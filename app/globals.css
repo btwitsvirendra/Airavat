@@ -3,43 +3,44 @@
 @tailwind utilities;
 
 :root {
-  --teal: #14b8a6;
-  --regal-blue: #1e3a8a;
-  --regal-gold: #f59e0b;
+  --teal: #03C4CB;
+  --regal-blue: #09546A;
+  --royal-gold: #F0BFE9;
+  --stone-grey: #424242;
 }
 
 body {
-  @apply bg-white text-gray-900;
+  @apply bg-gray-50 text-gray-900;
 }
 
 .gradient-hero {
-  background: linear-gradient(135deg, #1e3a8a 0%, #14b8a6 100%);
+  background: linear-gradient(135deg, #09546A 0%, #03C4CB 100%);
 }
 
 .gradient-text {
-  @apply bg-gradient-to-r from-regal-blue-700 to-teal-600 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-regal-blue-500 to-teal-500 bg-clip-text text-transparent;
 }
 
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
 }
 
 .btn-primary {
-  @apply bg-regal-blue-700 text-white px-6 py-3 rounded-lg font-semibold
-         hover:bg-regal-blue-800 transition-all duration-200
+  @apply bg-teal text-white px-6 py-3 rounded-lg font-semibold
+         hover:bg-teal-600 transition-all duration-200
          active:scale-95 shadow-md hover:shadow-lg;
 }
 
 .btn-secondary {
-  @apply bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold
-         hover:bg-teal-700 transition-all duration-200
+  @apply bg-regal-blue text-white px-6 py-3 rounded-lg font-semibold
+         hover:bg-regal-blue-600 transition-all duration-200
          active:scale-95 shadow-md hover:shadow-lg;
 }
 
-.btn-gold {
-  @apply bg-regal-gold-500 text-white px-6 py-3 rounded-lg font-semibold
-         hover:bg-regal-gold-600 transition-all duration-200
-         active:scale-95 shadow-md hover:shadow-lg;
+.btn-outline {
+  @apply border-2 border-teal text-teal px-6 py-3 rounded-lg font-semibold
+         hover:bg-teal hover:text-white transition-all duration-200
+         active:scale-95;
 }
 
 .input-field {
