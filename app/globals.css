@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --teal: #14b8a6;
+  --regal-blue: #1e3a8a;
+  --regal-gold: #f59e0b;
+}
+
+body {
+  @apply bg-white text-gray-900;
+}
+
+.gradient-hero {
+  background: linear-gradient(135deg, #1e3a8a 0%, #14b8a6 100%);
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-regal-blue-700 to-teal-600 bg-clip-text text-transparent;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+.btn-primary {
+  @apply bg-regal-blue-700 text-white px-6 py-3 rounded-lg font-semibold
+         hover:bg-regal-blue-800 transition-all duration-200
+         active:scale-95 shadow-md hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply bg-teal-600 text-white px-6 py-3 rounded-lg font-semibold
+         hover:bg-teal-700 transition-all duration-200
+         active:scale-95 shadow-md hover:shadow-lg;
+}
+
+.btn-gold {
+  @apply bg-regal-gold-500 text-white px-6 py-3 rounded-lg font-semibold
+         hover:bg-regal-gold-600 transition-all duration-200
+         active:scale-95 shadow-md hover:shadow-lg;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg
+         focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent
+         transition-all duration-200;
+}
+
+.badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.badge-success {
+  @apply badge bg-green-100 text-green-800;
+}
+
+.badge-warning {
+  @apply badge bg-yellow-100 text-yellow-800;
+}
+
+.badge-info {
+  @apply badge bg-blue-100 text-blue-800;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-teal-500 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-teal-600;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Loading spinner */
+.spinner {
+  border: 3px solid rgba(20, 184, 166, 0.1);
+  border-radius: 50%;
+  border-top: 3px solid #14b8a6;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
