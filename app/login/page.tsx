@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useStore } from '@/lib/store';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -15,11 +16,17 @@ export default function LoginPage() {
     rememberMe: false,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock login - in real app, this would call an API
-    toast.success('Login successful!');
-    router.push('/');
+    const { login } = useStore.getState();
+    const success = await login(formData.email, formData.password);
+
+    if (success) {
+      toast.success('Login successful!');
+      router.push('/account');
+    } else {
+      toast.error('Invalid email or password. Use: iamvirendra07@gmail.com / 12345678');
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

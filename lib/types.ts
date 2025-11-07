@@ -3,7 +3,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  role: 'buyer' | 'supplier';
+  role: 'buyer' | 'seller';
   phone?: string;
   company?: string;
   gstin?: string;
@@ -34,7 +34,7 @@ export interface Product {
 
 // Supplier Types
 export interface Supplier extends User {
-  role: 'supplier';
+  role: 'seller';
   businessName: string;
   businessAddress: string;
   verificationStatus: 'pending' | 'verified' | 'rejected';

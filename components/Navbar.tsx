@@ -91,7 +91,7 @@ export default function Navbar() {
 
               {/* Account */}
               {user ? (
-                <Link href="/dashboard" className="flex items-center gap-2 text-gray-700 hover:text-teal transition">
+                <Link href="/account" className="flex items-center gap-2 text-gray-700 hover:text-teal transition">
                   <User size={24} />
                   <span className="hidden lg:block text-sm">Account</span>
                 </Link>
