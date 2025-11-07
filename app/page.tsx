@@ -133,37 +133,99 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-16">
+      {/* Categories Carousel Section */}
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-regal-blue-800 mb-4">
-              Explore Categories
-            </h2>
-            <p className="text-gray-600 text-lg">
-              Browse through our wide range of product categories
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {categories.map((category, index) => (
-              <Link
-                key={index}
-                href={`/products?category=${category.name}`}
-                className="bg-white p-6 rounded-xl shadow-md card-hover text-center group"
-              >
-                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
-                  {category.icon}
+          <div className="relative">
+            {/* Carousel Container */}
+            <div className="flex items-center gap-4">
+              {/* Left Arrow */}
+              <button className="flex-shrink-0 w-10 h-10 bg-white border-2 border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition">
+                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              {/* Categories Scroll Container */}
+              <div className="flex-1 overflow-x-auto scrollbar-hide">
+                <div className="flex gap-6 pb-2">
+                  {categories.map((category, index) => (
+                    <Link
+                      key={index}
+                      href={`/products?category=${category.name}`}
+                      className="flex-shrink-0 text-center group cursor-pointer"
+                    >
+                      <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-teal-50 transition-colors">
+                        <div className="text-4xl">{category.icon}</div>
+                      </div>
+                      <p className="text-sm font-medium text-gray-700 max-w-[100px] mx-auto">
+                        Construction & Real Estate
+                      </p>
+                    </Link>
+                  ))}
                 </div>
-                <h3 className="font-semibold text-gray-800 mb-2">{category.name}</h3>
-                <p className="text-sm text-gray-500">{category.count}</p>
-              </Link>
-            ))}
+              </div>
+
+              {/* Right Arrow */}
+              <button className="flex-shrink-0 w-10 h-10 bg-white border-2 border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-50 transition">
+                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
-          <div className="text-center mt-8">
-            <Link href="/categories" className="text-teal-600 font-semibold hover:text-teal-700 flex items-center justify-center gap-2">
-              View All Categories
-              <ArrowRight size={20} />
-            </Link>
+        </div>
+      </section>
+
+      {/* ADS Banner Section */}
+      <section className="py-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-gradient-to-r from-regal-blue to-regal-blue-400 rounded-2xl p-16 text-center text-white">
+            <h2 className="text-4xl font-bold">ADS</h2>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products Section */}
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {[1, 2, 3, 4, 5].map((item, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                {/* Product Image Placeholder */}
+                <div className="aspect-square bg-gray-100 flex items-center justify-center">
+                  <span className="text-gray-400 text-sm">Product image</span>
+                </div>
+
+                {/* Product Info */}
+                <div className="p-4">
+                  <p className="text-sm text-gray-600 mb-2">Grey black 600x600 yellow tile for bathroom and hotel</p>
+                  <p className="text-lg font-bold text-gray-800 mb-1">Rs 170</p>
+                  <p className="text-xs text-gray-500 mb-2">MOQ : 2 pieces</p>
+                  <p className="text-xs text-gray-500 mb-3">Laxmi Granite and Tiles , Pune</p>
+                  <p className="text-xs text-gray-400">Listing Date : 2:20 pm , 29/8/2025</p>
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-2 mt-3">
+                    <button className="flex-1 bg-teal text-white text-xs py-2 rounded-md hover:bg-teal-600 transition flex items-center justify-center gap-1">
+                      <span>Qty</span>
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                      </svg>
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
+                    </button>
+                    <button className="bg-teal text-white p-2 rounded-md hover:bg-teal-600 transition">
+                      <MessageSquare size={16} />
+                    </button>
+                    <button className="bg-teal text-white p-2 rounded-md hover:bg-teal-600 transition">
+                      <ShoppingBag size={16} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --teal: #03C4CB;
-  --regal-blue: #09546A;
-  --royal-gold: #F0BFE9;
+  --teal: #0DC4CB;
+  --regal-blue: #09544F;
+  --royal-gold: #F08E09;
   --stone-grey: #424242;
 }
 
@@ -41,6 +41,12 @@ body {
   @apply border-2 border-teal text-teal px-6 py-3 rounded-lg font-semibold
          hover:bg-teal hover:text-white transition-all duration-200
          active:scale-95;
+}
+
+.btn-gold {
+  @apply bg-royal-gold text-white px-6 py-3 rounded-lg font-semibold
+         hover:bg-royal-gold-600 transition-all duration-200
+         active:scale-95 shadow-md hover:shadow-lg;
 }
 
 .input-field {
