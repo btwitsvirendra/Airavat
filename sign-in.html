@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign in to Airavat B2B E-commerce Platform">
+  <title>Sign In - Airavat</title>
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+  <!-- Header -->
+  <div class="auth-header">
+    <a href="index.html" class="auth-logo">
+      <span class="elephant-icon">🐘</span>
+      <span>Airavat</span>
+    </a>
+    <select class="language-selector">
+      <option value="en">English</option>
+      <option value="hi">हिंदी</option>
+      <option value="ta">தமிழ்</option>
+      <option value="te">తెలుగు</option>
+    </select>
+  </div>
+
+  <!-- Main Container -->
+  <div class="auth-container">
+    <!-- Left Illustration -->
+    <div class="auth-illustration">
+      <div class="illustration-content">
+        <!-- Elephant with delivery items illustration -->
+        <div style="font-size: 180px; line-height: 1.2; text-align: center;">
+          🐘
+        </div>
+        <div style="font-size: 60px; margin-top: -30px; text-align: center; display: flex; justify-content: center; gap: 10px;">
+          📦
+          ✈️
+          🛡️
+          💰
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Form Section -->
+    <div class="auth-form-section">
+      <div class="auth-form-container">
+        <h1 class="auth-heading">Sign In</h1>
+        <p class="auth-subheading">Use your last sign in method</p>
+
+        <!-- Phone Login Button -->
+        <button class="auth-button auth-button-phone" id="phoneButton" aria-label="Continue with Phone">
+          <span class="auth-button-icon">📞</span>
+          <span>Continue with Phone</span>
+        </button>
+
+        <!-- Divider -->
+        <div class="auth-divider">OR</div>
+
+        <!-- Social Login Buttons -->
+        <button class="auth-button auth-button-social" aria-label="Continue with Google">
+          <span class="auth-button-icon">🔴</span>
+          <span>Continue with Google</span>
+        </button>
+
+        <button class="auth-button auth-button-social" aria-label="Continue with Zoho">
+          <span class="auth-button-icon">🟡</span>
+          <span>Continue with Zoho</span>
+        </button>
+
+        <button class="auth-button auth-button-social" aria-label="Continue with Facebook">
+          <span class="auth-button-icon">🔵</span>
+          <span>Continue with Facebook</span>
+        </button>
+
+        <button class="auth-button auth-button-social" aria-label="Continue with LinkedIn">
+          <span class="auth-button-icon">🔵</span>
+          <span>Continue with LinkedIn</span>
+        </button>
+
+        <!-- Create Account Link -->
+        <div class="auth-footer-text">
+          New to AiravatSupplies.com?
+          <a href="create-account.html" class="auth-footer-link">Create New Account</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phone Number Modal -->
+  <div class="phone-modal" id="phoneModal" role="dialog" aria-labelledby="phoneModalHeader" aria-modal="true">
+    <div class="phone-modal-content">
+      <h2 class="phone-modal-header" id="phoneModalHeader">Enter Your Phone Number</h2>
+      <div class="phone-input-group">
+        <input type="text" class="country-code" value="+91" readonly aria-label="Country code">
+        <input
+          type="tel"
+          class="phone-input"
+          id="phoneInput"
+          placeholder="Enter 10-digit number"
+          maxlength="10"
+          aria-label="Phone number"
+          autocomplete="tel"
+        >
+      </div>
+      <div class="error-message" id="errorMessage" role="alert"></div>
+      <div class="phone-modal-buttons">
+        <button class="modal-button modal-button-cancel" id="cancelPhone">Cancel</button>
+        <button class="modal-button modal-button-submit" id="submitPhone">Continue</button>
+      </div>
+      <p class="demo-info">
+        <strong>Demo credentials:</strong><br>
+        Phone: 9352787989
+      </p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/session.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

@@ -3,6 +3,9 @@
 let currentProduct = null;
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Check authentication status
+  checkAuthStatus();
+
   // Get product from URL parameter
   const urlParams = new URLSearchParams(window.location.search);
   const productId = parseInt(urlParams.get('id'));
@@ -30,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
   loadSimilarProducts();
   initTabs();
   initButtons();
+
+  // Setup account icon handler
+  setupAccountIcon();
 });
 
 // Load Product Details
@@ -426,4 +432,132 @@ function performSearch() {
 
   // Redirect to home page with search term
   window.location.href = `index.html?search=${encodeURIComponent(searchTerm)}`;
+}
+
+// Authentication Integration Functions
+
+/**
+ * Check authentication status and update UI
+ */
+function checkAuthStatus() {
+  if (sessionManager.checkAuth()) {
+    const user = sessionManager.getUser();
+    const accountText = document.getElementById('accountText');
+    if (accountText && user) {
+      // Show user's first name instead of "Account"
+      const firstName = user.name.split(' ')[0];
+      accountText.textContent = firstName;
+    }
+  }
+}
+
+/**
+ * Setup account icon click handler
+ */
+function setupAccountIcon() {
+  const accountIcon = document.getElementById('accountIcon');
+  if (accountIcon) {
+    accountIcon.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      if (sessionManager.checkAuth()) {
+        // User is logged in - show account menu
+        showAccountMenu();
+      } else {
+        // User is not logged in - redirect to sign in
+        window.location.href = 'sign-in.html';
+      }
+    });
+  }
+}
+
+/**
+ * Show account menu for logged-in users
+ */
+function showAccountMenu() {
+  const user = sessionManager.getUser();
+
+  // Create account menu overlay
+  const overlay = document.createElement('div');
+  overlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 80px;
+    padding-right: 20px;
+  `;
+
+  const menu = document.createElement('div');
+  menu.style.cssText = `
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    min-width: 280px;
+    padding: 20px;
+    animation: slideDown 0.3s ease;
+  `;
+
+  menu.innerHTML = `
+    <div style="padding-bottom: 15px; border-bottom: 1px solid #E0E0E0; margin-bottom: 15px;">
+      <div style="font-size: 18px; font-weight: 700; color: #054A4E; margin-bottom: 5px;">${user.name}</div>
+      <div style="font-size: 13px; color: #666;">${user.email}</div>
+      <div style="font-size: 12px; color: #999; margin-top: 5px;">Member ID: ${user.memberId}</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <a href="#" style="padding: 10px; color: #424242; text-decoration: none; border-radius: 6px; transition: background 0.3s;" onmouseover="this.style.background='#F5F5F5'" onmouseout="this.style.background='transparent'">👤 My Profile</a>
+      <a href="#" style="padding: 10px; color: #424242; text-decoration: none; border-radius: 6px; transition: background 0.3s;" onmouseover="this.style.background='#F5F5F5'" onmouseout="this.style.background='transparent'">📦 My Orders</a>
+      <a href="#" style="padding: 10px; color: #424242; text-decoration: none; border-radius: 6px; transition: background 0.3s;" onmouseover="this.style.background='#F5F5F5'" onmouseout="this.style.background='transparent'">⚙️ Settings</a>
+      <a href="#" style="padding: 10px; color: #424242; text-decoration: none; border-radius: 6px; transition: background 0.3s;" onmouseover="this.style.background='#F5F5F5'" onmouseout="this.style.background='transparent'">❓ Help Center</a>
+      <div style="height: 1px; background: #E0E0E0; margin: 10px 0;"></div>
+      <button id="logoutBtn" style="padding: 10px; background: #E53935; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.background='#C62828'" onmouseout="this.style.background='#E53935'">🚪 Logout</button>
+    </div>
+  `;
+
+  // Add animation styles
+  if (!document.querySelector('style[data-account-menu]')) {
+    const style = document.createElement('style');
+    style.dataset.accountMenu = 'true';
+    style.textContent = `
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  overlay.appendChild(menu);
+  document.body.appendChild(overlay);
+
+  // Close menu on overlay click
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      document.body.removeChild(overlay);
+    }
+  });
+
+  // Logout button handler
+  document.getElementById('logoutBtn').addEventListener('click', function() {
+    sessionManager.logout();
+    document.body.removeChild(overlay);
+    showNotification('Logged out successfully');
+    // Update account text back to "Account"
+    const accountText = document.getElementById('accountText');
+    if (accountText) {
+      accountText.textContent = 'Account';
+    }
+  });
 }
