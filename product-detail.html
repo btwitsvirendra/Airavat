@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Product Details - Airavat B2B E-commerce Platform">
+  <title>Product Details - Airavat</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <!-- Top Navigation Bar -->
+    <div class="top-nav">
+      <div class="container">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <span class="logo-icon">🐘</span>
+          <span>Airavat</span>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <input type="text" placeholder="Search products..." aria-label="Search products">
+          <button type="button" aria-label="Search">Search</button>
+        </div>
+
+        <!-- Right Navigation -->
+        <div class="nav-right">
+          <div class="nav-item">
+            <span class="flag-icon">🇮🇳</span>
+            <span>Deliver To: Delhi...</span>
+          </div>
+          <a href="#" class="nav-item">
+            <span>Become a merchant</span>
+          </a>
+          <div class="nav-item" aria-label="Messages">
+            <span class="nav-icon">💬</span>
+            <span class="hidden-mobile">Messages</span>
+          </div>
+          <div class="nav-item" aria-label="Cart">
+            <span class="nav-icon">🛒</span>
+            <span class="hidden-mobile">Cart</span>
+          </div>
+          <div class="nav-item" aria-label="Account">
+            <span class="nav-icon">👤</span>
+            <span class="hidden-mobile">Account</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Navigation Bar -->
+    <div class="secondary-nav">
+      <div class="container">
+        <div class="nav-left">
+          <div class="nav-link">
+            <span>☰</span>
+            <span>Categories</span>
+          </div>
+          <div class="nav-link">
+            <span>🧭</span>
+            <span>Discover</span>
+          </div>
+          <div class="nav-link">
+            <span>📄</span>
+            <span>RFQ</span>
+          </div>
+          <div class="nav-link">
+            <span>🛡️</span>
+            <span>Trade Protection</span>
+          </div>
+        </div>
+        <div class="nav-right-links">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="#" class="nav-link">About</a>
+          <a href="#" class="nav-link">Contact Us</a>
+          <a href="#" class="nav-link">Help Center</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <div class="product-detail-container">
+        <!-- Product Detail Grid -->
+        <div class="product-detail-grid">
+          <!-- Image Gallery -->
+          <div class="image-gallery">
+            <div class="main-image-container" id="mainImage">
+              <!-- Main image will be loaded dynamically -->
+            </div>
+            <div class="thumbnail-container" id="thumbnailContainer">
+              <!-- Thumbnails will be loaded dynamically -->
+            </div>
+          </div>
+
+          <!-- Product Details -->
+          <div class="product-details">
+            <h1 class="product-detail-title" id="productTitle">Loading...</h1>
+
+            <div class="rating-section">
+              <div class="stars" id="productStars">★★★★★</div>
+              <div class="rating-text" id="productRating">(0) 0 reviews</div>
+            </div>
+
+            <div class="supplier-info">
+              <div class="supplier-name" id="supplierName">Supplier Name</div>
+              <div class="supplier-location" id="supplierLocation">Location</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="detail-row">
+              <div class="detail-label">Minimum Order Quantity:</div>
+              <div class="detail-value" id="productMOQ">0 pieces</div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">Sample Price:</div>
+              <div class="price-range" id="productPrice">Rs 0</div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">Thickness:</div>
+              <select class="dropdown-select" id="thicknessSelect">
+                <option>5-2mm</option>
+                <option>3-4mm</option>
+                <option>1-2mm</option>
+              </select>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">Volume:</div>
+              <select class="dropdown-select" id="volumeSelect">
+                <option>50 ml-2 l</option>
+                <option>100 ml-500 ml</option>
+                <option>1 l-5 l</option>
+              </select>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">Customization options:</div>
+              <div class="customization-options" id="customizationOptions">
+                <!-- Will be loaded dynamically -->
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">Other Customization Options:</div>
+              <div class="other-options">
+                • Surface Handling<br>
+                • Body Material<br>
+                • Custom Packaging
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-label">Shipping:</div>
+              <div class="shipping-info" id="shippingInfo">
+                Shipping information will be loaded...
+              </div>
+            </div>
+
+            <div class="payment-methods">
+              <span class="payment-icon">💳</span>
+              <span class="payment-icon">🔒</span>
+              <span style="font-size: 14px; font-weight: 500;">Escrow Payment Available</span>
+            </div>
+
+            <button class="btn-primary" id="addToCartBtn">Add to Cart</button>
+            <button class="btn-secondary" id="shareBtn">Share Product</button>
+          </div>
+        </div>
+
+        <!-- Product Description Section -->
+        <div class="description-section">
+          <h3>Product Description</h3>
+          <p id="productDescription">Loading product description...</p>
+        </div>
+
+        <!-- Similar Products -->
+        <div class="similar-products">
+          <h3>More Products like this</h3>
+          <div class="similar-products-grid" id="similarProductsGrid">
+            <!-- Similar products will be loaded dynamically -->
+          </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <div class="tabs-section">
+          <div class="tabs-header">
+            <button class="tab-btn active" data-tab="attributes">Attribute</button>
+            <button class="tab-btn" data-tab="reviews">Reviews</button>
+            <button class="tab-btn" data-tab="supplier">Supplier Card</button>
+            <button class="tab-btn" data-tab="about">About</button>
+          </div>
+
+          <!-- Attributes Tab -->
+          <div class="tab-content active" id="attributes">
+            <h3>Key Attributes</h3>
+            <table class="attributes-table" id="attributesTable">
+              <!-- Will be loaded dynamically -->
+            </table>
+
+            <h3 class="mt-30">Packaging & Delivery</h3>
+            <table class="attributes-table">
+              <tr>
+                <th>Packaging Details</th>
+                <td id="packagingDetails">Standard packaging</td>
+              </tr>
+              <tr>
+                <th>Delivery Time</th>
+                <td>7-15 business days</td>
+              </tr>
+              <tr>
+                <th>Port</th>
+                <td>Mumbai / Delhi</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Reviews Tab -->
+          <div class="tab-content" id="reviews">
+            <div class="reviews-header">
+              <div>
+                <div class="rating-large" id="averageRating">4.5</div>
+                <div class="rating-stars-large" id="averageStars">★★★★★</div>
+                <div style="margin-top: 10px;">Excellent</div>
+              </div>
+              <div>
+                <div id="totalReviews" style="font-size: 18px; font-weight: 600;">0 reviews</div>
+              </div>
+              <div>
+                <span class="recommended-badge">RECOMMENDED SUPPLIER</span>
+              </div>
+            </div>
+
+            <div id="reviewsList">
+              <!-- Reviews will be loaded dynamically -->
+            </div>
+          </div>
+
+          <!-- Supplier Card Tab -->
+          <div class="tab-content" id="supplier">
+            <div class="supplier-card">
+              <div class="supplier-header">
+                <div class="supplier-logo">🏭</div>
+                <div class="supplier-title">
+                  <div class="supplier-company-name" id="companyName">Company Name</div>
+                  <div class="business-performance">Business performance</div>
+                </div>
+                <button class="contact-supplier-btn">Contact Supplier</button>
+              </div>
+
+              <div class="performance-metrics">
+                <div class="metric">
+                  <div class="metric-value">100%</div>
+                  <div class="metric-label">Response Rate</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">98%</div>
+                  <div class="metric-label">On-time Delivery</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">4.5★</div>
+                  <div class="metric-label">Average Rating</div>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+
+              <div>
+                <p><strong>Years in Business:</strong> 10+ years</p>
+                <p><strong>Location:</strong> <span id="supplierLocationDetail">India</span></p>
+                <p><strong>Total Employees:</strong> 500+</p>
+                <p><strong>Main Products:</strong> <span id="mainProducts">Various products</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- About Tab -->
+          <div class="tab-content" id="about">
+            <div class="about-company">
+              <h3>About Our Company</h3>
+
+              <div class="company-images">
+                <div class="company-image">📜</div>
+                <div class="company-image">🏭</div>
+                <div class="company-image">🚚</div>
+                <div class="company-image">👥</div>
+                <div class="company-image">🏆</div>
+              </div>
+
+              <div class="company-description">
+                <h4>Certificates</h4>
+                <p>Our company holds ISO 9001:2015 certification for quality management and is compliant with international standards.</p>
+
+                <h4>Factory Tour</h4>
+                <p>We welcome buyers to visit our state-of-the-art manufacturing facility spanning 50,000 sq ft with advanced production equipment.</p>
+
+                <h4>Delivery Fleet</h4>
+                <p>We maintain a dedicated logistics network ensuring timely delivery across India and international markets.</p>
+
+                <h4>Our Team</h4>
+                <p>Our experienced team of 500+ professionals is committed to delivering excellence in products and services.</p>
+
+                <h4>Awards & Recognition</h4>
+                <p>Recipient of multiple industry awards for quality, innovation, and customer satisfaction.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Similar Products (Bottom) -->
+        <div class="similar-products">
+          <h3>Similar Products</h3>
+          <div class="similar-products-grid" id="similarProductsBottom">
+            <!-- Similar products will be loaded dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>About Airavat</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press & Media</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>For Buyers</h4>
+          <ul>
+            <li><a href="#">How to Buy</a></li>
+            <li><a href="#">Payment Methods</a></li>
+            <li><a href="#">Buyer Protection</a></li>
+            <li><a href="#">Request for Quotation</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>For Suppliers</h4>
+          <ul>
+            <li><a href="#">Become a Supplier</a></li>
+            <li><a href="#">Seller Center</a></li>
+            <li><a href="#">Supplier Membership</a></li>
+            <li><a href="#">Learning Center</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Dispute Resolution</a></li>
+            <li><a href="#">Report IPR Infringement</a></li>
+            <li><a href="#">Submit a Complaint</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Airavat B2B E-commerce Platform. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>
