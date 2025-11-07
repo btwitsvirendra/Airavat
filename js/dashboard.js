@@ -49,45 +49,88 @@ class DashboardManager {
   }
 
   setupHeaderNavigation() {
-    // Messages button
-    const messagesButtons = document.querySelectorAll('[aria-label="Messages"], .nav-item:has(.nav-icon:contains("💬"))');
-    messagesButtons.forEach(btn => {
-      btn.style.cursor = 'pointer';
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (sessionManager.checkAuth()) {
-          const role = sessionManager.getRole();
-          window.location.href = role === 'seller' ? 'seller-messages.html' : 'messages.html';
-        } else {
+    // Messages button - using aria-label selector
+    const messagesButton = document.querySelector('[aria-label="Messages"]');
+    if (messagesButton) {
+      messagesButton.style.cursor = 'pointer';
+      // Messages link already has href, but add auth check
+      messagesButton.addEventListener('click', (e) => {
+        if (!sessionManager.checkAuth()) {
+          e.preventDefault();
           this.showNotification('Please sign in to access messages', 'info');
           setTimeout(() => window.location.href = 'sign-in.html', 1000);
         }
+        // If authenticated, let the link work normally
       });
-    });
+    }
 
-    // Discover button
-    const discoverLinks = document.querySelectorAll('.nav-link, .category-link');
-    discoverLinks.forEach(link => {
-      if (link.textContent.includes('Discover')) {
+    // Category links - Discover, RFQ, About, Contact, Help Center, etc.
+    const categoryLinks = document.querySelectorAll('.category-link');
+    categoryLinks.forEach(link => {
+      const linkText = link.textContent.trim();
+
+      // Discover
+      if (linkText.includes('Discover')) {
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
           e.preventDefault();
           this.showNotification('Discover page - Coming soon!', 'info');
         });
       }
-      if (link.textContent.includes('RFQ') && !link.href) {
+
+      // RFQ - has href now, just add auth check
+      if (linkText.includes('RFQ')) {
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (sessionManager.checkAuth()) {
-            const role = sessionManager.getRole();
-            window.location.href = role === 'seller' ? 'seller-rfq.html' : 'rfq.html';
-          } else {
+          if (!sessionManager.checkAuth()) {
+            e.preventDefault();
             this.showNotification('Please sign in to access RFQ', 'info');
             setTimeout(() => window.location.href = 'sign-in.html', 1000);
           }
+          // If authenticated, let the link work normally
         });
       }
+
+      // Categories
+      if (linkText === 'Categories' || linkText.includes('All Categories')) {
+        link.style.cursor = 'pointer';
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification('Product categories - Coming soon!', 'info');
+        });
+      }
+
+      // About
+      if (linkText === 'About') {
+        link.style.cursor = 'pointer';
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification('About Airavat - B2B E-commerce Platform', 'info');
+        });
+      }
+
+      // Contact Us
+      if (linkText === 'Contact Us') {
+        link.style.cursor = 'pointer';
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification('Contact: support@airavat.com | +91 1800-XXX-XXXX', 'info');
+        });
+      }
+
+      // Help Center
+      if (linkText === 'Help Center') {
+        link.style.cursor = 'pointer';
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification('Help Center - FAQs and Support', 'info');
+        });
+      }
+    });
+
+    // Trade Protection (on home page)
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
       if (link.textContent.includes('Trade Protection')) {
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
@@ -97,37 +140,14 @@ class DashboardManager {
       }
     });
 
-    // Become a merchant link
-    const merchantLinks = document.querySelectorAll('a, .nav-item');
-    merchantLinks.forEach(link => {
+    // Become a merchant link (on home page)
+    const allLinks = document.querySelectorAll('a');
+    allLinks.forEach(link => {
       if (link.textContent.includes('Become a merchant')) {
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
           e.preventDefault();
           this.showNotification('Seller registration will be implemented. For demo, use: 9352787951', 'info');
-        });
-      }
-    });
-
-    // Help Center, About, Contact Us links
-    const infoLinks = document.querySelectorAll('.nav-link');
-    infoLinks.forEach(link => {
-      if (link.textContent === 'About') {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.showNotification('About Airavat - B2B E-commerce Platform', 'info');
-        });
-      }
-      if (link.textContent === 'Contact Us') {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.showNotification('Contact: support@airavat.com | +91 1800-XXX-XXXX', 'info');
-        });
-      }
-      if (link.textContent === 'Help Center') {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.showNotification('Help Center - FAQs and Support', 'info');
         });
       }
     });
@@ -163,11 +183,22 @@ class DashboardManager {
   }
 
   setupCategoryLinks() {
+    // Skip links that are handled specifically in setupHeaderNavigation
+    const skipLinks = ['Home', 'About', 'Contact Us', 'Help Center', 'Discover', 'Categories', 'RFQ'];
+
     const categoryLinks = document.querySelectorAll('.category-link');
     categoryLinks.forEach(link => {
+      const linkText = link.textContent.trim();
+
+      // Skip if this link is handled elsewhere
+      if (skipLinks.some(skip => linkText.includes(skip))) {
+        return;
+      }
+
+      // For other category links (like Electronics, Construction, etc.)
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        const category = link.textContent.trim();
+        const category = linkText;
         this.showNotification(`Browsing ${category} category`, 'info');
       });
     });
