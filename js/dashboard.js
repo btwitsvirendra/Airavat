@@ -26,6 +26,9 @@ class DashboardManager {
   // ==================== GLOBAL HANDLERS ====================
 
   setupGlobalHandlers() {
+    // Header navigation items
+    this.setupHeaderNavigation();
+
     // Search functionality
     this.setupSearch();
 
@@ -43,6 +46,91 @@ class DashboardManager {
 
     // Quick action buttons
     this.setupQuickActions();
+  }
+
+  setupHeaderNavigation() {
+    // Messages button
+    const messagesButtons = document.querySelectorAll('[aria-label="Messages"], .nav-item:has(.nav-icon:contains("💬"))');
+    messagesButtons.forEach(btn => {
+      btn.style.cursor = 'pointer';
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (sessionManager.checkAuth()) {
+          const role = sessionManager.getRole();
+          window.location.href = role === 'seller' ? 'seller-messages.html' : 'messages.html';
+        } else {
+          this.showNotification('Please sign in to access messages', 'info');
+          setTimeout(() => window.location.href = 'sign-in.html', 1000);
+        }
+      });
+    });
+
+    // Discover button
+    const discoverLinks = document.querySelectorAll('.nav-link, .category-link');
+    discoverLinks.forEach(link => {
+      if (link.textContent.includes('Discover')) {
+        link.style.cursor = 'pointer';
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification('Discover page - Coming soon!', 'info');
+        });
+      }
+      if (link.textContent.includes('RFQ') && !link.href) {
+        link.style.cursor = 'pointer';
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (sessionManager.checkAuth()) {
+            const role = sessionManager.getRole();
+            window.location.href = role === 'seller' ? 'seller-rfq.html' : 'rfq.html';
+          } else {
+            this.showNotification('Please sign in to access RFQ', 'info');
+            setTimeout(() => window.location.href = 'sign-in.html', 1000);
+          }
+        });
+      }
+      if (link.textContent.includes('Trade Protection')) {
+        link.style.cursor = 'pointer';
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification('Trade Protection - Learn about buyer and seller protection', 'info');
+        });
+      }
+    });
+
+    // Become a merchant link
+    const merchantLinks = document.querySelectorAll('a, .nav-item');
+    merchantLinks.forEach(link => {
+      if (link.textContent.includes('Become a merchant')) {
+        link.style.cursor = 'pointer';
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification('Seller registration will be implemented. For demo, use: 9352787951', 'info');
+        });
+      }
+    });
+
+    // Help Center, About, Contact Us links
+    const infoLinks = document.querySelectorAll('.nav-link');
+    infoLinks.forEach(link => {
+      if (link.textContent === 'About') {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification('About Airavat - B2B E-commerce Platform', 'info');
+        });
+      }
+      if (link.textContent === 'Contact Us') {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification('Contact: support@airavat.com | +91 1800-XXX-XXXX', 'info');
+        });
+      }
+      if (link.textContent === 'Help Center') {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification('Help Center - FAQs and Support', 'info');
+        });
+      }
+    });
   }
 
   setupSearch() {
