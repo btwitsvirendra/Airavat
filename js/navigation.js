@@ -134,7 +134,7 @@ class NavigationManager {
 
     dropdown.innerHTML = html;
 
-    // Setup logout handler
+    // Setup logout handler and menu item navigation
     setTimeout(() => {
       const logoutBtn = document.getElementById('dropdownLogout');
       if (logoutBtn) {
@@ -143,6 +143,20 @@ class NavigationManager {
           this.handleLogout();
         });
       }
+
+      // Ensure dropdown menu items navigate properly
+      const dropdownItems = dropdown.querySelectorAll('.dropdown-item');
+      dropdownItems.forEach(item => {
+        if (item.id !== 'dropdownLogout') {
+          item.addEventListener('click', (e) => {
+            // Allow the link to navigate normally
+            const href = item.getAttribute('href');
+            if (href && href !== '#') {
+              window.location.href = href;
+            }
+          });
+        }
+      });
     }, 0);
 
     return dropdown;
