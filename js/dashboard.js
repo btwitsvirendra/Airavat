@@ -26,14 +26,11 @@ class DashboardManager {
   // ==================== GLOBAL HANDLERS ====================
 
   setupGlobalHandlers() {
-    // Header navigation items
-    this.setupHeaderNavigation();
+    // Setup all navigation in one unified method
+    this.setupAllNavigation();
 
     // Search functionality
     this.setupSearch();
-
-    // Category links
-    this.setupCategoryLinks();
 
     // Cart functionality
     this.setupCart();
@@ -48,107 +45,140 @@ class DashboardManager {
     this.setupQuickActions();
   }
 
-  setupHeaderNavigation() {
-    // Messages button - using aria-label selector
-    const messagesButton = document.querySelector('[aria-label="Messages"]');
-    if (messagesButton) {
-      messagesButton.style.cursor = 'pointer';
-      // Messages link already has href, but add auth check
-      messagesButton.addEventListener('click', (e) => {
-        if (!sessionManager.checkAuth()) {
-          e.preventDefault();
-          this.showNotification('Please sign in to access messages', 'info');
-          setTimeout(() => window.location.href = 'sign-in.html', 1000);
-        }
-        // If authenticated, let the link work normally
-      });
-    }
+  setupAllNavigation() {
+    // Process each link only once to avoid duplicate handlers
+    const processedLinks = new Set();
 
-    // Category links - Discover, RFQ, About, Contact, Help Center, etc.
-    const categoryLinks = document.querySelectorAll('.category-link');
-    categoryLinks.forEach(link => {
+    // Handle all navigation links in one pass
+    const allLinks = document.querySelectorAll('a, .category-link, .nav-link');
+
+    allLinks.forEach(link => {
+      // Skip if already processed
+      if (processedLinks.has(link)) return;
+
       const linkText = link.textContent.trim();
+      const linkHref = link.getAttribute('href');
+      const hasValidHref = linkHref && linkHref !== '#' && linkHref !== '';
+
+      // Skip empty links
+      if (!linkText) return;
+
+      // Messages button
+      if (link.getAttribute('aria-label') === 'Messages') {
+        processedLinks.add(link);
+        link.style.cursor = 'pointer';
+        // Has href, let it navigate naturally
+        return;
+      }
+
+      // Home link - always let it navigate
+      if (linkText === 'Home' && hasValidHref) {
+        processedLinks.add(link);
+        return;
+      }
 
       // Discover
       if (linkText.includes('Discover')) {
+        processedLinks.add(link);
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
           e.preventDefault();
           this.showNotification('Discover page - Coming soon!', 'info');
-        });
+        }, {once: false});
+        return;
       }
 
-      // RFQ - has href now, just add auth check
+      // RFQ
       if (linkText.includes('RFQ')) {
+        processedLinks.add(link);
         link.style.cursor = 'pointer';
-        link.addEventListener('click', (e) => {
-          if (!sessionManager.checkAuth()) {
+        if (hasValidHref && linkHref.includes('rfq')) {
+          // Has valid RFQ link, let it work
+          return;
+        } else {
+          link.addEventListener('click', (e) => {
             e.preventDefault();
-            this.showNotification('Please sign in to access RFQ', 'info');
-            setTimeout(() => window.location.href = 'sign-in.html', 1000);
-          }
-          // If authenticated, let the link work normally
-        });
+            this.showNotification('RFQ page', 'info');
+          }, {once: false});
+          return;
+        }
       }
 
       // Categories
-      if (linkText === 'Categories' || linkText.includes('All Categories')) {
+      if (linkText === 'Categories' || linkText === 'All Categories') {
+        processedLinks.add(link);
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
           e.preventDefault();
           this.showNotification('Product categories - Coming soon!', 'info');
-        });
+        }, {once: false});
+        return;
       }
 
       // About
       if (linkText === 'About') {
+        processedLinks.add(link);
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
           e.preventDefault();
           this.showNotification('About Airavat - B2B E-commerce Platform', 'info');
-        });
+        }, {once: false});
+        return;
       }
 
       // Contact Us
       if (linkText === 'Contact Us') {
+        processedLinks.add(link);
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
           e.preventDefault();
           this.showNotification('Contact: support@airavat.com | +91 1800-XXX-XXXX', 'info');
-        });
+        }, {once: false});
+        return;
       }
 
       // Help Center
       if (linkText === 'Help Center') {
+        processedLinks.add(link);
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
           e.preventDefault();
           this.showNotification('Help Center - FAQs and Support', 'info');
-        });
+        }, {once: false});
+        return;
       }
-    });
 
-    // Trade Protection (on home page)
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-      if (link.textContent.includes('Trade Protection')) {
+      // Trade Protection
+      if (linkText.includes('Trade Protection')) {
+        processedLinks.add(link);
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
           e.preventDefault();
           this.showNotification('Trade Protection - Learn about buyer and seller protection', 'info');
-        });
+        }, {once: false});
+        return;
       }
-    });
 
-    // Become a merchant link (on home page)
-    const allLinks = document.querySelectorAll('a');
-    allLinks.forEach(link => {
-      if (link.textContent.includes('Become a merchant')) {
+      // Become a merchant
+      if (linkText.includes('Become a merchant')) {
+        processedLinks.add(link);
         link.style.cursor = 'pointer';
         link.addEventListener('click', (e) => {
           e.preventDefault();
           this.showNotification('Seller registration will be implemented. For demo, use: 9352787951', 'info');
-        });
+        }, {once: false});
+        return;
+      }
+
+      // Other category links (Electronics, Construction, etc.)
+      if (link.classList.contains('category-link') && !hasValidHref) {
+        // These are product categories, show browsing message
+        processedLinks.add(link);
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.showNotification(`Browsing ${linkText} category`, 'info');
+        }, {once: false});
+        return;
       }
     });
   }
@@ -180,28 +210,6 @@ class DashboardManager {
     this.showNotification(`Searching for: "${query}"`, 'info');
     // In a real app, this would redirect to search results
     console.log('Search query:', query);
-  }
-
-  setupCategoryLinks() {
-    // Skip links that are handled specifically in setupHeaderNavigation
-    const skipLinks = ['Home', 'About', 'Contact Us', 'Help Center', 'Discover', 'Categories', 'RFQ'];
-
-    const categoryLinks = document.querySelectorAll('.category-link');
-    categoryLinks.forEach(link => {
-      const linkText = link.textContent.trim();
-
-      // Skip if this link is handled elsewhere
-      if (skipLinks.some(skip => linkText.includes(skip))) {
-        return;
-      }
-
-      // For other category links (like Electronics, Construction, etc.)
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const category = linkText;
-        this.showNotification(`Browsing ${category} category`, 'info');
-      });
-    });
   }
 
   setupCart() {

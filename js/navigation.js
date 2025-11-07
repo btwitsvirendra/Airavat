@@ -56,11 +56,21 @@ class NavigationManager {
 
     const dropdown = this.createAccountDropdown();
     const accountIcon = document.getElementById('accountIcon');
+
+    // Position dropdown relative to account icon
+    accountIcon.style.position = 'relative';
     accountIcon.appendChild(dropdown);
 
-    // Close on outside click
+    // Close on outside click, but don't interfere with dropdown item clicks
     setTimeout(() => {
       document.addEventListener('click', function closeDropdown(e) {
+        const dropdown = document.querySelector('.account-dropdown');
+        if (!dropdown) {
+          document.removeEventListener('click', closeDropdown);
+          return;
+        }
+
+        // Check if click is outside both the dropdown and account icon
         if (!accountIcon.contains(e.target)) {
           dropdown.remove();
           document.removeEventListener('click', closeDropdown);
@@ -134,29 +144,16 @@ class NavigationManager {
 
     dropdown.innerHTML = html;
 
-    // Setup logout handler and menu item navigation
+    // Setup logout handler only
     setTimeout(() => {
       const logoutBtn = document.getElementById('dropdownLogout');
       if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
           e.preventDefault();
+          e.stopPropagation();
           this.handleLogout();
         });
       }
-
-      // Ensure dropdown menu items navigate properly
-      const dropdownItems = dropdown.querySelectorAll('.dropdown-item');
-      dropdownItems.forEach(item => {
-        if (item.id !== 'dropdownLogout') {
-          item.addEventListener('click', (e) => {
-            // Allow the link to navigate normally
-            const href = item.getAttribute('href');
-            if (href && href !== '#') {
-              window.location.href = href;
-            }
-          });
-        }
-      });
     }, 0);
 
     return dropdown;
