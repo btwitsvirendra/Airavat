@@ -1,7 +1,10 @@
 // Authentication Logic for Airavat B2B E-commerce Platform
 
-// Valid phone number for demo (can be extended to multiple numbers or API validation)
-const VALID_PHONE = '9352787989';
+// Valid phone numbers for demo (buyer and seller accounts)
+const VALID_PHONES = {
+  BUYER: '9352787989',
+  SELLER: '9352787951'
+};
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -159,8 +162,10 @@ function validateAndLogin() {
     return;
   }
 
-  if (phone !== VALID_PHONE) {
-    showError('Invalid phone number. Demo number: 9352787989');
+  // Check if phone number is valid (buyer or seller)
+  const validPhoneNumbers = Object.values(VALID_PHONES);
+  if (!validPhoneNumbers.includes(phone)) {
+    showError(`Invalid phone number. Demo numbers: ${VALID_PHONES.BUYER} (Buyer) or ${VALID_PHONES.SELLER} (Seller)`);
     return;
   }
 
@@ -173,15 +178,22 @@ function validateAndLogin() {
 
   // Simulate API call delay
   setTimeout(() => {
-    // Login successful
-    sessionManager.login(phone);
+    // Login successful - sessionManager determines role based on phone
+    const user = sessionManager.login(phone);
 
-    // Show success message
-    showNotification('Login successful! Welcome back.', 'success');
+    // Show success message based on role
+    const roleMessage = user.role === 'seller' ? 'Seller' : 'Buyer';
+    showNotification(`Login successful! Welcome ${roleMessage}.`, 'success');
 
-    // Redirect to home page after short delay
+    // Redirect based on role after short delay
     setTimeout(() => {
-      window.location.href = 'index.html';
+      if (user.role === 'seller') {
+        // Sellers go to seller dashboard
+        window.location.href = 'seller-profile.html';
+      } else {
+        // Buyers go to buyer dashboard
+        window.location.href = 'profile.html';
+      }
     }, 500);
   }, 1000);
 }
