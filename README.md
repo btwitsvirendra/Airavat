@@ -23,13 +23,34 @@ A comprehensive B2B e-commerce marketplace inspired by Alibaba.com, designed spe
 
 ## Tech Stack
 
+### Frontend
 - **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **State Management**: Zustand
+- **Language**: TypeScript 5.4+
+- **Styling**: Tailwind CSS 3.4
+- **UI Components**: Custom component library
 - **Icons**: Lucide React
 - **Animations**: Framer Motion
+
+### State Management
+- **Client State**: Zustand with persistence
+- **Server State**: TanStack Query (React Query)
+- **Forms**: React Hook Form + Zod validation
+
+### API & Real-time
+- **HTTP Client**: Axios with interceptors
+- **Real-time**: Socket.IO Client
 - **Notifications**: React Hot Toast
+
+### Developer Tools
+- **Linting**: ESLint with custom rules
+- **Formatting**: Prettier + Tailwind plugin
+- **Git Hooks**: Husky + lint-staged
+- **Commit Linting**: Commitlint (Conventional Commits)
+
+### Testing
+- **Unit Testing**: Vitest + Testing Library
+- **E2E Testing**: Playwright
+- **Coverage**: Vitest Coverage (V8)
 
 ## Color Palette
 
@@ -78,7 +99,8 @@ Airavat/
 
 ### Prerequisites
 - Node.js 18.x or higher
-- npm or yarn
+- npm 9+ or yarn 1.22+
+- Git
 
 ### Installation
 
@@ -93,18 +115,46 @@ cd Airavat
 npm install
 ```
 
-3. Run the development server:
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
+
+Update `.env.local` with your configuration:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+NEXT_PUBLIC_SOCKET_URL=http://localhost:8000
+NEXT_PUBLIC_ENV=development
+```
+
+4. Run the development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-### Build for Production
+### Available Scripts
 
 ```bash
-npm run build
-npm start
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+
+# Code Quality
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues
+npm run format       # Format code with Prettier
+npm run format:check # Check code formatting
+npm run type-check   # Run TypeScript compiler check
+
+# Testing
+npm run test         # Run unit tests
+npm run test:ui      # Run tests with UI
+npm run test:coverage # Generate coverage report
+npm run test:e2e     # Run E2E tests
+npm run test:e2e:ui  # Run E2E tests with UI
 ```
 
 ## Key Pages
@@ -212,15 +262,62 @@ npm start
 - Track shipments
 - Delivery status updates
 
+## Professional Features ✨
+
+### API Integration
+- Complete API client layer with Axios
+- Automatic token refresh and error handling
+- React Query hooks for all features
+- Type-safe API services for all endpoints
+- Request/response interceptors
+- Comprehensive TypeScript type definitions
+
+### Component Library
+- Professional UI component library
+- Reusable components (Button, Input, Card, Badge, Modal, Select, Textarea)
+- Consistent design system
+- Dark mode support
+- Accessibility features
+
+### State Management
+- Modular Zustand store with slices
+- LocalStorage persistence for cart
+- Separate client and server state
+- Type-safe state management
+
+### Error Handling
+- React Error Boundaries
+- Custom error pages (404, 500)
+- Toast notifications
+- Loading states and skeletons
+
+### Testing Infrastructure
+- Unit tests with Vitest
+- Component tests with Testing Library
+- E2E tests with Playwright
+- Code coverage reporting
+
+### Code Quality
+- ESLint with TypeScript rules
+- Prettier for code formatting
+- Husky pre-commit hooks
+- Conventional Commits
+
+### Security
+- Security headers (CSP, X-Frame-Options, etc.)
+- XSS protection
+- Content Security Policy
+- Secure cookie handling
+
 ## Future Enhancements
 
-- Backend API integration
-- Real-time WebSocket for chat
 - Payment gateway integration (Razorpay/Stripe)
-- Advanced search with AI
-- Product recommendations
-- Review and rating system
-- Multi-language support
+- Advanced search with filters
+- Product recommendations with AI
+- Multi-language support (i18n)
+- Progressive Web App (PWA)
+- Analytics dashboard
+- Notification system
 - Mobile application
 
 ## Contributing
