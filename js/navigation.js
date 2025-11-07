@@ -82,7 +82,8 @@ class NavigationManager {
     if (currentInterface === 'buyer' || !currentInterface) {
       // Buyer menu items
       menuItems = [
-        { icon: '🏠', text: 'Home', link: 'profile.html' },
+        { icon: '🏠', text: 'Home', link: 'index.html' },
+        { icon: '👤', text: 'My Profile', link: 'profile.html' },
         { icon: '📦', text: 'Orders', link: 'orders.html' },
         { icon: '💬', text: 'Messages', link: 'messages.html' },
         { icon: '📋', text: 'RFQ', link: 'rfq.html' },
@@ -92,7 +93,8 @@ class NavigationManager {
     } else {
       // Seller menu items
       menuItems = [
-        { icon: '🏠', text: 'Home', link: 'seller-profile.html' },
+        { icon: '🏠', text: 'Home', link: 'index.html' },
+        { icon: '👤', text: 'My Profile', link: 'seller-profile.html' },
         { icon: '📦', text: 'Orders', link: 'orders.html' },
         { icon: '💬', text: 'Messages', link: 'seller-messages.html' },
         { icon: '📋', text: 'RFQ', link: 'seller-rfq.html' },

@@ -185,15 +185,10 @@ function validateAndLogin() {
     const roleMessage = user.role === 'seller' ? 'Seller' : 'Buyer';
     showNotification(`Login successful! Welcome ${roleMessage}.`, 'success');
 
-    // Redirect based on role after short delay
+    // Redirect to home page after short delay
     setTimeout(() => {
-      if (user.role === 'seller') {
-        // Sellers go to seller dashboard
-        window.location.href = 'seller-profile.html';
-      } else {
-        // Buyers go to buyer dashboard
-        window.location.href = 'profile.html';
-      }
+      // All users go to home page after login
+      window.location.href = 'index.html';
     }, 500);
   }, 1000);
 }
