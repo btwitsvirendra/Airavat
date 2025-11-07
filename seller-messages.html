@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Seller Messages - Airavat B2B E-commerce Platform">
+  <title>Messages - Seller Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="seller-interface">
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <span class="elephant-icon">🐘</span>
+          <span class="logo-text">Airavat</span>
+        </a>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for products, orders, buyers..." class="search-input">
+          <button class="search-button">🔍</button>
+        </div>
+        <div class="nav-icons">
+          <select class="language-selector">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+          </select>
+          <div id="switchContainer" class="interface-switch-container"></div>
+          <a href="#" class="icon-link cart-icon">🛒<span class="cart-badge">0</span></a>
+          <a href="#" class="icon-link account-icon" id="accountIcon">👤<span class="account-text" id="accountText">Account</span></a>
+        </div>
+      </nav>
+      <div class="category-nav">
+        <a href="#" class="category-link">All Categories</a>
+        <a href="#" class="category-link">Electronics</a>
+        <a href="#" class="category-link">Construction</a>
+        <a href="#" class="category-link">Textile</a>
+        <a href="#" class="category-link">Agriculture</a>
+        <a href="#" class="category-link">Industrial Machinery</a>
+        <a href="#" class="category-link">Packaging</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <nav class="sidebar-nav">
+        <a href="seller-profile.html" class="sidebar-item" data-page="seller-profile"><span class="sidebar-icon">🏠</span><span>Home</span></a>
+        <a href="orders.html" class="sidebar-item" data-page="orders"><span class="sidebar-icon">📦</span><span>Orders</span></a>
+        <a href="seller-messages.html" class="sidebar-item active" data-page="seller-messages"><span class="sidebar-icon">💬</span><span>Messages</span></a>
+        <a href="seller-rfq.html" class="sidebar-item" data-page="seller-rfq"><span class="sidebar-icon">📋</span><span>RFQ</span></a>
+        <a href="seller-payments.html" class="sidebar-item" data-page="seller-payments"><span class="sidebar-icon">💰</span><span>Payments</span></a>
+        <a href="logistics.html" class="sidebar-item" data-page="logistics"><span class="sidebar-icon">🚚</span><span>Transport</span></a>
+        <a href="seller-sales.html" class="sidebar-item seller-only" data-page="seller-sales"><span class="sidebar-icon">💼</span><span>Sales</span></a>
+        <a href="seller-inventory.html" class="sidebar-item seller-only" data-page="seller-inventory"><span class="sidebar-icon">📊</span><span>Inventory</span></a>
+        <a href="seller-grow.html" class="sidebar-item seller-only" data-page="seller-grow"><span class="sidebar-icon">📈</span><span>Grow</span></a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main" style="padding: 0;">
+      <div class="dashboard-header" style="margin: 0; border-radius: 0; padding: 24px 32px;">
+        <div class="dashboard-title">Messages</div>
+        <div class="dashboard-subtitle">Chat with buyers and customers</div>
+      </div>
+
+      <!-- Messages Container -->
+      <div style="display: flex; height: calc(100vh - 250px); background: white;">
+        <!-- Conversations List -->
+        <div style="width: 350px; border-right: 1px solid var(--border-grey); display: flex; flex-direction: column;">
+          <!-- Search -->
+          <div style="padding: 16px; border-bottom: 1px solid var(--border-grey);">
+            <input type="text" placeholder="Search conversations..." style="width: 100%; padding: 10px 16px; border: 1px solid var(--border-grey); border-radius: 8px; font-size: 14px;">
+          </div>
+
+          <!-- Filter Tabs -->
+          <div style="padding: 12px 16px; border-bottom: 1px solid var(--border-grey); display: flex; gap: 8px;">
+            <button class="msg-filter active">All (12)</button>
+            <button class="msg-filter">Unread (3)</button>
+          </div>
+
+          <!-- Conversation Items -->
+          <div style="flex: 1; overflow-y: auto;">
+            <!-- Conversation 1 -->
+            <div class="conversation-item active" data-conv="1">
+              <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--regal-blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">VS</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                  <div style="font-weight: 600; font-size: 15px;">Virendra Singh</div>
+                  <div style="font-size: 11px; color: var(--text-grey);">3:15 PM</div>
+                </div>
+                <div style="font-size: 13px; color: var(--text-grey); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Do you have stock of 1000 units?</div>
+              </div>
+              <span class="unread-badge">1</span>
+            </div>
+
+            <!-- Conversation 2 -->
+            <div class="conversation-item" data-conv="2">
+              <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary-teal); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">SE</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                  <div style="font-weight: 600; font-size: 15px;">Sharma Electronics</div>
+                  <div style="font-size: 11px; color: var(--text-grey);">Yesterday</div>
+                </div>
+                <div style="font-size: 13px; color: var(--text-grey); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Thank you for the quick delivery!</div>
+              </div>
+            </div>
+
+            <!-- Conversation 3 -->
+            <div class="conversation-item" data-conv="3">
+              <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--royal-gold); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">TM</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                  <div style="font-weight: 600; font-size: 15px;">Textile Mills Ltd</div>
+                  <div style="font-size: 11px; color: var(--text-grey);">Jan 19</div>
+                </div>
+                <div style="font-size: 13px; color: var(--text-grey); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Can you provide bulk pricing?</div>
+              </div>
+              <span class="unread-badge">2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div style="flex: 1; display: flex; flex-direction: column;">
+          <!-- Chat Header -->
+          <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-grey); display: flex; align-items: center; gap: 16px;">
+            <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--regal-blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px;">VS</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 700; font-size: 18px; margin-bottom: 4px;">Virendra Singh</div>
+              <div style="font-size: 13px; color: var(--text-grey);">● Last seen 2 minutes ago</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">View Orders</button>
+              <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Send Quote</button>
+            </div>
+          </div>
+
+          <!-- Messages -->
+          <div style="flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; background: var(--light-grey);">
+            <!-- Received Message -->
+            <div style="display: flex; gap: 12px; max-width: 70%; align-self: flex-start;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--regal-blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0;">VS</div>
+              <div>
+                <div style="background: white; padding: 12px 16px; border-radius: 12px; border-top-left-radius: 0; margin-bottom: 4px;">
+                  <div style="font-size: 14px; line-height: 1.5; color: var(--soft-grey);">Hello! I'm interested in ordering Industrial LED Bulbs. Do you have 1000 units in stock?</div>
+                </div>
+                <div style="font-size: 11px; color: var(--text-grey); padding-left: 8px;">3:10 PM</div>
+              </div>
+            </div>
+
+            <!-- Sent Message -->
+            <div style="display: flex; gap: 12px; max-width: 70%; align-self: flex-end;">
+              <div>
+                <div style="background: var(--primary-teal); color: white; padding: 12px 16px; border-radius: 12px; border-top-right-radius: 0; margin-bottom: 4px;">
+                  <div style="font-size: 14px; line-height: 1.5;">Yes, we have stock available! I can offer you a special bulk price of ₹82.5 per unit for 1000 units. Total: ₹82,500</div>
+                </div>
+                <div style="font-size: 11px; color: var(--text-grey); padding-right: 8px; text-align: right;">3:12 PM</div>
+              </div>
+            </div>
+
+            <!-- Received Message -->
+            <div style="display: flex; gap: 12px; max-width: 70%; align-self: flex-start;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--regal-blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0;">VS</div>
+              <div>
+                <div style="background: white; padding: 12px 16px; border-radius: 12px; border-top-left-radius: 0; margin-bottom: 4px;">
+                  <div style="font-size: 14px; line-height: 1.5; color: var(--soft-grey);">That's a great price! How long will delivery take?</div>
+                </div>
+                <div style="font-size: 11px; color: var(--text-grey); padding-left: 8px;">3:15 PM</div>
+              </div>
+            </div>
+
+            <!-- Quick Reply Suggestions -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+              <button style="padding: 8px 16px; border: 1px solid var(--border-grey); background: white; border-radius: 20px; font-size: 13px; cursor: pointer;">📦 5-7 business days</button>
+              <button style="padding: 8px 16px; border: 1px solid var(--border-grey); background: white; border-radius: 20px; font-size: 13px; cursor: pointer;">💰 Send Invoice</button>
+              <button style="padding: 8px 16px; border: 1px solid var(--border-grey); background: white; border-radius: 20px; font-size: 13px; cursor: pointer;">📋 Product Catalog</button>
+            </div>
+          </div>
+
+          <!-- Message Input -->
+          <div style="padding: 20px 24px; border-top: 1px solid var(--border-grey); background: white;">
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <button style="padding: 10px; border: none; background: none; cursor: pointer; font-size: 20px;">📎</button>
+              <button style="padding: 10px; border: none; background: none; cursor: pointer; font-size: 20px;">😊</button>
+              <input type="text" placeholder="Type your message..." style="flex: 1; padding: 12px 16px; border: 1px solid var(--border-grey); border-radius: 24px; font-size: 14px;">
+              <button class="btn btn-primary" style="padding: 12px 24px; border-radius: 24px;">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/session.js"></script>
+  <script src="js/navigation.js"></script>
+  <script>
+    // Conversation switching
+    document.querySelectorAll('.conversation-item').forEach(item => {
+      item.addEventListener('click', function() {
+        document.querySelectorAll('.conversation-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Add styles
+    const style = document.createElement('style');
+    style.textContent = `
+      .conversation-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+        position: relative;
+      }
+      .conversation-item:hover {
+        background: var(--light-grey);
+      }
+      .conversation-item.active {
+        background: rgba(13, 196, 203, 0.1);
+        border-right: 3px solid var(--primary-teal);
+      }
+      .unread-badge {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: var(--primary-teal);
+        color: white;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .msg-filter {
+        padding: 6px 12px;
+        border: 1px solid var(--border-grey);
+        background: white;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .msg-filter.active {
+        background: var(--primary-teal);
+        color: white;
+        border-color: var(--primary-teal);
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Seller Dashboard - Airavat B2B E-commerce Platform">
+  <title>Seller Dashboard - Airavat</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="seller-interface">
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <span class="elephant-icon">🐘</span>
+          <span class="logo-text">Airavat</span>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <input type="text" placeholder="Search for products, orders, buyers..." class="search-input">
+          <button class="search-button">🔍</button>
+        </div>
+
+        <!-- Nav Icons -->
+        <div class="nav-icons">
+          <!-- Language Selector -->
+          <select class="language-selector">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+          </select>
+
+          <!-- Interface Switch Container -->
+          <div id="switchContainer" class="interface-switch-container"></div>
+
+          <!-- Cart Icon -->
+          <a href="#" class="icon-link cart-icon">
+            🛒
+            <span class="cart-badge">0</span>
+          </a>
+
+          <!-- Account Icon -->
+          <a href="#" class="icon-link account-icon" id="accountIcon">
+            👤
+            <span class="account-text" id="accountText">Account</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Category Navigation -->
+      <div class="category-nav">
+        <a href="#" class="category-link">All Categories</a>
+        <a href="#" class="category-link">Electronics</a>
+        <a href="#" class="category-link">Construction</a>
+        <a href="#" class="category-link">Textile</a>
+        <a href="#" class="category-link">Agriculture</a>
+        <a href="#" class="category-link">Industrial Machinery</a>
+        <a href="#" class="category-link">Packaging</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <nav class="sidebar-nav">
+        <a href="seller-profile.html" class="sidebar-item active" data-page="seller-profile">
+          <span class="sidebar-icon">🏠</span>
+          <span>Home</span>
+        </a>
+        <a href="orders.html" class="sidebar-item" data-page="orders">
+          <span class="sidebar-icon">📦</span>
+          <span>Orders</span>
+        </a>
+        <a href="seller-messages.html" class="sidebar-item" data-page="seller-messages">
+          <span class="sidebar-icon">💬</span>
+          <span>Messages</span>
+        </a>
+        <a href="seller-rfq.html" class="sidebar-item" data-page="seller-rfq">
+          <span class="sidebar-icon">📋</span>
+          <span>RFQ</span>
+        </a>
+        <a href="seller-payments.html" class="sidebar-item" data-page="seller-payments">
+          <span class="sidebar-icon">💰</span>
+          <span>Payments</span>
+        </a>
+        <a href="logistics.html" class="sidebar-item" data-page="logistics">
+          <span class="sidebar-icon">🚚</span>
+          <span>Transport</span>
+        </a>
+        <a href="seller-sales.html" class="sidebar-item seller-only" data-page="seller-sales">
+          <span class="sidebar-icon">💼</span>
+          <span>Sales</span>
+        </a>
+        <a href="seller-inventory.html" class="sidebar-item seller-only" data-page="seller-inventory">
+          <span class="sidebar-icon">📊</span>
+          <span>Inventory</span>
+        </a>
+        <a href="seller-grow.html" class="sidebar-item seller-only" data-page="seller-grow">
+          <span class="sidebar-icon">📈</span>
+          <span>Grow</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Welcome Header -->
+      <div class="dashboard-header">
+        <div class="flex-between">
+          <div>
+            <div class="dashboard-title">Welcome back, Rajesh Kumar! 👋</div>
+            <div class="dashboard-subtitle">Here's what's happening with your store today</div>
+          </div>
+          <button class="btn btn-primary">
+            <span>➕</span>
+            <span>Add New Product</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card" style="border-left-color: #0DC4CB;">
+          <div class="stat-value">₹8.2L</div>
+          <div class="stat-label">Monthly Revenue</div>
+          <div style="font-size: 12px; color: var(--success-green); margin-top: 8px;">↑ 12% from last month</div>
+        </div>
+        <div class="stat-card" style="border-left-color: #F0BF69;">
+          <div class="stat-value">47</div>
+          <div class="stat-label">Active Orders</div>
+          <div style="font-size: 12px; color: var(--text-grey); margin-top: 8px;">8 pending shipment</div>
+        </div>
+        <div class="stat-card" style="border-left-color: #054A4E;">
+          <div class="stat-value">156</div>
+          <div class="stat-label">Total Products</div>
+          <div style="font-size: 12px; color: var(--text-grey); margin-top: 8px;">12 low stock items</div>
+        </div>
+        <div class="stat-card" style="border-left-color: var(--success-green);">
+          <div class="stat-value">4.8⭐</div>
+          <div class="stat-label">Seller Rating</div>
+          <div style="font-size: 12px; color: var(--text-grey); margin-top: 8px;">Based on 234 reviews</div>
+        </div>
+      </div>
+
+      <!-- Sales Chart & Quick Actions -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px;">
+        <!-- Sales Overview -->
+        <div class="dashboard-card">
+          <h2 class="card-title">Sales Overview</h2>
+          <div class="card-subtitle">Last 7 days performance</div>
+
+          <!-- Simple Bar Chart -->
+          <div style="display: flex; align-items: flex-end; gap: 12px; height: 200px; padding: 20px 0;">
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+              <div style="width: 100%; height: 45%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div>
+              <span style="font-size: 12px; color: var(--text-grey);">Mon</span>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+              <div style="width: 100%; height: 60%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div>
+              <span style="font-size: 12px; color: var(--text-grey);">Tue</span>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+              <div style="width: 100%; height: 55%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div>
+              <span style="font-size: 12px; color: var(--text-grey);">Wed</span>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+              <div style="width: 100%; height: 75%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div>
+              <span style="font-size: 12px; color: var(--text-grey);">Thu</span>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+              <div style="width: 100%; height: 85%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div>
+              <span style="font-size: 12px; color: var(--text-grey);">Fri</span>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+              <div style="width: 100%; height: 50%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div>
+              <span style="font-size: 12px; color: var(--text-grey);">Sat</span>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+              <div style="width: 100%; height: 40%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div>
+              <span style="font-size: 12px; color: var(--text-grey);">Sun</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="dashboard-card">
+          <h2 class="card-title">Quick Actions</h2>
+          <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+            <button class="btn btn-secondary" style="width: 100%; justify-content: center;">
+              <span>📦</span>
+              <span>Manage Inventory</span>
+            </button>
+            <button class="btn btn-secondary" style="width: 100%; justify-content: center;">
+              <span>📋</span>
+              <span>View RFQs</span>
+            </button>
+            <button class="btn btn-secondary" style="width: 100%; justify-content: center;">
+              <span>💰</span>
+              <span>Create Payment Link</span>
+            </button>
+            <button class="btn btn-secondary" style="width: 100%; justify-content: center;">
+              <span>📈</span>
+              <span>View Analytics</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Products & Recent Orders -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+        <!-- Top Selling Products -->
+        <div class="dashboard-card">
+          <h2 class="card-title">Top Selling Products</h2>
+          <div class="card-subtitle">Best performers this month</div>
+
+          <div style="margin-top: 20px;">
+            <!-- Product 1 -->
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid var(--border-grey);">
+              <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px; flex-shrink: 0;"></div>
+              <div style="flex: 1;">
+                <div style="font-weight: 600; margin-bottom: 4px;">Industrial LED Bulbs</div>
+                <div style="font-size: 12px; color: var(--text-grey);">245 units sold</div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-weight: 700; color: var(--primary-teal);">₹22,050</div>
+                <div style="font-size: 11px; color: var(--success-green);">↑ 18%</div>
+              </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid var(--border-grey);">
+              <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px; flex-shrink: 0;"></div>
+              <div style="flex: 1;">
+                <div style="font-weight: 600; margin-bottom: 4px;">Cotton Fabric Rolls</div>
+                <div style="font-size: 12px; color: var(--text-grey);">87 rolls sold</div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-weight: 700; color: var(--primary-teal);">₹36,975</div>
+                <div style="font-size: 11px; color: var(--success-green);">↑ 24%</div>
+              </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid var(--border-grey);">
+              <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px; flex-shrink: 0;"></div>
+              <div style="flex: 1;">
+                <div style="font-weight: 600; margin-bottom: 4px;">Steel Construction Rods</div>
+                <div style="font-size: 12px; color: var(--text-grey);">1250 kg sold</div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-weight: 700; color: var(--primary-teal);">₹78,125</div>
+                <div style="font-size: 11px; color: var(--success-green);">↑ 15%</div>
+              </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px;">
+              <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px; flex-shrink: 0;"></div>
+              <div style="flex: 1;">
+                <div style="font-weight: 600; margin-bottom: 4px;">Packaging Boxes</div>
+                <div style="font-size: 12px; color: var(--text-grey);">3450 units sold</div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-weight: 700; color: var(--primary-teal);">₹86,250</div>
+                <div style="font-size: 11px; color: var(--success-green);">↑ 32%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Inquiries -->
+        <div class="dashboard-card">
+          <h2 class="card-title">Recent RFQ Inquiries</h2>
+          <div class="card-subtitle">New buyer requests</div>
+
+          <div style="margin-top: 20px;">
+            <!-- Inquiry 1 -->
+            <div style="padding: 12px; border-bottom: 1px solid var(--border-grey);">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <div style="font-weight: 600;">LED Bulbs - Bulk Order</div>
+                <span class="badge badge-warning">Pending</span>
+              </div>
+              <div style="font-size: 13px; color: var(--text-grey); margin-bottom: 4px;">Buyer: Sharma Electronics</div>
+              <div style="font-size: 12px; color: var(--text-grey);">Qty: 1000 units • Budget: ₹80,000</div>
+              <button class="btn btn-primary" style="margin-top: 8px; padding: 6px 12px; font-size: 12px;">Send Quote</button>
+            </div>
+
+            <!-- Inquiry 2 -->
+            <div style="padding: 12px; border-bottom: 1px solid var(--border-grey);">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <div style="font-weight: 600;">Cotton Fabric - White</div>
+                <span class="badge badge-warning">Pending</span>
+              </div>
+              <div style="font-size: 13px; color: var(--text-grey); margin-bottom: 4px;">Buyer: Textile Mills Pvt Ltd</div>
+              <div style="font-size: 12px; color: var(--text-grey);">Qty: 500 rolls • Budget: ₹2,10,000</div>
+              <button class="btn btn-primary" style="margin-top: 8px; padding: 6px 12px; font-size: 12px;">Send Quote</button>
+            </div>
+
+            <!-- Inquiry 3 -->
+            <div style="padding: 12px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <div style="font-weight: 600;">Packaging Materials</div>
+                <span class="badge badge-success">Quoted</span>
+              </div>
+              <div style="font-size: 13px; color: var(--text-grey); margin-bottom: 4px;">Buyer: FoodPack Industries</div>
+              <div style="font-size: 12px; color: var(--text-grey);">Qty: 5000 units • Budget: ₹1,25,000</div>
+              <button class="btn btn-secondary" style="margin-top: 8px; padding: 6px 12px; font-size: 12px;">View Quote</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Orders -->
+      <div class="dashboard-card">
+        <div class="flex-between mb-20">
+          <h2 class="card-title">Recent Orders</h2>
+          <a href="orders.html" style="color: var(--primary-teal); font-weight: 600; text-decoration: none;">View All →</a>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Buyer</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>#ORD2024045</strong></td>
+              <td>Sharma Electronics</td>
+              <td>Industrial LED Bulbs</td>
+              <td>500 Units</td>
+              <td><strong>₹45,000</strong></td>
+              <td><span class="badge badge-warning">Processing</span></td>
+              <td>
+                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Process</button>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>#ORD2024044</strong></td>
+              <td>Textile Mills Ltd</td>
+              <td>Cotton Fabric Rolls</td>
+              <td>200 Rolls</td>
+              <td><strong>₹85,000</strong></td>
+              <td><span class="badge badge-warning">In Transit</span></td>
+              <td>
+                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Track</button>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>#ORD2024043</strong></td>
+              <td>Construction Corp</td>
+              <td>Steel Rods</td>
+              <td>1000 Kg</td>
+              <td><strong>₹62,500</strong></td>
+              <td><span class="badge badge-success">Delivered</span></td>
+              <td>
+                <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">View</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/session.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

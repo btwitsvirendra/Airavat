@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Post RFQ - Airavat B2B E-commerce Platform">
+  <title>Post New RFQ - Airavat</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <span class="elephant-icon">🐘</span>
+          <span class="logo-text">Airavat</span>
+        </a>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for products, manufacturers, suppliers..." class="search-input">
+          <button class="search-button">🔍</button>
+        </div>
+        <div class="nav-icons">
+          <select class="language-selector">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+          </select>
+          <div id="switchContainer" class="interface-switch-container"></div>
+          <a href="#" class="icon-link cart-icon">🛒<span class="cart-badge">0</span></a>
+          <a href="#" class="icon-link account-icon" id="accountIcon">👤<span class="account-text" id="accountText">Account</span></a>
+        </div>
+      </nav>
+      <div class="category-nav">
+        <a href="#" class="category-link">All Categories</a>
+        <a href="#" class="category-link">Electronics</a>
+        <a href="#" class="category-link">Construction</a>
+        <a href="#" class="category-link">Textile</a>
+        <a href="#" class="category-link">Agriculture</a>
+        <a href="#" class="category-link">Industrial Machinery</a>
+        <a href="#" class="category-link">Packaging</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <nav class="sidebar-nav">
+        <a href="profile.html" class="sidebar-item" data-page="profile"><span class="sidebar-icon">🏠</span><span>Home</span></a>
+        <a href="orders.html" class="sidebar-item" data-page="orders"><span class="sidebar-icon">📦</span><span>Orders</span></a>
+        <a href="messages.html" class="sidebar-item" data-page="messages"><span class="sidebar-icon">💬</span><span>Messages</span></a>
+        <a href="rfq.html" class="sidebar-item active" data-page="rfq"><span class="sidebar-icon">📋</span><span>RFQ</span></a>
+        <a href="payments.html" class="sidebar-item" data-page="payments"><span class="sidebar-icon">💰</span><span>Payments</span></a>
+        <a href="logistics.html" class="sidebar-item" data-page="logistics"><span class="sidebar-icon">🚚</span><span>Transport Service</span></a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div class="dashboard-title">Post New RFQ</div>
+        <div class="dashboard-subtitle">Request quotes from multiple sellers</div>
+      </div>
+
+      <!-- RFQ Form -->
+      <div class="dashboard-card">
+        <form style="max-width: 800px;">
+          <div class="form-group">
+            <label class="form-label">Product/Service Name *</label>
+            <input type="text" class="form-input" placeholder="e.g., Industrial LED Bulbs - 9W" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Category *</label>
+            <select class="form-select" required>
+              <option value="">Select Category</option>
+              <option>Electronics</option>
+              <option>Construction Materials</option>
+              <option>Textile & Fabric</option>
+              <option>Agriculture</option>
+              <option>Industrial Machinery</option>
+              <option>Packaging Materials</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+              <label class="form-label">Quantity *</label>
+              <input type="number" class="form-input" placeholder="e.g., 1000" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Unit *</label>
+              <select class="form-select" required>
+                <option value="">Select Unit</option>
+                <option>Pieces/Units</option>
+                <option>Kg</option>
+                <option>Tons</option>
+                <option>Meters</option>
+                <option>Liters</option>
+                <option>Boxes</option>
+                <option>Rolls</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+              <label class="form-label">Budget Range</label>
+              <div style="display: flex; gap: 12px; align-items: center;">
+                <input type="number" class="form-input" placeholder="Min (₹)">
+                <span>to</span>
+                <input type="number" class="form-input" placeholder="Max (₹)">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Required by Date *</label>
+              <input type="date" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Detailed Requirements *</label>
+            <textarea class="form-textarea" placeholder="Describe your requirements in detail. Include specifications, quality standards, certifications needed, etc." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Preferred Delivery Location *</label>
+            <input type="text" class="form-input" placeholder="e.g., Mumbai, Maharashtra" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Attach Files (Optional)</label>
+            <div style="border: 2px dashed var(--border-grey); border-radius: 8px; padding: 40px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--primary-teal)'" onmouseout="this.style.borderColor='var(--border-grey)'">
+              <div style="font-size: 48px; margin-bottom: 16px;">📎</div>
+              <div style="font-weight: 600; margin-bottom: 8px;">Click to upload or drag and drop</div>
+              <div style="font-size: 13px; color: var(--text-grey);">PDF, DOC, Images up to 10MB</div>
+            </div>
+          </div>
+
+          <div style="background: var(--light-grey); padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+            <div style="font-weight: 600; margin-bottom: 12px;">💡 Tips for Getting Best Quotes:</div>
+            <ul style="font-size: 14px; color: var(--text-grey); line-height: 1.8; margin-left: 20px;">
+              <li>Provide detailed specifications and requirements</li>
+              <li>Include quality standards and certifications needed</li>
+              <li>Mention your preferred delivery timeline</li>
+              <li>Attach technical drawings or samples if available</li>
+              <li>Be clear about payment terms and conditions</li>
+            </ul>
+          </div>
+
+          <div style="display: flex; gap: 12px; justify-content: flex-end;">
+            <a href="rfq.html" class="btn btn-secondary" style="text-decoration: none;">Cancel</a>
+            <button type="submit" class="btn btn-primary">Post RFQ</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/session.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RFQ - Airavat B2B E-commerce Platform">
+  <title>My RFQs - Airavat</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <span class="elephant-icon">🐘</span>
+          <span class="logo-text">Airavat</span>
+        </a>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for products, manufacturers, suppliers..." class="search-input">
+          <button class="search-button">🔍</button>
+        </div>
+        <div class="nav-icons">
+          <select class="language-selector">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+          </select>
+          <div id="switchContainer" class="interface-switch-container"></div>
+          <a href="#" class="icon-link cart-icon">🛒<span class="cart-badge">0</span></a>
+          <a href="#" class="icon-link account-icon" id="accountIcon">👤<span class="account-text" id="accountText">Account</span></a>
+        </div>
+      </nav>
+      <div class="category-nav">
+        <a href="#" class="category-link">All Categories</a>
+        <a href="#" class="category-link">Electronics</a>
+        <a href="#" class="category-link">Construction</a>
+        <a href="#" class="category-link">Textile</a>
+        <a href="#" class="category-link">Agriculture</a>
+        <a href="#" class="category-link">Industrial Machinery</a>
+        <a href="#" class="category-link">Packaging</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <nav class="sidebar-nav">
+        <a href="profile.html" class="sidebar-item" data-page="profile"><span class="sidebar-icon">🏠</span><span>Home</span></a>
+        <a href="orders.html" class="sidebar-item" data-page="orders"><span class="sidebar-icon">📦</span><span>Orders</span></a>
+        <a href="messages.html" class="sidebar-item" data-page="messages"><span class="sidebar-icon">💬</span><span>Messages</span></a>
+        <a href="rfq.html" class="sidebar-item active" data-page="rfq"><span class="sidebar-icon">📋</span><span>RFQ</span></a>
+        <a href="payments.html" class="sidebar-item" data-page="payments"><span class="sidebar-icon">💰</span><span>Payments</span></a>
+        <a href="logistics.html" class="sidebar-item" data-page="logistics"><span class="sidebar-icon">🚚</span><span>Transport Service</span></a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div class="dashboard-title">Request for Quotations (RFQ)</div>
+            <div class="dashboard-subtitle">Manage your product inquiries and quotes</div>
+          </div>
+          <a href="rfq-post.html" class="btn btn-primary">
+            <span>➕</span>
+            <span>Post New RFQ</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="stat-card">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Active RFQs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">45</div>
+          <div class="stat-label">Quotes Received</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">8</div>
+          <div class="stat-label">Converted to Orders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">₹4.2L</div>
+          <div class="stat-label">Total Value</div>
+        </div>
+      </div>
+
+      <!-- RFQ Cards -->
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <!-- RFQ 1 -->
+        <div class="dashboard-card">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <div style="flex: 1;">
+              <div style="font-size: 20px; font-weight: 700; color: var(--soft-grey); margin-bottom: 8px;">Industrial LED Bulbs - 9W</div>
+              <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 12px;">RFQ ID: <strong>#RFQ2024015</strong> • Posted: Jan 20, 2025</div>
+              <div style="display: flex; gap: 24px; margin-bottom: 16px;">
+                <div>
+                  <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 4px;">Quantity</div>
+                  <div style="font-weight: 600; font-size: 15px;">1000 Units</div>
+                </div>
+                <div>
+                  <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 4px;">Budget</div>
+                  <div style="font-weight: 600; font-size: 15px;">₹80,000 - ₹90,000</div>
+                </div>
+                <div>
+                  <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 4px;">Delivery by</div>
+                  <div style="font-weight: 600; font-size: 15px;">Feb 15, 2025</div>
+                </div>
+              </div>
+              <div style="padding: 12px; background: var(--light-grey); border-radius: 8px; margin-bottom: 12px;">
+                <div style="font-size: 13px; color: var(--soft-grey);">
+                  <strong>Requirements:</strong> Need high-quality LED bulbs with minimum 2 year warranty. Must be energy efficient and comply with ISI standards.
+                </div>
+              </div>
+            </div>
+            <span class="badge badge-success" style="margin-left: 16px;">Active</span>
+          </div>
+
+          <div style="border-top: 1px solid var(--border-grey); padding-top: 16px;">
+            <div style="font-weight: 600; margin-bottom: 12px;">Quotes Received: 8</div>
+            <div style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px;">
+              <!-- Quote Card 1 -->
+              <div style="min-width: 280px; border: 2px solid var(--primary-teal); border-radius: 8px; padding: 16px; background: rgba(13, 196, 203, 0.05);">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                  <div style="font-weight: 600; font-size: 15px;">Bright Electronics</div>
+                  <span class="badge badge-success">Best</span>
+                </div>
+                <div style="font-size: 24px; font-weight: 700; color: var(--primary-teal); margin-bottom: 8px;">₹82,500</div>
+                <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 12px;">₹82.5 per unit • Delivery: 15 days</div>
+                <button class="btn btn-primary" style="width: 100%; padding: 8px; font-size: 13px;">Accept Quote</button>
+              </div>
+
+              <!-- Quote Card 2 -->
+              <div style="min-width: 280px; border: 1px solid var(--border-grey); border-radius: 8px; padding: 16px;">
+                <div style="font-weight: 600; font-size: 15px; margin-bottom: 8px;">LED Solutions Ltd</div>
+                <div style="font-size: 24px; font-weight: 700; color: var(--soft-grey); margin-bottom: 8px;">₹87,000</div>
+                <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 12px;">₹87 per unit • Delivery: 12 days</div>
+                <button class="btn btn-secondary" style="width: 100%; padding: 8px; font-size: 13px;">View Details</button>
+              </div>
+
+              <!-- Quote Card 3 -->
+              <div style="min-width: 280px; border: 1px solid var(--border-grey); border-radius: 8px; padding: 16px;">
+                <div style="font-weight: 600; font-size: 15px; margin-bottom: 8px;">Industrial Lights Co</div>
+                <div style="font-size: 24px; font-weight: 700; color: var(--soft-grey); margin-bottom: 8px;">₹89,500</div>
+                <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 12px;">₹89.5 per unit • Delivery: 10 days</div>
+                <button class="btn btn-secondary" style="width: 100%; padding: 8px; font-size: 13px;">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RFQ 2 -->
+        <div class="dashboard-card">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <div style="flex: 1;">
+              <div style="font-size: 20px; font-weight: 700; color: var(--soft-grey); margin-bottom: 8px;">Cotton Fabric Rolls - White</div>
+              <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 12px;">RFQ ID: <strong>#RFQ2024014</strong> • Posted: Jan 18, 2025</div>
+              <div style="display: flex; gap: 24px; margin-bottom: 16px;">
+                <div>
+                  <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 4px;">Quantity</div>
+                  <div style="font-weight: 600; font-size: 15px;">500 Rolls</div>
+                </div>
+                <div>
+                  <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 4px;">Budget</div>
+                  <div style="font-weight: 600; font-size: 15px;">₹2,00,000 - ₹2,20,000</div>
+                </div>
+                <div>
+                  <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 4px;">Delivery by</div>
+                  <div style="font-weight: 600; font-size: 15px;">Feb 10, 2025</div>
+                </div>
+              </div>
+            </div>
+            <span class="badge badge-warning" style="margin-left: 16px;">Pending</span>
+          </div>
+
+          <div style="border-top: 1px solid var(--border-grey); padding-top: 16px;">
+            <div style="font-weight: 600; margin-bottom: 12px;">Quotes Received: 5</div>
+            <button class="btn btn-secondary">View All Quotes</button>
+          </div>
+        </div>
+
+        <!-- RFQ 3 -->
+        <div class="dashboard-card" style="opacity: 0.7;">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+            <div style="flex: 1;">
+              <div style="font-size: 20px; font-weight: 700; color: var(--soft-grey); margin-bottom: 8px;">Construction Steel Rods</div>
+              <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 12px;">RFQ ID: <strong>#RFQ2024013</strong> • Posted: Jan 15, 2025</div>
+              <div style="display: flex; gap: 24px;">
+                <div>
+                  <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 4px;">Quantity</div>
+                  <div style="font-weight: 600; font-size: 15px;">2000 Kg</div>
+                </div>
+                <div>
+                  <div style="font-size: 12px; color: var(--text-grey); margin-bottom: 4px;">Final Amount</div>
+                  <div style="font-weight: 600; font-size: 15px; color: var(--primary-teal);">₹1,25,000</div>
+                </div>
+              </div>
+            </div>
+            <span class="badge badge-success" style="margin-left: 16px;">Completed</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/session.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

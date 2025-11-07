@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Seller Growth Tools - Airavat B2B E-commerce Platform">
+  <title>Grow Your Business - Seller Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="seller-interface">
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo"><span class="elephant-icon">🐘</span><span class="logo-text">Airavat</span></a>
+        <div class="search-bar"><input type="text" placeholder="Search for products, orders, buyers..." class="search-input"><button class="search-button">🔍</button></div>
+        <div class="nav-icons">
+          <select class="language-selector"><option value="en">English</option><option value="hi">हिंदी</option><option value="ta">தமிழ்</option><option value="te">తెలుగు</option></select>
+          <div id="switchContainer" class="interface-switch-container"></div>
+          <a href="#" class="icon-link cart-icon">🛒<span class="cart-badge">0</span></a>
+          <a href="#" class="icon-link account-icon" id="accountIcon">👤<span class="account-text" id="accountText">Account</span></a>
+        </div>
+      </nav>
+      <div class="category-nav"><a href="#" class="category-link">All Categories</a><a href="#" class="category-link">Electronics</a><a href="#" class="category-link">Construction</a><a href="#" class="category-link">Textile</a><a href="#" class="category-link">Agriculture</a><a href="#" class="category-link">Industrial Machinery</a><a href="#" class="category-link">Packaging</a></div>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <aside class="dashboard-sidebar">
+      <nav class="sidebar-nav">
+        <a href="seller-profile.html" class="sidebar-item" data-page="seller-profile"><span class="sidebar-icon">🏠</span><span>Home</span></a>
+        <a href="orders.html" class="sidebar-item" data-page="orders"><span class="sidebar-icon">📦</span><span>Orders</span></a>
+        <a href="seller-messages.html" class="sidebar-item" data-page="seller-messages"><span class="sidebar-icon">💬</span><span>Messages</span></a>
+        <a href="seller-rfq.html" class="sidebar-item" data-page="seller-rfq"><span class="sidebar-icon">📋</span><span>RFQ</span></a>
+        <a href="seller-payments.html" class="sidebar-item" data-page="seller-payments"><span class="sidebar-icon">💰</span><span>Payments</span></a>
+        <a href="logistics.html" class="sidebar-item" data-page="logistics"><span class="sidebar-icon">🚚</span><span>Transport</span></a>
+        <a href="seller-sales.html" class="sidebar-item seller-only" data-page="seller-sales"><span class="sidebar-icon">💼</span><span>Sales</span></a>
+        <a href="seller-inventory.html" class="sidebar-item seller-only" data-page="seller-inventory"><span class="sidebar-icon">📊</span><span>Inventory</span></a>
+        <a href="seller-grow.html" class="sidebar-item seller-only active" data-page="seller-grow"><span class="sidebar-icon">📈</span><span>Grow</span></a>
+      </nav>
+    </aside>
+
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div class="dashboard-title">Grow Your Business</div>
+        <div class="dashboard-subtitle">Tools and resources to boost your sales</div>
+      </div>
+
+      <!-- Growth Score -->
+      <div class="dashboard-card" style="background: linear-gradient(135deg, #054A4E 0%, #0DC4CB 100%); color: white;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="flex: 1;">
+            <div style="font-size: 16px; font-weight: 600; margin-bottom: 12px; opacity: 0.9;">Your Growth Score</div>
+            <div style="font-size: 72px; font-weight: 700; margin-bottom: 12px; line-height: 1;">8.5/10</div>
+            <div style="font-size: 14px; margin-bottom: 20px; opacity: 0.9;">You're performing better than 75% of sellers in your category</div>
+            <button style="background: white; color: var(--primary-teal); padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">View Detailed Report</button>
+          </div>
+          <div style="font-size: 150px; opacity: 0.2;">📈</div>
+        </div>
+      </div>
+
+      <!-- Growth Tools -->
+      <div class="dashboard-card">
+        <h2 class="card-title" style="margin-bottom: 20px;">Growth Tools</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+          <!-- Tool Card 1 -->
+          <div style="border: 2px solid var(--primary-teal); border-radius: 12px; padding: 24px; background: rgba(13, 196, 203, 0.05); cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+            <div style="font-size: 48px; margin-bottom: 16px;">🎯</div>
+            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Featured Listing</div>
+            <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 16px; line-height: 1.6;">Get your products featured on homepage and category pages for maximum visibility</div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;">Start Campaign</button>
+          </div>
+
+          <!-- Tool Card 2 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 24px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size: 48px; margin-bottom: 16px;">📱</div>
+            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Bulk SMS Campaigns</div>
+            <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 16px; line-height: 1.6;">Send promotional SMS to targeted buyers and increase your reach</div>
+            <button class="btn btn-secondary" style="width: 100%; justify-content: center;">Learn More</button>
+          </div>
+
+          <!-- Tool Card 3 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 24px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size: 48px; margin-bottom: 16px;">💰</div>
+            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Business Loans</div>
+            <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 16px; line-height: 1.6;">Get instant business loans up to ₹50L with minimal documentation</div>
+            <button class="btn btn-secondary" style="width: 100%; justify-content: center;">Check Eligibility</button>
+          </div>
+
+          <!-- Tool Card 4 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 24px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size: 48px; margin-bottom: 16px;">📊</div>
+            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Product Photography</div>
+            <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 16px; line-height: 1.6;">Professional product photoshoot to enhance your listing quality</div>
+            <button class="btn btn-secondary" style="width: 100%; justify-content: center;">Book Session</button>
+          </div>
+
+          <!-- Tool Card 5 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 24px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size: 48px; margin-bottom: 16px;">🎓</div>
+            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Seller Training</div>
+            <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 16px; line-height: 1.6;">Free training programs to help you become a better seller</div>
+            <button class="btn btn-secondary" style="width: 100%; justify-content: center;">View Courses</button>
+          </div>
+
+          <!-- Tool Card 6 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 24px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size: 48px; margin-bottom: 16px;">🛡️</div>
+            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Seller Protection</div>
+            <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 16px; line-height: 1.6;">Protection against fraud, payment defaults and disputes</div>
+            <button class="btn btn-secondary" style="width: 100%; justify-content: center;">Get Protected</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="dashboard-card">
+        <h2 class="card-title" style="margin-bottom: 20px;">Personalized Recommendations</h2>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <!-- Recommendation 1 -->
+          <div style="border-left: 4px solid var(--primary-teal); background: rgba(13, 196, 203, 0.05); padding: 20px; border-radius: 8px;">
+            <div style="display: flex; align-items: start; gap: 16px;">
+              <div style="font-size: 32px;">💡</div>
+              <div style="flex: 1;">
+                <div style="font-weight: 700; font-size: 16px; margin-bottom: 8px;">Add more product images</div>
+                <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 12px;">Products with 5+ images get 3x more inquiries. You have 12 products with less than 3 images.</div>
+                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Update Products</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommendation 2 -->
+          <div style="border-left: 4px solid var(--royal-gold); background: rgba(240, 191, 105, 0.05); padding: 20px; border-radius: 8px;">
+            <div style="display: flex; align-items: start; gap: 16px;">
+              <div style="font-size: 32px;">⚡</div>
+              <div style="flex: 1;">
+                <div style="font-weight: 700; font-size: 16px; margin-bottom: 8px;">Respond to RFQs faster</div>
+                <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 12px;">Your average response time is 8 hours. Top sellers respond within 2 hours. Enable push notifications to respond faster.</div>
+                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Enable Notifications</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommendation 3 -->
+          <div style="border-left: 4px solid var(--success-green); background: rgba(76, 175, 80, 0.05); padding: 20px; border-radius: 8px;">
+            <div style="display: flex; align-items: start; gap: 16px;">
+              <div style="font-size: 32px;">📦</div>
+              <div style="flex: 1;">
+                <div style="font-weight: 700; font-size: 16px; margin-bottom: 8px;">Expand to new categories</div>
+                <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 12px;">Based on your profile, you can sell Agricultural Products and Industrial Machinery. These categories are seeing high demand.</div>
+                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Explore Categories</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Stories -->
+      <div class="dashboard-card">
+        <h2 class="card-title" style="margin-bottom: 20px;">Success Stories</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+          <!-- Story 1 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 20px;">
+            <div style="font-size: 48px; margin-bottom: 12px;">🏆</div>
+            <div style="font-weight: 700; font-size: 16px; margin-bottom: 8px;">"3x growth in 6 months"</div>
+            <div style="font-size: 13px; color: var(--text-grey); line-height: 1.6; margin-bottom: 12px;">"Using Airavat's featured listing and growth tools, I was able to triple my monthly revenue in just 6 months."</div>
+            <div style="font-size: 12px; color: var(--text-grey);">- Amit Sharma, Electronics Supplier</div>
+          </div>
+
+          <!-- Story 2 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 20px;">
+            <div style="font-size: 48px; margin-bottom: 12px;">💼</div>
+            <div style="font-weight: 700; font-size: 16px; margin-bottom: 8px;">"Found 50+ regular buyers"</div>
+            <div style="font-size: 13px; color: var(--text-grey); line-height: 1.6; margin-bottom: 12px;">"The RFQ system helped me connect with quality buyers. Now I have a stable client base of 50+ regular buyers."</div>
+            <div style="font-size: 12px; color: var(--text-grey);">- Priya Desai, Textile Manufacturer</div>
+          </div>
+
+          <!-- Story 3 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 20px;">
+            <div style="font-size: 48px; margin-bottom: 12px;">🚀</div>
+            <div style="font-weight: 700; font-size: 16px; margin-bottom: 8px;">"Expanded nationwide"</div>
+            <div style="font-size: 13px; color: var(--text-grey); line-height: 1.6; margin-bottom: 12px;">"Started as a local supplier, now delivering to buyers across India. Airavat's logistics support made it possible."</div>
+            <div style="font-size: 12px; color: var(--text-grey);">- Vikram Singh, Construction Materials</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/session.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

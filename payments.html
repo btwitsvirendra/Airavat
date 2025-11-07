@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Payments - Airavat B2B E-commerce Platform">
+  <title>Payments - Airavat</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          <span class="elephant-icon">🐘</span>
+          <span class="logo-text">Airavat</span>
+        </a>
+        <div class="search-bar">
+          <input type="text" placeholder="Search for products, manufacturers, suppliers..." class="search-input">
+          <button class="search-button">🔍</button>
+        </div>
+        <div class="nav-icons">
+          <select class="language-selector">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+          </select>
+          <div id="switchContainer" class="interface-switch-container"></div>
+          <a href="#" class="icon-link cart-icon">🛒<span class="cart-badge">0</span></a>
+          <a href="#" class="icon-link account-icon" id="accountIcon">👤<span class="account-text" id="accountText">Account</span></a>
+        </div>
+      </nav>
+      <div class="category-nav">
+        <a href="#" class="category-link">All Categories</a>
+        <a href="#" class="category-link">Electronics</a>
+        <a href="#" class="category-link">Construction</a>
+        <a href="#" class="category-link">Textile</a>
+        <a href="#" class="category-link">Agriculture</a>
+        <a href="#" class="category-link">Industrial Machinery</a>
+        <a href="#" class="category-link">Packaging</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <nav class="sidebar-nav">
+        <a href="profile.html" class="sidebar-item" data-page="profile"><span class="sidebar-icon">🏠</span><span>Home</span></a>
+        <a href="orders.html" class="sidebar-item" data-page="orders"><span class="sidebar-icon">📦</span><span>Orders</span></a>
+        <a href="messages.html" class="sidebar-item" data-page="messages"><span class="sidebar-icon">💬</span><span>Messages</span></a>
+        <a href="rfq.html" class="sidebar-item" data-page="rfq"><span class="sidebar-icon">📋</span><span>RFQ</span></a>
+        <a href="payments.html" class="sidebar-item active" data-page="payments"><span class="sidebar-icon">💰</span><span>Payments</span></a>
+        <a href="logistics.html" class="sidebar-item" data-page="logistics"><span class="sidebar-icon">🚚</span><span>Transport Service</span></a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div class="dashboard-title">Payments & Wallet</div>
+        <div class="dashboard-subtitle">Manage your payments and transactions</div>
+      </div>
+
+      <!-- Wallet Card -->
+      <div class="dashboard-card" style="background: linear-gradient(135deg, #054A4E 0%, #0DC4CB 100%); color: white;">
+        <div style="display: flex; justify-content: space-between; align-items: start;">
+          <div style="flex: 1;">
+            <div style="font-size: 16px; font-weight: 600; margin-bottom: 8px; opacity: 0.9;">Airavat Wallet Balance</div>
+            <div style="font-size: 48px; font-weight: 700; margin-bottom: 20px;">₹12,450</div>
+            <div style="display: flex; gap: 12px;">
+              <button style="background: white; color: var(--primary-teal); padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Add Money</button>
+              <button style="background: rgba(255,255,255,0.2); color: white; padding: 12px 24px; border: 1px solid white; border-radius: 8px; font-weight: 600; cursor: pointer;">Withdraw</button>
+            </div>
+          </div>
+          <div style="font-size: 120px; opacity: 0.2;">💰</div>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">₹2.4L</div>
+          <div class="stat-label">Total Spent</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">₹45K</div>
+          <div class="stat-label">Pending Payments</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">15</div>
+          <div class="stat-label">Completed Orders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Pending Orders</div>
+        </div>
+      </div>
+
+      <!-- Payment Methods -->
+      <div class="dashboard-card">
+        <div class="flex-between mb-20">
+          <h2 class="card-title">Saved Payment Methods</h2>
+          <button class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;">+ Add New</button>
+        </div>
+
+        <div style="display: grid; gap: 16px;">
+          <!-- Card 1 -->
+          <div style="border: 2px solid var(--primary-teal); border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 16px; background: rgba(13, 196, 203, 0.05);">
+            <div style="font-size: 40px;">💳</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">HDFC Bank Card</div>
+              <div style="font-size: 14px; color: var(--text-grey);">•••• •••• •••• 4532</div>
+            </div>
+            <span class="badge badge-success">Primary</span>
+          </div>
+
+          <!-- Card 2 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 16px;">
+            <div style="font-size: 40px;">🏦</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">Net Banking - SBI</div>
+              <div style="font-size: 14px; color: var(--text-grey);">Account ending with 8921</div>
+            </div>
+            <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Remove</button>
+          </div>
+
+          <!-- UPI -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 16px;">
+            <div style="font-size: 40px;">📱</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">UPI</div>
+              <div style="font-size: 14px; color: var(--text-grey);">virendra@okhdfc</div>
+            </div>
+            <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transaction History -->
+      <div class="dashboard-card">
+        <div class="flex-between mb-20">
+          <h2 class="card-title">Recent Transactions</h2>
+          <select style="padding: 8px 16px; border: 1px solid var(--border-grey); border-radius: 8px; font-size: 14px;">
+            <option>All Transactions</option>
+            <option>Credits</option>
+            <option>Debits</option>
+          </select>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Transaction ID</th>
+              <th>Description</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>#TXN2024056</strong></td>
+              <td>Payment for Order #ORD2024001</td>
+              <td>Jan 20, 2025</td>
+              <td><span style="color: var(--error-red);">Debit</span></td>
+              <td><strong style="color: var(--error-red);">- ₹45,000</strong></td>
+              <td><span class="badge badge-success">Success</span></td>
+            </tr>
+            <tr>
+              <td><strong>#TXN2024055</strong></td>
+              <td>Wallet Top-up</td>
+              <td>Jan 18, 2025</td>
+              <td><span style="color: var(--success-green);">Credit</span></td>
+              <td><strong style="color: var(--success-green);">+ ₹50,000</strong></td>
+              <td><span class="badge badge-success">Success</span></td>
+            </tr>
+            <tr>
+              <td><strong>#TXN2024054</strong></td>
+              <td>Payment for Order #ORD2024002</td>
+              <td>Jan 15, 2025</td>
+              <td><span style="color: var(--error-red);">Debit</span></td>
+              <td><strong style="color: var(--error-red);">- ₹85,000</strong></td>
+              <td><span class="badge badge-success">Success</span></td>
+            </tr>
+            <tr>
+              <td><strong>#TXN2024053</strong></td>
+              <td>Payment for Order #ORD2024003</td>
+              <td>Jan 12, 2025</td>
+              <td><span style="color: var(--error-red);">Debit</span></td>
+              <td><strong style="color: var(--error-red);">- ₹62,500</strong></td>
+              <td><span class="badge badge-warning">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/session.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

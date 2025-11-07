@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Seller Sales Analytics - Airavat B2B E-commerce Platform">
+  <title>Sales Analytics - Seller Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="seller-interface">
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo"><span class="elephant-icon">🐘</span><span class="logo-text">Airavat</span></a>
+        <div class="search-bar"><input type="text" placeholder="Search for products, orders, buyers..." class="search-input"><button class="search-button">🔍</button></div>
+        <div class="nav-icons">
+          <select class="language-selector"><option value="en">English</option><option value="hi">हिंदी</option><option value="ta">தமிழ்</option><option value="te">తెలుగు</option></select>
+          <div id="switchContainer" class="interface-switch-container"></div>
+          <a href="#" class="icon-link cart-icon">🛒<span class="cart-badge">0</span></a>
+          <a href="#" class="icon-link account-icon" id="accountIcon">👤<span class="account-text" id="accountText">Account</span></a>
+        </div>
+      </nav>
+      <div class="category-nav"><a href="#" class="category-link">All Categories</a><a href="#" class="category-link">Electronics</a><a href="#" class="category-link">Construction</a><a href="#" class="category-link">Textile</a><a href="#" class="category-link">Agriculture</a><a href="#" class="category-link">Industrial Machinery</a><a href="#" class="category-link">Packaging</a></div>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <aside class="dashboard-sidebar">
+      <nav class="sidebar-nav">
+        <a href="seller-profile.html" class="sidebar-item" data-page="seller-profile"><span class="sidebar-icon">🏠</span><span>Home</span></a>
+        <a href="orders.html" class="sidebar-item" data-page="orders"><span class="sidebar-icon">📦</span><span>Orders</span></a>
+        <a href="seller-messages.html" class="sidebar-item" data-page="seller-messages"><span class="sidebar-icon">💬</span><span>Messages</span></a>
+        <a href="seller-rfq.html" class="sidebar-item" data-page="seller-rfq"><span class="sidebar-icon">📋</span><span>RFQ</span></a>
+        <a href="seller-payments.html" class="sidebar-item" data-page="seller-payments"><span class="sidebar-icon">💰</span><span>Payments</span></a>
+        <a href="logistics.html" class="sidebar-item" data-page="logistics"><span class="sidebar-icon">🚚</span><span>Transport</span></a>
+        <a href="seller-sales.html" class="sidebar-item seller-only active" data-page="seller-sales"><span class="sidebar-icon">💼</span><span>Sales</span></a>
+        <a href="seller-inventory.html" class="sidebar-item seller-only" data-page="seller-inventory"><span class="sidebar-icon">📊</span><span>Inventory</span></a>
+        <a href="seller-grow.html" class="sidebar-item seller-only" data-page="seller-grow"><span class="sidebar-icon">📈</span><span>Grow</span></a>
+      </nav>
+    </aside>
+
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div><div class="dashboard-title">Sales Analytics</div><div class="dashboard-subtitle">Track your sales performance and insights</div></div>
+          <select style="padding: 10px 16px; border: 1px solid var(--border-grey); border-radius: 8px; font-size: 14px; font-weight: 600;"><option>This Month</option><option>Last Month</option><option>Last 3 Months</option><option>Last 6 Months</option><option>This Year</option></select>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-value">₹12.5L</div><div class="stat-label">Total Revenue</div><div style="font-size: 12px; color: var(--success-green); margin-top: 8px;">↑ 18% from last month</div></div>
+        <div class="stat-card"><div class="stat-value">245</div><div class="stat-label">Orders Fulfilled</div><div style="font-size: 12px; color: var(--success-green); margin-top: 8px;">↑ 12% from last month</div></div>
+        <div class="stat-card"><div class="stat-value">₹5,102</div><div class="stat-label">Avg Order Value</div><div style="font-size: 12px; color: var(--text-grey); margin-top: 8px;">— No change</div></div>
+        <div class="stat-card"><div class="stat-value">98.2%</div><div class="stat-label">Fulfillment Rate</div><div style="font-size: 12px; color: var(--success-green); margin-top: 8px;">↑ 2% from last month</div></div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px;">
+        <div class="dashboard-card">
+          <h2 class="card-title">Revenue Trend</h2>
+          <div class="card-subtitle">Daily revenue for the current month</div>
+          <div style="display: flex; align-items: flex-end; gap: 8px; height: 250px; padding: 20px 0; margin-top: 20px;">
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;"><div style="width: 100%; height: 35%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div><span style="font-size: 11px; color: var(--text-grey);">1</span></div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;"><div style="width: 100%; height: 48%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div><span style="font-size: 11px; color: var(--text-grey);">5</span></div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;"><div style="width: 100%; height: 62%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div><span style="font-size: 11px; color: var(--text-grey);">10</span></div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;"><div style="width: 100%; height: 55%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div><span style="font-size: 11px; color: var(--text-grey);">15</span></div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;"><div style="width: 100%; height: 78%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div><span style="font-size: 11px; color: var(--text-grey);">20</span></div>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;"><div style="width: 100%; height: 85%; background: var(--primary-teal); border-radius: 8px 8px 0 0;"></div><span style="font-size: 11px; color: var(--text-grey);">25</span></div>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <h2 class="card-title">Top Categories</h2>
+          <div class="card-subtitle">By revenue this month</div>
+          <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 16px;">
+            <div><div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span style="font-weight: 600; font-size: 14px;">Electronics</span><span style="font-weight: 700; color: var(--primary-teal);">₹4.2L</span></div><div style="width: 100%; height: 8px; background: var(--light-grey); border-radius: 4px;"><div style="width: 75%; height: 100%; background: var(--primary-teal); border-radius: 4px;"></div></div></div>
+            <div><div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span style="font-weight: 600; font-size: 14px;">Textile</span><span style="font-weight: 700; color: var(--primary-teal);">₹3.5L</span></div><div style="width: 100%; height: 8px; background: var(--light-grey); border-radius: 4px;"><div style="width: 62%; height: 100%; background: var(--primary-teal); border-radius: 4px;"></div></div></div>
+            <div><div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span style="font-weight: 600; font-size: 14px;">Construction</span><span style="font-weight: 700; color: var(--primary-teal);">₹2.8L</span></div><div style="width: 100%; height: 8px; background: var(--light-grey); border-radius: 4px;"><div style="width: 50%; height: 100%; background: var(--primary-teal); border-radius: 4px;"></div></div></div>
+            <div><div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span style="font-weight: 600; font-size: 14px;">Packaging</span><span style="font-weight: 700; color: var(--primary-teal);">₹2.0L</span></div><div style="width: 100%; height: 8px; background: var(--light-grey); border-radius: 4px;"><div style="width: 36%; height: 100%; background: var(--primary-teal); border-radius: 4px;"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+        <div class="dashboard-card">
+          <h2 class="card-title">Best Selling Products</h2>
+          <div style="margin-top: 20px;">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid var(--border-grey);">
+              <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px; flex-shrink: 0;"></div>
+              <div style="flex: 1;"><div style="font-weight: 600; margin-bottom: 4px;">Industrial LED Bulbs</div><div style="font-size: 12px; color: var(--text-grey);">245 units sold</div></div>
+              <div style="text-align: right;"><div style="font-weight: 700; color: var(--primary-teal);">₹22,050</div><div style="font-size: 11px; color: var(--success-green);">↑ 18%</div></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid var(--border-grey);">
+              <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px; flex-shrink: 0;"></div>
+              <div style="flex: 1;"><div style="font-weight: 600; margin-bottom: 4px;">Cotton Fabric Rolls</div><div style="font-size: 12px; color: var(--text-grey);">87 rolls sold</div></div>
+              <div style="text-align: right;"><div style="font-weight: 700; color: var(--primary-teal);">₹36,975</div><div style="font-size: 11px; color: var(--success-green);">↑ 24%</div></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid var(--border-grey);">
+              <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px; flex-shrink: 0;"></div>
+              <div style="flex: 1;"><div style="font-weight: 600; margin-bottom: 4px;">Steel Construction Rods</div><div style="font-size: 12px; color: var(--text-grey);">1250 kg sold</div></div>
+              <div style="text-align: right;"><div style="font-weight: 700; color: var(--primary-teal);">₹78,125</div><div style="font-size: 11px; color: var(--success-green);">↑ 15%</div></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px;">
+              <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px; flex-shrink: 0;"></div>
+              <div style="flex: 1;"><div style="font-weight: 600; margin-bottom: 4px;">Packaging Boxes</div><div style="font-size: 12px; color: var(--text-grey);">3450 units sold</div></div>
+              <div style="text-align: right;"><div style="font-weight: 700; color: var(--primary-teal);">₹86,250</div><div style="font-size: 11px; color: var(--success-green);">↑ 32%</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <h2 class="card-title">Top Buyers</h2>
+          <div style="margin-top: 20px;">
+            <div style="padding: 16px; border-bottom: 1px solid var(--border-grey);">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary-teal); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">SE</div>
+                <div style="flex: 1;"><div style="font-weight: 600;">Sharma Electronics</div><div style="font-size: 12px; color: var(--text-grey);">32 orders</div></div>
+                <div style="font-weight: 700; color: var(--primary-teal);">₹2.8L</div>
+              </div>
+            </div>
+            <div style="padding: 16px; border-bottom: 1px solid var(--border-grey);">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--regal-blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">TM</div>
+                <div style="flex: 1;"><div style="font-weight: 600;">Textile Mills Ltd</div><div style="font-size: 12px; color: var(--text-grey);">24 orders</div></div>
+                <div style="font-weight: 700; color: var(--primary-teal);">₹2.1L</div>
+              </div>
+            </div>
+            <div style="padding: 16px; border-bottom: 1px solid var(--border-grey);">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--royal-gold); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">CC</div>
+                <div style="flex: 1;"><div style="font-weight: 600;">Construction Corp</div><div style="font-size: 12px; color: var(--text-grey);">18 orders</div></div>
+                <div style="font-weight: 700; color: var(--primary-teal);">₹1.6L</div>
+              </div>
+            </div>
+            <div style="padding: 16px;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--soft-grey); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">FP</div>
+                <div style="flex: 1;"><div style="font-weight: 600;">FoodPack Industries</div><div style="font-size: 12px; color: var(--text-grey);">15 orders</div></div>
+                <div style="font-weight: 700; color: var(--primary-teal);">₹1.2L</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/session.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Buyer Profile - Airavat B2B E-commerce Platform">
+  <title>My Profile - Airavat</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <span class="elephant-icon">🐘</span>
+          <span class="logo-text">Airavat</span>
+        </a>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <input type="text" placeholder="Search for products, manufacturers, suppliers..." class="search-input">
+          <button class="search-button">🔍</button>
+        </div>
+
+        <!-- Nav Icons -->
+        <div class="nav-icons">
+          <!-- Language Selector -->
+          <select class="language-selector">
+            <option value="en">English</option>
+            <option value="hi">हिंदी</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+          </select>
+
+          <!-- Interface Switch Container -->
+          <div id="switchContainer" class="interface-switch-container"></div>
+
+          <!-- Cart Icon -->
+          <a href="#" class="icon-link cart-icon">
+            🛒
+            <span class="cart-badge">0</span>
+          </a>
+
+          <!-- Account Icon -->
+          <a href="#" class="icon-link account-icon" id="accountIcon">
+            👤
+            <span class="account-text" id="accountText">Account</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Category Navigation -->
+      <div class="category-nav">
+        <a href="#" class="category-link">All Categories</a>
+        <a href="#" class="category-link">Electronics</a>
+        <a href="#" class="category-link">Construction</a>
+        <a href="#" class="category-link">Textile</a>
+        <a href="#" class="category-link">Agriculture</a>
+        <a href="#" class="category-link">Industrial Machinery</a>
+        <a href="#" class="category-link">Packaging</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <nav class="sidebar-nav">
+        <a href="profile.html" class="sidebar-item active" data-page="profile">
+          <span class="sidebar-icon">🏠</span>
+          <span>Home</span>
+        </a>
+        <a href="orders.html" class="sidebar-item" data-page="orders">
+          <span class="sidebar-icon">📦</span>
+          <span>Orders</span>
+        </a>
+        <a href="messages.html" class="sidebar-item" data-page="messages">
+          <span class="sidebar-icon">💬</span>
+          <span>Messages</span>
+        </a>
+        <a href="rfq.html" class="sidebar-item" data-page="rfq">
+          <span class="sidebar-icon">📋</span>
+          <span>RFQ</span>
+        </a>
+        <a href="payments.html" class="sidebar-item" data-page="payments">
+          <span class="sidebar-icon">💰</span>
+          <span>Payments</span>
+        </a>
+        <a href="logistics.html" class="sidebar-item" data-page="logistics">
+          <span class="sidebar-icon">🚚</span>
+          <span>Transport Service</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      <!-- Profile Header Card -->
+      <div class="dashboard-card">
+        <div style="display: flex; justify-content: space-between; align-items: start; gap: 24px;">
+          <!-- Profile Info -->
+          <div style="display: flex; gap: 20px; flex: 1;">
+            <!-- Avatar -->
+            <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #0DC4CB, #054A4E); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; font-weight: 700; flex-shrink: 0;">
+              VS
+            </div>
+
+            <!-- Details -->
+            <div style="flex: 1;">
+              <h1 style="font-size: 32px; font-weight: 700; color: var(--soft-grey); margin-bottom: 8px;">Virendra Singh</h1>
+              <p style="font-size: 16px; color: var(--text-grey); margin-bottom: 8px;">Member ID: <strong>AIR2024001</strong></p>
+              <p style="font-size: 14px; color: var(--text-grey); margin-bottom: 16px;">virendra.singh@example.com | +91 93527 87989</p>
+
+              <div style="display: flex; gap: 12px;">
+                <button class="btn btn-primary">
+                  <span>📞</span>
+                  <span>Contact Support</span>
+                </button>
+                <button class="btn btn-secondary">
+                  <span>✏️</span>
+                  <span>Edit Profile</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Profile Completion -->
+          <div style="background: var(--light-grey); padding: 20px; border-radius: 12px; text-align: center; min-width: 200px;">
+            <div style="font-size: 36px; font-weight: 700; color: var(--primary-teal); margin-bottom: 8px;">75%</div>
+            <div style="font-size: 14px; color: var(--text-grey); margin-bottom: 12px;">Profile Complete</div>
+            <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 13px;">Complete Profile</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Carousel -->
+      <div class="dashboard-card" style="background: linear-gradient(135deg, #0DC4CB 0%, #054A4E 100%); color: white;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="flex: 1;">
+            <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">Get Additional Tax Benefits</h2>
+            <p style="font-size: 16px; margin-bottom: 20px; opacity: 0.9;">Complete your GST details to unlock exclusive tax benefits and faster approvals</p>
+            <button style="background: white; color: var(--primary-teal); padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Learn More</button>
+          </div>
+          <div style="font-size: 120px; opacity: 0.2;">📄</div>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Active Orders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">₹2.4L</div>
+          <div class="stat-label">Total Spent</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">8</div>
+          <div class="stat-label">Saved Suppliers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Active RFQs</div>
+        </div>
+      </div>
+
+      <!-- Orders Section -->
+      <div class="dashboard-card">
+        <div class="flex-between mb-20">
+          <h2 class="card-title">Recent Orders</h2>
+          <a href="orders.html" style="color: var(--primary-teal); font-weight: 600; text-decoration: none;">View All →</a>
+        </div>
+
+        <!-- Tabs -->
+        <div style="display: flex; gap: 24px; margin-bottom: 20px; border-bottom: 2px solid var(--border-grey);">
+          <button class="tab-button active" data-tab="track">Track Order</button>
+          <button class="tab-button" data-tab="refund">Refund</button>
+          <button class="tab-button" data-tab="dispute">Dispute</button>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="tab-content active" id="track">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>MOQ</th>
+                <th>Amount</th>
+                <th>Delivery Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px;"></div>
+                    <div>
+                      <div style="font-weight: 600; margin-bottom: 4px;">Industrial LED Bulbs</div>
+                      <div style="font-size: 12px; color: var(--text-grey);">Order #ORD2024001</div>
+                    </div>
+                  </div>
+                </td>
+                <td>500 Units</td>
+                <td><strong>₹45,000</strong></td>
+                <td><span class="badge badge-warning">In Transit</span></td>
+                <td>
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Track</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px;"></div>
+                    <div>
+                      <div style="font-weight: 600; margin-bottom: 4px;">Cotton Fabric Rolls</div>
+                      <div style="font-size: 12px; color: var(--text-grey);">Order #ORD2024002</div>
+                    </div>
+                  </div>
+                </td>
+                <td>200 Rolls</td>
+                <td><strong>₹85,000</strong></td>
+                <td><span class="badge badge-success">Delivered</span></td>
+                <td>
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 50px; height: 50px; background: var(--light-grey); border-radius: 8px;"></div>
+                    <div>
+                      <div style="font-weight: 600; margin-bottom: 4px;">Construction Steel Rods</div>
+                      <div style="font-size: 12px; color: var(--text-grey);">Order #ORD2024003</div>
+                    </div>
+                  </div>
+                </td>
+                <td>1000 Kg</td>
+                <td><strong>₹62,500</strong></td>
+                <td><span class="badge badge-warning">Processing</span></td>
+                <td>
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Track</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tab-content" id="refund">
+          <div class="empty-state">
+            <div class="empty-state-icon">📦</div>
+            <div class="empty-state-title">No Refund Requests</div>
+            <div class="empty-state-text">You haven't requested any refunds yet</div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="dispute">
+          <div class="empty-state">
+            <div class="empty-state-icon">⚖️</div>
+            <div class="empty-state-title">No Active Disputes</div>
+            <div class="empty-state-text">You don't have any disputes at the moment</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Favorite Products -->
+      <div class="dashboard-card">
+        <div class="flex-between mb-20">
+          <h2 class="card-title">Favorite Products</h2>
+          <a href="index.html" style="color: var(--primary-teal); font-weight: 600; text-decoration: none;">Browse More →</a>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;">
+          <!-- Product Card 1 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 16px; transition: box-shadow 0.3s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+            <div style="width: 100%; height: 150px; background: var(--light-grey); border-radius: 8px; margin-bottom: 12px;"></div>
+            <h3 style="font-size: 16px; font-weight: 600; color: var(--soft-grey); margin-bottom: 8px;">Industrial LED Bulbs</h3>
+            <p style="font-size: 14px; color: var(--text-grey); margin-bottom: 8px;">MOQ: 500 Units</p>
+            <p style="font-size: 18px; font-weight: 700; color: var(--primary-teal);">₹90/unit</p>
+          </div>
+
+          <!-- Product Card 2 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 16px; transition: box-shadow 0.3s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+            <div style="width: 100%; height: 150px; background: var(--light-grey); border-radius: 8px; margin-bottom: 12px;"></div>
+            <h3 style="font-size: 16px; font-weight: 600; color: var(--soft-grey); margin-bottom: 8px;">Cotton Fabric Rolls</h3>
+            <p style="font-size: 14px; color: var(--text-grey); margin-bottom: 8px;">MOQ: 100 Rolls</p>
+            <p style="font-size: 18px; font-weight: 700; color: var(--primary-teal);">₹425/roll</p>
+          </div>
+
+          <!-- Product Card 3 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 16px; transition: box-shadow 0.3s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+            <div style="width: 100%; height: 150px; background: var(--light-grey); border-radius: 8px; margin-bottom: 12px;"></div>
+            <h3 style="font-size: 16px; font-weight: 600; color: var(--soft-grey); margin-bottom: 8px;">Steel Construction Rods</h3>
+            <p style="font-size: 14px; color: var(--text-grey); margin-bottom: 8px;">MOQ: 500 Kg</p>
+            <p style="font-size: 18px; font-weight: 700; color: var(--primary-teal);">₹62.5/kg</p>
+          </div>
+
+          <!-- Product Card 4 -->
+          <div style="border: 1px solid var(--border-grey); border-radius: 12px; padding: 16px; transition: box-shadow 0.3s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+            <div style="width: 100%; height: 150px; background: var(--light-grey); border-radius: 8px; margin-bottom: 12px;"></div>
+            <h3 style="font-size: 16px; font-weight: 600; color: var(--soft-grey); margin-bottom: 8px;">Packaging Boxes</h3>
+            <p style="font-size: 14px; color: var(--text-grey); margin-bottom: 8px;">MOQ: 1000 Units</p>
+            <p style="font-size: 18px; font-weight: 700; color: var(--primary-teal);">₹25/unit</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/session.js"></script>
+  <script src="js/navigation.js"></script>
+  <script>
+    // Tab switching functionality
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', function() {
+        const tabName = this.dataset.tab;
+
+        // Remove active class from all tabs and contents
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        // Add active class to clicked tab and corresponding content
+        this.classList.add('active');
+        document.getElementById(tabName).classList.add('active');
+      });
+    });
+
+    // Add tab button styles
+    const style = document.createElement('style');
+    style.textContent = `
+      .tab-button {
+        padding: 12px 0;
+        background: none;
+        border: none;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-grey);
+        cursor: pointer;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      .tab-button.active {
+        color: var(--primary-teal);
+      }
+
+      .tab-button.active::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--primary-teal);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
