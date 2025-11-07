@@ -270,12 +270,166 @@ class NavigationManager {
   }
 }
 
-// Initialize navigation on dashboard pages
-document.addEventListener('DOMContentLoaded', () => {
-  // Check if on dashboard page
-  const isDashboardPage = document.querySelector('.dashboard-container') !== null;
+// Add styles for account dropdown
+const style = document.createElement('style');
+style.textContent = `
+  .account-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 280px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    animation: dropdownSlideIn 0.2s ease;
+  }
 
-  if (isDashboardPage && sessionManager.checkAuth()) {
+  @keyframes dropdownSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: var(--soft-grey);
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .dropdown-item:hover {
+    background: var(--light-grey);
+  }
+
+  .dropdown-icon {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+  }
+
+  .dropdown-text {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .dropdown-separator {
+    height: 1px;
+    background: var(--border-grey);
+    margin: 8px 0;
+  }
+
+  .account-icon {
+    position: relative;
+  }
+
+  .register-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .register-modal {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 450px;
+    text-align: center;
+    animation: modalSlideIn 0.3s ease;
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .register-modal-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+  }
+
+  .register-modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--soft-grey);
+    margin-bottom: 16px;
+  }
+
+  .register-modal-description {
+    font-size: 15px;
+    color: var(--text-grey);
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .register-modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .modal-btn {
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .modal-btn-cancel {
+    background: var(--light-grey);
+    color: var(--soft-grey);
+  }
+
+  .modal-btn-cancel:hover {
+    background: #e0e0e0;
+  }
+
+  .modal-btn-primary {
+    background: var(--primary-teal);
+    color: white;
+  }
+
+  .modal-btn-primary:hover {
+    background: #0ab3ba;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 196, 203, 0.3);
+  }
+`;
+document.head.appendChild(style);
+
+// Initialize navigation on ALL pages
+document.addEventListener('DOMContentLoaded', () => {
+  if (sessionManager.checkAuth()) {
     new NavigationManager();
   }
 });
