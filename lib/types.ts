@@ -13,13 +13,19 @@ export interface User {
 // Product Types
 export interface Product {
   id: string;
-  supplierId: string;
+  supplierId?: string;
   name: string;
   description: string;
   category: string;
   images: string[];
   minOrderQuantity: number;
   maxOrderQuantity?: number;
+  supplier?: {
+    id?: string;
+    name: string;
+    location?: string;
+    rating?: number;
+  };
   price: {
     amount: number;
     currency: string;

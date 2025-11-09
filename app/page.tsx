@@ -4,7 +4,7 @@ import {
   ArrowRight,
   BadgeCheck,
   Building2,
-  ChartPie,
+  PieChart,
   FileSearch,
   Globe2,
   Headset,
@@ -461,7 +461,7 @@ export default function HomePage() {
                   Sync with your ERP for purchase orders and invoice reconciliation.
                 </li>
                 <li className="flex items-start gap-3">
-                  <ChartPie className="mt-1 h-4 w-4 text-regal-blue-800" />
+                  <PieChart className="mt-1 h-4 w-4 text-regal-blue-800" />
                   Analyse spend by category, location and supplier performance.
                 </li>
               </ul>

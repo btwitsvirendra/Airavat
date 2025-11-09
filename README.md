@@ -141,7 +141,7 @@ npm start
 - Copy link functionality
 - Invoice download
 
-### Transport (`/transport`)
+### Logistics (`/logistics`)
 - Booking form with pickup and delivery addresses
 - Vehicle type selection (Van, Truck, Container)
 - Package details (weight and dimensions)

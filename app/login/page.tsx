@@ -5,10 +5,18 @@ import Link from 'next/link';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useStore } from '@/lib/store';
+
+const DEMO_CREDENTIALS = {
+  email: 'iamvirendra07@gmail.com',
+  password: '12345678',
+};
 
 export default function LoginPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const setUser = useStore((state) => state.setUser);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -17,8 +25,31 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock login - in real app, this would call an API
-    toast.success('Login successful!');
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    const isDemoUser =
+      formData.email.trim().toLowerCase() === DEMO_CREDENTIALS.email &&
+      formData.password === DEMO_CREDENTIALS.password;
+
+    if (!isDemoUser) {
+      toast.error('Incorrect email or password. Try the demo credentials below.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    setUser({
+      id: 'demo-buyer-001',
+      email: DEMO_CREDENTIALS.email,
+      name: 'Virendra (Demo Buyer)',
+      role: 'buyer',
+      phone: '+91 98765 43210',
+      company: 'Airavat Demo Industries',
+      createdAt: new Date(),
+    });
+
+    toast.success('Welcome back to Airavat!');
     router.push('/');
   };
 
@@ -111,10 +142,21 @@ export default function LoginPage() {
             </div>
 
             {/* Submit Button */}
-            <button type="submit" className="w-full btn-primary">
-              Sign In
+            <button type="submit" className="w-full btn-primary flex items-center justify-center gap-2" disabled={isSubmitting}>
+              {isSubmitting && (
+                <span className="spinner border-white/40" aria-hidden />
+              )}
+              <span>{isSubmitting ? 'Signing you in...' : 'Sign In'}</span>
             </button>
           </form>
+
+          <div className="mt-6 rounded-lg bg-teal-50 border border-teal-100 p-4 text-sm text-teal-900">
+            <p className="font-semibold mb-1">Demo access</p>
+            <p>
+              Use <span className="font-medium">{DEMO_CREDENTIALS.email}</span> and password{' '}
+              <span className="font-medium">{DEMO_CREDENTIALS.password}</span> to explore the buyer experience.
+            </p>
+          </div>
 
           {/* Divider */}
           <div className="relative my-6">
@@ -159,7 +201,7 @@ export default function LoginPage() {
 
           {/* Sign Up Link */}
           <p className="mt-6 text-center text-gray-600">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/register" className="text-teal-600 hover:text-teal-700 font-semibold">
               Sign up
             </Link>
