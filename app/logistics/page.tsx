@@ -1,11 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Truck, Package, MapPin, Calendar, Weight, Ruler, IndianRupee, CheckCircle, Clock } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useSearchParams } from 'next/navigation';
 
 export default function TransportPage() {
+  return (
+    <Suspense fallback={<LogisticsLoading />}>
+      <TransportPageContent />
+    </Suspense>
+  );
+}
+
+function TransportPageContent() {
   const [activeTab, setActiveTab] = useState<'book' | 'bookings'>('book');
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState({
     orderId: '',
     vehicleType: 'truck',
@@ -22,6 +32,19 @@ export default function TransportPage() {
     width: '',
     height: '',
   });
+
+  useEffect(() => {
+    const orderIdParam = searchParams.get('orderId');
+    const supplierParam = searchParams.get('supplier');
+    if (orderIdParam) {
+      setActiveTab('book');
+      setFormData((prev) => ({
+        ...prev,
+        orderId: orderIdParam,
+        pickupAddress: supplierParam ? `Supplier: ${supplierParam}` : prev.pickupAddress,
+      }));
+    }
+  }, [searchParams]);
 
   // Mock bookings data
   const bookings = [
@@ -455,6 +478,14 @@ export default function TransportPage() {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+function LogisticsLoading() {
+  return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <p className="text-sm text-gray-500">Loading logistics planner…</p>
     </div>
   );
 }

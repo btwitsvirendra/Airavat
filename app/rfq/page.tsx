@@ -1,7 +1,7 @@
 'use client';
 
-import { Suspense, useMemo, useState } from 'react';
-import { FileText, PlusCircle, Upload } from 'lucide-react';
+import { Suspense, useMemo, useRef, useState } from 'react';
+import { FileText, PlusCircle, Upload, Image as ImageIcon, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useSearchParams } from 'next/navigation';
 
@@ -13,6 +13,14 @@ const categories = [
   'Packaging & Printing',
   'Chemicals & Plastics',
 ];
+
+type AttachmentDraft = {
+  id: string;
+  name: string;
+  sizeLabel: string;
+  type: 'image' | 'document';
+  preview?: string;
+};
 
 export default function RfqPage() {
   return (
@@ -36,6 +44,8 @@ function RfqForm() {
       : '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [attachments, setAttachments] = useState<AttachmentDraft[]>([]);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const clusterHint = useMemo(() => {
     if (!preselectedCluster) return '';
@@ -74,10 +84,53 @@ function RfqForm() {
     }
 
     setIsSubmitting(true);
-    toast.success('RFQ posted! Verified suppliers will respond within 48 hours.');
+    toast.success(
+      attachments.length > 0
+        ? `RFQ posted with ${attachments.length} attachment${attachments.length > 1 ? 's' : ''}! Verified suppliers will respond within 48 hours.`
+        : 'RFQ posted! Verified suppliers will respond within 48 hours.'
+    );
+    attachments.forEach((attachment) => {
+      if (attachment.preview) {
+        URL.revokeObjectURL(attachment.preview);
+      }
+    });
+    setAttachments([]);
     setTimeout(() => {
       setIsSubmitting(false);
     }, 800);
+  };
+
+  const handleFilesSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files ?? []);
+    if (files.length === 0) return;
+
+    const drafts = files.map((file) => {
+      const inferredType: AttachmentDraft['type'] = file.type.startsWith('image/') ? 'image' : 'document';
+      return {
+        id: `${file.name}-${file.lastModified}`,
+        name: file.name,
+        sizeLabel: `${(file.size / 1024).toFixed(1)} KB`,
+        type: inferredType,
+        preview: inferredType === 'image' ? URL.createObjectURL(file) : undefined,
+      } satisfies AttachmentDraft;
+    });
+
+    setAttachments((prev) => [...prev, ...drafts]);
+    event.target.value = '';
+  };
+
+  const removeAttachment = (attachmentId: string) => {
+    setAttachments((prev) => {
+      const toRemove = prev.find((attachment) => attachment.id === attachmentId);
+      if (toRemove?.preview) {
+        URL.revokeObjectURL(toRemove.preview);
+      }
+      return prev.filter((attachment) => attachment.id !== attachmentId);
+    });
+  };
+
+  const triggerFilePicker = () => {
+    fileInputRef.current?.click();
   };
 
   return (
@@ -186,13 +239,58 @@ function RfqForm() {
             {clusterHint && <p className="text-sm text-teal-700">Suggestion: {clusterHint}</p>}
           </div>
 
-          <div className="rounded-2xl border border-dashed border-teal-300 bg-teal-50 p-6 text-center">
-            <FileText className="mx-auto mb-3 text-teal-500" size={28} />
-            <p className="font-semibold text-regal-blue-900">Attach drawings or BOM</p>
-            <p className="text-sm text-teal-700 mb-4">Upload PDFs, CAD files, or spreadsheets so suppliers can respond precisely.</p>
-            <button type="button" className="inline-flex items-center gap-2 rounded-full bg-teal-500 px-5 py-2 text-sm font-semibold text-white">
-              <Upload size={16} /> Upload files
-            </button>
+          <div className="rounded-2xl border border-dashed border-teal-300 bg-teal-50 p-6">
+            <div className="text-center">
+              <FileText className="mx-auto mb-3 text-teal-500" size={28} />
+              <p className="font-semibold text-regal-blue-900">Attach drawings or BOM</p>
+              <p className="text-sm text-teal-700 mb-4">
+                Upload reference photos, CAD drawings, or BOM spreadsheets so suppliers can respond precisely.
+              </p>
+              <button
+                type="button"
+                onClick={triggerFilePicker}
+                className="inline-flex items-center gap-2 rounded-full bg-teal-500 px-5 py-2 text-sm font-semibold text-white transition hover:bg-teal-600"
+              >
+                <Upload size={16} /> Upload files
+              </button>
+            </div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              multiple
+              className="hidden"
+              onChange={handleFilesSelected}
+            />
+            {attachments.length > 0 && (
+              <div className="mt-6 space-y-3">
+                {attachments.map((attachment) => (
+                  <div
+                    key={attachment.id}
+                    className="flex items-center justify-between gap-3 rounded-xl bg-white px-4 py-3 shadow-sm"
+                  >
+                    <div className="flex items-center gap-3 text-sm text-gray-700">
+                      {attachment.type === 'image' ? (
+                        <ImageIcon size={18} className="text-teal-600" />
+                      ) : (
+                        <FileText size={18} className="text-teal-600" />
+                      )}
+                      <div>
+                        <p className="font-semibold text-regal-blue-900">{attachment.name}</p>
+                        <p className="text-xs text-gray-500">{attachment.sizeLabel}</p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => removeAttachment(attachment.id)}
+                      className="flex items-center gap-1 rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold text-gray-500 transition hover:border-red-300 hover:text-red-500"
+                    >
+                      <X size={12} /> Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <button type="submit" className="btn-primary w-full md:w-auto" disabled={isSubmitting}>

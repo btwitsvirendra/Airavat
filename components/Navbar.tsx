@@ -30,6 +30,7 @@ const navigationLinks = [
   { href: '/payment-links', label: 'Secure Payments' },
   { href: '/logistics', label: 'Logistics' },
   { href: '/events', label: 'Events & Webinars' },
+  { href: '/admin', label: 'Admin Console' },
 ];
 
 export default function Navbar() {

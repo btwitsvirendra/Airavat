@@ -5,74 +5,50 @@ import Link from 'next/link';
 import { Filter, Grid, List, Star, MapPin, MessageSquare, ShoppingCart } from 'lucide-react';
 import { useStore } from '@/lib/store';
 import toast from 'react-hot-toast';
-
-// Mock data - in real app, this would come from API
-const mockProducts = [
-  {
-    id: '1',
-    name: 'Industrial LED Light 100W',
-    description: 'High-efficiency LED lighting solution for warehouses and factories',
-    category: 'Electronics',
-    images: ['https://images.unsplash.com/photo-1524501537239-6e6d23b24ea8?w=500'],
-    price: { amount: 1250, currency: 'INR', unit: 'piece' },
-    minOrderQuantity: 50,
-    stock: 1000,
-    supplier: { id: 's1', name: 'TechLight Industries', location: 'Mumbai', rating: 4.5 },
-    tags: ['LED', 'Industrial', 'Energy Efficient'],
-  },
-  {
-    id: '2',
-    name: 'Cotton Fabric Rolls',
-    description: 'Premium quality cotton fabric, 40s count, perfect for garments',
-    category: 'Textiles',
-    images: ['https://images.unsplash.com/photo-1516321165247-4aa89a48be28?w=500'],
-    price: { amount: 280, currency: 'INR', unit: 'meter' },
-    minOrderQuantity: 500,
-    stock: 5000,
-    supplier: { id: 's2', name: 'Textile Hub', location: 'Surat', rating: 4.8 },
-    tags: ['Cotton', 'Fabric', 'Textile'],
-  },
-  {
-    id: '3',
-    name: 'Hydraulic Press Machine',
-    description: '50 Ton hydraulic press for metal forming and fabrication',
-    category: 'Machinery',
-    images: ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500'],
-    price: { amount: 450000, currency: 'INR', unit: 'unit' },
-    minOrderQuantity: 1,
-    stock: 15,
-    supplier: { id: 's3', name: 'MachineWorks Ltd', location: 'Pune', rating: 4.7 },
-    tags: ['Machinery', 'Hydraulic', 'Manufacturing'],
-  },
-  {
-    id: '4',
-    name: 'Organic Turmeric Powder',
-    description: 'Premium organic turmeric powder, certified and lab-tested',
-    category: 'Food',
-    images: ['https://images.unsplash.com/photo-1615485500134-275e3a8b8d21?w=500'],
-    price: { amount: 450, currency: 'INR', unit: 'kg' },
-    minOrderQuantity: 100,
-    stock: 2000,
-    supplier: { id: 's4', name: 'Organic Farms Co', location: 'Kerala', rating: 4.9 },
-    tags: ['Organic', 'Spices', 'Food'],
-  },
-];
+import { catalogProducts } from '@/lib/data/catalog';
 
 export default function ProductsPage() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const { addToCart } = useStore();
+  const [quantities, setQuantities] = useState<Record<string, number>>(() => {
+    return Object.fromEntries(
+      catalogProducts.map((product) => [product.id, product.minOrderQuantity])
+    );
+  });
+  const addToCart = useStore((state) => state.addToCart);
+  const inventory = useStore((state) => state.inventory);
 
   const categories = ['all', 'Electronics', 'Textiles', 'Machinery', 'Food', 'Chemicals', 'Building Materials'];
 
   const handleAddToCart = (product: any) => {
-    addToCart(product, product.minOrderQuantity);
+    const available = inventory[product.id]?.available ?? product.stock ?? 0;
+    const desiredQuantity = quantities[product.id] ?? product.minOrderQuantity;
+
+    if (available === 0) {
+      toast.error('This product is currently out of stock.');
+      return;
+    }
+
+    if (desiredQuantity > available) {
+      setQuantities((prev) => ({ ...prev, [product.id]: available }));
+      toast.error(`Only ${available} units are available right now.`);
+      return;
+    }
+
+    addToCart(product, desiredQuantity);
     toast.success('Added to cart!');
   };
 
-  const filteredProducts = selectedCategory === 'all'
-    ? mockProducts
-    : mockProducts.filter(p => p.category === selectedCategory);
+  const filteredProducts =
+    selectedCategory === 'all'
+      ? catalogProducts
+      : catalogProducts.filter((product) => product.category === selectedCategory);
+
+  const updateQuantity = (productId: string, value: number, min: number, max: number) => {
+    if (Number.isNaN(value)) return;
+    const clamped = Math.min(Math.max(value, min), max);
+    setQuantities((prev) => ({ ...prev, [productId]: clamped }));
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -171,71 +147,104 @@ export default function ProductsPage() {
 
             {/* Products */}
             <div className={viewMode === 'grid' ? 'grid md:grid-cols-2 xl:grid-cols-3 gap-6' : 'space-y-4'}>
-              {filteredProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className={`bg-white rounded-lg shadow-md card-hover ${viewMode === 'list' ? 'flex gap-4' : ''}`}
-                >
-                  <img
-                    src={product.images[0]}
-                    alt={product.name}
-                    className={`${viewMode === 'grid' ? 'w-full h-48' : 'w-48 h-48'} object-cover rounded-t-lg`}
-                  />
-                  <div className="p-4 flex-1">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-semibold text-lg text-gray-800">{product.name}</h3>
-                      <span className="badge badge-info">{product.category}</span>
-                    </div>
-                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
+              {filteredProducts.map((product) => {
+                const available = inventory[product.id]?.available ?? product.stock ?? 0;
+                const reserved = inventory[product.id]?.reserved ?? 0;
+                const remaining = Math.max(available - reserved, 0);
+                const desiredQuantity = quantities[product.id] ?? product.minOrderQuantity;
 
-                    <div className="mb-3">
-                      <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
-                        <MapPin size={16} />
-                        <span>{product.supplier.location}</span>
-                        <div className="flex items-center ml-auto">
-                          <Star size={16} className="text-yellow-500 fill-current" />
-                          <span className="ml-1">{product.supplier.rating}</span>
+                return (
+                  <div
+                    key={product.id}
+                    className={`bg-white rounded-lg shadow-md card-hover ${viewMode === 'list' ? 'flex gap-4' : ''}`}
+                  >
+                    <img
+                      src={product.images[0]}
+                      alt={product.name}
+                      className={`${viewMode === 'grid' ? 'w-full h-48' : 'w-48 h-48'} object-cover rounded-t-lg`}
+                    />
+                    <div className="p-4 flex-1">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="font-semibold text-lg text-gray-800">{product.name}</h3>
+                        <span className="badge badge-info">{product.category}</span>
+                      </div>
+                      <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
+
+                      <div className="mb-3">
+                        <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
+                          <MapPin size={16} />
+                          <span>{product.supplier?.location}</span>
+                          <div className="flex items-center ml-auto">
+                            <Star size={16} className="text-yellow-500 fill-current" />
+                            <span className="ml-1">{product.supplier?.rating}</span>
+                          </div>
+                        </div>
+                        <Link
+                          href={`/suppliers/${product.supplier?.id ?? product.supplierId}`}
+                          className="text-sm text-teal-600 hover:underline"
+                        >
+                          {product.supplier?.name}
+                        </Link>
+                      </div>
+
+                      <div className="border-t pt-3 mb-3">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <div>
+                            <p className="text-2xl font-bold text-regal-blue-700">
+                              ₹{product.price.amount}
+                              <span className="text-sm font-normal text-gray-500">/{product.price.unit}</span>
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              Min Order: {product.minOrderQuantity} · Available to book: {remaining}
+                            </p>
+                          </div>
+                          <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-600">
+                            {available} in stock
+                          </span>
                         </div>
                       </div>
-                      <Link
-                        href={`/suppliers/${product.supplier.id}`}
-                        className="text-sm text-teal-600 hover:underline"
-                      >
-                        {product.supplier.name}
-                      </Link>
-                    </div>
 
-                    <div className="border-t pt-3 mb-3">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <p className="text-2xl font-bold text-regal-blue-700">
-                            ₹{product.price.amount}
-                            <span className="text-sm font-normal text-gray-500">/{product.price.unit}</span>
-                          </p>
-                          <p className="text-xs text-gray-500">Min Order: {product.minOrderQuantity} units</p>
+                      <div className="flex flex-col gap-3">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <label className="text-xs font-semibold text-gray-500">Quantity</label>
+                          <input
+                            type="number"
+                            value={desiredQuantity}
+                            min={product.minOrderQuantity}
+                            max={available}
+                            onChange={(event) =>
+                              updateQuantity(
+                                product.id,
+                                Number(event.target.value),
+                                product.minOrderQuantity,
+                                available
+                              )
+                            }
+                            className="w-28 rounded-lg border border-gray-200 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none"
+                          />
+                          <span className="text-xs text-gray-500">Reserved in cart: {reserved}</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <Link
+                            href={`/messages?supplier=${product.supplier?.id ?? product.supplierId}`}
+                            className="flex-1 border border-teal-600 text-teal-600 px-4 py-2 rounded-lg font-medium hover:bg-teal-50 transition flex items-center justify-center gap-2"
+                          >
+                            <MessageSquare size={18} />
+                            Chat
+                          </Link>
+                          <button
+                            onClick={() => handleAddToCart(product)}
+                            className="flex-1 btn-primary py-2 flex items-center justify-center gap-2"
+                          >
+                            <ShoppingCart size={18} />
+                            Add to Cart
+                          </button>
                         </div>
                       </div>
-                    </div>
-
-                    <div className="flex gap-2">
-                      <Link
-                        href={`/messages?supplier=${product.supplier.id}`}
-                        className="flex-1 border border-teal-600 text-teal-600 px-4 py-2 rounded-lg font-medium hover:bg-teal-50 transition flex items-center justify-center gap-2"
-                      >
-                        <MessageSquare size={18} />
-                        Chat
-                      </Link>
-                      <button
-                        onClick={() => handleAddToCart(product)}
-                        className="flex-1 btn-primary py-2 flex items-center justify-center gap-2"
-                      >
-                        <ShoppingCart size={18} />
-                        Add to Cart
-                      </button>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Pagination */}

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { User, Product, ChatMessage } from './types';
+import { initialInventory, InventoryRecord } from './data/catalog';
 
 interface AppState {
   // User state
@@ -11,6 +12,11 @@ interface AppState {
   addToCart: (product: Product, quantity: number) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
+
+  // Inventory state
+  inventory: Record<string, InventoryRecord>;
+  updateInventory: (productId: string, quantity: number) => void;
+  releaseReservation: (productId: string) => void;
 
   // Chat state
   activeConversationId: string | null;
@@ -34,23 +40,104 @@ export const useStore = create<AppState>((set) => ({
   cart: [],
   addToCart: (product, quantity) =>
     set((state) => {
+      const inventoryRecord = state.inventory[product.id] ?? { available: product.stock, reserved: 0 };
+      const available = inventoryRecord.available;
       const existingItem = state.cart.find((item) => item.product.id === product.id);
-      if (existingItem) {
-        return {
-          cart: state.cart.map((item) =>
-            item.product.id === product.id
-              ? { ...item, quantity: item.quantity + quantity }
-              : item
-          ),
-        };
+      const baselineQuantity = existingItem?.quantity ?? 0;
+      const desiredQuantity = Math.max(product.minOrderQuantity, baselineQuantity + quantity);
+      const cappedQuantity = Math.min(available, desiredQuantity);
+
+      if (cappedQuantity === 0) {
+        return state;
       }
-      return { cart: [...state.cart, { product, quantity }] };
+
+      const nextCart = existingItem
+        ? state.cart.map((item) =>
+            item.product.id === product.id
+              ? { ...item, quantity: cappedQuantity }
+              : item
+          )
+        : [...state.cart, { product, quantity: cappedQuantity }];
+
+      return {
+        cart: nextCart.filter((item) => item.quantity > 0),
+        inventory: {
+          ...state.inventory,
+          [product.id]: {
+            available,
+            reserved: cappedQuantity,
+          },
+        },
+      };
     }),
   removeFromCart: (productId) =>
+    set((state) => {
+      const nextCart = state.cart.filter((item) => item.product.id !== productId);
+      const nextInventory = { ...state.inventory };
+      if (nextInventory[productId]) {
+        nextInventory[productId] = {
+          ...nextInventory[productId],
+          reserved: 0,
+        };
+      }
+      return {
+        cart: nextCart,
+        inventory: nextInventory,
+      };
+    }),
+  clearCart: () =>
+    set((state) => {
+      const resetInventory = Object.fromEntries(
+        Object.entries(state.inventory).map(([productId, record]) => [
+          productId,
+          { ...record, reserved: 0 },
+        ])
+      );
+      return { cart: [], inventory: resetInventory };
+    }),
+
+  // Inventory state
+  inventory: Object.fromEntries(
+    Object.entries(initialInventory).map(([productId, record]) => [
+      productId,
+      { ...record },
+    ])
+  ),
+  updateInventory: (productId, quantity) =>
+    set((state) => {
+      const safeQuantity = Math.max(0, quantity);
+      const existingCartItem = state.cart.find((item) => item.product.id === productId);
+      const adjustedCart = existingCartItem
+        ? state.cart
+            .map((item) =>
+              item.product.id === productId
+                ? { ...item, quantity: Math.min(item.quantity, safeQuantity) }
+                : item
+            )
+            .filter((item) => item.quantity > 0)
+        : state.cart;
+
+      return {
+        cart: adjustedCart,
+        inventory: {
+          ...state.inventory,
+          [productId]: {
+            available: safeQuantity,
+            reserved: Math.min(state.inventory[productId]?.reserved ?? 0, safeQuantity),
+          },
+        },
+      };
+    }),
+  releaseReservation: (productId) =>
     set((state) => ({
-      cart: state.cart.filter((item) => item.product.id !== productId),
+      inventory: {
+        ...state.inventory,
+        [productId]: {
+          available: state.inventory[productId]?.available ?? 0,
+          reserved: 0,
+        },
+      },
     })),
-  clearCart: () => set({ cart: [] }),
 
   // Chat state
   activeConversationId: null,
