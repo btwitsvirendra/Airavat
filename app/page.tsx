@@ -1,261 +1,406 @@
 import Link from 'next/link';
 import {
-  ShoppingBag,
-  Users,
-  TrendingUp,
-  Shield,
-  MessageSquare,
-  CreditCard,
-  Truck,
-  Star,
   ArrowRight,
+  Banknote,
+  Factory,
+  Globe2,
+  Handshake,
+  LineChart,
   Package,
-  Zap,
-  Globe
+  ShieldCheck,
+  Sparkles,
+  Truck,
+  Warehouse,
 } from 'lucide-react';
 
+const heroCategories = [
+  'Consumer Electronics',
+  'Industrial Machinery',
+  'Apparel & Fashion',
+  'Beauty & Personal Care',
+  'Packaging & Printing',
+  'Home & Garden',
+  'Renewable Energy',
+  'Automobile & Transportation',
+  'Metals & Minerals',
+  'Healthcare & Medical',
+  'Sports & Entertainment',
+  'Gifts & Crafts',
+];
+
+const flashDeals = [
+  {
+    title: 'Smart Manufacturing Robotics',
+    price: 'Starting at ₹1.2L / unit',
+    discount: 'Save 18%',
+    category: 'Industrial Automation',
+  },
+  {
+    title: 'Organic Cotton Fabrics',
+    price: '₹245 / metre',
+    discount: 'Save 22%',
+    category: 'Textiles',
+  },
+  {
+    title: 'Solar Rooftop Modules',
+    price: '₹10,500 / KW',
+    discount: 'Save 15%',
+    category: 'Renewable Energy',
+  },
+  {
+    title: 'Cold Chain Logistics',
+    price: '₹55 / km',
+    discount: 'Save 12%',
+    category: 'Transportation',
+  },
+];
+
+const industryCollections = [
+  {
+    title: 'Made in India Showcase',
+    description: 'Discover verified Indian manufacturers ready for global trade',
+    href: '/collections/made-in-india',
+  },
+  {
+    title: 'Airavat Sustainable Sourcing',
+    description: 'Eco-friendly products with traceable supply chains',
+    href: '/collections/sustainability',
+  },
+  {
+    title: 'Smart Factory Solutions',
+    description: 'Automation, AI and IoT solutions for modern plants',
+    href: '/collections/industry-4',
+  },
+];
+
+const tradeServices = [
+  {
+    icon: ShieldCheck,
+    title: 'Airavat Assurance',
+    description: 'Order protection from payment to delivery with dispute resolution support.',
+  },
+  {
+    icon: Truck,
+    title: 'Integrated Logistics',
+    description: 'Book transport, customs clearance and last-mile delivery in one place.',
+  },
+  {
+    icon: Banknote,
+    title: 'Flexible Financing',
+    description: 'Unlock working capital with easy pay later and credit line options.',
+  },
+  {
+    icon: Globe2,
+    title: 'Global Sourcing',
+    description: 'Connect with suppliers across 190+ countries and regional trade shows.',
+  },
+];
+
+const supplierSpotlight = [
+  {
+    name: 'Bharat Precision Tools',
+    location: 'Pune, Maharashtra',
+    speciality: 'CNC machining & tooling for aerospace and auto OEMs',
+  },
+  {
+    name: 'Kerala Naturals Export Co.',
+    location: 'Kochi, Kerala',
+    speciality: 'Spices, nutraceuticals and organic personal care ingredients',
+  },
+  {
+    name: 'Eastern Textile Mills',
+    location: 'Surat, Gujarat',
+    speciality: 'Sustainable fabrics, recycled polyester and custom apparel',
+  },
+];
+
+const businessInsights = [
+  {
+    title: 'India Manufacturing Pulse - Q3 2024',
+    description: 'Demand forecasts, commodity trends and sourcing strategies for the next quarter.',
+    href: '/insights/manufacturing-pulse',
+  },
+  {
+    title: 'How SMEs are Scaling with Airavat RFQ',
+    description: 'Learn how thousands of SMEs reduce sourcing time by 40% using digital quotes.',
+    href: '/insights/rfq-success',
+  },
+  {
+    title: 'Cross-border Trade Compliance Guide',
+    description: 'Updated GST, customs and documentation rules for exporters and importers.',
+    href: '/insights/compliance-guide',
+  },
+];
+
 export default function Home() {
-  const categories = [
-    { name: 'Electronics & Components', icon: '🔌', count: '15,234 products' },
-    { name: 'Textiles & Apparel', icon: '👔', count: '22,567 products' },
-    { name: 'Machinery & Equipment', icon: '⚙️', count: '8,943 products' },
-    { name: 'Building Materials', icon: '🏗️', count: '12,456 products' },
-    { name: 'Chemicals & Plastics', icon: '🧪', count: '6,789 products' },
-    { name: 'Food & Beverages', icon: '🍽️', count: '18,234 products' },
-    { name: 'Automotive Parts', icon: '🚗', count: '9,876 products' },
-    { name: 'Home & Furniture', icon: '🛋️', count: '14,567 products' },
-  ];
-
-  const features = [
-    {
-      icon: MessageSquare,
-      title: 'Direct Chat with Suppliers',
-      description: 'Connect instantly with verified suppliers and negotiate deals in real-time',
-      color: 'text-teal-600'
-    },
-    {
-      icon: CreditCard,
-      title: 'Secure Payment Links',
-      description: 'Get customized payment links with secure transactions and buyer protection',
-      color: 'text-regal-blue-600'
-    },
-    {
-      icon: Truck,
-      title: 'Integrated Logistics',
-      description: 'Book transport services directly through our platform with live tracking',
-      color: 'text-regal-gold-600'
-    },
-    {
-      icon: Shield,
-      title: 'Verified Suppliers',
-      description: 'All suppliers are verified with business documents and quality certifications',
-      color: 'text-green-600'
-    },
-  ];
-
-  const stats = [
-    { value: '50,000+', label: 'Products Listed' },
-    { value: '5,000+', label: 'Verified Suppliers' },
-    { value: '₹500Cr+', label: 'Transaction Value' },
-    { value: '98%', label: 'Customer Satisfaction' },
-  ];
-
   return (
-    <div>
+    <div className="bg-gray-50">
       {/* Hero Section */}
-      <section className="gradient-hero text-white py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                India's Premier <br />
-                <span className="text-regal-gold-400">B2B Marketplace</span>
-              </h1>
-              <p className="text-xl text-blue-100">
-                Connect with verified suppliers, negotiate directly, and grow your business with integrated payments and logistics
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/products" className="btn-gold flex items-center justify-center gap-2">
-                  Start Sourcing
-                  <ArrowRight size={20} />
-                </Link>
-                <Link href="/supplier/register" className="bg-white text-regal-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2">
-                  Become a Supplier
-                </Link>
-              </div>
-            </div>
-            <div className="hidden md:block">
-              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="bg-teal-500 p-3 rounded-lg">
-                    <ShoppingBag size={32} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-blue-200">Quick Search</p>
-                    <p className="font-semibold">Find products instantly</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="bg-regal-gold-500 p-3 rounded-lg">
-                    <MessageSquare size={32} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-blue-200">Direct Chat</p>
-                    <p className="font-semibold">Connect with suppliers</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="bg-green-500 p-3 rounded-lg">
-                    <Shield size={32} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-blue-200">Secure Payments</p>
-                    <p className="font-semibold">Protected transactions</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="bg-gradient-to-br from-black via-regal-blue-900 to-black text-white">
+        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-12 lg:grid-cols-[260px_1fr_300px]">
+          <aside className="hidden rounded-3xl bg-white/5 p-6 shadow-lg shadow-black/10 backdrop-blur lg:block">
+            <h2 className="text-sm font-semibold uppercase tracking-widest text-regal-gold-300">Top Categories</h2>
+            <ul className="mt-4 space-y-3 text-sm text-blue-100">
+              {heroCategories.map((category) => (
+                <li key={category}>
+                  <Link
+                    href={`/products?category=${encodeURIComponent(category)}`}
+                    className="flex items-center justify-between rounded-xl px-3 py-2 transition hover:bg-white/10 hover:text-white"
+                  >
+                    <span>{category}</span>
+                    <ArrowRight size={16} className="text-regal-gold-300" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </aside>
 
-      {/* Stats Section */}
-      <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-regal-blue-700">{stat.value}</div>
-                <div className="text-gray-600 mt-2">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-regal-blue-800 mb-4">
-              Explore Categories
-            </h2>
-            <p className="text-gray-600 text-lg">
-              Browse through our wide range of product categories
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {categories.map((category, index) => (
-              <Link
-                key={index}
-                href={`/products?category=${category.name}`}
-                className="bg-white p-6 rounded-xl shadow-md card-hover text-center group"
-              >
-                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
-                  {category.icon}
-                </div>
-                <h3 className="font-semibold text-gray-800 mb-2">{category.name}</h3>
-                <p className="text-sm text-gray-500">{category.count}</p>
-              </Link>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Link href="/categories" className="text-teal-600 font-semibold hover:text-teal-700 flex items-center justify-center gap-2">
-              View All Categories
-              <ArrowRight size={20} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-16 bg-gradient-to-br from-regal-blue-50 to-teal-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-regal-blue-800 mb-4">
-              Why Choose Airavat?
-            </h2>
-            <p className="text-gray-600 text-lg">
-              Everything you need for seamless B2B transactions
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-xl shadow-lg card-hover"
-              >
-                <feature.icon className={`${feature.color} mb-4`} size={40} />
-                <h3 className="font-semibold text-xl text-gray-800 mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-regal-blue-800 mb-4">
-              How It Works
-            </h2>
-            <p className="text-gray-600 text-lg">
-              Simple steps to start buying or selling
-            </p>
-          </div>
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { step: '1', title: 'Register', description: 'Create your buyer or supplier account', icon: Users },
-              { step: '2', title: 'Browse & Connect', description: 'Find products and chat with suppliers', icon: MessageSquare },
-              { step: '3', title: 'Negotiate & Pay', description: 'Get custom quotes and payment links', icon: CreditCard },
-              { step: '4', title: 'Ship & Track', description: 'Book logistics and track deliveries', icon: Truck },
-            ].map((item, index) => (
-              <div key={index} className="relative">
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-teal-600 text-white rounded-full text-2xl font-bold mb-4">
-                    {item.step}
-                  </div>
-                  <item.icon className="mx-auto text-regal-blue-600 mb-4" size={48} />
-                  <h3 className="font-semibold text-xl text-gray-800 mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-600">
-                    {item.description}
+          <div className="space-y-6">
+            <div className="rounded-3xl bg-white/10 p-8 shadow-xl shadow-black/20 backdrop-blur">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.4em] text-regal-gold-300">Welcome to Airavat</p>
+                  <h1 className="mt-2 text-4xl font-bold md:text-5xl">India&apos;s Premier B2B Marketplace</h1>
+                  <p className="mt-3 max-w-xl text-sm text-blue-100 md:text-base">
+                    Source directly from verified manufacturers, negotiate with suppliers in real time and secure end-to-end trade
+                    services for your business.
                   </p>
                 </div>
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-teal-200 -ml-4">
-                    <ArrowRight className="absolute right-0 -top-3 text-teal-400" size={24} />
+                <Link
+                  href="/register"
+                  className="inline-flex items-center gap-2 rounded-full bg-regal-gold-500 px-6 py-3 text-sm font-semibold text-black transition hover:bg-regal-gold-400"
+                >
+                  Join Free <ArrowRight size={18} />
+                </Link>
+              </div>
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                  <h3 className="text-lg font-semibold text-white">Sourcing Solutions</h3>
+                  <p className="mt-2 text-sm text-blue-100">
+                    Post RFQs and receive quotes within 24 hours from verified suppliers in your target industries.
+                  </p>
+                  <Link href="/rfq" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-regal-gold-300">
+                    Submit RFQ <ArrowRight size={16} />
+                  </Link>
+                </div>
+                <div className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                  <h3 className="text-lg font-semibold text-white">Trade Protection</h3>
+                  <p className="mt-2 text-sm text-blue-100">
+                    Secure payments, inspection and logistics under Airavat Assurance with transparent tracking.
+                  </p>
+                  <Link href="/trade-protection" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-regal-gold-300">
+                    Explore Assurance <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {flashDeals.map((deal) => (
+                <div key={deal.title} className="group flex items-center justify-between rounded-3xl bg-white/10 p-5 transition hover:bg-white/15">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.3em] text-regal-gold-300">Featured Deal</p>
+                    <h3 className="mt-2 text-lg font-semibold text-white">{deal.title}</h3>
+                    <p className="mt-1 text-sm text-blue-100">{deal.category}</p>
+                    <p className="mt-2 text-sm font-semibold text-regal-gold-300">{deal.price}</p>
                   </div>
-                )}
+                  <span className="rounded-full bg-regal-gold-500/20 px-4 py-2 text-sm font-semibold text-regal-gold-200">{deal.discount}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <aside className="hidden flex-col gap-4 rounded-3xl bg-white p-6 text-gray-900 shadow-xl lg:flex">
+            <div className="rounded-2xl bg-gray-900/90 p-6 text-white">
+              <p className="text-xs uppercase tracking-[0.4em] text-regal-gold-300">Airavat Account</p>
+              <h3 className="mt-3 text-xl font-semibold">Sign in to sync your sourcing</h3>
+              <p className="mt-2 text-sm text-blue-100">Track orders, manage RFQs, and chat with suppliers instantly.</p>
+              <div className="mt-4 flex flex-col gap-2">
+                <Link href="/login" className="rounded-full bg-white px-4 py-2 text-center text-sm font-semibold text-black">
+                  Sign In
+                </Link>
+                <Link href="/register" className="rounded-full border border-white/20 px-4 py-2 text-center text-sm font-semibold text-white">
+                  Join Free
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-gray-200 p-5 shadow-sm">
+              <h3 className="text-sm font-semibold text-gray-900">Trade Calendar</h3>
+              <p className="mt-2 text-xs text-gray-500">Meet suppliers at upcoming events</p>
+              <ul className="mt-4 space-y-3 text-sm text-gray-600">
+                <li className="flex items-center justify-between">
+                  <span>Airavat Global Expo</span>
+                  <span className="text-xs text-regal-blue-600">July 18</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  <span>North India Buyer Meet</span>
+                  <span className="text-xs text-regal-blue-600">Aug 02</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  <span>Sustainability Summit</span>
+                  <span className="text-xs text-regal-blue-600">Aug 22</span>
+                </li>
+              </ul>
+              <Link href="/events" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-regal-blue-700">
+                View all events <ArrowRight size={16} />
+              </Link>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      {/* Industry Collections */}
+      <section className="mx-auto max-w-7xl px-4 py-12">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.4em] text-regal-blue-600">Curated Collections</p>
+            <h2 className="mt-2 text-3xl font-semibold text-regal-blue-900">Discover opportunities for your business</h2>
+          </div>
+          <Link href="/discover" className="inline-flex items-center gap-2 text-sm font-semibold text-regal-blue-700">
+            Explore all <ArrowRight size={16} />
+          </Link>
+        </div>
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {industryCollections.map((collection) => (
+            <Link
+              key={collection.title}
+              href={collection.href}
+              className="group relative overflow-hidden rounded-3xl border border-white bg-white shadow-lg shadow-regal-blue-50 transition hover:-translate-y-1 hover:shadow-xl"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-regal-blue-900/90 via-black/70 to-teal-900/70 opacity-90 transition group-hover:opacity-100" />
+              <div className="relative p-8 text-white">
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs font-semibold text-regal-gold-200">
+                  <Sparkles size={14} /> Featured
+                </span>
+                <h3 className="mt-4 text-2xl font-semibold">{collection.title}</h3>
+                <p className="mt-3 text-sm text-blue-100">{collection.description}</p>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-regal-gold-200">
+                  View collection <ArrowRight size={16} />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Trade Services */}
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.4em] text-regal-blue-600">Airavat Services</p>
+              <h2 className="mt-2 text-3xl font-semibold text-regal-blue-900">Secure trade with trusted infrastructure</h2>
+            </div>
+            <Link href="/trade-services" className="inline-flex items-center gap-2 text-sm font-semibold text-teal-600">
+              View trade services <ArrowRight size={16} />
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {tradeServices.map((service) => (
+              <div key={service.title} className="rounded-3xl border border-gray-100 bg-gradient-to-br from-white to-regal-blue-50 p-6 shadow-sm">
+                <service.icon className="h-10 w-10 text-regal-blue-700" />
+                <h3 className="mt-4 text-lg font-semibold text-regal-blue-900">{service.title}</h3>
+                <p className="mt-2 text-sm text-gray-600">{service.description}</p>
+                <Link href={`/trade-services#${service.title.toLowerCase().replace(/\s+/g, '-')}`} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-regal-blue-700">
+                  Learn more <ArrowRight size={16} />
+                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 gradient-hero text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Ready to Transform Your Business?
-          </h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Join thousands of businesses already using Airavat to streamline their procurement and sales
+      {/* Supplier Spotlight & Insights */}
+      <section className="mx-auto max-w-7xl px-4 py-16">
+        <div className="grid gap-10 lg:grid-cols-[2fr_1.2fr]">
+          <div>
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.4em] text-regal-blue-600">Supplier Spotlight</p>
+                <h2 className="mt-2 text-3xl font-semibold text-regal-blue-900">Verified manufacturers you can trust</h2>
+              </div>
+              <Link href="/suppliers" className="inline-flex items-center gap-2 text-sm font-semibold text-regal-blue-700">
+                Browse all suppliers <ArrowRight size={16} />
+              </Link>
+            </div>
+            <div className="mt-8 space-y-5">
+              {supplierSpotlight.map((supplier) => (
+                <div key={supplier.name} className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <h3 className="text-xl font-semibold text-regal-blue-900">{supplier.name}</h3>
+                      <p className="text-sm text-gray-500">{supplier.location}</p>
+                    </div>
+                    <span className="inline-flex items-center gap-2 rounded-full bg-regal-blue-50 px-3 py-1 text-xs font-semibold text-regal-blue-700">
+                      <Handshake size={14} /> Verified Partner
+                    </span>
+                  </div>
+                  <p className="mt-3 text-sm text-gray-600">{supplier.speciality}</p>
+                  <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-gray-500">
+                    <span className="inline-flex items-center gap-2">
+                      <Factory size={14} /> ISO 9001
+                    </span>
+                    <span className="inline-flex items-center gap-2">
+                      <Warehouse size={14} /> 5 production lines
+                    </span>
+                    <span className="inline-flex items-center gap-2">
+                      <Package size={14} /> MOQ negotiable
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <aside className="space-y-6">
+            <div className="rounded-3xl bg-gradient-to-br from-regal-blue-900 to-black p-8 text-white shadow-lg">
+              <p className="text-xs uppercase tracking-[0.4em] text-regal-gold-300">Business Dashboard</p>
+              <h3 className="mt-3 text-2xl font-semibold">Monitor your sourcing performance</h3>
+              <p className="mt-3 text-sm text-blue-100">
+                Gain insights on order status, supplier responsiveness and savings achieved with Airavat services.
+              </p>
+              <div className="mt-5 flex items-center gap-3 text-sm text-regal-gold-200">
+                <LineChart size={18} /> Real-time analytics
+              </div>
+              <Link href="/dashboard" className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-black">
+                View Dashboard <ArrowRight size={16} />
+              </Link>
+            </div>
+
+            <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+              <h3 className="text-lg font-semibold text-regal-blue-900">Insights & Research</h3>
+              <p className="mt-2 text-sm text-gray-600">Stay ahead with Airavat intelligence</p>
+              <div className="mt-5 space-y-4">
+                {businessInsights.map((insight) => (
+                  <Link key={insight.href} href={insight.href} className="block rounded-2xl border border-transparent p-4 transition hover:border-regal-blue-200 hover:bg-regal-blue-50">
+                    <h4 className="text-sm font-semibold text-regal-blue-900">{insight.title}</h4>
+                    <p className="mt-1 text-xs text-gray-500">{insight.description}</p>
+                    <span className="mt-2 inline-flex items-center gap-2 text-xs font-semibold text-teal-600">
+                      Read report <ArrowRight size={14} />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="bg-gradient-to-r from-black via-regal-blue-900 to-black py-16 text-white">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 text-center">
+          <p className="text-xs uppercase tracking-[0.4em] text-regal-gold-300">Ready to grow</p>
+          <h2 className="text-3xl font-semibold md:text-4xl">Transform your supply chain with Airavat</h2>
+          <p className="max-w-3xl text-sm text-blue-100 md:text-base">
+            Join thousands of Indian businesses sourcing smarter with digital procurement, trusted logistics and instant payments on a single platform.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/register" className="btn-gold flex items-center justify-center gap-2">
-              Get Started Now
-              <ArrowRight size={20} />
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link href="/register" className="rounded-full bg-regal-gold-500 px-6 py-3 text-sm font-semibold text-black hover:bg-regal-gold-400">
+              Start sourcing now
             </Link>
-            <Link href="/about" className="bg-white text-regal-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2">
-              Learn More
+            <Link href="/contact" className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10">
+              Speak with an expert
             </Link>
           </div>
         </div>
@@ -263,3 +408,4 @@ export default function Home() {
     </div>
   );
 }
+
