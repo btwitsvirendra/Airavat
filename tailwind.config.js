@@ -49,6 +49,17 @@ module.exports = {
         },
         'stone-grey': '#424242',
       },
+      keyframes: {
+        tealLineMoveRight: {
+          '0%': { width: '0%', opacity: '1', transform: 'scaleX(1)' },
+          '85%': { width: '100%', opacity: '1', transform: 'scaleX(1)' },
+          '95%': { width: '100%', opacity: '1', transform: 'scaleX(1) translateX(0)' },
+          '100%': { width: '100%', opacity: '0', transform: 'scaleX(0) translateX(100%)', transformOrigin: 'right top' },
+        },
+      },
+      animation: {
+        tealLineMoveRight: 'tealLineMoveRight 0.8s ease-out forwards',
+      },
     },
   },
   plugins: [],

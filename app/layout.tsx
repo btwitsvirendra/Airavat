@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Toaster } from 'react-hot-toast';
+import ConditionalFooter from '@/components/ConditionalFooter';
 
 export const metadata: Metadata = {
   title: 'Airavat - B2B E-commerce Platform',
@@ -22,7 +23,7 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
-        <Footer />
+        <ConditionalFooter />
         <Toaster position="top-right" />
       </body>
     </html>

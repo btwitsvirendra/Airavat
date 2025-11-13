@@ -1,254 +1,234 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { BadgeCheck, Package, Truck, MapPin, X } from 'lucide-react';
-import toast from 'react-hot-toast';
-
-const orders = [
-  {
-    id: 'ORD-2024-001',
-    supplier: 'TechLight Industries',
-    amount: 125000,
-    status: 'processing',
-    nextStep: 'Awaiting inspection',
-    eta: '15 Nov 2024',
-  },
-  {
-    id: 'ORD-2024-002',
-    supplier: 'Textile Hub',
-    amount: 275000,
-    status: 'shipped',
-    nextStep: 'In transit to Bengaluru',
-    eta: '11 Nov 2024',
-  },
-  {
-    id: 'ORD-2024-003',
-    supplier: 'Organic Farms Co',
-    amount: 45000,
-    status: 'delivered',
-    nextStep: 'Payment released',
-    eta: 'Delivered 2 Nov 2024',
-  },
-];
-
-const statusLabels: Record<string, string> = {
-  processing: 'Processing',
-  shipped: 'Shipped',
-  delivered: 'Delivered',
-};
-
-const orderTimelines: Record<string, { title: string; description: string; timestamp: string; completed: boolean }[]> = {
-  'ORD-2024-001': [
-    {
-      title: 'Purchase order confirmed',
-      description: 'Buyer confirmed specification and payment terms with TechLight Industries.',
-      timestamp: '04 Nov 2024 · 09:10',
-      completed: true,
-    },
-    {
-      title: 'Production in progress',
-      description: 'Supplier preparing 50 units with BIS certification reports attached.',
-      timestamp: '05 Nov 2024 · 14:05',
-      completed: true,
-    },
-    {
-      title: 'Inspection scheduled',
-      description: 'Third-party inspection booked for 10 Nov before dispatch.',
-      timestamp: 'Pending',
-      completed: false,
-    },
-    {
-      title: 'Dispatch to Bengaluru',
-      description: 'Transport partner to pick up consignment post inspection.',
-      timestamp: 'Pending',
-      completed: false,
-    },
-  ],
-  'ORD-2024-002': [
-    {
-      title: 'Fabric inspection complete',
-      description: 'Quality check and colour fastness test completed with reports uploaded.',
-      timestamp: '02 Nov 2024 · 18:20',
-      completed: true,
-    },
-    {
-      title: 'In transit to Bengaluru',
-      description: 'Container left Surat warehouse with GPS tracking enabled.',
-      timestamp: '03 Nov 2024 · 05:45',
-      completed: true,
-    },
-    {
-      title: 'Customs documentation',
-      description: 'E-way bill and state permits shared for consignee validation.',
-      timestamp: '03 Nov 2024 · 08:00',
-      completed: true,
-    },
-    {
-      title: 'Delivery to buyer',
-      description: 'Final mile delivery scheduled for 11 Nov 2024.',
-      timestamp: 'Scheduled',
-      completed: false,
-    },
-  ],
-  'ORD-2024-003': [
-    {
-      title: 'Order delivered',
-      description: 'Cold chain shipment delivered and quality accepted by buyer.',
-      timestamp: '02 Nov 2024 · 16:00',
-      completed: true,
-    },
-    {
-      title: 'Payment released',
-      description: 'Escrow payment released to supplier after buyer confirmation.',
-      timestamp: '03 Nov 2024 · 11:10',
-      completed: true,
-    },
-  ],
-};
+import { useState } from 'react';
+import Link from 'next/link';
+import {
+  LayoutDashboard,
+  MessageSquare,
+  ShoppingBag,
+  CreditCard,
+  Heart,
+  Package,
+  MapPin,
+  Bookmark,
+  Settings,
+  ArrowRight,
+  ChevronRight,
+  Headphones,
+  TrendingUp,
+  Truck,
+  Search,
+  Filter,
+  FileText,
+} from 'lucide-react';
+import { useStore } from '@/lib/store';
 
 export default function OrdersPage() {
-  const [activeFilter, setActiveFilter] = useState<'all' | 'processing' | 'shipped' | 'delivered'>('all');
-  const [trackingOrderId, setTrackingOrderId] = useState<string | null>(null);
-  const router = useRouter();
-
-  const filteredOrders = useMemo(() => {
-    if (activeFilter === 'all') return orders;
-    return orders.filter((order) => order.status === activeFilter);
-  }, [activeFilter]);
-
-  const openLogistics = (orderId: string, supplier: string) => {
-    router.push(`/logistics?orderId=${orderId}&supplier=${encodeURIComponent(supplier)}`);
-    toast.success('Compare logistics partners and negotiate delivery charges.');
-  };
+  const { user } = useStore();
+  const [activeTab, setActiveTab] = useState<'all' | 'confirming' | 'unpaid' | 'preparing' | 'delivering' | 'refunds' | 'completed' | 'closed'>('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h1 className="text-4xl font-bold text-regal-blue-900">My Orders</h1>
-            <p className="text-gray-600">Track RFQ conversions, shipments, and assurance milestones in real time.</p>
-          </div>
-          <div className="flex gap-2">
-            {(['all', 'processing', 'shipped', 'delivered'] as const).map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                  activeFilter === filter ? 'bg-teal-500 text-white' : 'bg-white text-gray-600 hover:bg-teal-50'
-                }`}
-              >
-                {filter === 'all' ? 'All' : statusLabels[filter]}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          {filteredOrders.map((order) => (
-            <article key={order.id} className="rounded-2xl bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">Order ID</p>
-                  <h2 className="text-2xl font-semibold text-regal-blue-900">{order.id}</h2>
-                  <p className="text-sm text-gray-500">Supplier · {order.supplier}</p>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="rounded-2xl bg-teal-50 px-4 py-2 text-right">
-                    <p className="text-xs text-gray-500">Order value</p>
-                    <p className="text-2xl font-bold text-regal-blue-900">₹{order.amount.toLocaleString()}</p>
-                  </div>
-                  <button
-                    onClick={() => setTrackingOrderId(order.id)}
-                    className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-600 transition hover:border-teal-400 hover:text-teal-600"
-                  >
-                    Track delivery
-                  </button>
-                  {order.status !== 'delivered' && (
-                    <button
-                      onClick={() => openLogistics(order.id, order.supplier)}
-                      className="rounded-full border border-teal-500 px-4 py-2 text-sm font-semibold text-teal-600 transition hover:bg-teal-50"
-                    >
-                      Book logistics
-                    </button>
-                  )}
-                </div>
-              </div>
-              <div className="mt-6 grid gap-4 md:grid-cols-3">
-                <div className="flex items-center gap-3 rounded-xl bg-teal-50 p-4 text-teal-700">
-                  <BadgeCheck size={22} /> {statusLabels[order.status]}
-                </div>
-                <div className="flex items-center gap-3 rounded-xl bg-blue-50 p-4 text-blue-700">
-                  <Truck size={22} /> {order.nextStep}
-                </div>
-                <div className="flex items-center gap-3 rounded-xl bg-yellow-50 p-4 text-yellow-800">
-                  <Package size={22} /> {order.eta}
-                </div>
-              </div>
-            </article>
-          ))}
-          {filteredOrders.length === 0 && (
-            <div className="rounded-2xl border border-dashed border-teal-300 bg-white p-8 text-center">
-              <p className="text-lg font-semibold text-regal-blue-900">No orders yet</p>
-              <p className="mt-2 text-sm text-gray-500">Post an RFQ or add ready-to-ship items to cart to see them tracked here.</p>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-[1920px] mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Link href="/" className="text-2xl font-bold text-[#FF6A00]">Airavat</Link>
+              <span className="text-gray-600">My Airavat</span>
             </div>
-          )}
+            <div className="flex items-center gap-4 text-sm">
+              <div className="flex items-center gap-1 text-gray-600">
+                <span>🇮🇳</span>
+                <span>Deliver to: IN</span>
+              </div>
+              <div className="flex items-center gap-1 text-gray-600">
+                <span>English-USD</span>
+              </div>
+              <Link href="/supplier/register" className="text-gray-600 hover:text-[#FF6A00]">
+                Start selling
+              </Link>
+              <Link href="/messages" className="text-gray-600 hover:text-[#FF6A00]">
+                <MessageSquare size={20} />
+              </Link>
+              <Link href="/orders" className="text-[#FF6A00]">
+                <FileText size={20} />
+              </Link>
+              <Link href="/cart" className="text-gray-600 hover:text-[#FF6A00] relative">
+                <ShoppingBag size={20} />
+              </Link>
+              <Link href="/support" className="text-gray-600 hover:text-[#FF6A00]">
+                <Headphones size={20} />
+              </Link>
+              <Link href="/account" className="text-gray-600 hover:text-[#FF6A00]">
+                <div className="w-8 h-8 bg-[#FF6A00] rounded-full flex items-center justify-center text-white font-semibold">
+                  {user?.name?.[0] || 'U'}
+                </div>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
-      {trackingOrderId && (
-        <OrderTimelineModal
-          orderId={trackingOrderId}
-          onClose={() => setTrackingOrderId(null)}
-          steps={orderTimelines[trackingOrderId] ?? []}
-        />
-      )}
-    </div>
-  );
-}
 
-function OrderTimelineModal({
-  orderId,
-  onClose,
-  steps,
-}: {
-  orderId: string;
-  onClose: () => void;
-  steps: { title: string; description: string; timestamp: string; completed: boolean }[];
-}) {
-  return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center">
-      <div className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b px-6 py-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-gray-400">Live tracking</p>
-            <h3 className="text-xl font-semibold text-regal-blue-900">{orderId}</h3>
-          </div>
-          <button
-            onClick={onClose}
-            className="rounded-full p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700"
-            aria-label="Close tracking"
-          >
-            <X size={20} />
-          </button>
-        </div>
-        <div className="max-h-[60vh] overflow-y-auto px-6 py-5">
-          <div className="space-y-6">
-            {steps.length === 0 && (
-              <p className="text-sm text-gray-500">No tracking milestones available yet. Please check back soon.</p>
-            )}
-            {steps.map((step, index) => (
-              <div key={index} className="flex items-start gap-4">
-                <div className={`mt-1 flex h-6 w-6 items-center justify-center rounded-full ${step.completed ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-500'}`}>
-                  <MapPin size={16} />
+      <div className="max-w-[1920px] mx-auto px-4 py-6">
+        <div className="flex gap-6">
+          {/* Left Sidebar Navigation */}
+          <aside className="w-64 flex-shrink-0">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+              <nav className="space-y-1">
+                <Link
+                  href="/account"
+                  className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition"
+                >
+                  <LayoutDashboard size={20} />
+                  Dashboard
+                </Link>
+                
+                <div className="pt-4">
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Online trading</div>
+                  <Link href="/messages" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                    <MessageSquare size={18} />
+                    Messages
+                    <ChevronRight size={16} className="ml-auto text-gray-400" />
+                  </Link>
+                  <Link href="/orders" className="flex items-center gap-3 px-4 py-2 bg-[#FFF4E6] text-[#FF6A00] rounded-lg font-medium">
+                    <ShoppingBag size={18} />
+                    Orders
+                  </Link>
+                  <Link href="/payment" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                    <CreditCard size={18} />
+                    Payment
+                    <ChevronRight size={16} className="ml-auto text-gray-400" />
+                  </Link>
+                  <Link href="/saved" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                    <Heart size={18} />
+                    Saved & history
+                    <ChevronRight size={16} className="ml-auto text-gray-400" />
+                  </Link>
                 </div>
-                <div>
-                  <p className="text-sm font-semibold text-regal-blue-900">{step.title}</p>
-                  <p className="text-sm text-gray-600">{step.description}</p>
-                  <p className="text-xs text-gray-400 mt-1">{step.timestamp}</p>
+
+                <div className="pt-4">
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Add-on services</div>
+                  <Link href="/logistics" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                    <Package size={18} />
+                    Logistics services
+                    <ChevronRight size={16} className="ml-auto text-gray-400" />
+                  </Link>
+                  <Link href="/dropshipping" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                    <Truck size={18} />
+                    Dropshipping
+                    <ChevronRight size={16} className="ml-auto text-gray-400" />
+                  </Link>
+                  <Link href="/services" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                    <TrendingUp size={18} />
+                    More services
+                    <ChevronRight size={16} className="ml-auto text-gray-400" />
+                  </Link>
                 </div>
+
+                <div className="pt-4">
+                  <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 px-4">Account settings</div>
+                  <Link href="/account/settings" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                    <Settings size={18} />
+                    Account settings
+                  </Link>
+                  <Link href="/supplier/dashboard" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
+                    <ArrowRight size={18} />
+                    Switch to supplier
+                  </Link>
+                </div>
+              </nav>
+            </div>
+          </aside>
+
+          {/* Main Content */}
+          <main className="flex-1">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <h1 className="text-2xl font-bold text-gray-900 mb-6">Orders</h1>
+
+              {/* Search and Filter Bar */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex-1 relative">
+                  <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search by name, order number, or other information"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent outline-none"
+                  />
+                </div>
+                <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent outline-none">
+                  <option>Order date</option>
+                  <option>Last 7 days</option>
+                  <option>Last 30 days</option>
+                  <option>Last 90 days</option>
+                </select>
+                <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent outline-none">
+                  <option>Select time</option>
+                </select>
+                <button className="bg-[#FF6A00] hover:bg-[#E55A00] text-white px-6 py-2 rounded-lg font-medium transition flex items-center gap-2">
+                  <span>+</span>
+                  Bulk Create Order
+                </button>
               </div>
-            ))}
+
+              {/* Order Tabs */}
+              <div className="flex items-center gap-2 mb-6 overflow-x-auto">
+                {[
+                  { id: 'all', label: 'All' },
+                  { id: 'confirming', label: 'Confirming' },
+                  { id: 'unpaid', label: 'Unpaid' },
+                  { id: 'preparing', label: 'Preparing to ship' },
+                  { id: 'delivering', label: 'Delivering' },
+                  { id: 'refunds', label: 'Refunds & after-sale' },
+                  { id: 'completed', label: 'Completed & in review' },
+                  { id: 'closed', label: 'Closed' },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id as any)}
+                    className={`px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap transition ${
+                      activeTab === tab.id
+                        ? 'bg-[#FF6A00] text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Empty Orders State */}
+              <div className="flex flex-col items-center justify-center py-20">
+                <div className="relative mb-6">
+                  <div className="w-32 h-32 bg-[#FFF4E6] rounded-full flex items-center justify-center">
+                    <div className="w-24 h-24 bg-[#FF6A00]/20 rounded-full flex items-center justify-center">
+                      <FileText size={64} className="text-[#FF6A00]" />
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xl font-semibold text-gray-900 mb-2">No orders yet</p>
+                <p className="text-gray-600 mb-6">Go to the homepage or click below to start sourcing</p>
+                <Link
+                  href="/products"
+                  className="bg-[#FF6A00] hover:bg-[#E55A00] text-white px-6 py-3 rounded-lg font-medium transition"
+                >
+                  Start sourcing
+                </Link>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+
+      {/* Need Help Sidebar */}
+      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40">
+        <div className="bg-[#FF6A00] text-white px-4 py-6 rounded-lg shadow-lg writing-vertical-rl">
+          <p className="text-sm font-semibold mb-2">Need Help?</p>
+          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mx-auto">
+            <Headphones size={20} />
           </div>
         </div>
       </div>

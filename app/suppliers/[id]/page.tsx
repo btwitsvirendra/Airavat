@@ -1,237 +1,362 @@
 'use client';
 
-import { Star, MapPin, Phone, Mail, Clock, CheckCircle, TrendingUp, MessageSquare, Package } from 'lucide-react';
+import { useState } from 'react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import {
+  Star,
+  CheckCircle2,
+  MapPin,
+  Phone,
+  Mail,
+  Globe,
+  Calendar,
+  Users,
+  Package,
+  TrendingUp,
+  MessageSquare,
+  Share2,
+  Award,
+  ShieldCheck,
+  Truck,
+  Clock,
+} from 'lucide-react';
+import LikeButton from '@/components/LikeButton';
+import { catalogProducts } from '@/lib/data/catalog';
+import { motion } from 'framer-motion';
 
-export default function SupplierProfile({ params }: { params: { id: string } }) {
-  // Mock data
-  const supplier = {
-    id: params.id,
-    name: 'TechLight Industries',
-    businessName: 'TechLight Industries Pvt. Ltd.',
-    logo: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=200',
-    banner: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200',
-    rating: 4.8,
-    totalReviews: 342,
-    location: 'Mumbai, Maharashtra',
-    yearEstablished: 2015,
-    verified: true,
-    responseTime: '< 2 hours',
-    totalOrders: 1250,
-    description: 'Leading manufacturer and supplier of industrial LED lighting solutions. We specialize in energy-efficient lighting for warehouses, factories, and commercial spaces. ISO 9001:2015 certified with in-house R&D facility.',
-    products: [
-      {
-        id: '1',
-        name: 'Industrial LED Light 100W',
-        price: 1250,
-        image: 'https://images.unsplash.com/photo-1524501537239-6e6d23b24ea8?w=300',
-        minOrder: 50,
-      },
-      {
-        id: '2',
-        name: 'LED Flood Light 200W',
-        price: 2100,
-        image: 'https://images.unsplash.com/photo-1565372455536-4f2a6b6d4e5d?w=300',
-        minOrder: 25,
-      },
-      {
-        id: '3',
-        name: 'Street Light LED 150W',
-        price: 1800,
-        image: 'https://images.unsplash.com/photo-1513828583688-c52646db42da?w=300',
-        minOrder: 100,
-      },
-    ],
-    certifications: ['ISO 9001:2015', 'CE Certified', 'BIS Approved'],
-    contact: {
-      phone: '+91 98765 43210',
-      email: 'sales@techlight.com',
-      address: 'Plot No. 45, MIDC Industrial Area, Andheri East, Mumbai - 400093',
-    },
-  };
+// Mock supplier data matching database schema
+const supplierData = {
+  business_id: 'b1',
+  business_name: 'TechLight Industries',
+  display_name: 'TechLight Industries',
+  company_legal_name: 'TechLight Industries Private Limited',
+  description: 'Leading manufacturer of industrial LED lighting solutions and electrical equipment. We specialize in high-quality, energy-efficient products for commercial and industrial applications.',
+  city: 'Mumbai',
+  state: 'Maharashtra',
+  country: 'India',
+  pincode: '400001',
+  primary_contact_phone: '+91 22 1234 5678',
+  primary_contact_email: 'contact@techlight.com',
+  website_url: 'https://www.techlight.com',
+  year_established: 2010,
+  employee_count: '50-100',
+  is_verified: true,
+  verification_level: 'gold',
+  gst_number: '27AABCU9603R1ZM',
+  pan_number: 'AABCU9603R',
+  address_line1: '123 Industrial Estate',
+  address_line2: 'Andheri East',
+  rating: 4.8,
+  total_products: 120,
+  response_rate: '98%',
+  response_time: '< 24h',
+  on_time_delivery: '95%',
+  transaction_level: 'High',
+};
+
+export default function SupplierProfilePage() {
+  const params = useParams();
+  const supplierId = params?.id as string;
+  const [activeTab, setActiveTab] = useState<'products' | 'about' | 'reviews'>('products');
+  
+  // Filter products by this supplier
+  const supplierProducts = catalogProducts.filter((p) => p.supplierId === 's1' || p.businessId === supplierId);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Banner */}
-      <div
-        className="h-64 bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${supplier.banner})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-regal-blue-900/80 to-transparent" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 -mt-32 relative z-10">
-        {/* Supplier Header Card */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+      {/* Supplier Header - Alibaba.com Style */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-[1920px] mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row gap-6">
-            <img
-              src={supplier.logo}
-              alt={supplier.name}
-              className="w-32 h-32 rounded-lg object-cover border-4 border-white shadow-md"
-            />
-            <div className="flex-1">
-              <div className="flex items-start justify-between mb-2">
-                <div>
-                  <h1 className="text-3xl font-bold text-gray-800 flex items-center gap-2">
-                    {supplier.name}
-                    {supplier.verified && (
-                      <CheckCircle className="text-green-500" size={28} />
-                    )}
-                  </h1>
-                  <p className="text-gray-600">{supplier.businessName}</p>
+            {/* Supplier Logo/Info */}
+            <div className="flex items-start gap-4">
+              <div className="w-24 h-24 bg-gradient-to-br from-[#FF6A00] to-[#FF8C00] rounded-lg flex items-center justify-center text-white text-3xl font-bold flex-shrink-0">
+                {supplierData.business_name[0]}
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <h1 className="text-2xl font-bold text-gray-900">{supplierData.display_name}</h1>
+                  {supplierData.is_verified && (
+                    <CheckCircle2 size={24} className="text-[#FF6A00]" />
+                  )}
+                  {supplierData.verification_level === 'gold' && (
+                    <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full">
+                      Gold Supplier
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-4 text-sm text-gray-600 mb-2">
+                  <div className="flex items-center gap-1">
+                    <Star size={16} className="fill-yellow-400 text-yellow-400" />
+                    <span className="font-semibold">{supplierData.rating}</span>
+                    <span className="text-gray-500">({Math.floor(Math.random() * 500) + 100} reviews)</span>
+                  </div>
+                  <span>•</span>
+                  <span>{supplierData.total_products} Products</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <MapPin size={14} />
+                  <span>{supplierData.city}, {supplierData.state}, {supplierData.country}</span>
                 </div>
               </div>
+            </div>
 
-              <div className="flex items-center gap-4 mb-4">
-                <div className="flex items-center gap-1">
-                  <Star className="text-yellow-500 fill-current" size={20} />
-                  <span className="font-semibold text-lg">{supplier.rating}</span>
-                  <span className="text-gray-500">({supplier.totalReviews} reviews)</span>
+            {/* Action Buttons */}
+            <div className="flex flex-col gap-2 md:ml-auto">
+              <button className="px-6 py-2 bg-[#FF6A00] hover:bg-[#E55A00] text-white rounded-md font-medium transition flex items-center justify-center gap-2">
+                <MessageSquare size={18} />
+                Contact Supplier
+              </button>
+              <div className="flex gap-2">
+                <div className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                  <LikeButton size="sm" />
+                  <span>Follow</span>
                 </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  <MapPin size={18} />
-                  {supplier.location}
-                </div>
-                <div className="flex items-center gap-2 text-gray-600">
-                  <Clock size={18} />
-                  Response: {supplier.responseTime}
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <Link href={`/messages?supplier=${supplier.id}`} className="btn-primary flex items-center gap-2">
-                  <MessageSquare size={20} />
-                  Chat Now
-                </Link>
-                <button className="border border-teal-600 text-teal-600 px-6 py-3 rounded-lg font-semibold hover:bg-teal-50 transition">
-                  Request Quote
+                <button className="flex-1 px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition flex items-center justify-center gap-2">
+                  <Share2 size={18} />
+                  Share
                 </button>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="grid lg:grid-cols-3 gap-6">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* About */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">About Company</h2>
-              <p className="text-gray-600 leading-relaxed">{supplier.description}</p>
+      {/* Supplier Stats - Alibaba.com Style */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-[1920px] mx-auto px-4 py-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-[#FF6A00] mb-1">{supplierData.response_rate}</div>
+              <div className="text-xs text-gray-600">Response Rate</div>
             </div>
-
-            {/* Stats */}
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="bg-white rounded-xl shadow-md p-6 text-center">
-                <Package className="mx-auto text-teal-600 mb-2" size={32} />
-                <p className="text-3xl font-bold text-regal-blue-700">{supplier.totalOrders}+</p>
-                <p className="text-gray-600">Total Orders</p>
-              </div>
-              <div className="bg-white rounded-xl shadow-md p-6 text-center">
-                <TrendingUp className="mx-auto text-green-600 mb-2" size={32} />
-                <p className="text-3xl font-bold text-regal-blue-700">{supplier.yearEstablished}</p>
-                <p className="text-gray-600">Year Established</p>
-              </div>
-              <div className="bg-white rounded-xl shadow-md p-6 text-center">
-                <Star className="mx-auto text-yellow-500 mb-2" size={32} />
-                <p className="text-3xl font-bold text-regal-blue-700">{supplier.rating}/5</p>
-                <p className="text-gray-600">Avg Rating</p>
-              </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-[#FF6A00] mb-1">{supplierData.response_time}</div>
+              <div className="text-xs text-gray-600">Response Time</div>
             </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-[#FF6A00] mb-1">{supplierData.on_time_delivery}</div>
+              <div className="text-xs text-gray-600">On-Time Delivery</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-[#FF6A00] mb-1">{supplierData.transaction_level}</div>
+              <div className="text-xs text-gray-600">Transaction Level</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            {/* Products */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">Products</h2>
-              <div className="grid md:grid-cols-2 gap-4">
-                {supplier.products.map((product) => (
-                  <div key={product.id} className="border rounded-lg p-4 hover:shadow-md transition">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-32 object-cover rounded mb-3"
-                    />
-                    <h3 className="font-semibold text-gray-800 mb-2">{product.name}</h3>
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="text-xl font-bold text-regal-blue-700">₹{product.price}</p>
-                        <p className="text-xs text-gray-500">Min: {product.minOrder} units</p>
+      {/* Main Content */}
+      <div className="max-w-[1920px] mx-auto px-4 py-8">
+        <div className="flex gap-6">
+          {/* Left Sidebar - Company Info */}
+          <aside className="hidden lg:block w-80 flex-shrink-0">
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-4">
+              <h3 className="font-semibold text-gray-900 mb-4">Company Information</h3>
+              <div className="space-y-4 text-sm">
+                <div>
+                  <div className="text-gray-600 mb-1">Business Type</div>
+                  <div className="font-medium text-gray-900">Manufacturer, Trading Company</div>
+                </div>
+                <div>
+                  <div className="text-gray-600 mb-1">Year Established</div>
+                  <div className="font-medium text-gray-900">{supplierData.year_established}</div>
+                </div>
+                <div>
+                  <div className="text-gray-600 mb-1">Employees</div>
+                  <div className="font-medium text-gray-900">{supplierData.employee_count}</div>
+                </div>
+                <div>
+                  <div className="text-gray-600 mb-1">Location</div>
+                  <div className="font-medium text-gray-900">
+                    {supplierData.address_line1}, {supplierData.address_line2}
+                    <br />
+                    {supplierData.city}, {supplierData.state} {supplierData.pincode}
+                    <br />
+                    {supplierData.country}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-gray-600 mb-1">Contact</div>
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <Phone size={14} className="text-gray-400" />
+                      <span className="font-medium text-gray-900">{supplierData.primary_contact_phone}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Mail size={14} className="text-gray-400" />
+                      <span className="font-medium text-gray-900">{supplierData.primary_contact_email}</span>
+                    </div>
+                    {supplierData.website_url && (
+                      <div className="flex items-center gap-2">
+                        <Globe size={14} className="text-gray-400" />
+                        <a href={supplierData.website_url} target="_blank" rel="noopener noreferrer" className="font-medium text-[#FF6A00] hover:underline">
+                          Visit Website
+                        </a>
                       </div>
-                      <button className="text-teal-600 hover:text-teal-700 font-medium">
-                        View Details
-                      </button>
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-gray-600 mb-1">GST Number</div>
+                  <div className="font-medium text-gray-900">{supplierData.gst_number}</div>
+                </div>
+                <div>
+                  <div className="text-gray-600 mb-1">PAN Number</div>
+                  <div className="font-medium text-gray-900">{supplierData.pan_number}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Verification Badges */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+              <h3 className="font-semibold text-gray-900 mb-4">Verification</h3>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck size={20} className="text-[#FF6A00]" />
+                  <span className="text-sm text-gray-700">Trade Assurance</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Award size={20} className="text-[#FF6A00]" />
+                  <span className="text-sm text-gray-700">Verified Supplier</span>
+                </div>
+                {supplierData.verification_level === 'gold' && (
+                  <div className="flex items-center gap-2">
+                    <Star size={20} className="text-yellow-400 fill-yellow-400" />
+                    <span className="text-sm text-gray-700">Gold Supplier</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </aside>
+
+          {/* Main Content Area */}
+          <main className="flex-1">
+            {/* Tabs */}
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+              <div className="flex border-b border-gray-200">
+                <button
+                  onClick={() => setActiveTab('products')}
+                  className={`px-6 py-4 font-medium transition ${
+                    activeTab === 'products'
+                      ? 'text-[#FF6A00] border-b-2 border-[#FF6A00]'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  Products ({supplierProducts.length})
+                </button>
+                <button
+                  onClick={() => setActiveTab('about')}
+                  className={`px-6 py-4 font-medium transition ${
+                    activeTab === 'about'
+                      ? 'text-[#FF6A00] border-b-2 border-[#FF6A00]'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  About
+                </button>
+                <button
+                  onClick={() => setActiveTab('reviews')}
+                  className={`px-6 py-4 font-medium transition ${
+                    activeTab === 'reviews'
+                      ? 'text-[#FF6A00] border-b-2 border-[#FF6A00]'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  Reviews
+                </button>
+              </div>
+
+              {/* Tab Content */}
+              <div className="p-6">
+                {activeTab === 'products' && (
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {supplierProducts.map((product) => (
+                      <Link
+                        key={product.id}
+                        href={`/products/${product.id}`}
+                        className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition"
+                      >
+                        <div className="aspect-square bg-gray-100 relative">
+                          {product.images[0] ? (
+                            <img
+                              src={product.images[0]}
+                              alt={product.name}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-gray-400">
+                              <Package size={48} />
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-3">
+                          <h3 className="text-sm font-medium text-gray-900 line-clamp-2 mb-2">{product.name}</h3>
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-lg font-bold text-gray-900">₹{product.price.amount.toLocaleString()}</span>
+                            <span className="text-xs text-gray-500">/{product.price.unit}</span>
+                          </div>
+                          <div className="text-xs text-gray-500 mt-1">
+                            MOQ: {product.minOrderQuantity} {product.price.unit}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+
+                {activeTab === 'about' && (
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Company Description</h3>
+                      <p className="text-gray-600 leading-relaxed">{supplierData.description}</p>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Main Products</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {['LED Lights', 'Industrial Lighting', 'Electrical Equipment', 'Energy Solutions'].map((product) => (
+                          <span key={product} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                            {product}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                ))}
-              </div>
-              <button className="w-full mt-4 text-teal-600 font-semibold hover:text-teal-700">
-                View All Products →
-              </button>
-            </div>
-          </div>
+                )}
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Contact Info */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <Phone className="text-teal-600 mt-1" size={20} />
-                  <div>
-                    <p className="text-sm text-gray-500">Phone</p>
-                    <p className="font-medium">{supplier.contact.phone}</p>
+                {activeTab === 'reviews' && (
+                  <div className="space-y-4">
+                    {[1, 2, 3].map((review) => (
+                      <div key={review} className="border-b border-gray-200 pb-4 last:border-b-0">
+                        <div className="flex items-start gap-4">
+                          <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-600 font-semibold">
+                            U{review}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <div className="flex items-center gap-1">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                  <Star key={star} size={14} className="fill-yellow-400 text-yellow-400" />
+                                ))}
+                              </div>
+                              <span className="text-sm font-medium text-gray-900">Excellent Product</span>
+                            </div>
+                            <p className="text-sm text-gray-600 mb-2">
+                              Great quality and fast delivery. Highly recommended supplier for industrial lighting solutions.
+                            </p>
+                            <div className="text-xs text-gray-500">By Buyer • {new Date().toLocaleDateString()}</div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Mail className="text-teal-600 mt-1" size={20} />
-                  <div>
-                    <p className="text-sm text-gray-500">Email</p>
-                    <p className="font-medium">{supplier.contact.email}</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <MapPin className="text-teal-600 mt-1" size={20} />
-                  <div>
-                    <p className="text-sm text-gray-500">Address</p>
-                    <p className="font-medium">{supplier.contact.address}</p>
-                  </div>
-                </div>
+                )}
               </div>
             </div>
-
-            {/* Certifications */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Certifications</h3>
-              <div className="space-y-2">
-                {supplier.certifications.map((cert, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <CheckCircle className="text-green-500" size={18} />
-                    <span className="text-gray-700">{cert}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Quick Actions */}
-            <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-xl shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Quick Actions</h3>
-              <div className="space-y-3">
-                <button className="w-full bg-white border border-gray-300 px-4 py-3 rounded-lg font-medium hover:bg-gray-50 transition">
-                  Save Supplier
-                </button>
-                <button className="w-full bg-white border border-gray-300 px-4 py-3 rounded-lg font-medium hover:bg-gray-50 transition">
-                  Share Profile
-                </button>
-                <button className="w-full bg-white border border-gray-300 px-4 py-3 rounded-lg font-medium hover:bg-gray-50 transition">
-                  Report Issue
-                </button>
-              </div>
-            </div>
-          </div>
+          </main>
         </div>
       </div>
-
-      <div className="h-12" />
     </div>
   );
 }

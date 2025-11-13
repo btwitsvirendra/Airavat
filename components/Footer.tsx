@@ -1,190 +1,272 @@
+'use client';
+
 import Link from 'next/link';
-import {
-  CreditCard,
-  Facebook,
-  Headset,
-  Instagram,
-  Linkedin,
-  MapPin,
-  Phone,
-  ShieldCheck,
-  Truck,
-  Twitter,
-} from 'lucide-react';
-
-const serviceHighlights = [
-  {
-    icon: ShieldCheck,
-    title: 'Trade Assurance',
-    description: 'Secure payments with guaranteed delivery on every order',
-  },
-  {
-    icon: CreditCard,
-    title: 'Instant Payments',
-    description: 'Flexible payment links tailored to your business needs',
-  },
-  {
-    icon: Truck,
-    title: 'Smart Logistics',
-    description: 'Door-to-door transport with live shipment tracking',
-  },
-  {
-    icon: Headset,
-    title: '24/7 Support',
-    description: 'Dedicated sourcing experts and customer success teams',
-  },
-];
-
-const footerLinks = [
-  {
-    heading: 'Trade Services',
-    links: [
-      { href: '/trade-protection', label: 'Airavat Assurance' },
-      { href: '/payment-links', label: 'Secure Payment Links' },
-      { href: '/logistics', label: 'Logistics Solutions' },
-      { href: '/inspection', label: 'Inspection Services' },
-      { href: '/financing', label: 'Trade Financing' },
-    ],
-  },
-  {
-    heading: 'Buyer Resources',
-    links: [
-      { href: '/how-to-buy', label: 'How to Buy' },
-      { href: '/rfq', label: 'Request for Quotation' },
-      { href: '/events', label: 'Events & Webinars' },
-      { href: '/help/buyer', label: 'Buyer Help Center' },
-      { href: '/covid-resources', label: 'Compliance & Certifications' },
-    ],
-  },
-  {
-    heading: 'Supplier Resources',
-    links: [
-      { href: '/supplier/register', label: 'Join as Supplier' },
-      { href: '/supplier/tools', label: 'Supplier Tools' },
-      { href: '/supplier/academy', label: 'Airavat Academy' },
-      { href: '/supplier/insights', label: 'Market Insights' },
-      { href: '/supplier/help', label: 'Supplier Support' },
-    ],
-  },
-];
+import { Facebook, Twitter, Linkedin, Youtube, Instagram, Camera } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-gray-300">
-      <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {serviceHighlights.map((service) => (
-            <div
-              key={service.title}
-              className="flex items-start gap-4 rounded-2xl border border-white/5 bg-white/5 p-5 transition hover:border-regal-gold-500/60 hover:bg-white/10"
-            >
-              <service.icon className="mt-1 h-10 w-10 flex-shrink-0 text-regal-gold-400" />
-              <div>
-                <h3 className="text-base font-semibold text-white">{service.title}</h3>
-                <p className="mt-1 text-sm text-gray-400">{service.description}</p>
+    <footer className="bg-gray-900 text-gray-300">
+      <div className="max-w-[1920px] mx-auto px-4 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-8">
+          {/* Get support */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Get support</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/help" className="hover:text-white transition">
+                  Help Center
+                </Link>
+              </li>
+              <li>
+                <Link href="/live-chat" className="hover:text-white transition">
+                  Live chat
+                </Link>
+              </li>
+              <li>
+                <Link href="/orders" className="hover:text-white transition">
+                  Check order status
+                </Link>
+              </li>
+              <li>
+                <Link href="/refunds" className="hover:text-white transition">
+                  Refunds
+                </Link>
+              </li>
+              <li>
+                <Link href="/report-abuse" className="hover:text-white transition">
+                  Report abuse
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Payments and protections */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Payments and protections</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/safe-payments" className="hover:text-white transition">
+                  Safe and easy payments
+                </Link>
+              </li>
+              <li>
+                <Link href="/money-back" className="hover:text-white transition">
+                  Money-back policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/shipping" className="hover:text-white transition">
+                  On-time shipping
+                </Link>
+              </li>
+              <li>
+                <Link href="/after-sales" className="hover:text-white transition">
+                  After-sales protections
+                </Link>
+              </li>
+              <li>
+                <Link href="/product-monitoring" className="hover:text-white transition">
+                  Product monitoring services
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Source on Airavat */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Source on Airavat</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/rfq" className="hover:text-white transition">
+                  Request for Quotation
+                </Link>
+              </li>
+              <li>
+                <Link href="/membership" className="hover:text-white transition">
+                  Membership program
+                </Link>
+              </li>
+              <li>
+                <Link href="/tax" className="hover:text-white transition">
+                  Sales tax and VAT
+                </Link>
+              </li>
+              <li>
+                <Link href="/reads" className="hover:text-white transition">
+                  Airavat Reads
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Sell on Airavat */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Sell on Airavat</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link href="/supplier/register" className="hover:text-white transition">
+                  Start selling
+                </Link>
+              </li>
+              <li>
+                <Link href="/supplier/dashboard" className="hover:text-white transition">
+                  Seller Central
+                </Link>
+              </li>
+              <li>
+                <Link href="/supplier/verify" className="hover:text-white transition">
+                  Become a Verified Supplier
+                </Link>
+              </li>
+              <li>
+                <Link href="/partnerships" className="hover:text-white transition">
+                  Partnerships
+                </Link>
+              </li>
+              <li>
+                <Link href="/app" className="hover:text-white transition">
+                  Download the app for suppliers
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Get to know us */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Get to know us</h3>
+            <ul className="space-y-2 text-sm mb-4">
+              <li>
+                <Link href="/about" className="hover:text-white transition">
+                  About Airavat
+                </Link>
+              </li>
+              <li>
+                <Link href="/responsibility" className="hover:text-white transition">
+                  Corporate responsibility
+                </Link>
+              </li>
+              <li>
+                <Link href="/news" className="hover:text-white transition">
+                  News center
+                </Link>
+              </li>
+              <li>
+                <Link href="/careers" className="hover:text-white transition">
+                  Careers
+                </Link>
+              </li>
+            </ul>
+            <div className="mt-4">
+              <p className="text-white font-semibold mb-3 text-sm">Stay Connected</p>
+              <div className="flex gap-3">
+                <Link href="https://facebook.com" target="_blank" className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition">
+                  <span className="text-white text-xs font-bold">f</span>
+                </Link>
+                <Link href="https://linkedin.com" target="_blank" className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition">
+                  <span className="text-white text-xs font-bold">in</span>
+                </Link>
+                <Link href="https://twitter.com" target="_blank" className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition">
+                  <span className="text-white text-xs">🐦</span>
+                </Link>
+                <Link href="https://instagram.com" target="_blank" className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition">
+                  <Camera size={16} className="text-white" />
+                </Link>
+                <Link href="https://youtube.com" target="_blank" className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition">
+                  <span className="text-white text-xs">▶</span>
+                </Link>
+                <Link href="https://tiktok.com" target="_blank" className="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition">
+                  <span className="text-white text-xs">♪</span>
+                </Link>
               </div>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid gap-10 lg:grid-cols-5">
-          <div className="lg:col-span-2 space-y-5">
+        {/* Payment and Security Logos */}
+        <div className="border-t border-gray-800 pt-8 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
             <div>
-              <span className="text-3xl font-semibold text-white">Aira</span>
-              <span className="text-3xl font-semibold text-regal-gold-400">vat</span>
-            </div>
-            <p className="text-sm leading-relaxed text-gray-400">
-              Airavat connects Indian businesses with trusted suppliers across the globe. Discover millions of products, manage
-              trade digitally, and scale your supply chain with confidence.
-            </p>
-            <div className="flex items-center gap-4 text-sm text-gray-400">
-              <MapPin size={18} className="text-regal-gold-400" />
-              <span>Global Trade Tower, Bengaluru, India</span>
-            </div>
-            <div className="flex flex-wrap gap-4 text-sm text-gray-400">
-              <span className="inline-flex items-center gap-2">
-                <Phone size={18} className="text-regal-gold-400" /> +91 1800-120-5005
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <Headset size={18} className="text-regal-gold-400" /> support@airavat.com
-              </span>
-            </div>
-            <div className="flex gap-3 text-gray-400">
-              <Link href="https://facebook.com" className="rounded-full border border-white/10 p-2 hover:border-regal-gold-400 hover:text-regal-gold-400 transition">
-                <Facebook size={18} />
-              </Link>
-              <Link href="https://twitter.com" className="rounded-full border border-white/10 p-2 hover:border-regal-gold-400 hover:text-regal-gold-400 transition">
-                <Twitter size={18} />
-              </Link>
-              <Link href="https://linkedin.com" className="rounded-full border border-white/10 p-2 hover:border-regal-gold-400 hover:text-regal-gold-400 transition">
-                <Linkedin size={18} />
-              </Link>
-              <Link href="https://instagram.com" className="rounded-full border border-white/10 p-2 hover:border-regal-gold-400 hover:text-regal-gold-400 transition">
-                <Instagram size={18} />
-              </Link>
-            </div>
-          </div>
-
-          <div className="lg:col-span-3 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {footerLinks.map((group) => (
-              <div key={group.heading} className="space-y-3">
-                <h4 className="text-sm font-semibold uppercase tracking-widest text-white/90">{group.heading}</h4>
-                <ul className="space-y-2 text-sm text-gray-400">
-                  {group.links.map((link) => (
-                    <li key={link.href}>
-                      <Link href={link.href} className="hover:text-regal-gold-300 transition">
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+              <p className="text-xs text-gray-500 mb-2">Security</p>
+              <div className="flex flex-wrap gap-3">
+                <div className="bg-white rounded px-3 py-2 text-xs font-semibold text-gray-900">ID Check</div>
+                <div className="bg-white rounded px-3 py-2 text-xs font-semibold text-gray-900">PCI DSS</div>
+                <div className="bg-white rounded px-3 py-2 text-xs font-semibold text-gray-900">SSL</div>
+                <div className="bg-white rounded px-3 py-2 text-xs font-semibold text-gray-900">VERISIGN</div>
               </div>
-            ))}
-            <div className="space-y-3">
-              <h4 className="text-sm font-semibold uppercase tracking-widest text-white/90">Get the App</h4>
-              <p className="text-sm text-gray-400">
-                Manage sourcing, chat with suppliers, and track orders on the go with the Airavat mobile app.
-              </p>
-              <div className="space-y-3">
-                <Link
-                  href="/download/android"
-                  className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white hover:border-regal-gold-400 hover:bg-white/10 transition"
-                >
-                  <span>Download for Android</span>
-                  <span className="text-xs text-regal-gold-300">APK</span>
-                </Link>
-                <Link
-                  href="/download/ios"
-                  className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white hover:border-regal-gold-400 hover:bg-white/10 transition"
-                >
-                  <span>Download for iOS</span>
-                  <span className="text-xs text-regal-gold-300">App Store</span>
-                </Link>
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 mb-2">Payment Methods</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="text-xs bg-gray-800 px-2 py-1 rounded">VISA</span>
+                <span className="text-xs bg-gray-800 px-2 py-1 rounded">Mastercard</span>
+                <span className="text-xs bg-gray-800 px-2 py-1 rounded">AMEX</span>
+                <span className="text-xs bg-gray-800 px-2 py-1 rounded">PayPal</span>
+                <span className="text-xs bg-gray-800 px-2 py-1 rounded">Apple Pay</span>
+                <span className="text-xs bg-gray-800 px-2 py-1 rounded">Discover</span>
+                <span className="text-xs bg-gray-800 px-2 py-1 rounded">UnionPay</span>
+                <span className="text-xs bg-gray-800 px-2 py-1 rounded">T/T</span>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="border-t border-white/10 bg-black/80">
-        <div className="max-w-7xl mx-auto px-4 py-6 text-xs text-gray-500">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <p>© {new Date().getFullYear()} Airavat Technologies Pvt. Ltd. All rights reserved.</p>
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="/privacy" className="hover:text-regal-gold-300 transition">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-regal-gold-300 transition">
-                Terms of Use
-              </Link>
-              <Link href="/sitemap" className="hover:text-regal-gold-300 transition">
-                Sitemap
-              </Link>
-              <Link href="/compliance" className="hover:text-regal-gold-300 transition">
-                Compliance & Certificates
-              </Link>
+        {/* Alibaba Lens and Mobile App */}
+        <div className="border-t border-gray-800 pt-8 mb-8">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h4 className="text-white font-semibold mb-3">Alibaba Lens</h4>
+              <p className="text-sm text-gray-400 mb-4">Add Alibaba Lens to Chrome</p>
+              <button className="bg-[#FF6A00] hover:bg-[#E55A00] text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2">
+                <Camera size={20} />
+                Alibaba Lens
+              </button>
+            </div>
+            <div>
+              <h4 className="text-white font-semibold mb-3">Mobile App</h4>
+              <p className="text-sm text-gray-400 mb-4">Trade on the go with the Airavat app</p>
+              <div className="flex gap-3">
+                <button className="bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-900 transition">
+                  Download on the App Store
+                </button>
+                <button className="bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-900 transition">
+                  GET IT ON Google Play
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Footer - Legal and Affiliate Links */}
+        <div className="border-t border-gray-800 pt-8">
+          <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-4">
+            <Link href="https://aliexpress.com" className="hover:text-white transition">AliExpress</Link>
+            <Link href="https://1688.com" className="hover:text-white transition">1688.com</Link>
+            <Link href="https://tmall.com" className="hover:text-white transition">Tmall Taobao World</Link>
+            <Link href="https://alipay.com" className="hover:text-white transition">Alipay</Link>
+            <Link href="https://lazada.com" className="hover:text-white transition">Lazada</Link>
+            <Link href="https://taobao.com" className="hover:text-white transition">Taobao Global</Link>
+            <Link href="/tao" className="hover:text-white transition">TAO</Link>
+            <Link href="https://trendyol.com" className="hover:text-white transition">Trendyol</Link>
+            <Link href="https://europages.com" className="hover:text-white transition">Europages</Link>
+          </div>
+          <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-4">
+            <Link href="/policies" className="hover:text-white transition">Policies and rules</Link>
+            <Link href="/legal" className="hover:text-white transition">Legal Notice</Link>
+            <Link href="/listing-policy" className="hover:text-white transition">Product Listing Policy</Link>
+            <Link href="/ip-protection" className="hover:text-white transition">Intellectual Property Protection</Link>
+            <Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white transition">Terms of Use</Link>
+            <Link href="/integrity" className="hover:text-white transition">Integrity Compliance</Link>
+          </div>
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-4 border-t border-gray-800">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl font-bold text-[#FF6A00]">A</span>
+              <span className="text-xl font-bold text-white">Airavat</span>
+            </div>
+            <div className="text-xs text-gray-500">
+              <p>© 1999-2025 Airavat.com.</p>
+              <p className="mt-1">增值电信业务经营许可证: 浙B2-20241358</p>
+              <p className="mt-1">浙公网安备33010002000366 浙ICP备2024067534号-3</p>
             </div>
           </div>
         </div>
@@ -192,4 +274,3 @@ export default function Footer() {
     </footer>
   );
 }
-

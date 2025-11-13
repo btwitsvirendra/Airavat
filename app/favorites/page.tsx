@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Heart, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
+import LikeButton from '@/components/LikeButton';
 import toast from 'react-hot-toast';
 
 const initialFavorites = [
@@ -31,7 +32,7 @@ export default function FavoritesPage() {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-6">
         <div className="mb-8 flex items-center gap-3 text-regal-blue-900">
-          <Heart size={28} className="text-regal-gold-500" />
+          <LikeButton defaultChecked={true} size="lg" />
           <div>
             <h1 className="text-3xl font-bold">Saved Favourites</h1>
             <p className="text-sm text-gray-600">Bookmark suppliers and products to revisit quickly.</p>
