@@ -216,7 +216,7 @@ export default function Footer() {
             <div>
               <h4 className="text-white font-semibold mb-3">Alibaba Lens</h4>
               <p className="text-sm text-gray-400 mb-4">Add Alibaba Lens to Chrome</p>
-              <button className="bg-[#FF6A00] hover:bg-[#E55A00] text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2">
+              <button className="bg-[#03C4CB] hover:bg-[#02A8B0] text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2">
                 <Camera size={20} />
                 Alibaba Lens
               </button>
@@ -260,7 +260,7 @@ export default function Footer() {
           </div>
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-4 border-t border-gray-800">
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-[#FF6A00]">A</span>
+              <span className="text-2xl font-bold text-[#03C4CB]">A</span>
               <span className="text-xl font-bold text-white">Airavat</span>
             </div>
             <div className="text-xs text-gray-500">

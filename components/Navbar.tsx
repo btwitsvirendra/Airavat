@@ -269,7 +269,7 @@ export default function Navbar() {
                   <span className="absolute left-[18px] w-[28px] h-[28px] flex-shrink-0 block pointer-events-none">
                     <ShoppingCart size={28} className="text-gray-700" />
                     {cart.length > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-[#FF6A00] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold z-20">
+                      <span className="absolute -top-1 -right-1 bg-[#03C4CB] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold z-20">
                         {cart.length}
                       </span>
                     )}

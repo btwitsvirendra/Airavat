@@ -31,21 +31,21 @@ export default function SupplierDashboard() {
         <div className="max-w-[1920px] mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/" className="text-2xl font-bold text-[#FF6A00]">Airavat</Link>
+              <Link href="/" className="text-2xl font-bold text-[#03C4CB]">Airavat</Link>
               <span className="text-gray-600">My Airavat</span>
             </div>
             <div className="flex items-center gap-4 text-sm">
-              <Link href="/" className="text-gray-600 hover:text-[#FF6A00]">
+              <Link href="/" className="text-gray-600 hover:text-[#03C4CB]">
                 Switch to buyer site
               </Link>
-              <Link href="/supplier/register" className="bg-[#FF6A00] hover:bg-[#E55A00] text-white px-4 py-2 rounded-lg font-medium transition">
+              <Link href="/supplier/register" className="bg-[#03C4CB] hover:bg-[#02A8B0] text-white px-4 py-2 rounded-lg font-medium transition">
                 Start selling
               </Link>
-              <Link href="/help" className="text-gray-600 hover:text-[#FF6A00]">
+              <Link href="/help" className="text-gray-600 hover:text-[#03C4CB]">
                 <Headphones size={20} />
               </Link>
-              <Link href="/account" className="text-gray-600 hover:text-[#FF6A00]">
-                <div className="w-8 h-8 bg-[#FF6A00] rounded-full flex items-center justify-center text-white font-semibold">
+              <Link href="/account" className="text-gray-600 hover:text-[#03C4CB]">
+                <div className="w-8 h-8 bg-[#03C4CB] rounded-full flex items-center justify-center text-white font-semibold">
                   {user?.name?.[0] || 'U'}
                 </div>
               </Link>
@@ -62,7 +62,7 @@ export default function SupplierDashboard() {
               <nav className="space-y-1">
                 <Link
                   href="/supplier/dashboard"
-                  className="flex items-center gap-3 px-4 py-3 bg-[#FFF4E6] text-[#FF6A00] rounded-lg font-medium"
+                  className="flex items-center gap-3 px-4 py-3 bg-[#E6F9FA] text-[#03C4CB] rounded-lg font-medium"
                 >
                   <Home size={20} />
                   Home
@@ -145,12 +145,12 @@ export default function SupplierDashboard() {
                   },
                 ].map((tool, index) => (
                   <div key={index} className="text-center">
-                    <div className="w-16 h-16 bg-[#FFF4E6] rounded-full flex items-center justify-center mx-auto mb-4">
-                      <tool.icon size={32} className="text-[#FF6A00]" />
+                    <div className="w-16 h-16 bg-[#E6F9FA] rounded-full flex items-center justify-center mx-auto mb-4">
+                      <tool.icon size={32} className="text-[#03C4CB]" />
                     </div>
                     <h3 className="font-semibold text-gray-900 mb-2">{tool.title}</h3>
                     <p className="text-sm text-gray-600 mb-3">{tool.description}</p>
-                    <Link href="/supplier/learn" className="text-sm text-[#FF6A00] hover:underline font-medium">
+                    <Link href="/supplier/learn" className="text-sm text-[#03C4CB] hover:underline font-medium">
                       Learn more
                     </Link>
                   </div>
@@ -165,7 +165,7 @@ export default function SupplierDashboard() {
                   <p className="text-gray-900 font-medium">Add your industry and view the according industry report.</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent outline-none">
+                  <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none">
                     <option>Please select industry</option>
                     <option>Electronics</option>
                     <option>Textiles</option>

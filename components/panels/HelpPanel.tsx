@@ -52,7 +52,7 @@ export default function HelpPanel() {
             placeholder="Search help articles..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-gray-100 text-gray-900 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6A00] focus:bg-white"
+            className="w-full bg-gray-100 text-gray-900 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#03C4CB] focus:bg-white"
           />
         </div>
       </div>
@@ -64,9 +64,9 @@ export default function HelpPanel() {
           {helpCategories.map((category, index) => (
             <div
               key={index}
-              className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg hover:border-[#FF6A00] hover:bg-[#FFF4E6] transition cursor-pointer"
+              className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg hover:border-[#03C4CB] hover:bg-[#E6F9FA] transition cursor-pointer"
             >
-              <div className="text-[#FF6A00] mt-0.5">{category.icon}</div>
+              <div className="text-[#03C4CB] mt-0.5">{category.icon}</div>
               <div className="flex-1">
                 <h4 className="text-sm font-semibold text-gray-900 mb-1">{category.title}</h4>
                 <p className="text-xs text-gray-600 mb-2">{category.description}</p>
@@ -94,10 +94,10 @@ export default function HelpPanel() {
       </div>
 
       {/* Contact Support */}
-      <div className="bg-gradient-to-r from-[#FF6A00] to-[#FF8C00] rounded-lg p-6 text-white">
+      <div className="bg-gradient-to-r from-[#03C4CB] to-[#04D4DD] rounded-lg p-6 text-white">
         <h3 className="font-semibold mb-2">Still need help?</h3>
         <p className="text-sm opacity-90 mb-4">Our support team is available 24/7 to assist you.</p>
-        <button className="bg-white text-[#FF6A00] px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition">
+        <button className="bg-white text-[#03C4CB] px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition">
           Contact Support
         </button>
       </div>

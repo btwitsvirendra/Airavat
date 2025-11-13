@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { catalogProducts } from '@/lib/data/catalog';
 import { categories } from '@/lib/data/categories';
@@ -23,7 +23,11 @@ import {
   CheckCircle2,
   TrendingUp,
   FileText,
+  MessageSquare,
+  Share2,
 } from 'lucide-react';
+import LikeButton from '@/components/LikeButton';
+import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import { useStore } from '@/lib/store';
 
@@ -48,8 +52,8 @@ const topRankingProducts = [
 const frequentlySearched = ['glass bottles', 'perfume bottle', 'sport car', 'perfume bottle with box', 'led lights', 'smartphone'];
 
 export default function HomePage() {
-  const { addToCart, searchQuery, setSearchQuery } = useStore();
-  const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
+  const { addToCart, addToFavorites, removeFromFavorites, isFavorite, startProductChat, searchQuery, setSearchQuery } = useStore();
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -96,40 +100,37 @@ export default function HomePage() {
     return filtered;
   }, [selectedCategory]);
 
-  // Pagination settings
-  const productsPerPage = 10;
+  // Pagination settings - 50 products per page
+  const productsPerPage = 50;
   const totalProducts = filteredProducts.length;
-  const totalPages = 5; // Always show 5 pages
+  const totalPages = Math.max(1, Math.ceil(totalProducts / productsPerPage));
 
-  // Calculate which products to show for current page
-  // If we don't have enough products, cycle through them to fill all pages
+  // Calculate which products to show for current page - show diverse products
   const startIndex = (currentPage - 1) * productsPerPage;
-  let currentProducts: typeof catalogProducts = [];
-  
-  if (filteredProducts.length === 0) {
-    // If no products match, show empty
-    currentProducts = [];
-  } else if (filteredProducts.length <= productsPerPage) {
-    // If we have fewer products than one page, show all products on every page
-    currentProducts = filteredProducts;
-  } else {
-    // Normal pagination
-    const endIndex = startIndex + productsPerPage;
-    currentProducts = filteredProducts.slice(startIndex, endIndex);
-    
-    // If we've reached the end but need more products for remaining pages,
-    // cycle back to the beginning
-    if (currentProducts.length < productsPerPage && filteredProducts.length > 0) {
-      const remaining = productsPerPage - currentProducts.length;
-      const additionalProducts = filteredProducts.slice(0, remaining);
-      currentProducts = [...currentProducts, ...additionalProducts];
-    }
-  }
+  const endIndex = startIndex + productsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     // Scroll to top when page changes
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleAddToCart = (product: typeof catalogProducts[0]) => {
+    addToCart(product, product.minOrderQuantity);
+  };
+
+  const handleToggleFavorite = (product: typeof catalogProducts[0], isFav: boolean) => {
+    if (isFav) {
+      removeFromFavorites(product.id);
+    } else {
+      addToFavorites(product);
+    }
+  };
+
+  const handleChat = (product: typeof catalogProducts[0]) => {
+    startProductChat(product, product.supplier?.id);
+    router.push('/account?view=messages');
   };
 
   return (
@@ -151,13 +152,99 @@ export default function HomePage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="product-card"
-                    onMouseEnter={() => setHoveredProduct(product.id)}
-                    onMouseLeave={() => setHoveredProduct(null)}
+                    className="relative bg-white rounded-2xl overflow-hidden transition-all duration-300 ease-in-out shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,rgba(0,0,0,0.3)_0px_3px_7px_-3px] hover:bg-[#fdfdfd] hover:shadow-[rgba(0,0,0,0.09)_0px_2px_1px,rgba(0,0,0,0.09)_0px_4px_2px,rgba(0,0,0,0.09)_0px_8px_4px,rgba(0,0,0,0.09)_0px_16px_8px,rgba(0,0,0,0.09)_0px_32px_16px]"
+                    style={{ aspectRatio: '3/4' }}
                   >
-                    <div className="w-full h-full flex items-center justify-center text-white text-2xl font-bold">
-                      HOVER
-            </div>
+                    {/* Like button in top-right */}
+                    <div className="absolute top-4 right-4 z-10">
+                      <LikeButton 
+                        size="sm" 
+                        checked={isFavorite(product.id)}
+                        onChange={(checked) => handleToggleFavorite(product, checked)}
+                      />
+                    </div>
+
+                    <div className="p-4 h-full flex flex-col">
+                      {/* Image Holder - Unique Design */}
+                      <Link href={`/products/${product.id}`} className="block mb-3 flex-1">
+                        <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative group">
+                          {product.images[0] ? (
+                            <img
+                              src={product.images[0]}
+                              alt={product.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-gray-400">
+                              <PackageSearch size={32} />
+                            </div>
+                          )}
+                          {/* Overlay gradient */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </div>
+                      </Link>
+
+                      {/* Product Info */}
+                      <div className="flex-1 flex flex-col justify-between">
+                        <div>
+                          <Link href={`/products/${product.id}`}>
+                            <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 mb-2">
+                              {product.name}
+                            </h3>
+                          </Link>
+                          <div className="flex items-center gap-1 mb-2">
+                            <Star size={12} className="fill-yellow-400 text-yellow-400" />
+                            <span className="text-xs text-gray-600">
+                              {product.supplier?.rating?.toFixed(1) || 'N/A'}
+                            </span>
+                          </div>
+                          <div className="flex items-baseline gap-1 mb-1">
+                            <span className="text-base font-bold text-gray-900">
+                              ₹{product.price.amount.toLocaleString()}
+                            </span>
+                            <span className="text-xs text-gray-500">/{product.price.unit}</span>
+                          </div>
+                          <p className="text-xs text-gray-500 mb-3">
+                            MOQ: {product.minOrderQuantity} {product.price.unit}
+                          </p>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handleAddToCart(product)}
+                            className="flex-1 bg-[#03C4CB] hover:bg-[#02A8B0] text-white py-2 px-3 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5"
+                          >
+                            <ShoppingCart size={14} />
+                            <span>Cart</span>
+                          </button>
+                          <button
+                            onClick={() => handleChat(product)}
+                            className="p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition"
+                            title="Chat with supplier"
+                          >
+                            <MessageSquare size={16} className="text-gray-600" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              if (navigator.share) {
+                                navigator.share({
+                                  title: product.name,
+                                  text: `Check out ${product.name} on Airavat`,
+                                  url: `${window.location.origin}/products/${product.id}`
+                                });
+                              } else {
+                                navigator.clipboard.writeText(`${window.location.origin}/products/${product.id}`);
+                              }
+                            }}
+                            className="p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition"
+                            title="Share product"
+                          >
+                            <Share2 size={16} className="text-gray-600" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
               </div>

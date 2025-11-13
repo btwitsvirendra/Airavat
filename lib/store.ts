@@ -23,6 +23,13 @@ interface AppState {
   setActiveConversationId: (id: string | null) => void;
   messages: ChatMessage[];
   addMessage: (message: ChatMessage) => void;
+  startProductChat: (product: Product, supplierId?: string) => void;
+
+  // Favorites state
+  favorites: Product[];
+  addToFavorites: (product: Product) => void;
+  removeFromFavorites: (productId: string) => void;
+  isFavorite: (productId: string) => boolean;
 
   // UI state
   isSidebarOpen: boolean;
@@ -145,6 +152,41 @@ export const useStore = create<AppState>((set) => ({
   messages: [],
   addMessage: (message) =>
     set((state) => ({ messages: [...state.messages, message] })),
+  startProductChat: (product: Product, supplierId?: string) => {
+    const conversationId = `conv-${product.id}-${supplierId || 'supplier'}`;
+    const message: ChatMessage = {
+      id: `msg-${Date.now()}`,
+      conversationId,
+      senderId: useStore.getState().user?.id || 'user',
+      receiverId: supplierId || 'supplier',
+      message: `Hello! I am interested in this product:\n\nProduct: ${product.name}\nPrice: ${product.price.currency} ${product.price.amount}\n\nMay I know more about it?`,
+      type: 'text',
+      timestamp: new Date(),
+      read: false,
+    };
+    set({ 
+      activeConversationId: conversationId,
+      messages: [...useStore.getState().messages, message]
+    });
+  },
+
+  // Favorites state
+  favorites: [],
+  addToFavorites: (product) =>
+    set((state) => {
+      const exists = state.favorites.find((p) => p.id === product.id);
+      if (exists) return state;
+      // Add to beginning (latest on top)
+      return { favorites: [product, ...state.favorites] };
+    }),
+  removeFromFavorites: (productId) =>
+    set((state) => ({
+      favorites: state.favorites.filter((p) => p.id !== productId),
+    })),
+  isFavorite: (productId) => {
+    const state = useStore.getState();
+    return state.favorites.some((p) => p.id === productId);
+  },
 
   // UI state
   isSidebarOpen: false,

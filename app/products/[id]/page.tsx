@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { catalogProducts } from '@/lib/data/catalog';
 import { alibabaProducts } from '@/lib/data/alibaba-products';
 import { useStore } from '@/lib/store';
+import toast from 'react-hot-toast';
 import {
   Star,
   ShoppingCart,
@@ -33,9 +34,10 @@ const allProducts = [...catalogProducts, ...alibabaProducts];
 
 export default function ProductDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const productId = params?.id as string;
   const product = allProducts.find((p) => p.id === productId) || allProducts[0];
-  const { addToCart } = useStore();
+  const { addToCart, addToFavorites, removeFromFavorites, isFavorite, startProductChat } = useStore();
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState('black');
@@ -94,17 +96,30 @@ export default function ProductDetailPage() {
     addToCart(product, product.minOrderQuantity);
   };
 
+  const handleToggleFavorite = (isFav: boolean) => {
+    if (isFav) {
+      removeFromFavorites(product.id);
+    } else {
+      addToFavorites(product);
+    }
+  };
+
+  const handleChat = () => {
+    startProductChat(product, product.supplier?.id);
+    router.push('/account?view=messages');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Breadcrumbs */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-[1920px] mx-auto px-4 py-3">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-[#FF6A00]">Home</Link>
+            <Link href="/" className="hover:text-[#03C4CB]">Home</Link>
             <ChevronRight size={14} />
-            <Link href="/products" className="hover:text-[#FF6A00]">Fabric & Textile Raw Material</Link>
+            <Link href="/products" className="hover:text-[#03C4CB]">Fabric & Textile Raw Material</Link>
             <ChevronRight size={14} />
-            <Link href="/products?category=leather" className="hover:text-[#FF6A00]">Leather</Link>
+            <Link href="/products?category=leather" className="hover:text-[#03C4CB]">Leather</Link>
             <ChevronRight size={14} />
             <span className="text-gray-900">Synthetic Leather</span>
           </div>
@@ -146,7 +161,7 @@ export default function ProductDetailPage() {
                       onClick={() => setSelectedImage(idx)}
                       className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition ${
                         selectedImage === idx
-                          ? 'border-[#FF6A00]'
+                          ? 'border-[#03C4CB]'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
@@ -169,7 +184,11 @@ export default function ProductDetailPage() {
                     </div>
                   )}
                   <div className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition">
-                    <LikeButton size="sm" />
+                    <LikeButton 
+                      size="sm" 
+                      checked={isFavorite(product.id)}
+                      onChange={handleToggleFavorite}
+                    />
                   </div>
                   <button className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-white/80 rounded-full shadow-md hover:bg-white transition opacity-0 group-hover:opacity-100">
                     <ArrowLeft size={20} />
@@ -210,7 +229,7 @@ export default function ProductDetailPage() {
                       onClick={() => setSelectedColor(color)}
                       className={`w-10 h-10 rounded border-2 transition ${
                         selectedColor === color
-                          ? 'border-[#FF6A00] ring-2 ring-[#FF6A00]/20'
+                          ? 'border-[#03C4CB] ring-2 ring-[#03C4CB]/20'
                           : 'border-gray-300 hover:border-gray-400'
                       }`}
                       style={{
@@ -222,7 +241,7 @@ export default function ProductDetailPage() {
                   <button className="w-10 h-10 rounded border-2 border-gray-300 hover:border-gray-400 flex items-center justify-center text-xs font-semibold text-gray-600">
                     +4
                   </button>
-                  <Link href="#" className="text-sm text-[#FF6A00] hover:underline ml-2">
+                  <Link href="#" className="text-sm text-[#03C4CB] hover:underline ml-2">
                     Select now
                   </Link>
                 </div>
@@ -280,17 +299,17 @@ export default function ProductDetailPage() {
               <div className="flex gap-3">
                 <button
                   onClick={() => setIsInquiryModalOpen(true)}
-                  className="flex-1 bg-[#FF6A00] hover:bg-[#E55A00] text-white py-3 rounded-lg font-semibold transition"
+                  className="flex-1 bg-[#03C4CB] hover:bg-[#02A8B0] text-white py-3 rounded-lg font-semibold transition"
                 >
                   Send Inquiry
                 </button>
-                <Link 
-                  href="/messages"
-                  className="px-6 py-3 border-2 border-[#FF6A00] text-[#FF6A00] rounded-lg font-semibold hover:bg-[#FFF4E6] transition flex items-center gap-2"
+                <button
+                  onClick={handleChat}
+                  className="px-6 py-3 border-2 border-[#03C4CB] text-[#03C4CB] rounded-lg font-semibold hover:bg-[#E6F9FA] transition flex items-center gap-2"
                 >
                   <MessageSquare size={20} />
                   Chat now
-                </Link>
+                </button>
               </div>
               
               {/* Inquiry Modal */}
@@ -312,15 +331,15 @@ export default function ProductDetailPage() {
         {/* Product Spotlights */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
           <div className="flex items-center gap-2 mb-4">
-            <StarIcon size={20} className="text-[#FF6A00]" />
+            <StarIcon size={20} className="text-[#03C4CB]" />
             <h2 className="text-lg font-bold text-gray-900">Product spotlights</h2>
           </div>
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-2">Supplier highlights</h3>
             <p className="text-sm text-gray-600">
               This seller mainly exports to the{' '}
-              <span className="text-[#FF6A00] font-semibold">UAE, India, and Indonesia</span>, with a{' '}
-              <span className="text-[#FF6A00] font-semibold">customer satisfaction rate of 33.3%</span>.
+              <span className="text-[#03C4CB] font-semibold">UAE, India, and Indonesia</span>, with a{' '}
+              <span className="text-[#03C4CB] font-semibold">customer satisfaction rate of 33.3%</span>.
             </p>
           </div>
         </div>
@@ -340,7 +359,7 @@ export default function ProductDetailPage() {
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`py-4 px-2 border-b-2 transition ${
                     activeTab === tab.id
-                      ? 'border-[#FF6A00] text-[#FF6A00] font-semibold'
+                      ? 'border-[#03C4CB] text-[#03C4CB] font-semibold'
                       : 'border-transparent text-gray-600 hover:text-gray-900'
                   }`}
                 >
@@ -365,7 +384,7 @@ export default function ProductDetailPage() {
                 {Object.keys(specs).length > 10 && (
                   <button
                     onClick={() => setShowMoreAttributes(!showMoreAttributes)}
-                    className="mt-4 text-[#FF6A00] hover:underline flex items-center gap-1"
+                    className="mt-4 text-[#03C4CB] hover:underline flex items-center gap-1"
                   >
                     {showMoreAttributes ? 'Show less' : 'Show more'}
                     <ChevronDown size={16} className={showMoreAttributes ? 'rotate-180' : ''} />
@@ -395,7 +414,7 @@ export default function ProductDetailPage() {
                     <h3 className="text-xl font-bold text-gray-900 mb-2">Ratings & Reviews</h3>
                     <div className="flex items-center gap-4">
                       <button className="px-4 py-2 bg-gray-100 rounded-md text-sm font-medium">Product reviews (0)</button>
-                      <button className="px-4 py-2 bg-[#FF6A00] text-white rounded-md text-sm font-medium">Store reviews (3)</button>
+                      <button className="px-4 py-2 bg-[#03C4CB] text-white rounded-md text-sm font-medium">Store reviews (3)</button>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -408,7 +427,7 @@ export default function ProductDetailPage() {
                 </div>
                 <p className="text-sm text-gray-600 mb-4">
                   Showing all reviews in your chosen language{' '}
-                  <Link href="#" className="text-[#FF6A00] hover:underline">
+                  <Link href="#" className="text-[#03C4CB] hover:underline">
                     Show original
                   </Link>
                 </p>
@@ -416,7 +435,7 @@ export default function ProductDetailPage() {
                   {reviews.map((review) => (
                     <div key={review.id} className="border-b border-gray-200 pb-6 last:border-0">
                       <div className="flex items-start gap-3 mb-3">
-                        <div className="w-10 h-10 bg-[#FF6A00] rounded-full flex items-center justify-center text-white font-semibold">
+                        <div className="w-10 h-10 bg-[#03C4CB] rounded-full flex items-center justify-center text-white font-semibold">
                           {review.user[0]}
                         </div>
                         <div className="flex-1">
@@ -439,7 +458,7 @@ export default function ProductDetailPage() {
                           <p className="text-sm text-gray-700 mb-2">{review.text}</p>
                           <div className="flex items-center gap-4 text-xs text-gray-500">
                             <span>{review.date}</span>
-                            <button className="flex items-center gap-1 hover:text-[#FF6A00]">
+                            <button className="flex items-center gap-1 hover:text-[#03C4CB]">
                               <ThumbsUp size={14} />
                               Helpful (0)
                             </button>
@@ -482,10 +501,10 @@ export default function ProductDetailPage() {
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <button className="bg-[#FF6A00] hover:bg-[#E55A00] text-white px-6 py-2 rounded-lg font-medium transition">
+                    <button className="bg-[#03C4CB] hover:bg-[#02A8B0] text-white px-6 py-2 rounded-lg font-medium transition">
                       Company profile
                     </button>
-                    <button className="border-2 border-[#FF6A00] text-[#FF6A00] px-6 py-2 rounded-lg font-medium hover:bg-[#FFF4E6] transition">
+                    <button className="border-2 border-[#03C4CB] text-[#03C4CB] px-6 py-2 rounded-lg font-medium hover:bg-[#E6F9FA] transition">
                       More products
                     </button>
                   </div>
@@ -493,7 +512,7 @@ export default function ProductDetailPage() {
                 <div>
                   <h3 className="text-lg font-bold text-gray-900 mb-4">Product descriptions from the supplier</h3>
                   <div className="border-b border-gray-200 mb-4">
-                    <button className="px-4 py-2 border-b-2 border-[#FF6A00] text-[#FF6A00] font-semibold">
+                    <button className="px-4 py-2 border-b-2 border-[#03C4CB] text-[#03C4CB] font-semibold">
                       Product Description
                     </button>
                   </div>
@@ -522,7 +541,7 @@ export default function ProductDetailPage() {
                 </div>
                 <div className="p-3">
                   <p className="text-sm font-medium text-gray-900 line-clamp-2 mb-1">{p.name}</p>
-                  <p className="text-lg font-bold text-[#FF6A00]">${p.price.amount}</p>
+                  <p className="text-lg font-bold text-[#03C4CB]">${p.price.amount}</p>
                   <p className="text-xs text-gray-500">MOQ: {p.minOrderQuantity} {p.price.unit}</p>
                 </div>
               </Link>
@@ -531,25 +550,25 @@ export default function ProductDetailPage() {
         </div>
       </div>
 
-      {/* Floating Sidebar */}
-      <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40">
-        <div className="flex flex-col gap-3">
-          <button className="w-12 h-12 bg-white border border-gray-200 rounded-lg shadow-md flex items-center justify-center hover:bg-gray-50 transition">
-            <MessageSquare size={20} className="text-gray-600" />
-          </button>
-          <button className="w-12 h-12 bg-white border border-gray-200 rounded-lg shadow-md flex items-center justify-center hover:bg-gray-50 transition">
-            <HelpCircle size={20} className="text-gray-600" />
-          </button>
-          <button className="w-12 h-12 bg-white border border-gray-200 rounded-lg shadow-md flex items-center justify-center hover:bg-gray-50 transition">
-            <Download size={20} className="text-gray-600" />
-          </button>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="w-12 h-12 bg-white border border-gray-200 rounded-lg shadow-md flex items-center justify-center hover:bg-gray-50 transition"
+      {/* Back to Top Button */}
+      <div className="fixed right-6 bottom-6 z-40">
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="group w-[50px] h-[50px] rounded-full bg-[rgb(20,20,20)] border-none font-semibold flex items-center justify-center shadow-[0px_0px_0px_4px_rgba(3,196,203,0.253)] cursor-pointer transition-all duration-300 overflow-hidden relative hover:w-[140px] hover:rounded-[50px] hover:bg-[#03C4CB]"
+        >
+          <svg 
+            className="w-3 transition-all duration-300 group-hover:-translate-y-[200%]" 
+            viewBox="0 0 384 512"
           >
-            <ArrowUp size={20} className="text-gray-600" />
-          </button>
-        </div>
+            <path 
+              d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" 
+              fill="white"
+            />
+          </svg>
+          <span className="absolute -bottom-5 text-white text-[0px] opacity-0 transition-all duration-300 group-hover:text-[13px] group-hover:opacity-100 group-hover:bottom-auto whitespace-nowrap">
+            Back to Top
+          </span>
+        </button>
       </div>
     </div>
   );

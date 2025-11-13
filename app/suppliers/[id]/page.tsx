@@ -71,14 +71,14 @@ export default function SupplierProfilePage() {
           <div className="flex flex-col md:flex-row gap-6">
             {/* Supplier Logo/Info */}
             <div className="flex items-start gap-4">
-              <div className="w-24 h-24 bg-gradient-to-br from-[#FF6A00] to-[#FF8C00] rounded-lg flex items-center justify-center text-white text-3xl font-bold flex-shrink-0">
+              <div className="w-24 h-24 bg-gradient-to-br from-[#03C4CB] to-[#04D4DD] rounded-lg flex items-center justify-center text-white text-3xl font-bold flex-shrink-0">
                 {supplierData.business_name[0]}
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <h1 className="text-2xl font-bold text-gray-900">{supplierData.display_name}</h1>
                   {supplierData.is_verified && (
-                    <CheckCircle2 size={24} className="text-[#FF6A00]" />
+                    <CheckCircle2 size={24} className="text-[#03C4CB]" />
                   )}
                   {supplierData.verification_level === 'gold' && (
                     <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-semibold rounded-full">
@@ -104,7 +104,7 @@ export default function SupplierProfilePage() {
 
             {/* Action Buttons */}
             <div className="flex flex-col gap-2 md:ml-auto">
-              <button className="px-6 py-2 bg-[#FF6A00] hover:bg-[#E55A00] text-white rounded-md font-medium transition flex items-center justify-center gap-2">
+              <button className="px-6 py-2 bg-[#03C4CB] hover:bg-[#02A8B0] text-white rounded-md font-medium transition flex items-center justify-center gap-2">
                 <MessageSquare size={18} />
                 Contact Supplier
               </button>
@@ -128,19 +128,19 @@ export default function SupplierProfilePage() {
         <div className="max-w-[1920px] mx-auto px-4 py-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-[#FF6A00] mb-1">{supplierData.response_rate}</div>
+              <div className="text-2xl font-bold text-[#03C4CB] mb-1">{supplierData.response_rate}</div>
               <div className="text-xs text-gray-600">Response Rate</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-[#FF6A00] mb-1">{supplierData.response_time}</div>
+              <div className="text-2xl font-bold text-[#03C4CB] mb-1">{supplierData.response_time}</div>
               <div className="text-xs text-gray-600">Response Time</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-[#FF6A00] mb-1">{supplierData.on_time_delivery}</div>
+              <div className="text-2xl font-bold text-[#03C4CB] mb-1">{supplierData.on_time_delivery}</div>
               <div className="text-xs text-gray-600">On-Time Delivery</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-[#FF6A00] mb-1">{supplierData.transaction_level}</div>
+              <div className="text-2xl font-bold text-[#03C4CB] mb-1">{supplierData.transaction_level}</div>
               <div className="text-xs text-gray-600">Transaction Level</div>
             </div>
           </div>
@@ -191,7 +191,7 @@ export default function SupplierProfilePage() {
                     {supplierData.website_url && (
                       <div className="flex items-center gap-2">
                         <Globe size={14} className="text-gray-400" />
-                        <a href={supplierData.website_url} target="_blank" rel="noopener noreferrer" className="font-medium text-[#FF6A00] hover:underline">
+                        <a href={supplierData.website_url} target="_blank" rel="noopener noreferrer" className="font-medium text-[#03C4CB] hover:underline">
                           Visit Website
                         </a>
                       </div>
@@ -214,11 +214,11 @@ export default function SupplierProfilePage() {
               <h3 className="font-semibold text-gray-900 mb-4">Verification</h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck size={20} className="text-[#FF6A00]" />
+                  <ShieldCheck size={20} className="text-[#03C4CB]" />
                   <span className="text-sm text-gray-700">Trade Assurance</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Award size={20} className="text-[#FF6A00]" />
+                  <Award size={20} className="text-[#03C4CB]" />
                   <span className="text-sm text-gray-700">Verified Supplier</span>
                 </div>
                 {supplierData.verification_level === 'gold' && (
@@ -240,7 +240,7 @@ export default function SupplierProfilePage() {
                   onClick={() => setActiveTab('products')}
                   className={`px-6 py-4 font-medium transition ${
                     activeTab === 'products'
-                      ? 'text-[#FF6A00] border-b-2 border-[#FF6A00]'
+                      ? 'text-[#03C4CB] border-b-2 border-[#03C4CB]'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
@@ -250,7 +250,7 @@ export default function SupplierProfilePage() {
                   onClick={() => setActiveTab('about')}
                   className={`px-6 py-4 font-medium transition ${
                     activeTab === 'about'
-                      ? 'text-[#FF6A00] border-b-2 border-[#FF6A00]'
+                      ? 'text-[#03C4CB] border-b-2 border-[#03C4CB]'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
@@ -260,7 +260,7 @@ export default function SupplierProfilePage() {
                   onClick={() => setActiveTab('reviews')}
                   className={`px-6 py-4 font-medium transition ${
                     activeTab === 'reviews'
-                      ? 'text-[#FF6A00] border-b-2 border-[#FF6A00]'
+                      ? 'text-[#03C4CB] border-b-2 border-[#03C4CB]'
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >

@@ -165,6 +165,57 @@ export const catalogProducts: Product[] = [
   },
   // Add Alibaba.com products
   ...alibabaProducts,
+  // Generate additional products to reach at least 50 (deterministic values to avoid hydration errors)
+  ...Array.from({ length: 50 }, (_, i) => {
+    const categories = ['Electronics', 'Machinery', 'Food', 'Fabric & Textile Raw Material', 'Hardware', 'Construction'];
+    const suppliers = ['TechGlobal Inc', 'Industrial Solutions', 'Premium Suppliers', 'Global Trade Co', 'Quality Products Ltd'];
+    const category = categories[i % categories.length];
+    const supplier = suppliers[i % suppliers.length];
+    // Use deterministic values based on index to avoid hydration mismatches
+    const seed = i * 17 + 23; // Deterministic seed
+    const basePrice = ((seed * 137) % 50000) + 100;
+    const productNum = i + 1;
+    const rating = 4 + ((seed * 7) % 10) / 10; // Rating between 4.0 and 4.9
+    
+    return {
+      id: `prod-generated-${productNum}`,
+      productId: `prod-generated-${productNum}`,
+      supplierId: `s-${i}`,
+      businessId: `b-${i}`,
+      categoryId: `cat-${category.toLowerCase().replace(/\s+/g, '-')}`,
+      category: category,
+      currencyId: 'curr-inr',
+      priceUnitId: 'unit-piece',
+      product_name: `Premium Product ${productNum} - ${category}`,
+      slug: `premium-product-${productNum}-${category.toLowerCase().replace(/\s+/g, '-')}`,
+      description: `High-quality ${category.toLowerCase()} product with excellent specifications and competitive pricing. Perfect for industrial and commercial use.`,
+      specifications: JSON.stringify({
+        Quality: 'Premium',
+        Certification: 'ISO 9001:2015',
+        Origin: 'India',
+      }),
+      base_price: basePrice,
+      minOrderQuantity: ((seed * 11) % 50) + 10,
+      maxOrderQuantity: 10000,
+      unit_in_stock: ((seed * 13) % 2000) + 500,
+      available_quantity: ((seed * 13) % 2000) + 500,
+      status: 'active' as const,
+      is_featured: i % 3 === 0,
+      name: `Premium Product ${productNum} - ${category}`,
+      images: [`https://images.unsplash.com/photo-${1500000000000 + i}?w=800`],
+      stock: ((seed * 13) % 2000) + 500,
+      supplier: {
+        id: `s-${i}`,
+        name: supplier,
+        location: ['Mumbai', 'Delhi', 'Bangalore', 'Chennai', 'Kolkata'][i % 5],
+        rating: rating,
+      },
+      price: { amount: basePrice, currency: 'INR', unit: 'piece' },
+      tags: [category, 'Premium', 'Quality'],
+      createdAt: new Date(2024, (seed * 3) % 12, ((seed * 5) % 28) + 1),
+      updatedAt: new Date(2024, (seed * 3) % 12, ((seed * 5) % 28) + 1),
+    };
+  }),
 ];
 
 export const initialInventory: Record<string, InventoryRecord> = catalogProducts.reduce(

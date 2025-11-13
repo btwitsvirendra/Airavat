@@ -44,7 +44,7 @@ export default function MessagesPanel() {
             placeholder="Search messages..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-gray-100 text-gray-900 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6A00] focus:bg-white"
+            className="w-full bg-gray-100 text-gray-900 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#03C4CB] focus:bg-white"
           />
         </div>
       </div>
@@ -57,7 +57,7 @@ export default function MessagesPanel() {
             className="px-4 py-3 border-b border-gray-100 hover:bg-gray-50 cursor-pointer transition"
           >
             <div className="flex items-start gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#FF6A00] to-[#FF8C00] rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#03C4CB] to-[#04D4DD] rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0">
                 {conversation.avatar}
               </div>
               <div className="flex-1 min-w-0">
@@ -68,7 +68,7 @@ export default function MessagesPanel() {
                 <div className="flex items-center gap-2">
                   <p className="text-sm text-gray-600 truncate flex-1">{conversation.lastMessage}</p>
                   {conversation.unread > 0 && (
-                    <span className="bg-[#FF6A00] text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">
+                    <span className="bg-[#03C4CB] text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">
                       {conversation.unread}
                     </span>
                   )}

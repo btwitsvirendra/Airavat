@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useStore } from '@/lib/store';
+import { useRouter } from 'next/navigation';
 import {
   ArrowRight,
   ArrowLeft,
@@ -19,7 +21,6 @@ import {
   Eye,
 } from 'lucide-react';
 import LikeButton from '@/components/LikeButton';
-import { useStore } from '@/lib/store';
 
 export default function BuyerDashboard() {
   const { user } = useStore();
@@ -43,11 +44,16 @@ export default function BuyerDashboard() {
     { name: 'Ergonomic Mouse Pad', price: 839, moq: 2, liked: false },
   ];
 
-  const favoriteItems = [
-    { name: 'Mechanical Keyboard RGB', price: 839, moq: 2 },
-    { name: 'USB-C Hub Multiport', price: 839, moq: 2 },
-    { name: 'Wireless Charging Pad', price: 839, moq: 2 },
-  ];
+  const router = useRouter();
+  const { favorites } = useStore();
+  
+  // Get latest favorites (already sorted with latest on top from store)
+  const favoriteItems = favorites.slice(0, 3).map((product) => ({
+    name: product.name,
+    price: product.price.amount,
+    moq: product.minOrderQuantity,
+    id: product.id,
+  }));
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -280,14 +286,14 @@ export default function BuyerDashboard() {
                 <div className="flex items-center justify-between mb-5">
                   <h3 className="text-lg font-bold text-gray-900">Favorite</h3>
                   <Link 
-                    href="/favorites" 
+                    href="/account?view=favorites" 
                     className="text-sm text-teal-600 hover:text-teal-700 hover:underline font-semibold transition"
                   >
                     View
                   </Link>
                 </div>
                 <div className="space-y-4">
-                  {favoriteItems.map((item, index) => (
+                  {favoriteItems.length > 0 ? favoriteItems.map((item, index) => (
                     <div 
                       key={index} 
                       className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all duration-200 group"
@@ -311,7 +317,18 @@ export default function BuyerDashboard() {
                         </div>
                       </div>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-center py-8 text-gray-500">
+                      <Package className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                      <p className="text-sm">No favorites yet</p>
+                      <Link 
+                        href="/products"
+                        className="text-sm text-teal-600 hover:text-teal-700 hover:underline mt-2 inline-block"
+                      >
+                        Browse products
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

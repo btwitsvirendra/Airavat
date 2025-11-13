@@ -93,7 +93,7 @@ export default function AccountSidebar({ onPanelOpen, onBackToDashboard, activeV
   const pathname = usePathname();
   const router = useRouter();
   const { user, cart } = useStore();
-  const profileRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLButtonElement>(null);
   const [isProfileActive, setIsProfileActive] = useState(false);
 
   useEffect(() => {
@@ -510,31 +510,17 @@ export default function AccountSidebar({ onPanelOpen, onBackToDashboard, activeV
             <ul className="text-sm font-medium">
               {navsFooter.map((item, idx) => (
                 <li key={idx}>
-                  {item.panelType ? (
-                    <button
-                      onClick={() => handleNavigationClick(item.href, item.panelType)}
-                      className={`w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left will-change-[background-color] ${
-                        isActive(item.href)
-                          ? 'bg-gray-100 text-gray-900'
-                          : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
-                      }`}
-                    >
-                      <div className="text-gray-500">{item.icon}</div>
-                      {item.name}
-                    </button>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={`flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 will-change-[background-color] ${
-                        isActive(item.href)
-                          ? 'bg-gray-100 text-gray-900'
-                          : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
-                      }`}
-                    >
-                      <div className="text-gray-500">{item.icon}</div>
-                      {item.name}
-                    </Link>
-                  )}
+                  <Link
+                    href={item.href}
+                    className={`flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 will-change-[background-color] ${
+                      isActive(item.href)
+                        ? 'bg-gray-100 text-gray-900'
+                        : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
+                    }`}
+                  >
+                    <div className="text-gray-500">{item.icon}</div>
+                    {item.name}
+                  </Link>
                 </li>
               ))}
               <li>

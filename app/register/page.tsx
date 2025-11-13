@@ -38,6 +38,7 @@ export default function RegisterPage() {
       id: 'user-' + Date.now(),
       email: formData.email,
       name: formData.full_name,
+      full_name: formData.full_name,
       role: formData.role,
       phone: formData.phone,
       company: formData.company,
@@ -55,7 +56,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-white flex">
       {/* Left Section - Promotional */}
-      <div className="hidden lg:flex lg:w-2/3 bg-gradient-to-br from-[#FF6A00] via-[#FF8C00] to-[#FFA500] relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-2/3 bg-gradient-to-br from-[#03C4CB] via-[#04D4DD] to-[#05E4ED] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-64 h-64 bg-white rounded-full"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full"></div>
@@ -97,7 +98,7 @@ export default function RegisterPage() {
         {/* Header */}
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold text-[#FF6A00]">
+            <Link href="/" className="text-2xl font-bold text-[#03C4CB]">
               Airavat
             </Link>
             <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -122,7 +123,7 @@ export default function RegisterPage() {
                 onClick={() => setFormData({ ...formData, role: 'buyer' })}
                 className={`flex-1 px-4 py-3 rounded-lg border-2 transition ${
                   formData.role === 'buyer'
-                    ? 'border-[#FF6A00] bg-[#FFF4E6] text-[#FF6A00]'
+                    ? 'border-[#03C4CB] bg-[#E6F9FA] text-[#03C4CB]'
                     : 'border-gray-300 text-gray-700 hover:border-gray-400'
                 }`}
               >
@@ -133,7 +134,7 @@ export default function RegisterPage() {
                 onClick={() => setFormData({ ...formData, role: 'seller' })}
                 className={`flex-1 px-4 py-3 rounded-lg border-2 transition ${
                   formData.role === 'seller'
-                    ? 'border-[#FF6A00] bg-[#FFF4E6] text-[#FF6A00]'
+                    ? 'border-[#03C4CB] bg-[#E6F9FA] text-[#03C4CB]'
                     : 'border-gray-300 text-gray-700 hover:border-gray-400'
                 }`}
               >
@@ -155,7 +156,7 @@ export default function RegisterPage() {
                     value={formData.full_name}
                     onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
                     placeholder="Enter your full name"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent outline-none"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none"
                     required
                   />
                 </div>
@@ -173,7 +174,7 @@ export default function RegisterPage() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="Enter your email"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent outline-none"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none"
                     required
                   />
                 </div>
@@ -191,7 +192,7 @@ export default function RegisterPage() {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+91 98765 43210"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent outline-none"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none"
                     required
                   />
                 </div>
@@ -210,7 +211,7 @@ export default function RegisterPage() {
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       placeholder="Enter your company name"
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent outline-none"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none"
                     />
                   </div>
                 </div>
@@ -228,7 +229,7 @@ export default function RegisterPage() {
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     placeholder="Create a password (min. 8 characters)"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent outline-none"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none"
                     required
                     minLength={8}
                   />
@@ -247,7 +248,7 @@ export default function RegisterPage() {
                     value={formData.confirmPassword}
                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                     placeholder="Confirm your password"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent outline-none"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none"
                     required
                   />
                 </div>
@@ -262,11 +263,11 @@ export default function RegisterPage() {
                 />
                 <label htmlFor="terms" className="text-sm text-gray-600">
                   I agree to the{' '}
-                  <Link href="/terms" className="text-[#FF6A00] hover:underline">
+                  <Link href="/terms" className="text-[#03C4CB] hover:underline">
                     Terms of Service
                   </Link>{' '}
                   and{' '}
-                  <Link href="/privacy" className="text-[#FF6A00] hover:underline">
+                  <Link href="/privacy" className="text-[#03C4CB] hover:underline">
                     Privacy Policy
                   </Link>
                 </label>
@@ -274,7 +275,7 @@ export default function RegisterPage() {
 
               <button
                 type="submit"
-                className="w-full bg-[#FF6A00] hover:bg-[#E55A00] text-white py-3 rounded-lg font-semibold transition"
+                className="w-full bg-[#03C4CB] hover:bg-[#02A8B0] text-white py-3 rounded-lg font-semibold transition"
               >
                 Create Account
               </button>
@@ -282,7 +283,7 @@ export default function RegisterPage() {
 
             <p className="text-center text-gray-600 mt-6">
               Already have an account?{' '}
-              <Link href="/login" className="text-[#FF6A00] hover:underline font-semibold">
+              <Link href="/login" className="text-[#03C4CB] hover:underline font-semibold">
                 Sign in
               </Link>
             </p>

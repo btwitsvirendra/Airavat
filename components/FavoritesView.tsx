@@ -18,147 +18,42 @@ import {
   MoreVertical,
 } from 'lucide-react';
 import LikeButton from './LikeButton';
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  moq: number;
-  rating: number;
-  reviews: number;
-  image?: string;
-  supplier: string;
-  inStock: boolean;
-  isWishlisted?: boolean;
-}
+import { useStore } from '@/lib/store';
+import { Product as StoreProduct } from '@/lib/types';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { catalogProducts } from '@/lib/data/catalog';
 
 export default function FavoritesView() {
+  const router = useRouter();
+  const { favorites, removeFromFavorites, isFavorite, addToCart, startProductChat } = useStore();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<'favorites' | 'wishlist'>('favorites');
 
-  // Sample favorite products
-  const favoriteProducts: Product[] = [
-    {
-      id: 1,
-      name: 'Wireless Bluetooth Headphones Premium',
-      price: 45.99,
-      originalPrice: 69.99,
-      moq: 10,
-      rating: 4.5,
-      reviews: 234,
-      supplier: 'TechGlobal Inc.',
-      inStock: true,
-    },
-    {
-      id: 2,
-      name: 'Smart Watch Series 8 Pro',
-      price: 129.99,
-      originalPrice: 179.99,
-      moq: 5,
-      rating: 4.8,
-      reviews: 567,
-      supplier: 'SmartTech Solutions',
-      inStock: true,
-    },
-    {
-      id: 3,
-      name: 'Mechanical Keyboard RGB',
-      price: 89.99,
-      moq: 20,
-      rating: 4.6,
-      reviews: 189,
-      supplier: 'GamingGear Co.',
-      inStock: true,
-    },
-    {
-      id: 4,
-      name: 'USB-C Hub Multiport Adapter',
-      price: 34.99,
-      moq: 50,
-      rating: 4.4,
-      reviews: 312,
-      supplier: 'ConnectTech Ltd.',
-      inStock: true,
-    },
-    {
-      id: 5,
-      name: 'Wireless Charging Pad',
-      price: 24.99,
-      moq: 30,
-      rating: 4.3,
-      reviews: 145,
-      supplier: 'PowerUp Industries',
-      inStock: false,
-    },
-    {
-      id: 6,
-      name: 'Premium Laptop Stand Aluminum',
-      price: 59.99,
-      moq: 15,
-      rating: 4.7,
-      reviews: 278,
-      supplier: 'ErgoDesign Pro',
-      inStock: true,
-    },
-  ];
+  // Use store favorites (already sorted with latest on top)
+  const favoriteProducts = favorites;
+  const wishlistItems = favorites; // For now, wishlist is same as favorites
 
-  // Sample wishlist items
-  const wishlistItems: Product[] = [
-    {
-      id: 7,
-      name: '4K Ultra HD Monitor 27"',
-      price: 299.99,
-      originalPrice: 399.99,
-      moq: 3,
-      rating: 4.9,
-      reviews: 892,
-      supplier: 'DisplayMax Corp.',
-      inStock: true,
-      isWishlisted: true,
-    },
-    {
-      id: 8,
-      name: 'Ergonomic Office Chair',
-      price: 249.99,
-      moq: 2,
-      rating: 4.6,
-      reviews: 445,
-      supplier: 'ComfortSeat Inc.',
-      inStock: true,
-      isWishlisted: true,
-    },
-    {
-      id: 9,
-      name: 'Noise Cancelling Earbuds',
-      price: 79.99,
-      originalPrice: 119.99,
-      moq: 12,
-      rating: 4.5,
-      reviews: 623,
-      supplier: 'AudioTech Global',
-      inStock: true,
-      isWishlisted: true,
-    },
-  ];
-
-  // Suggested products (20 items for 5 columns x 4 rows)
-  const suggestedProducts: Product[] = Array.from({ length: 20 }, (_, i) => ({
-    id: 100 + i,
-    name: `Premium Product ${i + 1}`,
-    price: Math.floor(Math.random() * 200) + 20,
-    originalPrice: Math.floor(Math.random() * 100) + 50,
-    moq: Math.floor(Math.random() * 50) + 5,
-    rating: Math.random() * 1 + 4,
-    reviews: Math.floor(Math.random() * 500) + 50,
-    supplier: `Supplier ${i + 1}`,
-    inStock: Math.random() > 0.2,
-  }));
+  // Suggested products (20 items for 5 columns x 4 rows) - using catalog products
+  const suggestedProducts = catalogProducts.slice(0, 20);
 
   const currentProducts = activeTab === 'favorites' ? favoriteProducts : wishlistItems;
 
-  const ProductCard = ({ product }: { product: Product }) => {
+  const handleRemoveFavorite = (productId: string) => {
+    removeFromFavorites(productId);
+  };
+
+  const handleAddToCartFromFavorite = (product: StoreProduct) => {
+    addToCart(product, product.minOrderQuantity);
+  };
+
+  const handleChatFromFavorite = (product: StoreProduct) => {
+    startProductChat(product, product.supplier?.id);
+    router.push('/account?view=messages');
+  };
+
+  const ProductCard = ({ product }: { product: StoreProduct }) => {
     if (viewMode === 'list') {
       return (
         <div className="group bg-white rounded-xl border border-gray-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300 p-4">
@@ -168,11 +63,7 @@ export default function FavoritesView() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <Package className="w-12 h-12 text-gray-400" />
               </div>
-              {product.originalPrice && (
-                <span className="absolute top-2 left-2 px-2 py-0.5 bg-red-500 text-white text-xs font-bold rounded">
-                  -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
-                </span>
-              )}
+              {/* Product badges can be added here if needed */}
             </div>
 
             {/* Product Info */}
@@ -182,41 +73,35 @@ export default function FavoritesView() {
                   <p className="text-base font-semibold text-gray-900 mb-1 group-hover:text-teal-600 transition">
                     {product.name}
                   </p>
-                  <p className="text-sm text-gray-500">{product.supplier}</p>
+                  <p className="text-sm text-gray-500">{product.supplier?.name || 'Supplier'}</p>
                 </div>
                 <div className="flex items-center gap-2 ml-4">
                   <LikeButton 
-                    defaultChecked={product.isWishlisted} 
+                    checked={isFavorite(product.id)}
+                    onChange={(checked) => {
+                      if (!checked) {
+                        handleRemoveFavorite(product.id);
+                      }
+                    }}
                     size="sm"
                     className="p-1"
                   />
-                  <button className="p-2 hover:bg-gray-100 rounded-lg transition">
-                    <Share2 className="w-5 h-5 text-gray-400" />
+                  <button 
+                    onClick={() => handleChatFromFavorite(product)}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition"
+                    title="Chat with supplier"
+                  >
+                    <MessageSquare className="w-5 h-5 text-gray-400" />
                   </button>
                   <button className="p-2 hover:bg-gray-100 rounded-lg transition">
-                    <MoreVertical className="w-5 h-5 text-gray-400" />
+                    <Share2 className="w-5 h-5 text-gray-400" />
                   </button>
                 </div>
               </div>
 
               <div className="flex items-center gap-4 mb-3">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < Math.floor(product.rating)
-                          ? 'fill-amber-400 text-amber-400'
-                          : 'text-gray-300'
-                      }`}
-                    />
-                  ))}
-                  <span className="text-sm text-gray-600 ml-1">
-                    {product.rating} ({product.reviews})
-                  </span>
-                </div>
-                <span className="text-sm text-gray-500">MOQ: {product.moq} units</span>
-                {!product.inStock && (
+                <span className="text-sm text-gray-500">MOQ: {product.minOrderQuantity} {product.price.unit}</span>
+                {product.stock <= 0 && (
                   <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded">
                     Out of Stock
                   </span>
@@ -225,23 +110,24 @@ export default function FavoritesView() {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="text-xl font-bold text-gray-900">${product.price.toFixed(2)}</span>
-                  {product.originalPrice && (
-                    <span className="text-sm text-gray-400 line-through">
-                      ${product.originalPrice.toFixed(2)}
-                    </span>
-                  )}
+                  <span className="text-xl font-bold text-gray-900">
+                    {product.price.currency} {product.price.amount.toFixed(2)} / {product.price.unit}
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-sm font-semibold transition flex items-center gap-2">
-                    <Send size={16} />
-                    Send Inquiry
-                  </button>
-                  <button className="px-4 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-sm font-semibold transition">
+                  <button 
+                    onClick={() => handleChatFromFavorite(product)}
+                    className="px-4 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-sm font-semibold transition flex items-center gap-2"
+                  >
                     <MessageSquare size={16} />
+                    Chat
                   </button>
-                  <button className="px-4 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-sm font-semibold transition">
+                  <button 
+                    onClick={() => handleAddToCartFromFavorite(product)}
+                    className="px-4 py-2 bg-[#03C4CB] hover:bg-[#02A8B0] text-white rounded-lg text-sm font-semibold transition flex items-center gap-2"
+                  >
                     <ShoppingCart size={16} />
+                    Add to Cart
                   </button>
                 </div>
               </div>
@@ -261,12 +147,7 @@ export default function FavoritesView() {
           
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-2">
-            {product.originalPrice && (
-              <span className="px-2 py-1 bg-red-500 text-white text-xs font-bold rounded-md">
-                -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
-              </span>
-            )}
-            {!product.inStock && (
+            {product.stock <= 0 && (
               <span className="px-2 py-1 bg-gray-500 text-white text-xs font-semibold rounded-md">
                 Out of Stock
               </span>
@@ -277,15 +158,24 @@ export default function FavoritesView() {
           <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
             <div className="p-2 bg-white rounded-full shadow-md hover:bg-teal-50 transition">
               <LikeButton 
-                defaultChecked={product.isWishlisted} 
+                checked={isFavorite(product.id)}
+                onChange={(checked) => {
+                  if (!checked) {
+                    handleRemoveFavorite(product.id);
+                  }
+                }}
                 size="sm"
               />
             </div>
-            <button className="p-2 bg-white rounded-full shadow-md hover:bg-teal-50 hover:text-teal-600 transition">
-              <Share2 className="w-4 h-4" />
+            <button 
+              onClick={() => handleChatFromFavorite(product)}
+              className="p-2 bg-white rounded-full shadow-md hover:bg-teal-50 hover:text-teal-600 transition"
+              title="Chat with supplier"
+            >
+              <MessageSquare className="w-4 h-4" />
             </button>
             <button className="p-2 bg-white rounded-full shadow-md hover:bg-teal-50 hover:text-teal-600 transition">
-              <MoreVertical className="w-4 h-4" />
+              <Share2 className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -296,52 +186,34 @@ export default function FavoritesView() {
             <p className="text-sm font-semibold text-gray-900 line-clamp-2 mb-1 group-hover:text-teal-600 transition">
               {product.name}
             </p>
-            <p className="text-xs text-gray-500">{product.supplier}</p>
-          </div>
-
-          {/* Rating */}
-          <div className="flex items-center gap-1 mb-2">
-            <div className="flex items-center">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-3 h-3 ${
-                    i < Math.floor(product.rating)
-                      ? 'fill-amber-400 text-amber-400'
-                      : 'text-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-            <span className="text-xs text-gray-600 ml-1">
-              {product.rating} ({product.reviews})
-            </span>
+            <p className="text-xs text-gray-500">{product.supplier?.name || 'Supplier'}</p>
           </div>
 
           {/* Price */}
           <div className="flex items-center gap-2 mb-3">
-            <span className="text-lg font-bold text-gray-900">${product.price.toFixed(2)}</span>
-            {product.originalPrice && (
-              <span className="text-sm text-gray-400 line-through">
-                ${product.originalPrice.toFixed(2)}
-              </span>
-            )}
+            <span className="text-lg font-bold text-gray-900">
+              {product.price.currency} {product.price.amount.toFixed(2)} / {product.price.unit}
+            </span>
           </div>
 
           {/* MOQ */}
-          <p className="text-xs text-gray-500 mb-3">MOQ: {product.moq} units</p>
+          <p className="text-xs text-gray-500 mb-3">MOQ: {product.minOrderQuantity} {product.price.unit}</p>
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2">
-            <button className="flex-1 px-3 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1">
-              <Send size={14} />
-              Inquiry
-            </button>
-            <button className="px-3 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-xs font-semibold transition">
+            <button 
+              onClick={() => handleChatFromFavorite(product)}
+              className="px-3 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1"
+            >
               <MessageSquare size={14} />
+              Chat
             </button>
-            <button className="px-3 py-2 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-xs font-semibold transition">
+            <button 
+              onClick={() => handleAddToCartFromFavorite(product)}
+              className="flex-1 px-3 py-2 bg-[#03C4CB] hover:bg-[#02A8B0] text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1"
+            >
               <ShoppingCart size={14} />
+              Add to Cart
             </button>
           </div>
         </div>

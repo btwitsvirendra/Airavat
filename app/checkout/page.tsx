@@ -47,7 +47,7 @@ export default function CheckoutPage() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h2>
-          <Link href="/products" className="text-[#FF6A00] hover:underline">
+          <Link href="/products" className="text-[#03C4CB] hover:underline">
             Continue shopping
           </Link>
         </div>
@@ -62,7 +62,7 @@ export default function CheckoutPage() {
           {/* Left Side - Product Information */}
           <div className="space-y-6">
             <div>
-              <Link href="/cart" className="text-[#FF6A00] hover:underline text-sm mb-4 inline-block">
+              <Link href="/cart" className="text-[#03C4CB] hover:underline text-sm mb-4 inline-block">
                 ← Return to cart
               </Link>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">Review your order</h1>
@@ -99,7 +99,7 @@ export default function CheckoutPage() {
                       </p>
                       <div className="flex items-center gap-4 text-sm text-gray-600">
                         <span>Qty: {quantity} {product.price.unit}</span>
-                        <span className="text-[#FF6A00] font-semibold">
+                        <span className="text-[#03C4CB] font-semibold">
                           ₹{(product.price.amount * quantity).toLocaleString()}
                         </span>
                       </div>
@@ -129,7 +129,7 @@ export default function CheckoutPage() {
             </div>
 
             {/* Trade Assurance */}
-            <div className="bg-gradient-to-r from-[#FF6A00] to-[#FF9900] rounded-lg p-6 text-white">
+            <div className="bg-gradient-to-r from-[#03C4CB] to-[#FF9900] rounded-lg p-6 text-white">
               <div className="flex items-start gap-4">
                 <ShieldCheck size={32} className="flex-shrink-0" />
                 <div>
@@ -157,7 +157,7 @@ export default function CheckoutPage() {
                     placeholder="Email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
                   />
                 </div>
 
@@ -170,7 +170,7 @@ export default function CheckoutPage() {
                         required
                         value={formData.country}
                         onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent appearance-none bg-white"
+                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent appearance-none bg-white"
                       >
                         <option value="India">India</option>
                         <option value="United States">United States</option>
@@ -187,7 +187,7 @@ export default function CheckoutPage() {
                         placeholder="First name"
                         value={formData.firstName}
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent"
+                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
                       />
                       <input
                         type="text"
@@ -195,7 +195,7 @@ export default function CheckoutPage() {
                         placeholder="Last name"
                         value={formData.lastName}
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent"
+                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
                       />
                     </div>
                     <input
@@ -203,7 +203,7 @@ export default function CheckoutPage() {
                       placeholder="Company (optional)"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
                     />
                     <input
                       type="text"
@@ -211,14 +211,14 @@ export default function CheckoutPage() {
                       placeholder="Address"
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
                     />
                     <input
                       type="text"
                       placeholder="Apartment, suite, etc. (optional)"
                       value={formData.apartment}
                       onChange={(e) => setFormData({ ...formData, apartment: e.target.value })}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
                     />
                     <div className="grid grid-cols-2 gap-3">
                       <input
@@ -227,7 +227,7 @@ export default function CheckoutPage() {
                         placeholder="City"
                         value={formData.city}
                         onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent"
+                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
                       />
                       <input
                         type="text"
@@ -235,7 +235,7 @@ export default function CheckoutPage() {
                         placeholder="State"
                         value={formData.state}
                         onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent"
+                        className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
                       />
                     </div>
                     <input
@@ -244,7 +244,7 @@ export default function CheckoutPage() {
                       placeholder="Postal code"
                       value={formData.postalCode}
                       onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
                     />
                     <input
                       type="tel"
@@ -252,7 +252,7 @@ export default function CheckoutPage() {
                       placeholder="Phone"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -261,28 +261,28 @@ export default function CheckoutPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-gray-900 mb-3">Shipping method</h3>
                   <div className="space-y-2">
-                    <label className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#FF6A00] transition">
+                    <label className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#03C4CB] transition">
                       <input
                         type="radio"
                         name="shipping"
                         value="standard"
                         checked={shippingMethod === 'standard'}
                         onChange={(e) => setShippingMethod(e.target.value)}
-                        className="w-4 h-4 text-[#FF6A00] focus:ring-[#FF6A00]"
+                        className="w-4 h-4 text-[#03C4CB] focus:ring-[#03C4CB]"
                       />
                       <div className="flex-1">
                         <div className="font-semibold text-gray-900">Standard shipping</div>
                         <div className="text-sm text-gray-600">7-15 business days · ₹200</div>
                       </div>
                     </label>
-                    <label className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#FF6A00] transition">
+                    <label className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#03C4CB] transition">
                       <input
                         type="radio"
                         name="shipping"
                         value="express"
                         checked={shippingMethod === 'express'}
                         onChange={(e) => setShippingMethod(e.target.value)}
-                        className="w-4 h-4 text-[#FF6A00] focus:ring-[#FF6A00]"
+                        className="w-4 h-4 text-[#03C4CB] focus:ring-[#03C4CB]"
                       />
                       <div className="flex-1">
                         <div className="font-semibold text-gray-900">Express shipping</div>
@@ -296,37 +296,37 @@ export default function CheckoutPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-gray-900 mb-3">Payment</h3>
                   <div className="space-y-2">
-                    <label className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#FF6A00] transition">
+                    <label className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#03C4CB] transition">
                       <input
                         type="radio"
                         name="payment"
                         value="card"
                         checked={paymentMethod === 'card'}
                         onChange={(e) => setPaymentMethod(e.target.value)}
-                        className="w-4 h-4 text-[#FF6A00] focus:ring-[#FF6A00]"
+                        className="w-4 h-4 text-[#03C4CB] focus:ring-[#03C4CB]"
                       />
                       <CreditCard size={20} className="text-gray-600" />
                       <span className="font-semibold text-gray-900">Card</span>
                     </label>
-                    <label className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#FF6A00] transition">
+                    <label className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#03C4CB] transition">
                       <input
                         type="radio"
                         name="payment"
                         value="upi"
                         checked={paymentMethod === 'upi'}
                         onChange={(e) => setPaymentMethod(e.target.value)}
-                        className="w-4 h-4 text-[#FF6A00] focus:ring-[#FF6A00]"
+                        className="w-4 h-4 text-[#03C4CB] focus:ring-[#03C4CB]"
                       />
                       <span className="font-semibold text-gray-900">UPI</span>
                     </label>
-                    <label className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#FF6A00] transition">
+                    <label className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-[#03C4CB] transition">
                       <input
                         type="radio"
                         name="payment"
                         value="netbanking"
                         checked={paymentMethod === 'netbanking'}
                         onChange={(e) => setPaymentMethod(e.target.value)}
-                        className="w-4 h-4 text-[#FF6A00] focus:ring-[#FF6A00]"
+                        className="w-4 h-4 text-[#03C4CB] focus:ring-[#03C4CB]"
                       />
                       <span className="font-semibold text-gray-900">Net banking</span>
                     </label>
@@ -360,7 +360,7 @@ export default function CheckoutPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-[#FF6A00] hover:bg-[#E55A00] text-white py-3.5 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full bg-[#03C4CB] hover:bg-[#02A8B0] text-white py-3.5 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     <>
@@ -377,7 +377,7 @@ export default function CheckoutPage() {
 
                 <p className="text-xs text-gray-600 text-center">
                   By completing your purchase, you agree to these{' '}
-                  <Link href="/terms" className="text-[#FF6A00] hover:underline">
+                  <Link href="/terms" className="text-[#03C4CB] hover:underline">
                     Terms of Service
                   </Link>
                 </p>
