@@ -71,7 +71,7 @@ export default function RFQPanel() {
           <h3 className="text-lg font-semibold text-gray-900">My RFQs</h3>
           <Link
             href="/account/rfq"
-            className="flex items-center gap-2 bg-[#03C4CB] hover:bg-[#02A8B0] text-white px-4 py-2 rounded-lg text-sm font-medium transition"
+            className="flex items-center gap-2 bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition"
           >
             <Plus size={16} />
             New RFQ
@@ -84,7 +84,7 @@ export default function RFQPanel() {
             placeholder="Search RFQs..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-gray-100 text-gray-900 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#03C4CB] focus:bg-white"
+            className="w-full bg-gray-100 text-gray-900 placeholder-gray-400 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#9A79FF] focus:bg-white"
           />
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function RFQPanel() {
         {rfqs.map((rfq) => (
           <div
             key={rfq.id}
-            className="p-4 border border-gray-200 rounded-lg hover:border-[#03C4CB] hover:bg-[#E6F9FA] transition mb-3 cursor-pointer"
+            className="p-4 border border-gray-200 rounded-lg hover:border-[#9A79FF] hover:bg-[rgba(154, 121, 255, 0.1)] transition mb-3 cursor-pointer"
           >
             <div className="flex items-start justify-between mb-3">
               <div className="flex-1">
@@ -130,7 +130,7 @@ export default function RFQPanel() {
             <p className="text-gray-500 mb-4">No RFQs yet</p>
             <Link
               href="/account/rfq"
-              className="inline-flex items-center gap-2 bg-[#03C4CB] hover:bg-[#02A8B0] text-white px-4 py-2 rounded-lg text-sm font-medium transition"
+              className="inline-flex items-center gap-2 bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition"
             >
               <Plus size={16} />
               Create Your First RFQ

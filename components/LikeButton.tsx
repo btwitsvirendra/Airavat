@@ -36,14 +36,18 @@ export default function LikeButton({
   };
 
   return (
-    <label className={`relative inline-block cursor-pointer transition-transform duration-100 hover:scale-110 select-none ${className}`}>
+    <label 
+      className={`relative inline-block cursor-pointer transition-transform duration-100 hover:scale-110 select-none ${className}`}
+      onClick={(e) => e.stopPropagation()}
+    >
       <input
         type="checkbox"
         checked={checked}
         onChange={handleChange}
-        className="absolute opacity-0 cursor-pointer h-0 w-0"
+        className="absolute opacity-0 cursor-pointer inset-0 w-full h-full"
+        onClick={(e) => e.stopPropagation()}
       />
-      <div className={`${sizeClasses[size]} transition-all duration-300`}>
+      <div className={`${sizeClasses[size]} transition-all duration-300 pointer-events-none`}>
         <svg 
           viewBox="0 0 256 256" 
           className={`w-full h-full transition-all duration-300 ${checked ? 'animate-like-effect' : 'animate-dislike-effect'}`}

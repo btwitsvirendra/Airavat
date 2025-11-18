@@ -4,6 +4,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Toaster } from 'react-hot-toast';
 import ConditionalFooter from '@/components/ConditionalFooter';
+import BackToTop from '@/components/BackToTop';
+import NavigationLoader from '@/components/NavigationLoader';
 
 export const metadata: Metadata = {
   title: 'Airavat - B2B E-commerce Platform',
@@ -17,13 +19,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="font-sans antialiased">
+    <html lang="en" style={{ backgroundColor: '#F9F9FF', background: '#F9F9FF' }}>
+      <body 
+        className="font-sans antialiased" 
+        style={{ 
+          backgroundColor: '#F9F9FF', 
+          background: '#F9F9FF',
+          color: '#1A1A2E',
+          margin: 0,
+          padding: 0,
+          minHeight: '100vh'
+        }}
+      >
+        <NavigationLoader />
         <Navbar />
-        <main className="min-h-screen">
+        <main 
+          className="min-h-screen" 
+          style={{ 
+            backgroundColor: '#F9F9FF',
+            background: '#F9F9FF',
+            minHeight: '100vh'
+          }}
+        >
           {children}
         </main>
         <ConditionalFooter />
+        <BackToTop />
         <Toaster position="top-right" />
       </body>
     </html>

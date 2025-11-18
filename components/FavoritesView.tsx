@@ -56,7 +56,7 @@ export default function FavoritesView() {
   const ProductCard = ({ product }: { product: StoreProduct }) => {
     if (viewMode === 'list') {
       return (
-        <div className="group bg-white rounded-xl border border-gray-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300 p-4">
+        <div className="group bg-white rounded-xl border border-gray-200 hover:border-[#D1C2FF] hover:shadow-lg transition-all duration-300 p-4">
           <div className="flex items-start gap-4">
             {/* Product Image */}
             <div className="relative w-32 h-32 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden flex-shrink-0">
@@ -70,7 +70,7 @@ export default function FavoritesView() {
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex-1 min-w-0">
-                  <p className="text-base font-semibold text-gray-900 mb-1 group-hover:text-teal-600 transition">
+                  <p className="text-base font-semibold text-gray-900 mb-1 group-hover:text-[#9A79FF] transition">
                     {product.name}
                   </p>
                   <p className="text-sm text-gray-500">{product.supplier?.name || 'Supplier'}</p>
@@ -124,7 +124,7 @@ export default function FavoritesView() {
                   </button>
                   <button 
                     onClick={() => handleAddToCartFromFavorite(product)}
-                    className="px-4 py-2 bg-[#03C4CB] hover:bg-[#02A8B0] text-white rounded-lg text-sm font-semibold transition flex items-center gap-2"
+                    className="px-4 py-2 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg text-sm font-semibold transition flex items-center gap-2"
                   >
                     <ShoppingCart size={16} />
                     Add to Cart
@@ -138,7 +138,7 @@ export default function FavoritesView() {
     }
 
     return (
-      <div className="group bg-white rounded-xl border border-gray-200 hover:border-teal-300 hover:shadow-lg transition-all duration-300 overflow-hidden">
+      <div className="group bg-white rounded-xl border border-gray-200 hover:border-[#D1C2FF] hover:shadow-lg transition-all duration-300 overflow-hidden">
         {/* Product Image */}
         <div className="relative aspect-square bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
@@ -156,7 +156,7 @@ export default function FavoritesView() {
 
           {/* Action Buttons */}
           <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="p-2 bg-white rounded-full shadow-md hover:bg-teal-50 transition">
+            <div className="p-2 bg-white rounded-full shadow-md hover:bg-[rgba(154,121,255,0.1)] transition">
               <LikeButton 
                 checked={isFavorite(product.id)}
                 onChange={(checked) => {
@@ -169,12 +169,12 @@ export default function FavoritesView() {
             </div>
             <button 
               onClick={() => handleChatFromFavorite(product)}
-              className="p-2 bg-white rounded-full shadow-md hover:bg-teal-50 hover:text-teal-600 transition"
+              className="p-2 bg-white rounded-full shadow-md hover:bg-[rgba(154,121,255,0.1)] hover:text-[#9A79FF] transition"
               title="Chat with supplier"
             >
               <MessageSquare className="w-4 h-4" />
             </button>
-            <button className="p-2 bg-white rounded-full shadow-md hover:bg-teal-50 hover:text-teal-600 transition">
+            <button className="p-2 bg-white rounded-full shadow-md hover:bg-[rgba(154,121,255,0.1)] hover:text-[#9A79FF] transition">
               <Share2 className="w-4 h-4" />
             </button>
           </div>
@@ -183,7 +183,7 @@ export default function FavoritesView() {
         {/* Product Info */}
         <div className="p-4">
           <div className="mb-2">
-            <p className="text-sm font-semibold text-gray-900 line-clamp-2 mb-1 group-hover:text-teal-600 transition">
+            <p className="text-sm font-semibold text-gray-900 line-clamp-2 mb-1 group-hover:text-[#9A79FF] transition">
               {product.name}
             </p>
             <p className="text-xs text-gray-500">{product.supplier?.name || 'Supplier'}</p>
@@ -210,7 +210,7 @@ export default function FavoritesView() {
             </button>
             <button 
               onClick={() => handleAddToCartFromFavorite(product)}
-              className="flex-1 px-3 py-2 bg-[#03C4CB] hover:bg-[#02A8B0] text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1"
+              className="flex-1 px-3 py-2 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1"
             >
               <ShoppingCart size={14} />
               Add to Cart
@@ -237,7 +237,7 @@ export default function FavoritesView() {
               onClick={() => setViewMode('grid')}
               className={`p-2 rounded-lg transition ${
                 viewMode === 'grid'
-                  ? 'bg-teal-100 text-teal-600'
+                  ? 'bg-[rgba(154,121,255,0.2)] text-[#9A79FF]'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
@@ -247,7 +247,7 @@ export default function FavoritesView() {
               onClick={() => setViewMode('list')}
               className={`p-2 rounded-lg transition ${
                 viewMode === 'list'
-                  ? 'bg-teal-100 text-teal-600'
+                  ? 'bg-[rgba(154,121,255,0.2)] text-[#9A79FF]'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
@@ -262,7 +262,7 @@ export default function FavoritesView() {
             onClick={() => setActiveTab('favorites')}
             className={`px-4 py-2 text-sm font-semibold border-b-2 transition ${
               activeTab === 'favorites'
-                ? 'border-teal-600 text-teal-600'
+                ? 'border-[#9A79FF] text-[#9A79FF]'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -279,7 +279,7 @@ export default function FavoritesView() {
             onClick={() => setActiveTab('wishlist')}
             className={`px-4 py-2 text-sm font-semibold border-b-2 transition ${
               activeTab === 'wishlist'
-                ? 'border-teal-600 text-teal-600'
+                ? 'border-[#9A79FF] text-[#9A79FF]'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -301,7 +301,7 @@ export default function FavoritesView() {
               placeholder="Search favorites..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent"
             />
           </div>
           <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition flex items-center gap-2">
@@ -354,7 +354,7 @@ export default function FavoritesView() {
               </p>
               <Link
                 href="/products"
-                className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-semibold transition shadow-md hover:shadow-lg"
+                className="px-6 py-3 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg font-semibold transition shadow-md hover:shadow-lg"
               >
                 Browse Products
               </Link>
@@ -372,7 +372,7 @@ export default function FavoritesView() {
               </div>
               <Link
                 href="/products"
-                className="text-sm font-semibold text-teal-600 hover:text-teal-700 transition"
+                className="text-sm font-semibold text-[#9A79FF] hover:text-[#8A69EF] transition"
               >
                 View All →
               </Link>

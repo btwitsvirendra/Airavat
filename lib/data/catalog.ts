@@ -1,5 +1,5 @@
 import { Product } from '../types';
-import { alibabaProducts } from './alibaba-products';
+import { additionalProducts } from './additional-products';
 
 export interface InventoryRecord {
   available: number;
@@ -163,8 +163,8 @@ export const catalogProducts: Product[] = [
     createdAt: new Date('2024-03-11T11:20:00Z'),
     updatedAt: new Date('2024-10-12T11:20:00Z'),
   },
-  // Add Alibaba.com products
-  ...alibabaProducts,
+  // Add additional products
+  ...additionalProducts,
   // Generate additional products to reach at least 50 (deterministic values to avoid hydration errors)
   ...Array.from({ length: 50 }, (_, i) => {
     const categories = ['Electronics', 'Machinery', 'Food', 'Fabric & Textile Raw Material', 'Hardware', 'Construction'];

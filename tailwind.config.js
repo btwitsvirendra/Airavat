@@ -48,6 +48,21 @@ module.exports = {
           900: '#012729',
         },
         'stone-grey': '#424242',
+        // Royal Logistics Color Palette
+        'royal-navy': '#1B263B',
+        'cloud-white': '#F0F4F8',
+        'antique-gold': {
+          DEFAULT: '#C5A059',
+          hover: '#B8954A',
+          light: '#E8D4A8',
+        },
+        'charcoal': '#0D1B2A',
+        'bg-body': '#F0F4F8',
+        'bg-surface': '#FFFFFF',
+        'primary-accent': '#C5A059',
+        'secondary-accent': '#E8D4A8',
+        'text-primary': '#0D1B2A',
+        'text-secondary': '#555560',
       },
       keyframes: {
         tealLineMoveRight: {

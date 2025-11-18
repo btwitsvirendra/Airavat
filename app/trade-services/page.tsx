@@ -128,7 +128,7 @@ export default function TradeServicesPage() {
         <div className="space-y-6">
           <div className="rounded-3xl bg-white p-8 shadow-xl">
             <div className="mb-6 flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-teal-600">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[rgba(154,121,255,0.1)] text-[#9A79FF]">
                 <Icon size={28} />
               </div>
               <div>
@@ -139,7 +139,7 @@ export default function TradeServicesPage() {
             <ul className="space-y-4">
               {activeService.details.map((detail) => (
                 <li key={detail} className="flex items-start gap-3 text-gray-600">
-                  <ArrowRight size={18} className="mt-1 text-teal-500" />
+                  <ArrowRight size={18} className="mt-1 text-[#9A79FF]" />
                   <span>{detail}</span>
                 </li>
               ))}
@@ -175,12 +175,12 @@ export default function TradeServicesPage() {
                     onClick={() => setActiveService(service)}
                     className={`w-full rounded-2xl border px-5 py-4 text-left transition ${
                       isActive
-                        ? 'border-teal-500 bg-teal-50 shadow-lg'
-                        : 'border-gray-200 bg-white hover:border-teal-200 hover:bg-teal-50'
+                        ? 'border-[#9A79FF] bg-[rgba(154,121,255,0.1)] shadow-lg'
+                        : 'border-gray-200 bg-white hover:border-[#D1C2FF] hover:bg-[rgba(154,121,255,0.1)]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${isActive ? 'bg-white text-teal-600' : 'bg-gray-100 text-gray-500'}`}>
+                      <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${isActive ? 'bg-white text-[#9A79FF]' : 'bg-gray-100 text-gray-500'}`}>
                         <ServiceIcon size={20} />
                       </div>
                       <div>
@@ -201,7 +201,7 @@ export default function TradeServicesPage() {
                 <Link
                   key={playbook.link}
                   href={playbook.link}
-                  className="block rounded-2xl border border-gray-200 p-4 transition hover:border-teal-400 hover:bg-teal-50"
+                  className="block rounded-2xl border border-gray-200 p-4 transition hover:border-[#9A79FF] hover:bg-[rgba(154,121,255,0.1)]"
                 >
                   <p className="font-semibold text-regal-blue-900">{playbook.title}</p>
                   <p className="text-sm text-gray-500">{playbook.description}</p>
@@ -212,17 +212,17 @@ export default function TradeServicesPage() {
 
           <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-md space-y-4">
             <div className="flex items-center gap-3">
-              <Globe2 className="text-teal-500" size={22} />
+              <Globe2 className="text-[#9A79FF]" size={22} />
               <h3 className="text-lg font-semibold text-regal-blue-900">Cross-border concierge</h3>
             </div>
             <p className="text-sm text-gray-600">
               Navigating customs or compliance for new destinations? Our export desk co-creates documentation packs and taps into our ecosystem partners for on-ground execution.
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl bg-teal-50 p-4 text-sm text-teal-900">Middle East trade lanes</div>
-              <div className="rounded-xl bg-teal-50 p-4 text-sm text-teal-900">EU machinery imports</div>
-              <div className="rounded-xl bg-teal-50 p-4 text-sm text-teal-900">USA FDA compliance</div>
-              <div className="rounded-xl bg-teal-50 p-4 text-sm text-teal-900">SE Asia fulfilment</div>
+              <div className="rounded-xl bg-[rgba(154,121,255,0.1)] p-4 text-sm text-[#1A1A2E]">Middle East trade lanes</div>
+              <div className="rounded-xl bg-[rgba(154,121,255,0.1)] p-4 text-sm text-[#1A1A2E]">EU machinery imports</div>
+              <div className="rounded-xl bg-[rgba(154,121,255,0.1)] p-4 text-sm text-[#1A1A2E]">USA FDA compliance</div>
+              <div className="rounded-xl bg-[rgba(154,121,255,0.1)] p-4 text-sm text-[#1A1A2E]">SE Asia fulfilment</div>
             </div>
           </div>
         </div>
@@ -250,7 +250,7 @@ export default function TradeServicesPage() {
             const CardIcon = item.icon;
             return (
               <div key={item.title} className="rounded-2xl border border-gray-100 bg-gray-50 p-6">
-                <CardIcon className="mb-4 text-teal-600" size={28} />
+                <CardIcon className="mb-4 text-[#9A79FF]" size={28} />
                 <h4 className="text-xl font-semibold text-regal-blue-900">{item.title}</h4>
                 <p className="text-sm text-gray-600">{item.description}</p>
               </div>

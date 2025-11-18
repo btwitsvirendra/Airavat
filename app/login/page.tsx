@@ -57,7 +57,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-white flex">
       {/* Left Section - Promotional */}
-      <div className="hidden lg:flex lg:w-2/3 bg-gradient-to-br from-[#03C4CB] via-[#04D4DD] to-[#05E4ED] relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-2/3 bg-gradient-to-br from-[#9A79FF] via-[#8A69EF] to-[#7A59DF] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-64 h-64 bg-white rounded-full"></div>
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full"></div>
@@ -93,7 +93,7 @@ export default function LoginPage() {
         {/* Header */}
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold text-[#03C4CB]">
+            <Link href="/" className="text-2xl font-bold text-[#9A79FF]">
               Airavat
             </Link>
             <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -174,7 +174,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent outline-none"
                   required
                 />
               </div>
@@ -188,13 +188,13 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent outline-none"
                   required
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-[#03C4CB] hover:bg-[#02A8B0] text-white py-3 rounded-lg font-semibold transition"
+                className="w-full bg-[#9A79FF] hover:bg-[#8A69EF] text-white py-3 rounded-lg font-semibold transition"
               >
                 Sign in
               </button>
@@ -202,7 +202,7 @@ export default function LoginPage() {
 
             <p className="text-center text-gray-600 mb-8">
               New to Airavat?{' '}
-              <Link href="/register" className="text-[#03C4CB] hover:underline font-semibold">
+              <Link href="/register" className="text-[#9A79FF] hover:underline font-semibold">
                 Create an account
               </Link>
             </p>
@@ -211,7 +211,7 @@ export default function LoginPage() {
             <div className="space-y-3 pt-6 border-t border-gray-200">
               <Link
                 href="/supplier/login"
-                className="flex items-center gap-3 text-gray-600 hover:text-[#03C4CB] transition"
+                className="flex items-center gap-3 text-gray-600 hover:text-[#9A79FF] transition"
               >
                 <div className="w-6 h-6 border border-gray-300 rounded flex items-center justify-center">
                   <span className="text-xs">📦</span>
@@ -220,7 +220,7 @@ export default function LoginPage() {
               </Link>
               <Link
                 href="/login/qr"
-                className="flex items-center gap-3 text-gray-600 hover:text-[#03C4CB] transition"
+                className="flex items-center gap-3 text-gray-600 hover:text-[#9A79FF] transition"
               >
                 <div className="w-6 h-6 border border-gray-300 rounded flex items-center justify-center">
                   <span className="text-xs">◻◻</span>

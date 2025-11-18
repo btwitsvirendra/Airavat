@@ -78,24 +78,24 @@ function AccountLayoutContent({
 
         {/* Main Content Area */}
         {activeView === 'messages' ? (
-          <div className="flex-1 ml-[250px] min-w-0 h-full">
+          <div className="flex-1 ml-[60px] min-w-0 h-full">
             <MessagesView />
           </div>
         ) : activeView === 'rfq' ? (
-          <div className="flex-1 ml-[250px] min-w-0 h-full">
+          <div className="flex-1 ml-[60px] min-w-0 h-full">
             <RFQView />
           </div>
         ) : activeView === 'payments' ? (
-          <div className="flex-1 ml-[250px] min-w-0 h-full">
+          <div className="flex-1 ml-[60px] min-w-0 h-full">
             <PaymentsView />
           </div>
         ) : activeView === 'favorites' ? (
-          <div className="flex-1 ml-[250px] min-w-0 h-full">
+          <div className="flex-1 ml-[60px] min-w-0 h-full">
             <FavoritesView />
           </div>
         ) : (
           <>
-            <div className={`flex-1 ml-[250px] min-w-0 transition-all duration-300 ${isPanelOpen ? 'hidden' : ''}`}>
+            <div className={`flex-1 ml-[60px] min-w-0 transition-all duration-300 ${isPanelOpen ? 'hidden' : ''}`}>
               {children}
             </div>
 

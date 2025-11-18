@@ -29,13 +29,13 @@ export default function OrdersPage() {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#F9F9FF' }}>
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-[1920px] mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/" className="text-2xl font-bold text-[#03C4CB]">Airavat</Link>
+              <Link href="/" className="text-2xl font-bold text-[#9A79FF]">Airavat</Link>
               <span className="text-gray-600">My Airavat</span>
             </div>
             <div className="flex items-center gap-4 text-sm">
@@ -46,23 +46,23 @@ export default function OrdersPage() {
               <div className="flex items-center gap-1 text-gray-600">
                 <span>English-USD</span>
               </div>
-              <Link href="/supplier/register" className="text-gray-600 hover:text-[#03C4CB]">
+              <Link href="/supplier/register" className="text-gray-600 hover:text-[#9A79FF]">
                 Start selling
               </Link>
-              <Link href="/messages" className="text-gray-600 hover:text-[#03C4CB]">
+              <Link href="/messages" className="text-gray-600 hover:text-[#9A79FF]">
                 <MessageSquare size={20} />
               </Link>
-              <Link href="/orders" className="text-[#03C4CB]">
+              <Link href="/orders" className="text-[#9A79FF]">
                 <FileText size={20} />
               </Link>
-              <Link href="/cart" className="text-gray-600 hover:text-[#03C4CB] relative">
+              <Link href="/cart" className="text-gray-600 hover:text-[#9A79FF] relative">
                 <ShoppingBag size={20} />
               </Link>
-              <Link href="/support" className="text-gray-600 hover:text-[#03C4CB]">
+              <Link href="/support" className="text-gray-600 hover:text-[#9A79FF]">
                 <Headphones size={20} />
               </Link>
-              <Link href="/account" className="text-gray-600 hover:text-[#03C4CB]">
-                <div className="w-8 h-8 bg-[#03C4CB] rounded-full flex items-center justify-center text-white font-semibold">
+              <Link href="/account" className="text-gray-600 hover:text-[#9A79FF]">
+                <div className="w-8 h-8 bg-[#9A79FF] rounded-full flex items-center justify-center text-white font-semibold">
                   {user?.name?.[0] || 'U'}
                 </div>
               </Link>
@@ -92,7 +92,7 @@ export default function OrdersPage() {
                     Messages
                     <ChevronRight size={16} className="ml-auto text-gray-400" />
                   </Link>
-                  <Link href="/orders" className="flex items-center gap-3 px-4 py-2 bg-[#E6F9FA] text-[#03C4CB] rounded-lg font-medium">
+                  <Link href="/orders" className="flex items-center gap-3 px-4 py-2 bg-[rgba(154, 121, 255, 0.1)] text-[#9A79FF] rounded-lg font-medium">
                     <ShoppingBag size={18} />
                     Orders
                   </Link>
@@ -156,19 +156,19 @@ export default function OrdersPage() {
                     placeholder="Search by name, order number, or other information"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent outline-none"
                   />
                 </div>
-                <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none">
+                <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent outline-none">
                   <option>Order date</option>
                   <option>Last 7 days</option>
                   <option>Last 30 days</option>
                   <option>Last 90 days</option>
                 </select>
-                <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent outline-none">
+                <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent outline-none">
                   <option>Select time</option>
                 </select>
-                <button className="bg-[#03C4CB] hover:bg-[#02A8B0] text-white px-6 py-2 rounded-lg font-medium transition flex items-center gap-2">
+                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-2 rounded-lg font-medium transition flex items-center gap-2">
                   <span>+</span>
                   Bulk Create Order
                 </button>
@@ -191,7 +191,7 @@ export default function OrdersPage() {
                     onClick={() => setActiveTab(tab.id as any)}
                     className={`px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap transition ${
                       activeTab === tab.id
-                        ? 'bg-[#03C4CB] text-white'
+                        ? 'bg-[#9A79FF] text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
@@ -203,9 +203,9 @@ export default function OrdersPage() {
               {/* Empty Orders State */}
               <div className="flex flex-col items-center justify-center py-20">
                 <div className="relative mb-6">
-                  <div className="w-32 h-32 bg-[#E6F9FA] rounded-full flex items-center justify-center">
-                    <div className="w-24 h-24 bg-[#03C4CB]/20 rounded-full flex items-center justify-center">
-                      <FileText size={64} className="text-[#03C4CB]" />
+                  <div className="w-32 h-32 bg-[rgba(154, 121, 255, 0.1)] rounded-full flex items-center justify-center">
+                    <div className="w-24 h-24 bg-[#9A79FF]/20 rounded-full flex items-center justify-center">
+                      <FileText size={64} className="text-[#9A79FF]" />
                     </div>
                   </div>
                 </div>
@@ -213,7 +213,7 @@ export default function OrdersPage() {
                 <p className="text-gray-600 mb-6">Go to the homepage or click below to start sourcing</p>
                 <Link
                   href="/products"
-                  className="bg-[#03C4CB] hover:bg-[#02A8B0] text-white px-6 py-3 rounded-lg font-medium transition"
+                  className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-3 rounded-lg font-medium transition"
                 >
                   Start sourcing
                 </Link>
@@ -225,7 +225,7 @@ export default function OrdersPage() {
 
       {/* Need Help Sidebar */}
       <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40">
-        <div className="bg-[#03C4CB] text-white px-4 py-6 rounded-lg shadow-lg writing-vertical-rl">
+        <div className="bg-[#9A79FF] text-white px-4 py-6 rounded-lg shadow-lg writing-vertical-rl">
           <p className="text-sm font-semibold mb-2">Need Help?</p>
           <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mx-auto">
             <Headphones size={20} />

@@ -27,6 +27,8 @@ import {
   Share2,
 } from 'lucide-react';
 import LikeButton from '@/components/LikeButton';
+import CookiesPopup from '@/components/CookiesPopup';
+import FilterSidebar from '@/components/FilterSidebar';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
 import { useStore } from '@/lib/store';
@@ -57,6 +59,8 @@ export default function HomePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [sortBy, setSortBy] = useState<string>('relevance');
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000000]);
 
   // Read category from URL params
   useEffect(() => {
@@ -67,7 +71,7 @@ export default function HomePage() {
     }
   }, [searchParams]);
 
-  // Filter products by category
+  // Filter products by category, price, and sort
   const filteredProducts = useMemo(() => {
     let filtered = catalogProducts;
 
@@ -83,7 +87,7 @@ export default function HomePage() {
           const categoryName = category.name.toLowerCase();
           const categorySlug = category.slug.toLowerCase();
           
-  return (
+          return (
             productCategory === categoryName ||
             productCategory === categorySlug ||
             productCategory?.includes(categoryName.split(' ')[0])
@@ -97,8 +101,34 @@ export default function HomePage() {
       }
     }
 
+    // Filter by price range
+    filtered = filtered.filter(
+      (product) => product.price.amount >= priceRange[0] && product.price.amount <= priceRange[1]
+    );
+
+    // Sort products
+    filtered = [...filtered].sort((a, b) => {
+      switch (sortBy) {
+        case 'price-low':
+          return a.price.amount - b.price.amount;
+        case 'price-high':
+          return b.price.amount - a.price.amount;
+        case 'rating':
+          return (b.supplier?.rating || 0) - (a.supplier?.rating || 0);
+        case 'popularity':
+          // Sort by rating and stock (higher is more popular)
+          const aPopularity = (a.supplier?.rating || 0) * 10 + (a.stock || 0) / 1000;
+          const bPopularity = (b.supplier?.rating || 0) * 10 + (b.stock || 0) / 1000;
+          return bPopularity - aPopularity;
+        case 'newness':
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        default:
+          return 0;
+      }
+    });
+
     return filtered;
-  }, [selectedCategory]);
+  }, [selectedCategory, priceRange, sortBy]);
 
   // Pagination settings - 50 products per page
   const productsPerPage = 50;
@@ -120,11 +150,13 @@ export default function HomePage() {
     addToCart(product, product.minOrderQuantity);
   };
 
-  const handleToggleFavorite = (product: typeof catalogProducts[0], isFav: boolean) => {
-    if (isFav) {
-      removeFromFavorites(product.id);
-    } else {
+  const handleToggleFavorite = (product: typeof catalogProducts[0], checked: boolean) => {
+    if (checked) {
+      // Button is now checked (liked) - add to favorites
       addToFavorites(product);
+    } else {
+      // Button is now unchecked (unliked) - remove from favorites
+      removeFromFavorites(product.id);
     }
   };
 
@@ -134,14 +166,24 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#F9F9FF', background: '#F9F9FF', minHeight: '100vh' }}>
+      {/* Cookies Popup */}
+      <CookiesPopup />
+
       <section className="bg-white py-8 border-b border-gray-200">
         <div className="max-w-[1920px] mx-auto px-4">
           <div className="flex gap-6">
-            {/* Category Card */}
-            <div className="hidden lg:block flex-shrink-0">
+            {/* Left Sidebar - Category Card and Filters */}
+            <div className="hidden lg:block flex-shrink-0" style={{ width: '233px' }}>
               <CategoryCard />
-          </div>
+              <FilterSidebar
+                sortBy={sortBy}
+                onSortChange={setSortBy}
+                minPrice={priceRange[0]}
+                maxPrice={priceRange[1]}
+                onPriceChange={(min, max) => setPriceRange([min, max])}
+              />
+            </div>
 
             {/* Product Cards */}
             <main className="flex-1">
@@ -156,7 +198,7 @@ export default function HomePage() {
                     style={{ aspectRatio: '3/4' }}
                   >
                     {/* Like button in top-right */}
-                    <div className="absolute top-4 right-4 z-10">
+                    <div className="absolute top-4 right-4 z-20" onClick={(e) => e.stopPropagation()}>
                       <LikeButton 
                         size="sm" 
                         checked={isFavorite(product.id)}
@@ -164,9 +206,9 @@ export default function HomePage() {
                       />
                     </div>
 
-                    <div className="p-4 h-full flex flex-col">
-                      {/* Image Holder - Unique Design */}
-                      <Link href={`/products/${product.id}`} className="block mb-3 flex-1">
+                    <div className="p-4 h-full flex flex-col" style={{ width: '100%' }}>
+                      {/* Image Holder */}
+                      <Link href={`/products/${product.id}`} className="block mb-3 flex-1" style={{ width: '100%' }}>
                         <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative group">
                           {product.images[0] ? (
                             <img
@@ -179,48 +221,48 @@ export default function HomePage() {
                               <PackageSearch size={32} />
                             </div>
                           )}
-                          {/* Overlay gradient */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         </div>
                       </Link>
 
-                      {/* Product Info */}
-                      <div className="flex-1 flex flex-col justify-between">
-                        <div>
-                          <Link href={`/products/${product.id}`}>
-                            <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 mb-2">
+                      {/* Product Info - All Left Aligned */}
+                      <div className="flex-1 flex flex-col justify-between" style={{ width: '100%', textAlign: 'left' }}>
+                        <div style={{ width: '100%', textAlign: 'left' }}>
+                          <Link href={`/products/${product.id}`} style={{ display: 'block', width: '100%', textAlign: 'left' }}>
+                            <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 mb-2" style={{ textAlign: 'left', width: '100%' }}>
                               {product.name}
                             </h3>
                           </Link>
-                          <div className="flex items-center gap-1 mb-2">
-                            <Star size={12} className="fill-yellow-400 text-yellow-400" />
-                            <span className="text-xs text-gray-600">
+                          <div className="flex items-center gap-1 mb-2" style={{ justifyContent: 'flex-start', width: '100%' }}>
+                            <Star size={12} className="fill-yellow-400 text-yellow-400 flex-shrink-0" />
+                            <span className="text-xs text-gray-600" style={{ textAlign: 'left' }}>
                               {product.supplier?.rating?.toFixed(1) || 'N/A'}
                             </span>
                           </div>
-                          <div className="flex items-baseline gap-1 mb-1">
-                            <span className="text-base font-bold text-gray-900">
+                          <div className="flex items-baseline gap-1 mb-1" style={{ justifyContent: 'flex-start', width: '100%' }}>
+                            <span className="text-base font-bold text-gray-900" style={{ textAlign: 'left' }}>
                               ₹{product.price.amount.toLocaleString()}
                             </span>
-                            <span className="text-xs text-gray-500">/{product.price.unit}</span>
+                            <span className="text-xs text-gray-500" style={{ textAlign: 'left' }}>/{product.price.unit}</span>
                           </div>
-                          <p className="text-xs text-gray-500 mb-3">
+                          <p className="text-xs text-gray-500 mb-3" style={{ textAlign: 'left', width: '100%' }}>
                             MOQ: {product.minOrderQuantity} {product.price.unit}
                           </p>
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 mt-auto" style={{ width: '100%' }}>
                           <button
                             onClick={() => handleAddToCart(product)}
-                            className="flex-1 bg-[#03C4CB] hover:bg-[#02A8B0] text-white py-2 px-3 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5"
+                            className="flex-1 bg-[#9A79FF] hover:bg-[#8A69EF] text-white py-2 px-3 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5"
+                            style={{ minWidth: 0 }}
                           >
                             <ShoppingCart size={14} />
                             <span>Cart</span>
                           </button>
                           <button
                             onClick={() => handleChat(product)}
-                            className="p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition"
+                            className="p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition flex-shrink-0"
                             title="Chat with supplier"
                           >
                             <MessageSquare size={16} className="text-gray-600" />
@@ -237,7 +279,7 @@ export default function HomePage() {
                                 navigator.clipboard.writeText(`${window.location.origin}/products/${product.id}`);
                               }
                             }}
-                            className="p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition"
+                            className="p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition flex-shrink-0"
                             title="Share product"
                           >
                             <Share2 size={16} className="text-gray-600" />

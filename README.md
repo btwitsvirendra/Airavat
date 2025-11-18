@@ -1,6 +1,6 @@
 # Airavat - B2B E-commerce Platform
 
-A comprehensive B2B e-commerce marketplace inspired by Alibaba.com, designed specifically for Indian users. Airavat connects buyers with verified suppliers, offering integrated chat, payment links, and logistics services.
+A comprehensive B2B e-commerce marketplace designed specifically for Indian users. Airavat connects buyers with verified suppliers, offering integrated chat, payment links, and logistics services.
 
 ## Features
 

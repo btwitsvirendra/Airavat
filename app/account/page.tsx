@@ -56,7 +56,7 @@ export default function BuyerDashboard() {
   }));
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#F9F9FF' }}>
       <div className="max-w-[1920px] mx-auto px-6 py-6">
         <main className="w-full space-y-6">
           {/* Top Profile Section */}
@@ -65,7 +65,7 @@ export default function BuyerDashboard() {
               <div className="flex items-center gap-6">
                 {/* Profile Picture with Status */}
                 <div className="relative">
-                  <div className="w-28 h-28 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                  <div className="w-28 h-28 bg-gradient-to-br from-[#9A79FF] to-[#8A69EF] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                     <span className="text-4xl font-bold text-white">
                       {user?.name?.[0]?.toUpperCase() || 'V'}
                     </span>
@@ -78,7 +78,7 @@ export default function BuyerDashboard() {
                   <p className="text-xs text-gray-500 mb-1 font-mono">Member Id : SE8641784306743287</p>
                   <h1 className="text-3xl font-bold text-gray-900 mb-2">{user?.name || 'Virendra singh'}</h1>
                   <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 bg-teal-50 text-teal-700 text-xs font-semibold rounded-full border border-teal-200">
+                    <span className="px-3 py-1 bg-[rgba(154,121,255,0.1)] text-[#9A79FF] text-xs font-semibold rounded-full border border-[#D1C2FF]">
                       Verified Buyer
                     </span>
                     <span className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full border border-blue-200">
@@ -92,7 +92,7 @@ export default function BuyerDashboard() {
               <div className="flex items-center gap-3">
                 <Link 
                   href="/support" 
-                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-all duration-200"
+                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-[#9A79FF] hover:bg-[rgba(154,121,255,0.1)] rounded-lg transition-all duration-200"
                 >
                   <Headphones size={20} />
                   <span className="text-sm font-medium">Support</span>
@@ -122,8 +122,8 @@ export default function BuyerDashboard() {
             </div>
 
             {/* Promotional Banner */}
-            <div className="relative bg-gradient-to-r from-teal-50 via-blue-50 to-purple-50 rounded-xl p-5 border border-teal-100 overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-teal-200 opacity-20 rounded-full -mr-16 -mt-16"></div>
+            <div className="relative bg-gradient-to-r from-[rgba(154,121,255,0.1)] via-blue-50 to-purple-50 rounded-xl p-5 border border-[#D1C2FF] overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[rgba(154,121,255,0.2)] opacity-20 rounded-full -mr-16 -mt-16"></div>
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-200 opacity-20 rounded-full -ml-12 -mb-12"></div>
               <div className="relative flex items-center justify-between">
                 <button className="p-2 hover:bg-white/50 rounded-lg transition">
@@ -131,7 +131,7 @@ export default function BuyerDashboard() {
                 </button>
                 <div className="flex-1 flex items-center justify-center gap-6 mx-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center">
+                    <div className="w-10 h-10 bg-[#9A79FF] rounded-lg flex items-center justify-center">
                       <CheckCircle2 className="text-white w-5 h-5" />
                     </div>
                     <div>
@@ -140,7 +140,7 @@ export default function BuyerDashboard() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button className="px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg">
+                    <button className="px-5 py-2.5 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg">
                       Learn More
                     </button>
                     <button className="px-5 py-2.5 bg-white hover:bg-gray-50 border-2 border-gray-300 rounded-lg text-sm font-semibold transition-all duration-200">
@@ -173,7 +173,7 @@ export default function BuyerDashboard() {
                       onClick={() => setActiveTab(tab.id)}
                       className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                         activeTab === tab.id
-                          ? 'bg-teal-600 text-white shadow-md'
+                          ? 'bg-[#9A79FF] text-white shadow-md'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -236,7 +236,7 @@ export default function BuyerDashboard() {
                   <p className="text-sm text-gray-500 mb-6">Start shopping to see your orders here</p>
                   <Link
                     href="/products"
-                    className="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
+                    className="px-6 py-3 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
                   >
                     Browse Products
                   </Link>
@@ -252,7 +252,7 @@ export default function BuyerDashboard() {
                   <h3 className="text-lg font-bold text-gray-900">History</h3>
                   <Link 
                     href="/history" 
-                    className="text-sm text-teal-600 hover:text-teal-700 hover:underline font-semibold transition"
+                    className="text-sm text-[#9A79FF] hover:text-[#8A69EF] hover:underline font-semibold transition"
                   >
                     View
                   </Link>
@@ -287,7 +287,7 @@ export default function BuyerDashboard() {
                   <h3 className="text-lg font-bold text-gray-900">Favorite</h3>
                   <Link 
                     href="/account?view=favorites" 
-                    className="text-sm text-teal-600 hover:text-teal-700 hover:underline font-semibold transition"
+                    className="text-sm text-[#9A79FF] hover:text-[#8A69EF] hover:underline font-semibold transition"
                   >
                     View
                   </Link>
@@ -306,7 +306,7 @@ export default function BuyerDashboard() {
                         <p className="text-sm font-medium text-gray-700 mb-1">Price : ${item.price}</p>
                         <p className="text-xs text-gray-500 mb-3">MOQ: {item.moq}</p>
                         <div className="flex items-center gap-2">
-                          <button className="flex-1 px-3 py-1.5 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-xs font-semibold transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-1">
+                          <button className="flex-1 px-3 py-1.5 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg text-xs font-semibold transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-1">
                             <Send size={12} />
                             Send Inquiry
                           </button>
@@ -323,7 +323,7 @@ export default function BuyerDashboard() {
                       <p className="text-sm">No favorites yet</p>
                       <Link 
                         href="/products"
-                        className="text-sm text-teal-600 hover:text-teal-700 hover:underline mt-2 inline-block"
+                        className="text-sm text-[#9A79FF] hover:text-[#8A69EF] hover:underline mt-2 inline-block"
                       >
                         Browse products
                       </Link>

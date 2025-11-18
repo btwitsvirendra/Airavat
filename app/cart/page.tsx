@@ -28,7 +28,7 @@ export default function CartPage() {
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#03C4CB', '#04D4DD', '#05E4ED'],
+      colors: ['#9A79FF', '#8A69EF', '#7A59DF'],
     });
     setTimeout(() => {
       toast.success('Your Airavat success manager will coordinate payment links shortly.');
@@ -38,7 +38,7 @@ export default function CartPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen py-12" style={{ backgroundColor: '#F9F9FF' }}>
       <div className="max-w-[1920px] mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,16 +59,16 @@ export default function CartPage() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="rounded-lg border-2 border-dashed border-[#03C4CB] bg-[#E6F9FA] p-12 text-center"
+                  className="rounded-lg border-2 border-dashed border-[#9A79FF] bg-[rgba(154, 121, 255, 0.1)] p-12 text-center"
                 >
-                  <ShoppingBag size={64} className="mx-auto text-[#03C4CB] mb-4" />
+                  <ShoppingBag size={64} className="mx-auto text-[#9A79FF] mb-4" />
                   <p className="text-xl font-semibold text-gray-900 mb-2">Your cart is empty</p>
                   <p className="text-sm text-gray-600 mb-6">
                     Browse products or Discover clusters to add items and request consolidated quotes.
                   </p>
                   <Link
                     href="/products"
-                    className="inline-flex items-center gap-2 bg-[#03C4CB] hover:bg-[#02A8B0] text-white px-6 py-3 rounded-lg font-semibold transition"
+                    className="inline-flex items-center gap-2 bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-3 rounded-lg font-semibold transition"
                   >
                     Explore Products <ArrowRight size={18} />
                   </Link>
@@ -102,7 +102,7 @@ export default function CartPage() {
                       <p className="text-sm text-gray-500 mb-2">
                         {product.supplier?.name ?? product.supplierId ?? 'Supplier'}
                       </p>
-                      <p className="text-sm text-[#03C4CB] font-medium">
+                      <p className="text-sm text-[#9A79FF] font-medium">
                         MOQ: {product.minOrderQuantity} · Qty: {quantity} {product.price.unit}
                       </p>
                     </div>
@@ -145,17 +145,17 @@ export default function CartPage() {
             </div>
             <div className="space-y-2 pt-4">
               <div className="flex items-center gap-2 text-sm text-gray-700">
-                <ShieldCheck size={16} className="text-[#03C4CB]" />
+                <ShieldCheck size={16} className="text-[#9A79FF]" />
                 <span>Trade Assurance Protection</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-700">
-                <Truck size={16} className="text-[#03C4CB]" />
+                <Truck size={16} className="text-[#9A79FF]" />
                 <span>Integrated Logistics Support</span>
               </div>
             </div>
             <Link
               href="/checkout"
-              className="w-full bg-[#03C4CB] hover:bg-[#02A8B0] text-white py-4 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2 mt-4"
+              className="w-full bg-[#9A79FF] hover:bg-[#8A69EF] text-white py-4 rounded-lg text-sm font-semibold transition flex items-center justify-center gap-2 mt-4"
             >
               Proceed to Checkout
             </Link>

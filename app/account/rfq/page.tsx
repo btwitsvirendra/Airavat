@@ -51,16 +51,16 @@ export default function RFQManagerPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#F9F9FF' }}>
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-[1920px] mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/" className="text-2xl font-bold text-[#03C4CB]">Airavat</Link>
+              <Link href="/" className="text-2xl font-bold text-[#9A79FF]">Airavat</Link>
               <span className="text-gray-600">My RFQs</span>
             </div>
-            <Link href="/rfq" className="bg-[#03C4CB] hover:bg-[#02A8B0] text-white px-6 py-2 rounded-lg font-semibold transition flex items-center gap-2">
+            <Link href="/rfq" className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-2 rounded-lg font-semibold transition flex items-center gap-2">
               <Plus size={20} />
               Post an RFQ
             </Link>
@@ -73,19 +73,19 @@ export default function RFQManagerPage() {
           {/* Left Sidebar */}
           <aside className="w-64 flex-shrink-0 bg-white rounded-lg shadow-sm p-6 h-fit">
             <nav className="space-y-1">
-              <Link href="/account" className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-[#03C4CB]">
+              <Link href="/account" className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-[#9A79FF]">
                 <FileText size={20} />
                 <span>My Airavat</span>
               </Link>
-              <Link href="/account/rfq" className="flex items-center gap-3 px-4 py-3 rounded-lg bg-[#E6F9FA] text-[#03C4CB] font-medium">
+              <Link href="/account/rfq" className="flex items-center gap-3 px-4 py-3 rounded-lg bg-[rgba(154,121,255,0.1)] text-[#9A79FF] font-medium">
                 <FileText size={20} />
                 <span>My RFQs</span>
               </Link>
-              <Link href="/orders" className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-[#03C4CB]">
+              <Link href="/orders" className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-[#9A79FF]">
                 <FileText size={20} />
                 <span>Orders</span>
               </Link>
-              <Link href="/messages" className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-[#03C4CB]">
+              <Link href="/messages" className="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-[#9A79FF]">
                 <FileText size={20} />
                 <span>Messages</span>
               </Link>
@@ -110,7 +110,7 @@ export default function RFQManagerPage() {
                     placeholder="Search RFQs..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent"
                   />
                 </div>
                 <div className="flex items-center gap-2">
@@ -118,7 +118,7 @@ export default function RFQManagerPage() {
                   <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value as any)}
-                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#03C4CB] focus:border-transparent"
+                    className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent"
                   >
                     <option value="all">All Status</option>
                     <option value="open">Open</option>
@@ -135,7 +135,7 @@ export default function RFQManagerPage() {
                   <FileText size={48} className="mx-auto mb-4 text-gray-400" />
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">No RFQs found</h3>
                   <p className="text-gray-600 mb-6">Start by posting your first RFQ to get quotes from suppliers</p>
-                  <Link href="/rfq" className="inline-flex items-center gap-2 bg-[#03C4CB] hover:bg-[#02A8B0] text-white px-6 py-3 rounded-lg font-semibold transition">
+                  <Link href="/rfq" className="inline-flex items-center gap-2 bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-3 rounded-lg font-semibold transition">
                     <Plus size={20} />
                     Post an RFQ
                   </Link>

@@ -14,6 +14,7 @@ import {
   Settings,
   LogOut,
   ChevronDown,
+  Heart,
 } from 'lucide-react';
 import { useStore } from '@/lib/store';
 import { PanelType } from './AccountRightPanel';
@@ -44,7 +45,7 @@ const Menu = ({ children, items, onButtonClick }: MenuProps) => {
             e.stopPropagation();
             setIsOpened(!isOpened);
           }}
-          className="p-1 hover:bg-gray-100 rounded"
+          className="p-1 hover:bg-gray-100 rounded sidebar-expand-only"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +62,7 @@ const Menu = ({ children, items, onButtonClick }: MenuProps) => {
         </button>
       </div>
       {isOpened && (
-        <ul className="mx-4 px-2 border-l text-sm font-medium">
+        <ul className="mx-4 px-2 border-l text-sm font-medium sidebar-expand-only">
           {items.map((item, idx) => (
             <li key={idx}>
               {item.onClick ? (
@@ -147,17 +148,19 @@ export default function AccountSidebar({ onPanelOpen, onBackToDashboard, activeV
       panelType: null as PanelType,
       icon: (
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+          width="24"
+          height="24"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
           className="w-5 h-5"
         >
           <path
+            d="M21 12C21 16.9706 16.9706 21 12 21C10.8029 21 9.6603 20.7663 8.61549 20.3419C8.41552 20.2607 8.31554 20.2201 8.23472 20.202C8.15566 20.1843 8.09715 20.1778 8.01613 20.1778C7.9333 20.1778 7.84309 20.1928 7.66265 20.2229L4.10476 20.8159C3.73218 20.878 3.54589 20.909 3.41118 20.8512C3.29328 20.8007 3.19933 20.7067 3.14876 20.5888C3.09098 20.4541 3.12203 20.2678 3.18413 19.8952L3.77711 16.3374C3.80718 16.1569 3.82222 16.0667 3.82221 15.9839C3.8222 15.9028 3.81572 15.8443 3.798 15.7653C3.77988 15.6845 3.73927 15.5845 3.65806 15.3845C3.23374 14.3397 3 13.1971 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+            stroke="currentColor"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
           />
         </svg>
       ),
@@ -168,17 +171,19 @@ export default function AccountSidebar({ onPanelOpen, onBackToDashboard, activeV
       panelType: null as PanelType,
       icon: (
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
+          width="24"
+          height="24"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
           className="w-5 h-5"
         >
           <path
+            d="M2 2H3.30616C3.55218 2 3.67519 2 3.77418 2.04524C3.86142 2.08511 3.93535 2.14922 3.98715 2.22995C4.04593 2.32154 4.06333 2.44332 4.09812 2.68686L4.57143 6M4.57143 6L5.62332 13.7314C5.75681 14.7125 5.82355 15.2031 6.0581 15.5723C6.26478 15.8977 6.56108 16.1564 6.91135 16.3174C7.30886 16.5 7.80394 16.5 8.79411 16.5H17.352C18.2945 16.5 18.7658 16.5 19.151 16.3304C19.4905 16.1809 19.7818 15.9398 19.9923 15.6342C20.2309 15.2876 20.3191 14.8247 20.4955 13.8988L21.8191 6.94969C21.8812 6.62381 21.9122 6.46087 21.8672 6.3335C21.8278 6.22177 21.7499 6.12768 21.6475 6.06802C21.5308 6 21.365 6 21.0332 6H4.57143ZM10 21C10 21.5523 9.55228 22 9 22C8.44772 22 8 21.5523 8 21C8 20.4477 8.44772 20 9 20C9.55228 20 10 20.4477 10 21ZM18 21C18 21.5523 17.5523 22 17 22C16.4477 22 16 21.5523 16 21C16 20.4477 16.4477 20 17 20C17.5523 20 18 20.4477 18 21Z"
+            stroke="currentColor"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a2.25 2.25 0 002.25-2.25M7.5 14.25l5-10m5 10a2.25 2.25 0 002.25-2.25m0 0a2.25 2.25 0 00-2.25-2.25m-2.25 0L12.75 4.5M9.75 14.25l-1.5-3m0 0L6.75 9.75m3 4.5v-4.5m0 4.5h-3m3 0h3"
           />
         </svg>
       ),
@@ -284,260 +289,359 @@ export default function AccountSidebar({ onPanelOpen, onBackToDashboard, activeV
   }, [pathname]);
 
   return (
-    <nav className="fixed top-[132px] left-0 w-full h-[calc(100vh-132px)] border-r bg-white space-y-8 sm:w-[250px] z-30">
-      <div className="flex flex-col h-full px-4">
-        <div className="h-20 flex items-center pl-2">
-          <div className="w-full flex items-center gap-x-4">
-            <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-semibold text-sm">
-                {user?.name?.[0]?.toUpperCase() || 'U'}
-              </span>
-            </div>
-            <div className="flex-1 min-w-0">
-              <span className="block text-gray-700 text-sm font-semibold truncate">
-                {user?.name || 'User'}
-              </span>
-              <span className="block mt-px text-gray-600 text-xs truncate">
-                {user?.email || 'user@airavat.com'}
-              </span>
-            </div>
-            <div className="relative flex-shrink-0">
-              <button
-                ref={profileRef}
-                className="p-1.5 rounded-md text-gray-500 hover:bg-gray-50 active:bg-gray-100"
-                onClick={() => setIsProfileActive(!isProfileActive)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-              {isProfileActive && (
-                <div className="absolute z-10 top-12 right-0 w-56 rounded-lg bg-white shadow-md border text-sm text-gray-600">
-                  <div className="p-2 text-left">
-                    <span className="block text-gray-500/80 p-2">
-                      {user?.email || 'user@airavat.com'}
-                    </span>
-                    <Link
-                      href="/supplier/register"
-                      className="block w-full p-2 text-left rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150"
-                    >
-                      Switch to supplier
-                    </Link>
-                    <div className="relative rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className="w-4 h-4 absolute right-1 inset-y-0 my-auto pointer-events-none"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <select className="w-full cursor-pointer appearance-none bg-transparent p-2 outline-none">
-                        <option disabled selected>
-                          Theme
-                        </option>
-                        <option>Dark</option>
-                        <option>Light</option>
-                      </select>
-                    </div>
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full p-2 text-left rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .account-sidebar {
+          width: 60px;
+          height: calc(100vh - 132px);
+          background-color: #ffffff;
+          border-right: 1px solid #e5e7eb;
+          position: fixed;
+          top: 132px;
+          left: 0;
+          z-index: 30;
+          transition: width 0.75s ease;
+          overflow: hidden;
+        }
 
-        <div className="overflow-auto flex-1">
-          <ul className="text-sm font-medium">
-            {navigation.map((item, idx) => (
-              <li key={idx}>
-                {item.href === '/messages' ? (
-                  <button
-                    onClick={() => onPanelOpen?.('messages')}
-                    className={`w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left will-change-[background-color] ${
-                      activeView === 'messages'
-                        ? 'bg-gray-100 text-gray-900'
-                        : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
-                    }`}
-                  >
-                    <div className="text-gray-500">{item.icon}</div>
-                    {item.name}
-                  </button>
-                ) : item.href === '/account/rfq' ? (
-                  <button
-                    onClick={() => onPanelOpen?.('rfq')}
-                    className={`w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left will-change-[background-color] ${
-                      activeView === 'rfq'
-                        ? 'bg-gray-100 text-gray-900'
-                        : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
-                    }`}
-                  >
-                    <div className="text-gray-500">{item.icon}</div>
-                    {item.name}
-                  </button>
-                ) : item.href === '/account/favorites' ? (
-                  <Link
-                    href="/account?view=favorites"
-                    className={`flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 will-change-[background-color] ${
-                      activeView === 'favorites'
-                        ? 'bg-gray-100 text-gray-900'
-                        : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
-                    }`}
-                  >
-                    <div className="text-gray-500">{item.icon}</div>
-                    {item.name}
-                  </Link>
-                ) : item.panelType ? (
-                  <button
-                    onClick={() => handleNavigationClick(item.href, item.panelType)}
-                    className={`w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left will-change-[background-color] ${
-                      isActive(item.href)
-                        ? 'bg-gray-100 text-gray-900'
-                        : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
-                    }`}
-                  >
-                    <div className="text-gray-500">{item.icon}</div>
-                    {item.name}
-                    {item.href === '/cart' && cart.length > 0 && (
-                      <span className="ml-auto bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
-                        {cart.length}
-                      </span>
-                    )}
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className={`flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 will-change-[background-color] ${
-                      isActive(item.href)
-                        ? 'bg-gray-100 text-gray-900'
-                        : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
-                    }`}
-                  >
-                    <div className="text-gray-500">{item.icon}</div>
-                    {item.name}
-                    {item.href === '/cart' && cart.length > 0 && (
-                      <span className="ml-auto bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
-                        {cart.length}
-                      </span>
-                    )}
-                  </Link>
-                )}
-              </li>
-            ))}
+        .account-sidebar:hover {
+          width: 250px;
+        }
 
-            <li>
-              <Menu
-                items={[
-                  { name: 'Wallet', href: '/account/wallet', icon: '', onClick: () => onPanelOpen?.('payments') },
-                  { name: 'Payment link', href: '/payment-links', icon: '' },
-                  { name: 'Transactions', href: '/account/transactions', icon: '' },
-                ]}
-                onButtonClick={() => onPanelOpen?.('payments')}
-              >
+        .account-sidebar .sidebar-content {
+          width: 250px;
+          padding: 0 1rem;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+        }
+
+        .account-sidebar .sidebar-text {
+          opacity: 0;
+          transition: opacity 0.3s ease 0.2s;
+          white-space: nowrap;
+        }
+
+        .account-sidebar:hover .sidebar-text {
+          opacity: 1;
+        }
+
+        .account-sidebar .sidebar-expand-only {
+          opacity: 0;
+          transition: opacity 0.3s ease 0.2s;
+          pointer-events: none;
+        }
+
+        .account-sidebar:hover .sidebar-expand-only {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .account-sidebar .profile-section {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 1.25rem 0.5rem;
+          min-height: 5rem;
+        }
+
+        .account-sidebar .profile-avatar {
+          flex-shrink: 0;
+        }
+
+        .account-sidebar .profile-info {
+          flex: 1;
+          min-width: 0;
+          overflow: hidden;
+        }
+
+        .account-sidebar .profile-name {
+          display: block;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #374151;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .account-sidebar .profile-email {
+          display: block;
+          margin-top: 0.125rem;
+          font-size: 0.75rem;
+          color: #4b5563;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      `}} />
+
+      <nav className="account-sidebar">
+        <div className="sidebar-content">
+          <div className="h-20 flex items-center pl-2">
+            <div className="w-full flex items-center gap-x-4">
+              <div className="w-10 h-10 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0 profile-avatar">
+                <span className="text-white font-semibold text-sm">
+                  {user?.name?.[0]?.toUpperCase() || 'U'}
+                </span>
+              </div>
+              <div className="flex-1 min-w-0 profile-info sidebar-expand-only">
+                <span className="profile-name sidebar-text">
+                  {user?.name || 'User'}
+                </span>
+                <span className="profile-email sidebar-text">
+                  {user?.email || 'user@airavat.com'}
+                </span>
+              </div>
+              <div className="relative flex-shrink-0 sidebar-expand-only">
                 <button
-                  onClick={() => onPanelOpen?.('payments')}
-                  className={`w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left will-change-[background-color] ${
-                    activeView === 'payments'
-                      ? 'bg-gray-100 text-gray-900'
-                      : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
-                  }`}
+                  ref={profileRef}
+                  className="p-1.5 rounded-md text-gray-500 hover:bg-gray-50 active:bg-gray-100"
+                  onClick={() => setIsProfileActive(!isProfileActive)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5 text-gray-500"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
-                    />
-                  </svg>
-                  Payments
-                </button>
-              </Menu>
-            </li>
-
-            <li>
-              <Link
-                href="/supplier/dashboard"
-                className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors duration-75 will-change-[background-color]"
-              >
-                <div className="text-gray-500">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
                     className="w-5 h-5"
                   >
                     <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+                      fillRule="evenodd"
+                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                      clipRule="evenodd"
                     />
                   </svg>
-                </div>
-                Switch to supplier
-              </Link>
-            </li>
-          </ul>
+                </button>
+                {isProfileActive && (
+                  <div className="absolute z-10 top-12 right-0 w-56 rounded-lg bg-white shadow-md border text-sm text-gray-600 sidebar-expand-only">
+                    <div className="p-2 text-left">
+                      <span className="block text-gray-500/80 p-2">
+                        {user?.email || 'user@airavat.com'}
+                      </span>
+                      <Link
+                        href="/supplier/register"
+                        className="block w-full p-2 text-left rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150"
+                      >
+                        Switch to supplier
+                      </Link>
+                      <div className="relative rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-4 h-4 absolute right-1 inset-y-0 my-auto pointer-events-none"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <select className="w-full cursor-pointer appearance-none bg-transparent p-2 outline-none">
+                          <option disabled selected>
+                            Theme
+                          </option>
+                          <option>Dark</option>
+                          <option>Light</option>
+                        </select>
+                      </div>
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full p-2 text-left rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
 
-          <div className="pt-2 mt-2 border-t">
+          <div className="overflow-auto flex-1">
             <ul className="text-sm font-medium">
-              {navsFooter.map((item, idx) => (
-                <li key={idx}>
-                  <Link
-                    href={item.href}
-                    className={`flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 will-change-[background-color] ${
-                      isActive(item.href)
+              {navigation.map((item, idx) => {
+                const isItemActive = 
+                  (item.href === '/account' && activeView === 'dashboard') ||
+                  (item.href === '/messages' && activeView === 'messages') ||
+                  (item.href === '/account/rfq' && activeView === 'rfq') ||
+                  (item.href === '/account/favorites' && activeView === 'favorites') ||
+                  isActive(item.href);
+
+                return (
+                  <li key={idx}>
+                    {item.href === '/messages' ? (
+                      <button
+                        onClick={() => onPanelOpen?.('messages')}
+                        className={`w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left will-change-[background-color] ${
+                          activeView === 'messages'
+                            ? 'bg-gray-100 text-gray-900'
+                            : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
+                        }`}
+                      >
+                        <div className="text-gray-500 flex-shrink-0">{item.icon}</div>
+                        <span className="sidebar-text">{item.name}</span>
+                      </button>
+                    ) : item.href === '/account/rfq' ? (
+                      <button
+                        onClick={() => onPanelOpen?.('rfq')}
+                        className={`w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left will-change-[background-color] ${
+                          activeView === 'rfq'
+                            ? 'bg-gray-100 text-gray-900'
+                            : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
+                        }`}
+                      >
+                        <div className="text-gray-500 flex-shrink-0">{item.icon}</div>
+                        <span className="sidebar-text">{item.name}</span>
+                      </button>
+                    ) : item.href === '/account/favorites' ? (
+                      <Link
+                        href="/account?view=favorites"
+                        className={`flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 will-change-[background-color] ${
+                          activeView === 'favorites'
+                            ? 'bg-gray-100 text-gray-900'
+                            : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
+                        }`}
+                      >
+                        <div className="text-gray-500 flex-shrink-0">{item.icon}</div>
+                        <span className="sidebar-text">{item.name}</span>
+                      </Link>
+                    ) : item.panelType ? (
+                      <button
+                        onClick={() => handleNavigationClick(item.href, item.panelType)}
+                        className={`w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left will-change-[background-color] ${
+                          isItemActive
+                            ? 'bg-gray-100 text-gray-900'
+                            : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
+                        }`}
+                      >
+                        <div className="text-gray-500 flex-shrink-0">{item.icon}</div>
+                        <span className="sidebar-text">{item.name}</span>
+                        {item.href === '/cart' && cart.length > 0 && (
+                          <span className="ml-auto bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center sidebar-text">
+                            {cart.length}
+                          </span>
+                        )}
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className={`flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 will-change-[background-color] ${
+                          isItemActive
+                            ? 'bg-gray-100 text-gray-900'
+                            : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
+                        }`}
+                      >
+                        <div className="text-gray-500 flex-shrink-0">{item.icon}</div>
+                        <span className="sidebar-text">{item.name}</span>
+                        {item.href === '/cart' && cart.length > 0 && (
+                          <span className="ml-auto bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center sidebar-text">
+                            {cart.length}
+                          </span>
+                        )}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
+
+              <li>
+                <Menu
+                  items={[
+                    { name: 'Wallet', href: '/account/wallet', icon: '', onClick: () => onPanelOpen?.('payments') },
+                    { name: 'Payment link', href: '/payment-links', icon: '' },
+                    { name: 'Transactions', href: '/account/transactions', icon: '' },
+                  ]}
+                  onButtonClick={() => onPanelOpen?.('payments')}
+                >
+                  <button
+                    onClick={() => onPanelOpen?.('payments')}
+                    className={`w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left will-change-[background-color] ${
+                      activeView === 'payments'
                         ? 'bg-gray-100 text-gray-900'
                         : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
                     }`}
                   >
-                    <div className="text-gray-500">{item.icon}</div>
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
+                    <div className="text-gray-500 flex-shrink-0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
+                        />
+                      </svg>
+                    </div>
+                    <span className="sidebar-text">Payments</span>
+                  </button>
+                </Menu>
+              </li>
+
               <li>
-                <button
-                  onClick={handleLogout}
-                  className="w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left text-gray-600 hover:bg-gray-50 active:bg-gray-100 will-change-[background-color]"
+                <Link
+                  href="/supplier/dashboard"
+                  className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors duration-75 will-change-[background-color]"
                 >
-                  <div className="text-gray-500">
-                    <LogOut className="w-5 h-5" />
+                  <div className="text-gray-500 flex-shrink-0">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+                      />
+                    </svg>
                   </div>
-                  Logout
-                </button>
+                  <span className="sidebar-text">Switch to supplier</span>
+                </Link>
               </li>
             </ul>
+
+            <div className="pt-2 mt-2 border-t">
+              <ul className="text-sm font-medium">
+                {navsFooter.map((item, idx) => (
+                  <li key={idx}>
+                    <Link
+                      href={item.href}
+                      className={`flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 will-change-[background-color] ${
+                        isActive(item.href)
+                          ? 'bg-gray-100 text-gray-900'
+                          : 'text-gray-600 hover:bg-gray-50 active:bg-gray-100'
+                      }`}
+                    >
+                      <div className="text-gray-500 flex-shrink-0">{item.icon}</div>
+                      <span className="sidebar-text">{item.name}</span>
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-x-2 p-2 rounded-lg transition-colors duration-75 text-left text-gray-600 hover:bg-gray-50 active:bg-gray-100 will-change-[background-color]"
+                  >
+                    <div className="text-gray-500 flex-shrink-0">
+                      <LogOut className="w-5 h-5" />
+                    </div>
+                    <span className="sidebar-text">Logout</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }

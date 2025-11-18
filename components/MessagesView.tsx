@@ -21,7 +21,17 @@ import BurgerButton from './BurgerButton';
 import CustomCheckbox from './CustomCheckbox';
 import AnimatedDeleteButton from './AnimatedDeleteButton';
 
-const mockMessages = [
+interface Message {
+  id: string;
+  contactName: string;
+  company: string;
+  lastMessage: string;
+  date: string;
+  unread: number;
+  avatar: string;
+}
+
+const initialMessages: Message[] = [
   {
     id: '1',
     contactName: 'Virendra',
@@ -61,18 +71,97 @@ const mockMessages = [
 ];
 
 export default function MessagesView() {
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [archivedMessages, setArchivedMessages] = useState<Message[]>([]);
   const [selectedTab, setSelectedTab] = useState<'all' | 'unread'>('all');
   const [selectedMessage, setSelectedMessage] = useState<string | null>('1');
   const [messageText, setMessageText] = useState('');
   const [selectMode, setSelectMode] = useState(false);
   const [selectedChats, setSelectedChats] = useState<Set<string>>(new Set());
+  const [isArchiveView, setIsArchiveView] = useState(false);
 
-  const filteredMessages = mockMessages.filter((msg) => {
+  // Determine which messages to display based on archive view
+  const messagesToDisplay = isArchiveView ? archivedMessages : messages;
+  
+  const filteredMessages = messagesToDisplay.filter((msg) => {
     if (selectedTab === 'unread' && msg.unread === 0) return false;
     return true;
   });
 
-  const selectedMsg = mockMessages.find((m) => m.id === selectedMessage) || mockMessages[0];
+  const selectedMsg = messagesToDisplay.find((m) => m.id === selectedMessage);
+
+  // Handle delete functionality
+  const handleDelete = () => {
+    if (selectedChats.size === 0) return;
+    
+    if (isArchiveView) {
+      setArchivedMessages((prev) => prev.filter((msg) => !selectedChats.has(msg.id)));
+    } else {
+      setMessages((prev) => prev.filter((msg) => !selectedChats.has(msg.id)));
+    }
+    
+    setSelectedChats(new Set());
+    setSelectMode(false);
+    
+    // If deleted message was selected, clear selection
+    if (selectedMessage && selectedChats.has(selectedMessage)) {
+      setSelectedMessage(null);
+    }
+  };
+
+  // Handle archive functionality
+  const handleArchive = () => {
+    if (selectedChats.size === 0) return;
+    
+    if (isArchiveView) {
+      // Unarchive: move from archive back to messages
+      const chatsToUnarchive = archivedMessages.filter((msg) => selectedChats.has(msg.id));
+      setMessages((prev) => [...prev, ...chatsToUnarchive]);
+      setArchivedMessages((prev) => prev.filter((msg) => !selectedChats.has(msg.id)));
+    } else {
+      // Archive: move from messages to archive
+      const chatsToArchive = messages.filter((msg) => selectedChats.has(msg.id));
+      setArchivedMessages((prev) => [...prev, ...chatsToArchive]);
+      setMessages((prev) => prev.filter((msg) => !selectedChats.has(msg.id)));
+    }
+    
+    setSelectedChats(new Set());
+    setSelectMode(false);
+    
+    // If archived/unarchived message was selected, clear selection
+    if (selectedMessage && selectedChats.has(selectedMessage)) {
+      setSelectedMessage(null);
+    }
+  };
+
+  // Handle read functionality
+  const handleRead = () => {
+    if (selectedChats.size > 0) {
+      // Mark selected chats as read
+      if (isArchiveView) {
+        setArchivedMessages((prev) =>
+          prev.map((msg) =>
+            selectedChats.has(msg.id) ? { ...msg, unread: 0 } : msg
+          )
+        );
+      } else {
+        setMessages((prev) =>
+          prev.map((msg) =>
+            selectedChats.has(msg.id) ? { ...msg, unread: 0 } : msg
+          )
+        );
+      }
+      setSelectedChats(new Set());
+      setSelectMode(false);
+    } else {
+      // Mark all chats as read
+      if (isArchiveView) {
+        setArchivedMessages((prev) => prev.map((msg) => ({ ...msg, unread: 0 })));
+      } else {
+        setMessages((prev) => prev.map((msg) => ({ ...msg, unread: 0 })));
+      }
+    }
+  };
 
   return (
     <div className="h-screen flex bg-white">
@@ -82,8 +171,8 @@ export default function MessagesView() {
         <div className="pt-20 pb-4 px-4 border-b border-gray-200 relative overflow-visible">
           <div className="flex items-center justify-center gap-4">
             <button className="flex flex-col items-center gap-1.5 p-2 hover:bg-gray-50 rounded-lg transition group">
-              <Users size={20} className="text-gray-600 group-hover:text-teal-600" />
-              <span className="text-xs text-gray-600 group-hover:text-teal-600">Group Chat</span>
+              <Users size={20} className="text-gray-600 group-hover:text-[#9A79FF]" />
+              <span className="text-xs text-gray-600 group-hover:text-[#9A79FF]">Group Chat</span>
             </button>
             <div className="flex flex-col items-center gap-1.5 relative">
               <AnimatedTooltipButton 
@@ -96,9 +185,31 @@ export default function MessagesView() {
               />
               <span className="text-xs text-gray-600 mt-2">New Chat</span>
             </div>
-            <button className="flex flex-col items-center gap-1.5 p-2 hover:bg-gray-50 rounded-lg transition group">
-              <Archive size={20} className="text-gray-600 group-hover:text-teal-600" />
-              <span className="text-xs text-gray-600 group-hover:text-teal-600">Archive</span>
+            <button 
+              onClick={() => {
+                setIsArchiveView(!isArchiveView);
+                setSelectedMessage(null);
+                setSelectedChats(new Set());
+                setSelectMode(false);
+              }}
+              className={`flex flex-col items-center gap-1.5 p-2 rounded-lg transition group ${
+                isArchiveView 
+                  ? 'bg-[rgba(154,121,255,0.1)]' 
+                  : 'hover:bg-gray-50'
+              }`}
+            >
+              <Archive size={20} className={`${
+                isArchiveView 
+                  ? 'text-[#9A79FF]' 
+                  : 'text-gray-600 group-hover:text-[#9A79FF]'
+              }`} />
+              <span className={`text-xs ${
+                isArchiveView 
+                  ? 'text-[#9A79FF]' 
+                  : 'text-gray-600 group-hover:text-[#9A79FF]'
+              }`}>
+                {isArchiveView ? 'Inbox' : 'Archive'}
+              </span>
             </button>
           </div>
         </div>
@@ -111,7 +222,7 @@ export default function MessagesView() {
                 onClick={() => setSelectedTab('all')}
                 className={`text-sm font-medium transition ${
                   selectedTab === 'all'
-                    ? 'text-teal-600 underline decoration-2 underline-offset-4'
+                    ? 'text-[#9A79FF] underline decoration-2 underline-offset-4'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -121,7 +232,7 @@ export default function MessagesView() {
                 onClick={() => setSelectedTab('unread')}
                 className={`text-sm font-medium transition ${
                   selectedTab === 'unread'
-                    ? 'text-teal-600 underline decoration-2 underline-offset-4'
+                    ? 'text-[#9A79FF] underline decoration-2 underline-offset-4'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -130,7 +241,13 @@ export default function MessagesView() {
             </div>
             <BurgerButton 
               isChecked={selectMode}
-              onSelectChat={() => setSelectMode(!selectMode)} 
+              onSelectChat={() => {
+                setSelectMode(!selectMode);
+                if (selectMode) {
+                  // Clear selections when exiting select mode
+                  setSelectedChats(new Set());
+                }
+              }} 
             />
           </div>
         </div>
@@ -142,17 +259,17 @@ export default function MessagesView() {
               key={message.id}
               className={`group relative w-full border-b border-gray-100 overflow-hidden transition-all ${
                 selectedMessage === message.id 
-                  ? 'bg-teal-50' 
-                  : 'bg-teal-50/30 hover:bg-teal-50'
+                  ? 'bg-[rgba(154,121,255,0.1)]' 
+                  : 'bg-[rgba(154,121,255,0.1)]/30 hover:bg-[rgba(154,121,255,0.1)]'
               }`}
               style={{ transitionDuration: '350ms' }}
             >
               {/* Teal light animation on right side - Fixed for selected */}
               {selectedMessage === message.id && (
                 <div 
-                  className="absolute right-0 top-0 w-1 h-full bg-teal-500 z-20 shadow-[0_0_10px_rgba(3,196,203,0.8)]"
+                  className="absolute right-0 top-0 w-1 h-full bg-[#9A79FF] z-20 shadow-[0_0_10px_rgba(154,121,255,0.8)]"
                   style={{ 
-                    boxShadow: '0 0 15px rgba(3, 196, 203, 0.9), 0 0 30px rgba(3, 196, 203, 0.5)'
+                    boxShadow: '0 0 15px rgba(154, 121, 255, 0.9), 0 0 30px rgba(154, 121, 255, 0.5)'
                   }}
                 />
               )}
@@ -162,7 +279,7 @@ export default function MessagesView() {
                 <>
                   {/* Teal line - moves horizontally along outline from left to right */}
                   <div 
-                    className="absolute top-0 left-0 w-0 h-1 bg-teal-500 z-0 opacity-0 group-hover:opacity-100 group-hover:animate-tealLineMoveRight"
+                    className="absolute top-0 left-0 w-0 h-1 bg-[#9A79FF] z-0 opacity-0 group-hover:opacity-100 group-hover:animate-tealLineMoveRight"
                   />
                   {/* Gray background (::after) - follows teal line */}
                   <div 
@@ -203,8 +320,8 @@ export default function MessagesView() {
                     <h3 
                       className={`text-sm font-semibold truncate ${
                         selectedMessage === message.id 
-                          ? 'text-teal-600' 
-                          : 'text-gray-900 group-hover:text-teal-600'
+                          ? 'text-[#9A79FF]' 
+                          : 'text-gray-900 group-hover:text-[#9A79FF]'
                       }`}
                       style={{ transition: 'color 350ms linear 650ms' }}
                     >
@@ -223,37 +340,34 @@ export default function MessagesView() {
         {/* Bottom Action Bar - appears when selectMode is active */}
         {selectMode && (
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center justify-center gap-8 z-30">
-            {/* Archive Button */}
+            {/* Archive/Unarchive Button */}
             <button
-              onClick={() => {
-                // Archive selected chats
-                console.log('Archive:', Array.from(selectedChats));
-              }}
-              className="flex items-center justify-center transition-all duration-200 hover:scale-110"
-              title="Archive"
+              onClick={handleArchive}
+              disabled={selectedChats.size === 0}
+              className={`flex items-center justify-center transition-all duration-200 hover:scale-110 ${
+                selectedChats.size === 0 ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+              title={isArchiveView ? "Unarchive" : "Archive"}
             >
               <Archive className="w-6 h-6 text-gray-700 hover:text-gray-900" />
             </button>
             
-            {/* Read All Button */}
+            {/* Read All / Read Button */}
             <button
-              onClick={() => {
-                // Read all selected chats
-                console.log('Read all:', Array.from(selectedChats));
-              }}
+              onClick={handleRead}
               className="flex items-center justify-center transition-all duration-200 hover:scale-110 min-w-[50px]"
-              title="Read all"
+              title={selectedChats.size > 0 ? "Read selected" : "Read all"}
             >
-              <span className="text-[10px] font-medium text-gray-700 hover:text-gray-900 text-center whitespace-nowrap">Read all</span>
+              <span className="text-[10px] font-medium text-gray-700 hover:text-gray-900 text-center whitespace-nowrap">
+                {selectedChats.size > 0 ? 'Read' : 'Read all'}
+              </span>
             </button>
             
             {/* Delete Button */}
             <div className="flex items-center justify-center">
               <AnimatedDeleteButton
-                onClick={() => {
-                  // Delete selected chats
-                  console.log('Delete:', Array.from(selectedChats));
-                }}
+                onClick={handleDelete}
+                disabled={selectedChats.size === 0}
               />
             </div>
           </div>
@@ -297,19 +411,22 @@ export default function MessagesView() {
             {/* Action Buttons */}
             <div className="px-6 py-3 bg-white border-t border-gray-200">
               <div className="flex items-center gap-2 flex-wrap">
-                <button className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   Review Supplier
                 </button>
-                <button className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                  Business Card
+                </button>
+                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   Product List
                 </button>
-                <button className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   Transport
                 </button>
-                <button className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   Custom Request
                 </button>
-                <button className="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   File a complaint
                 </button>
               </div>
@@ -318,28 +435,28 @@ export default function MessagesView() {
             {/* Attachment Icons */}
             <div className="px-6 py-3 bg-white border-t border-gray-200">
               <div className="flex items-center gap-4">
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-teal-600 rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
                   <Smile size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-teal-600 rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
                   <ImageIcon size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-teal-600 rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
                   <Phone size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-teal-600 rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
                   <Video size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-teal-600 rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
                   <FileText size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-teal-600 rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
                   <FileText size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-teal-600 rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
                   <MapPin size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-teal-600 rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
                   <User size={20} />
                 </button>
               </div>
@@ -353,9 +470,9 @@ export default function MessagesView() {
                   onChange={(e) => setMessageText(e.target.value)}
                   placeholder="Please Type message here"
                   rows={3}
-                  className="flex-1 bg-gray-50 text-gray-900 placeholder-gray-400 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white resize-none border border-gray-200"
+                  className="flex-1 bg-gray-50 text-gray-900 placeholder-gray-400 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#9A79FF] focus:bg-white resize-none border border-gray-200"
                 />
-                <button className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-lg font-medium transition shadow-sm whitespace-nowrap">
+                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-3 rounded-lg font-medium transition shadow-sm whitespace-nowrap">
                   Send
                 </button>
               </div>

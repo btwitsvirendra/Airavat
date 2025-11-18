@@ -11,6 +11,7 @@ import { catalogProducts } from '@/lib/data/catalog';
 import { categories } from '@/lib/data/categories';
 import { motion, AnimatePresence } from 'framer-motion';
 import CategoryCard from '@/components/CategoryCard';
+import FilterSidebar from '@/components/FilterSidebar';
 
 export default function ProductsPage() {
   const searchParams = useSearchParams();
@@ -79,11 +80,13 @@ export default function ProductsPage() {
     addToCart(product, product.minOrderQuantity);
   };
 
-  const handleToggleFavorite = (product: typeof catalogProducts[0], isFav: boolean) => {
-    if (isFav) {
-      removeFromFavorites(product.id);
-    } else {
+  const handleToggleFavorite = (product: typeof catalogProducts[0], checked: boolean) => {
+    if (checked) {
+      // Button is now checked (liked) - add to favorites
       addToFavorites(product);
+    } else {
+      // Button is now unchecked (unliked) - remove from favorites
+      removeFromFavorites(product.id);
     }
   };
 
@@ -95,13 +98,20 @@ export default function ProductsPage() {
   const allCategories = [{ id: 'all', name: 'All Categories', slug: 'all' }, ...categories];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{ backgroundColor: '#F9F9FF' }}>
       <div className="max-w-[1920px] mx-auto px-4 py-8">
         <div className="flex gap-6">
-          {/* Category Card */}
-          <div className="hidden lg:block flex-shrink-0">
+          {/* Left Sidebar - Category Card and Filters */}
+          <div className="hidden lg:block flex-shrink-0" style={{ width: '233px' }}>
             <CategoryCard />
-        </div>
+            <FilterSidebar
+              sortBy={sortBy}
+              onSortChange={setSortBy}
+              minPrice={priceRange[0]}
+              maxPrice={priceRange[1]}
+              onPriceChange={(min, max) => setPriceRange([min, max])}
+            />
+          </div>
 
           <main className="flex-1">
             {/* Header */}
@@ -114,7 +124,7 @@ export default function ProductsPage() {
             <div className="mb-6 flex flex-wrap items-center gap-4 bg-white p-4 rounded-lg border border-gray-200">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:border-[#03C4CB] hover:text-[#03C4CB] transition-colors"
+                className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:border-[#9A79FF] hover:text-[#9A79FF] transition-colors"
               >
                 <Filter size={16} />
                 Filters
@@ -122,7 +132,7 @@ export default function ProductsPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 focus:outline-none focus:border-[#03C4CB]"
+                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 focus:outline-none focus:border-[#9A79FF]"
               >
                 <option value="relevance">Sort by: Relevance</option>
                 <option value="price-low">Price: Low to High</option>
@@ -133,7 +143,7 @@ export default function ProductsPage() {
                   <button
                     onClick={() => setViewMode('grid')}
                   className={`p-2 rounded-md transition ${
-                    viewMode === 'grid' ? 'bg-[#03C4CB] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    viewMode === 'grid' ? 'bg-[#9A79FF] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                   >
                   <Grid size={18} />
@@ -141,7 +151,7 @@ export default function ProductsPage() {
                   <button
                     onClick={() => setViewMode('list')}
                   className={`p-2 rounded-md transition ${
-                    viewMode === 'list' ? 'bg-[#03C4CB] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    viewMode === 'list' ? 'bg-[#9A79FF] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                   >
                   <List size={18} />
@@ -173,7 +183,7 @@ export default function ProductsPage() {
                       <select
                         value={selectedCategory}
                         onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:border-[#03C4CB]"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:border-[#9A79FF]"
                       >
                         {allCategories.map((cat) => (
                           <option key={cat.id} value={cat.slug}>
@@ -189,7 +199,7 @@ export default function ProductsPage() {
                           type="number"
                           value={priceRange[0]}
                           onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:border-[#03C4CB]"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:border-[#9A79FF]"
                           placeholder="Min"
                         />
                         <span className="text-gray-400">—</span>
@@ -197,7 +207,7 @@ export default function ProductsPage() {
                           type="number"
                           value={priceRange[1]}
                           onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:border-[#03C4CB]"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:border-[#9A79FF]"
                           placeholder="Max"
                         />
                 </div>
@@ -227,7 +237,7 @@ export default function ProductsPage() {
                       {viewMode === 'grid' ? (
                         <div className="relative bg-white rounded-2xl overflow-hidden h-full transition-all duration-300 ease-in-out shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,rgba(0,0,0,0.3)_0px_3px_7px_-3px] hover:bg-[#fdfdfd] hover:shadow-[rgba(0,0,0,0.09)_0px_2px_1px,rgba(0,0,0,0.09)_0px_4px_2px,rgba(0,0,0,0.09)_0px_8px_4px,rgba(0,0,0,0.09)_0px_16px_8px,rgba(0,0,0,0.09)_0px_32px_16px]" style={{ aspectRatio: '3/4' }}>
                           {/* Like button in top-right */}
-                          <div className="absolute top-4 right-4 z-10">
+                          <div className="absolute top-4 right-4 z-20" onClick={(e) => e.stopPropagation()}>
                             <LikeButton 
                               size="sm" 
                               checked={isFavorite(product.id)}
@@ -235,9 +245,9 @@ export default function ProductsPage() {
                             />
                           </div>
 
-                          <div className="p-4 h-full flex flex-col">
-                            {/* Image Holder - Unique Design */}
-                            <Link href={`/products/${product.id}`} className="block mb-3 flex-1">
+                          <div className="p-4 h-full flex flex-col" style={{ width: '100%' }}>
+                            {/* Image Holder */}
+                            <Link href={`/products/${product.id}`} className="block mb-3 flex-1" style={{ width: '100%' }}>
                               <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative group">
                                 {product.images[0] ? (
                                   <img
@@ -250,48 +260,48 @@ export default function ProductsPage() {
                                     <PackageSearch size={32} />
                                   </div>
                                 )}
-                                {/* Overlay gradient */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                               </div>
                             </Link>
 
-                            {/* Product Info */}
-                            <div className="flex-1 flex flex-col justify-between">
-                              <div>
-                                <Link href={`/products/${product.id}`}>
-                                  <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 mb-2">
+                            {/* Product Info - All Left Aligned */}
+                            <div className="flex-1 flex flex-col justify-between" style={{ width: '100%', textAlign: 'left' }}>
+                              <div style={{ width: '100%', textAlign: 'left' }}>
+                                <Link href={`/products/${product.id}`} style={{ display: 'block', width: '100%', textAlign: 'left' }}>
+                                  <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 mb-2" style={{ textAlign: 'left', width: '100%' }}>
                                     {product.name}
                                   </h3>
                                 </Link>
-                                <div className="flex items-center gap-1 mb-2">
-                                  <Star size={12} className="fill-yellow-400 text-yellow-400" />
-                                  <span className="text-xs text-gray-600">
+                                <div className="flex items-center gap-1 mb-2" style={{ justifyContent: 'flex-start', width: '100%' }}>
+                                  <Star size={12} className="fill-yellow-400 text-yellow-400 flex-shrink-0" />
+                                  <span className="text-xs text-gray-600" style={{ textAlign: 'left' }}>
                                     {product.supplier?.rating?.toFixed(1) || 'N/A'}
                                   </span>
                                 </div>
-                                <div className="flex items-baseline gap-1 mb-1">
-                                  <span className="text-base font-bold text-gray-900">
+                                <div className="flex items-baseline gap-1 mb-1" style={{ justifyContent: 'flex-start', width: '100%' }}>
+                                  <span className="text-base font-bold text-gray-900" style={{ textAlign: 'left' }}>
                                     ₹{product.price.amount.toLocaleString()}
                                   </span>
-                                  <span className="text-xs text-gray-500">/{product.price.unit}</span>
+                                  <span className="text-xs text-gray-500" style={{ textAlign: 'left' }}>/{product.price.unit}</span>
                                 </div>
-                                <p className="text-xs text-gray-500 mb-3">
+                                <p className="text-xs text-gray-500 mb-3" style={{ textAlign: 'left', width: '100%' }}>
                                   MOQ: {product.minOrderQuantity} {product.price.unit}
                                 </p>
                               </div>
 
                               {/* Action Buttons */}
-                              <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-2 mt-auto" style={{ width: '100%' }}>
                                 <button
                                   onClick={() => handleAddToCart(product)}
-                                  className="flex-1 bg-[#03C4CB] hover:bg-[#02A8B0] text-white py-2 px-3 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5"
+                                  className="flex-1 bg-[#9A79FF] hover:bg-[#8A69EF] text-white py-2 px-3 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5"
+                                  style={{ minWidth: 0 }}
                                 >
                                   <ShoppingCart size={14} />
                                   <span>Cart</span>
                                 </button>
                                 <button
                                   onClick={() => handleChat(product)}
-                                  className="p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition"
+                                  className="p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition flex-shrink-0"
                                   title="Chat with supplier"
                                 >
                                   <MessageSquare size={16} className="text-gray-600" />
@@ -308,7 +318,7 @@ export default function ProductsPage() {
                                       navigator.clipboard.writeText(`${window.location.origin}/products/${product.id}`);
                                     }
                                   }}
-                                  className="p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition"
+                                  className="p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition flex-shrink-0"
                                   title="Share product"
                                 >
                                   <Share2 size={16} className="text-gray-600" />
@@ -360,7 +370,7 @@ export default function ProductsPage() {
                           <div className="flex flex-col items-end gap-2">
                           <button
                             onClick={() => handleAddToCart(product)}
-                              className="bg-[#03C4CB] hover:bg-[#02A8B0] text-white py-2 px-4 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2"
+                              className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white py-2 px-4 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2"
                           >
                               <ShoppingCart size={16} />
                             Add to Cart
