@@ -171,8 +171,8 @@ export default function MessagesView() {
         <div className="pt-20 pb-4 px-4 border-b border-gray-200 relative overflow-visible">
           <div className="flex items-center justify-center gap-4">
             <button className="flex flex-col items-center gap-1.5 p-2 hover:bg-gray-50 rounded-lg transition group">
-              <Users size={20} className="text-gray-600 group-hover:text-[#9A79FF]" />
-              <span className="text-xs text-gray-600 group-hover:text-[#9A79FF]">Group Chat</span>
+              <Users size={20} className="text-gray-600 group-hover:text-[#3373FF]" />
+              <span className="text-xs text-gray-600 group-hover:text-[#3373FF]">Group Chat</span>
             </button>
             <div className="flex flex-col items-center gap-1.5 relative">
               <AnimatedTooltipButton 
@@ -200,13 +200,13 @@ export default function MessagesView() {
             >
               <Archive size={20} className={`${
                 isArchiveView 
-                  ? 'text-[#9A79FF]' 
-                  : 'text-gray-600 group-hover:text-[#9A79FF]'
+                  ? 'text-[#3373FF]' 
+                  : 'text-gray-600 group-hover:text-[#3373FF]'
               }`} />
               <span className={`text-xs ${
                 isArchiveView 
-                  ? 'text-[#9A79FF]' 
-                  : 'text-gray-600 group-hover:text-[#9A79FF]'
+                  ? 'text-[#3373FF]' 
+                  : 'text-gray-600 group-hover:text-[#3373FF]'
               }`}>
                 {isArchiveView ? 'Inbox' : 'Archive'}
               </span>
@@ -222,7 +222,7 @@ export default function MessagesView() {
                 onClick={() => setSelectedTab('all')}
                 className={`text-sm font-medium transition ${
                   selectedTab === 'all'
-                    ? 'text-[#9A79FF] underline decoration-2 underline-offset-4'
+                    ? 'text-[#3373FF] underline decoration-2 underline-offset-4'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -232,7 +232,7 @@ export default function MessagesView() {
                 onClick={() => setSelectedTab('unread')}
                 className={`text-sm font-medium transition ${
                   selectedTab === 'unread'
-                    ? 'text-[#9A79FF] underline decoration-2 underline-offset-4'
+                    ? 'text-[#3373FF] underline decoration-2 underline-offset-4'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -267,7 +267,7 @@ export default function MessagesView() {
               {/* Teal light animation on right side - Fixed for selected */}
               {selectedMessage === message.id && (
                 <div 
-                  className="absolute right-0 top-0 w-1 h-full bg-[#9A79FF] z-20 shadow-[0_0_10px_rgba(154,121,255,0.8)]"
+                  className="absolute right-0 top-0 w-1 h-full bg-[#3373FF] z-20 shadow-[0_0_10px_rgba(154,121,255,0.8)]"
                   style={{ 
                     boxShadow: '0 0 15px rgba(154, 121, 255, 0.9), 0 0 30px rgba(154, 121, 255, 0.5)'
                   }}
@@ -279,7 +279,7 @@ export default function MessagesView() {
                 <>
                   {/* Teal line - moves horizontally along outline from left to right */}
                   <div 
-                    className="absolute top-0 left-0 w-0 h-1 bg-[#9A79FF] z-0 opacity-0 group-hover:opacity-100 group-hover:animate-tealLineMoveRight"
+                    className="absolute top-0 left-0 w-0 h-1 bg-[#3373FF] z-0 opacity-0 group-hover:opacity-100 group-hover:animate-tealLineMoveRight"
                   />
                   {/* Gray background (::after) - follows teal line */}
                   <div 
@@ -320,8 +320,8 @@ export default function MessagesView() {
                     <h3 
                       className={`text-sm font-semibold truncate ${
                         selectedMessage === message.id 
-                          ? 'text-[#9A79FF]' 
-                          : 'text-gray-900 group-hover:text-[#9A79FF]'
+                          ? 'text-[#3373FF]' 
+                          : 'text-gray-900 group-hover:text-[#3373FF]'
                       }`}
                       style={{ transition: 'color 350ms linear 650ms' }}
                     >
@@ -411,22 +411,22 @@ export default function MessagesView() {
             {/* Action Buttons */}
             <div className="px-6 py-3 bg-white border-t border-gray-200">
               <div className="flex items-center gap-2 flex-wrap">
-                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   Review Supplier
                 </button>
-                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   Business Card
                 </button>
-                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   Product List
                 </button>
-                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   Transport
                 </button>
-                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   Custom Request
                 </button>
-                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
+                <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-sm">
                   File a complaint
                 </button>
               </div>
@@ -435,28 +435,28 @@ export default function MessagesView() {
             {/* Attachment Icons */}
             <div className="px-6 py-3 bg-white border-t border-gray-200">
               <div className="flex items-center gap-4">
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#3373FF] rounded-lg transition">
                   <Smile size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#3373FF] rounded-lg transition">
                   <ImageIcon size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#3373FF] rounded-lg transition">
                   <Phone size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#3373FF] rounded-lg transition">
                   <Video size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#3373FF] rounded-lg transition">
                   <FileText size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#3373FF] rounded-lg transition">
                   <FileText size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#3373FF] rounded-lg transition">
                   <MapPin size={20} />
                 </button>
-                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#9A79FF] rounded-lg transition">
+                <button className="p-2 text-gray-600 hover:bg-gray-100 hover:text-[#3373FF] rounded-lg transition">
                   <User size={20} />
                 </button>
               </div>
@@ -470,9 +470,9 @@ export default function MessagesView() {
                   onChange={(e) => setMessageText(e.target.value)}
                   placeholder="Please Type message here"
                   rows={3}
-                  className="flex-1 bg-gray-50 text-gray-900 placeholder-gray-400 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#9A79FF] focus:bg-white resize-none border border-gray-200"
+                  className="flex-1 bg-gray-50 text-gray-900 placeholder-gray-400 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#3373FF] focus:bg-white resize-none border border-gray-200"
                 />
-                <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-3 rounded-lg font-medium transition shadow-sm whitespace-nowrap">
+                <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-6 py-3 rounded-lg font-medium transition shadow-sm whitespace-nowrap">
                   Send
                 </button>
               </div>

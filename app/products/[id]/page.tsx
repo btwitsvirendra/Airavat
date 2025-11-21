@@ -81,7 +81,8 @@ export default function ProductDetailPage() {
   const router = useRouter();
   const productId = params?.id as string;
   const product = allProducts.find((p) => p.id === productId) || allProducts[0];
-  const { addToCart, addToFavorites, removeFromFavorites, isFavorite, startProductChat } = useStore();
+  const { addToCart, addToFavorites, removeFromFavorites, favorites, startProductChat } = useStore();
+  const isFavorite = (productId: string) => favorites.some((p: any) => p.id === productId);
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState('Multi');

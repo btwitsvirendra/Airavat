@@ -103,7 +103,7 @@ export default function RFQView() {
               onClick={() => setActiveTab('inquiries')}
               className={`text-base font-medium transition ${
                 activeTab === 'inquiries'
-                  ? 'text-[#9A79FF] underline decoration-2 underline-offset-4'
+                  ? 'text-[#3373FF] underline decoration-2 underline-offset-4'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -113,7 +113,7 @@ export default function RFQView() {
               onClick={() => setActiveTab('post')}
               className={`text-base font-medium transition ${
                 activeTab === 'post'
-                  ? 'text-[#9A79FF] underline decoration-2 underline-offset-4'
+                  ? 'text-[#3373FF] underline decoration-2 underline-offset-4'
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
@@ -121,7 +121,7 @@ export default function RFQView() {
             </button>
           </div>
           {activeTab === 'post' && (
-            <a href="#" className="text-sm text-gray-600 hover:text-[#9A79FF] flex items-center gap-1">
+            <a href="#" className="text-sm text-gray-600 hover:text-[#3373FF] flex items-center gap-1">
               How to Use
               <HelpCircle size={16} />
             </a>
@@ -135,7 +135,7 @@ export default function RFQView() {
           <div className="p-6">
             {/* Filters */}
             <div className="flex items-center gap-4 mb-6">
-              <button className="flex items-center gap-2 bg-[#9A79FF] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#8A69EF] transition">
+              <button className="flex items-center gap-2 bg-[#3373FF] text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#265ACC] transition">
                 All Inquires
                 <ChevronDown size={16} />
               </button>
@@ -146,7 +146,7 @@ export default function RFQView() {
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="flex items-center gap-2 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition focus:outline-none focus:ring-2 focus:ring-[#9A79FF]"
+                className="flex items-center gap-2 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition focus:outline-none focus:ring-2 focus:ring-[#3373FF]"
               >
                 <option value="">Select the category</option>
                 <option value="electronics">Electronics</option>
@@ -200,7 +200,7 @@ export default function RFQView() {
                       <p className="text-sm text-gray-700">{inquiry.delivery}</p>
                     </div>
                     <div className="col-span-2 flex items-center justify-end">
-                      <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-2 rounded-lg text-sm font-medium transition">
+                      <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-6 py-2 rounded-lg text-sm font-medium transition">
                         Chat
                       </button>
                     </div>
@@ -220,7 +220,7 @@ export default function RFQView() {
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#9A79FF]"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#3373FF]"
                 >
                   <option value="">Select the category</option>
                   <option value="electronics">Electronics</option>
@@ -240,7 +240,7 @@ export default function RFQView() {
                   value={formData.productName}
                   onChange={(e) => setFormData({ ...formData, productName: e.target.value })}
                   placeholder="Please enter product name"
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#9A79FF]"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#3373FF]"
                 />
               </div>
 
@@ -254,7 +254,7 @@ export default function RFQView() {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Please enter your product requirement to make customization to suite your business."
                   rows={5}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#9A79FF] resize-none"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#3373FF] resize-none"
                 />
               </div>
 
@@ -263,7 +263,7 @@ export default function RFQView() {
                 <label className="block text-sm font-bold text-gray-900 mb-2">
                   Upload Files
                 </label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#9A79FF] transition cursor-pointer">
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#3373FF] transition cursor-pointer">
                   <input
                     type="file"
                     multiple
@@ -273,7 +273,7 @@ export default function RFQView() {
                     id="file-upload"
                   />
                   <label htmlFor="file-upload" className="cursor-pointer">
-                    <Upload size={32} className="text-[#9A79FF] mx-auto mb-2" />
+                    <Upload size={32} className="text-[#3373FF] mx-auto mb-2" />
                     <p className="text-sm text-gray-600">
                       Upload a jpg, jpeg, png, doc, xls, or pdf, less than 10MB
                     </p>
@@ -308,14 +308,14 @@ export default function RFQView() {
                     value={formData.quantity}
                     onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
                     placeholder="Enter required Quantity"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#9A79FF]"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#3373FF]"
                   />
                   <input
                     type="text"
                     value={formData.unit}
                     onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
                     placeholder="Enter Unit (optional)"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#9A79FF]"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#3373FF]"
                   />
                 </div>
               </div>
@@ -329,7 +329,7 @@ export default function RFQView() {
                       type="checkbox"
                       checked={agreeToShare}
                       onChange={(e) => setAgreeToShare(e.target.checked)}
-                      className="mt-1 w-5 h-5 text-[#9A79FF] border-gray-300 rounded focus:ring-[#9A79FF]"
+                      className="mt-1 w-5 h-5 text-[#3373FF] border-gray-300 rounded focus:ring-[#3373FF]"
                     />
                     <span className="text-sm text-gray-700">
                       I agree to share my Business Card with quoted suppliers.
@@ -340,7 +340,7 @@ export default function RFQView() {
                       type="checkbox"
                       checked={agreeToRules}
                       onChange={(e) => setAgreeToRules(e.target.checked)}
-                      className="mt-1 w-5 h-5 text-[#9A79FF] border-gray-300 rounded focus:ring-[#9A79FF]"
+                      className="mt-1 w-5 h-5 text-[#3373FF] border-gray-300 rounded focus:ring-[#3373FF]"
                     />
                     <span className="text-sm text-gray-700">
                       I have read, understood and agreed to abide by the Buying Request Posting Rules
@@ -358,7 +358,7 @@ export default function RFQView() {
               <div className="pt-4">
                 <button
                   type="submit"
-                  className="w-full bg-[#9A79FF] hover:bg-[#8A69EF] text-white font-bold py-4 rounded-lg transition"
+                  className="w-full bg-[#3373FF] hover:bg-[#265ACC] text-white font-bold py-4 rounded-lg transition"
                 >
                   Post RFQ
                 </button>

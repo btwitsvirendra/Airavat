@@ -75,14 +75,14 @@ export default function FilterSidebar({
           {sortByOptions.map((option) => (
             <div className="block mt-4" key={option.id}>
               <input
-                className="mr-2 cursor-pointer accent-[#9A79FF]"
+                className="mr-2 cursor-pointer accent-[#3373FF]"
                 type="radio"
                 id={option.id}
                 name="sortBy"
                 checked={sortBy === option.value}
                 onChange={() => onSortChange(option.value)}
               />
-              <label className="cursor-pointer text-gray-700 hover:text-[#9A79FF] transition-colors" htmlFor={option.id}>
+              <label className="cursor-pointer text-gray-700 hover:text-[#3373FF] transition-colors" htmlFor={option.id}>
                 {option.label}
               </label>
             </div>
@@ -104,7 +104,7 @@ export default function FilterSidebar({
                 onClick={() => handlePriceRangeClick(range.min, range.max)}
                 className={`w-full text-left px-3 py-2 rounded-md text-sm transition ${
                   minPrice === range.min && maxPrice === range.max
-                    ? 'bg-[#9A79FF] text-white'
+                    ? 'bg-[#3373FF] text-white'
                     : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
                 }`}
               >
@@ -117,7 +117,7 @@ export default function FilterSidebar({
           <div className="flex items-center flex-wrap gap-2">
             <div className="flex-1 min-w-[120px]">
               <select
-                className="bg-white border border-gray-200 rounded-md p-3 w-full text-sm text-gray-700 focus:outline-none focus:border-[#9A79FF]"
+                className="bg-white border border-gray-200 rounded-md p-3 w-full text-sm text-gray-700 focus:outline-none focus:border-[#3373FF]"
                 value={customMinPrice}
                 onChange={(e) => handleMinPriceChange(e.target.value)}
               >
@@ -135,7 +135,7 @@ export default function FilterSidebar({
             </div>
             <div className="flex-1 min-w-[120px]">
               <select
-                className="bg-white border border-gray-200 rounded-md p-3 w-full text-sm text-gray-700 focus:outline-none focus:border-[#9A79FF]"
+                className="bg-white border border-gray-200 rounded-md p-3 w-full text-sm text-gray-700 focus:outline-none focus:border-[#3373FF]"
                 value={customMaxPrice}
                 onChange={(e) => handleMaxPriceChange(e.target.value)}
               >
@@ -160,14 +160,14 @@ export default function FilterSidebar({
           {colorOptions.map((option) => (
             <div className="block mt-4" key={option.id}>
               <input
-                className="mr-2 cursor-pointer accent-[#9A79FF]"
+                className="mr-2 cursor-pointer accent-[#3373FF]"
                 type="radio"
                 name="flexRadioColor"
                 id={option.id}
                 checked={selectedColor === option.id}
                 onChange={() => setSelectedColor(option.id)}
               />
-              <label className="cursor-pointer text-gray-700 hover:text-[#9A79FF] transition-colors" htmlFor={option.id}>
+              <label className="cursor-pointer text-gray-700 hover:text-[#3373FF] transition-colors" htmlFor={option.id}>
                 {option.label}
               </label>
             </div>

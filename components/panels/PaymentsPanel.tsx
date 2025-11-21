@@ -18,7 +18,7 @@ export default function PaymentsPanel() {
   return (
     <div className="h-full overflow-y-auto p-6">
       {/* Wallet Balance */}
-      <div className="bg-gradient-to-r from-[#9A79FF] to-[#8A69EF] rounded-lg p-6 text-white mb-6">
+      <div className="bg-gradient-to-r from-[#3373FF] to-[#265ACC] rounded-lg p-6 text-white mb-6">
         <div className="flex items-center justify-between mb-4">
           <div>
             <p className="text-sm opacity-90 mb-1">Wallet Balance</p>
@@ -42,10 +42,10 @@ export default function PaymentsPanel() {
         <div className="grid grid-cols-1 gap-3">
           <Link
             href="/account/wallet"
-            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#9A79FF] hover:bg-[rgba(154, 121, 255, 0.1)] transition cursor-pointer"
+            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#3373FF] hover:bg-[rgba(154, 121, 255, 0.1)] transition cursor-pointer"
           >
             <div className="flex items-center gap-3">
-              <Wallet size={24} className="text-[#9A79FF]" />
+              <Wallet size={24} className="text-[#3373FF]" />
               <div>
                 <p className="text-sm font-medium text-gray-900">Wallet</p>
                 <p className="text-xs text-gray-500">View and manage your wallet</p>
@@ -55,10 +55,10 @@ export default function PaymentsPanel() {
           </Link>
           <Link
             href="/payment-links"
-            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#9A79FF] hover:bg-[rgba(154, 121, 255, 0.1)] transition cursor-pointer"
+            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#3373FF] hover:bg-[rgba(154, 121, 255, 0.1)] transition cursor-pointer"
           >
             <div className="flex items-center gap-3">
-              <Link2 size={24} className="text-[#9A79FF]" />
+              <Link2 size={24} className="text-[#3373FF]" />
               <div>
                 <p className="text-sm font-medium text-gray-900">Payment Link</p>
                 <p className="text-xs text-gray-500">Create and manage payment links</p>
@@ -68,10 +68,10 @@ export default function PaymentsPanel() {
           </Link>
           <Link
             href="/account/transactions"
-            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#9A79FF] hover:bg-[rgba(154, 121, 255, 0.1)] transition cursor-pointer"
+            className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#3373FF] hover:bg-[rgba(154, 121, 255, 0.1)] transition cursor-pointer"
           >
             <div className="flex items-center gap-3">
-              <Receipt size={24} className="text-[#9A79FF]" />
+              <Receipt size={24} className="text-[#3373FF]" />
               <div>
                 <p className="text-sm font-medium text-gray-900">Transactions</p>
                 <p className="text-xs text-gray-500">View transaction history</p>
@@ -86,13 +86,13 @@ export default function PaymentsPanel() {
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-gray-900">Payment Methods</h3>
-          <button className="text-sm text-[#9A79FF] hover:underline">Add New</button>
+          <button className="text-sm text-[#3373FF] hover:underline">Add New</button>
         </div>
         <div className="space-y-3">
           {paymentMethods.map((method) => (
             <div
               key={method.id}
-              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#9A79FF] transition"
+              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#3373FF] transition"
             >
               <div className="flex items-center gap-3">
                 <CreditCard size={24} className="text-gray-400" />
@@ -103,7 +103,7 @@ export default function PaymentsPanel() {
               </div>
               <div className="flex items-center gap-2">
                 {method.default && (
-                  <span className="px-2 py-1 bg-[rgba(154, 121, 255, 0.1)] text-[#9A79FF] text-xs font-medium rounded">Default</span>
+                  <span className="px-2 py-1 bg-[rgba(154, 121, 255, 0.1)] text-[#3373FF] text-xs font-medium rounded">Default</span>
                 )}
                 <ArrowRight size={16} className="text-gray-400" />
               </div>
@@ -116,7 +116,7 @@ export default function PaymentsPanel() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
-          <Link href="/account/transactions" className="text-sm text-[#9A79FF] hover:underline">
+          <Link href="/account/transactions" className="text-sm text-[#3373FF] hover:underline">
             View All
           </Link>
         </div>

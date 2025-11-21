@@ -19,7 +19,7 @@ export default function PaymentPage() {
         <div className="max-w-[1920px] mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/" className="text-2xl font-bold text-[#9A79FF]">Airavat</Link>
+              <Link href="/" className="text-2xl font-bold text-[#3373FF]">Airavat</Link>
               <span className="text-gray-600">Payment & Wallet</span>
             </div>
           </div>
@@ -49,7 +49,7 @@ export default function PaymentPage() {
                   Orders
                   <ChevronRight size={16} className="ml-auto text-gray-400" />
                 </Link>
-                <Link href="/payment" className="flex items-center gap-3 px-4 py-2 bg-[rgba(154, 121, 255, 0.1)] text-[#9A79FF] rounded-lg font-medium">
+                <Link href="/payment" className="flex items-center gap-3 px-4 py-2 bg-[rgba(154, 121, 255, 0.1)] text-[#3373FF] rounded-lg font-medium">
                   <CreditCard size={18} />
                   Payment
                 </Link>
@@ -79,7 +79,7 @@ export default function PaymentPage() {
             </div>
 
             {/* Add New Card Button */}
-            <button className="px-6 py-3 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg font-semibold transition">
+            <button className="px-6 py-3 bg-[#3373FF] hover:bg-[#265ACC] text-white rounded-lg font-semibold transition">
               Add New Card
             </button>
           </main>

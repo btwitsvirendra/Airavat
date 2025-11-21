@@ -25,7 +25,7 @@ function createCategory(
   name: string,
   icon: string,
   description: string,
-  subcategoryNames?: string[] | Category[]
+  subcategoryNames?: (string | Category)[]
 ): Category {
   const slug = generateSlug(name);
   return {
@@ -209,9 +209,9 @@ export const categories: Category[] = [
         'wood based panels machinery',
         'wood chip machines',
       ]),
-      'Electronic Products machinery',
+      createSubcategory('industrial-machinery', 'Electronic Products machinery', []),
       createSubcategory('industrial-machinery', 'Recycling', ['Textile waste', 'Other recycling products']),
-      'Machinery service Sector',
+      createSubcategory('industrial-machinery', 'Machinery service Sector', []),
       createSubcategory('industrial-machinery', 'Environmental Machinery', [
         'Water treatment machinery',
         'Fog cannon machinery',
@@ -299,8 +299,8 @@ export const categories: Category[] = [
         'Separator',
         'Peanut Processing Machines',
       ]),
-      'Other Excess Inventory',
-      'Electronics Production Machinery',
+      createSubcategory('industrial-machinery', 'Other Excess Inventory', []),
+      createSubcategory('industrial-machinery', 'Electronics Production Machinery', []),
       createSubcategory('industrial-machinery', 'Apparel & Textile Machinery', [
         'Cloth Cutting Machines',
         'Braiding Machines',

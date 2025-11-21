@@ -29,7 +29,6 @@ interface AppState {
   favorites: Product[];
   addToFavorites: (product: Product) => void;
   removeFromFavorites: (productId: string) => void;
-  isFavorite: (productId: string) => boolean;
 
   // UI state
   isSidebarOpen: boolean;
@@ -41,7 +40,9 @@ interface AppState {
 export const useStore = create<AppState>((set) => ({
   // User state
   user: null,
-  setUser: (user) => set({ user }),
+  setUser: (user: User | null) => {
+    set({ user });
+  },
 
   // Cart state
   cart: [],
@@ -154,19 +155,21 @@ export const useStore = create<AppState>((set) => ({
     set((state) => ({ messages: [...state.messages, message] })),
   startProductChat: (product: Product, supplierId?: string) => {
     const conversationId = `conv-${product.id}-${supplierId || 'supplier'}`;
-    const message: ChatMessage = {
-      id: `msg-${Date.now()}`,
-      conversationId,
-      senderId: useStore.getState().user?.id || 'user',
-      receiverId: supplierId || 'supplier',
-      message: `Hello! I am interested in this product:\n\nProduct: ${product.name}\nPrice: ${product.price.currency} ${product.price.amount}\n\nMay I know more about it?`,
-      type: 'text',
-      timestamp: new Date(),
-      read: false,
-    };
-    set({ 
-      activeConversationId: conversationId,
-      messages: [...useStore.getState().messages, message]
+    set((state) => {
+      const message: ChatMessage = {
+        id: `msg-${Date.now()}`,
+        conversationId,
+        senderId: state.user?.id || 'user',
+        receiverId: supplierId || 'supplier',
+        message: `Hello! I am interested in this product:\n\nProduct: ${product.name}\nPrice: ${product.price.currency} ${product.price.amount}\n\nMay I know more about it?`,
+        type: 'text',
+        timestamp: new Date(),
+        read: false,
+      };
+      return { 
+        activeConversationId: conversationId,
+        messages: [...state.messages, message]
+      };
     });
   },
 
@@ -183,10 +186,6 @@ export const useStore = create<AppState>((set) => ({
     set((state) => ({
       favorites: state.favorites.filter((p) => p.id !== productId),
     })),
-  isFavorite: (productId) => {
-    const state = useStore.getState();
-    return state.favorites.some((p) => p.id === productId);
-  },
 
   // UI state
   isSidebarOpen: false,

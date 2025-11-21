@@ -54,7 +54,8 @@ const topRankingProducts = [
 const frequentlySearched = ['glass bottles', 'perfume bottle', 'sport car', 'perfume bottle with box', 'led lights', 'smartphone'];
 
 export default function HomePage() {
-  const { addToCart, addToFavorites, removeFromFavorites, isFavorite, startProductChat, searchQuery, setSearchQuery } = useStore();
+  const { addToCart, addToFavorites, removeFromFavorites, favorites, startProductChat, searchQuery, setSearchQuery } = useStore();
+  const isFavorite = (productId: string) => favorites.some((p: any) => p.id === productId);
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const searchParams = useSearchParams();
@@ -166,7 +167,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F9F9FF', background: '#F9F9FF', minHeight: '100vh' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#F8FAFC', background: '#F8FAFC', minHeight: '100vh' }}>
       {/* Cookies Popup */}
       <CookiesPopup />
 
@@ -254,7 +255,7 @@ export default function HomePage() {
                         <div className="flex items-center gap-2 mt-auto" style={{ width: '100%' }}>
                           <button
                             onClick={() => handleAddToCart(product)}
-                            className="flex-1 bg-[#9A79FF] hover:bg-[#8A69EF] text-white py-2 px-3 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5"
+                            className="flex-1 bg-[#3373FF] hover:bg-[#265ACC] text-white py-2 px-3 rounded-lg text-xs font-medium transition flex items-center justify-center gap-1.5"
                             style={{ minWidth: 0 }}
                           >
                             <ShoppingCart size={14} />

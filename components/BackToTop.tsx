@@ -43,7 +43,7 @@ export default function BackToTop() {
     <div className="fixed bottom-8 right-8 z-50">
       <button
         onClick={scrollToTop}
-        className="group relative w-[50px] h-[50px] rounded-full bg-[rgb(20,20,20)] border-none font-semibold flex items-center justify-center shadow-[0px_0px_0px_4px_rgba(154,121,255,0.253)] cursor-pointer transition-all duration-300 overflow-hidden hover:w-[140px] hover:rounded-[50px] hover:bg-[#9A79FF]"
+        className="group relative w-[50px] h-[50px] rounded-full bg-[rgb(20,20,20)] border-none font-semibold flex items-center justify-center shadow-[0px_0px_0px_4px_rgba(154,121,255,0.253)] cursor-pointer transition-all duration-300 overflow-hidden hover:w-[140px] hover:rounded-[50px] hover:bg-[#3373FF]"
       >
         <svg
           className="w-3 transition-all duration-300 group-hover:translate-y-[-200%]"

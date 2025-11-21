@@ -48,7 +48,7 @@ export default function BuyerDashboard() {
   const { favorites } = useStore();
   
   // Get latest favorites (already sorted with latest on top from store)
-  const favoriteItems = favorites.slice(0, 3).map((product) => ({
+  const favoriteItems = favorites.slice(0, 3).map((product: any) => ({
     name: product.name,
     price: product.price.amount,
     moq: product.minOrderQuantity,
@@ -56,7 +56,7 @@ export default function BuyerDashboard() {
   }));
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F9F9FF' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#F8FAFC' }}>
       <div className="max-w-[1920px] mx-auto px-6 py-6">
         <main className="w-full space-y-6">
           {/* Top Profile Section */}
@@ -65,7 +65,7 @@ export default function BuyerDashboard() {
               <div className="flex items-center gap-6">
                 {/* Profile Picture with Status */}
                 <div className="relative">
-                  <div className="w-28 h-28 bg-gradient-to-br from-[#9A79FF] to-[#8A69EF] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                  <div className="w-28 h-28 bg-gradient-to-br from-[#3373FF] to-[#265ACC] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                     <span className="text-4xl font-bold text-white">
                       {user?.name?.[0]?.toUpperCase() || 'V'}
                     </span>
@@ -78,7 +78,7 @@ export default function BuyerDashboard() {
                   <p className="text-xs text-gray-500 mb-1 font-mono">Member Id : SE8641784306743287</p>
                   <h1 className="text-3xl font-bold text-gray-900 mb-2">{user?.name || 'Virendra singh'}</h1>
                   <div className="flex items-center gap-2">
-                    <span className="px-3 py-1 bg-[rgba(154,121,255,0.1)] text-[#9A79FF] text-xs font-semibold rounded-full border border-[#D1C2FF]">
+                    <span className="px-3 py-1 bg-[rgba(154,121,255,0.1)] text-[#3373FF] text-xs font-semibold rounded-full border border-[#D1C2FF]">
                       Verified Buyer
                     </span>
                     <span className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full border border-blue-200">
@@ -92,7 +92,7 @@ export default function BuyerDashboard() {
               <div className="flex items-center gap-3">
                 <Link 
                   href="/support" 
-                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-[#9A79FF] hover:bg-[rgba(154,121,255,0.1)] rounded-lg transition-all duration-200"
+                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-[#3373FF] hover:bg-[rgba(154,121,255,0.1)] rounded-lg transition-all duration-200"
                 >
                   <Headphones size={20} />
                   <span className="text-sm font-medium">Support</span>
@@ -131,7 +131,7 @@ export default function BuyerDashboard() {
                 </button>
                 <div className="flex-1 flex items-center justify-center gap-6 mx-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#9A79FF] rounded-lg flex items-center justify-center">
+                    <div className="w-10 h-10 bg-[#3373FF] rounded-lg flex items-center justify-center">
                       <CheckCircle2 className="text-white w-5 h-5" />
                     </div>
                     <div>
@@ -140,7 +140,7 @@ export default function BuyerDashboard() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button className="px-5 py-2.5 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg">
+                    <button className="px-5 py-2.5 bg-[#3373FF] hover:bg-[#265ACC] text-white rounded-lg text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg">
                       Learn More
                     </button>
                     <button className="px-5 py-2.5 bg-white hover:bg-gray-50 border-2 border-gray-300 rounded-lg text-sm font-semibold transition-all duration-200">
@@ -173,7 +173,7 @@ export default function BuyerDashboard() {
                       onClick={() => setActiveTab(tab.id)}
                       className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                         activeTab === tab.id
-                          ? 'bg-[#9A79FF] text-white shadow-md'
+                          ? 'bg-[#3373FF] text-white shadow-md'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -236,7 +236,7 @@ export default function BuyerDashboard() {
                   <p className="text-sm text-gray-500 mb-6">Start shopping to see your orders here</p>
                   <Link
                     href="/products"
-                    className="px-6 py-3 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
+                    className="px-6 py-3 bg-[#3373FF] hover:bg-[#265ACC] text-white rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
                   >
                     Browse Products
                   </Link>
@@ -252,7 +252,7 @@ export default function BuyerDashboard() {
                   <h3 className="text-lg font-bold text-gray-900">History</h3>
                   <Link 
                     href="/history" 
-                    className="text-sm text-[#9A79FF] hover:text-[#8A69EF] hover:underline font-semibold transition"
+                    className="text-sm text-[#3373FF] hover:text-[#265ACC] hover:underline font-semibold transition"
                   >
                     View
                   </Link>
@@ -287,13 +287,13 @@ export default function BuyerDashboard() {
                   <h3 className="text-lg font-bold text-gray-900">Favorite</h3>
                   <Link 
                     href="/account?view=favorites" 
-                    className="text-sm text-[#9A79FF] hover:text-[#8A69EF] hover:underline font-semibold transition"
+                    className="text-sm text-[#3373FF] hover:text-[#265ACC] hover:underline font-semibold transition"
                   >
                     View
                   </Link>
                 </div>
                 <div className="space-y-4">
-                  {favoriteItems.length > 0 ? favoriteItems.map((item, index) => (
+                  {favoriteItems.length > 0 ? favoriteItems.map((item: any, index: number) => (
                     <div 
                       key={index} 
                       className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-all duration-200 group"
@@ -306,7 +306,7 @@ export default function BuyerDashboard() {
                         <p className="text-sm font-medium text-gray-700 mb-1">Price : ${item.price}</p>
                         <p className="text-xs text-gray-500 mb-3">MOQ: {item.moq}</p>
                         <div className="flex items-center gap-2">
-                          <button className="flex-1 px-3 py-1.5 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg text-xs font-semibold transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-1">
+                          <button className="flex-1 px-3 py-1.5 bg-[#3373FF] hover:bg-[#265ACC] text-white rounded-lg text-xs font-semibold transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-1">
                             <Send size={12} />
                             Send Inquiry
                           </button>
@@ -323,7 +323,7 @@ export default function BuyerDashboard() {
                       <p className="text-sm">No favorites yet</p>
                       <Link 
                         href="/products"
-                        className="text-sm text-[#9A79FF] hover:text-[#8A69EF] hover:underline mt-2 inline-block"
+                        className="text-sm text-[#3373FF] hover:text-[#265ACC] hover:underline mt-2 inline-block"
                       >
                         Browse products
                       </Link>

@@ -29,7 +29,7 @@ export default function FavoritesPage() {
   };
 
   return (
-    <div className="min-h-screen py-12" style={{ backgroundColor: '#F9F9FF' }}>
+    <div className="min-h-screen py-12" style={{ backgroundColor: '#F8FAFC' }}>
       <div className="max-w-4xl mx-auto px-6">
         <div className="mb-8 flex items-center gap-3 text-regal-blue-900">
           <LikeButton defaultChecked={true} size="lg" />
@@ -45,7 +45,7 @@ export default function FavoritesPage() {
               <div>
                 <h2 className="text-xl font-semibold text-regal-blue-900">{favorite.name}</h2>
                 <p className="text-sm text-gray-500">{favorite.supplier}</p>
-                <p className="text-sm font-semibold text-[#9A79FF]">{favorite.price}</p>
+                <p className="text-sm font-semibold text-[#3373FF]">{favorite.price}</p>
               </div>
               <div className="flex gap-3">
                 <button className="btn-secondary text-sm">Request quote</button>

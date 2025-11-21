@@ -11,7 +11,8 @@ import { motion } from 'framer-motion';
 import { categories } from '@/lib/data/categories';
 
 export default function TrendingProductsPage() {
-  const { addToCart, addToFavorites, removeFromFavorites, isFavorite, startProductChat } = useStore();
+  const { addToCart, addToFavorites, removeFromFavorites, favorites, startProductChat } = useStore();
+  const isFavorite = (productId: string) => favorites.some((p: any) => p.id === productId);
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [filterType, setFilterType] = useState<'hot-selling' | 'most-popular' | 'best-reviewed'>('hot-selling');
@@ -94,7 +95,7 @@ export default function TrendingProductsPage() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F9F9FF' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#F8FAFC' }}>
       {/* Header Section */}
       <div className="bg-gradient-to-br from-gray-50 to-gray-100 py-12 border-b border-gray-200">
         <div className="max-w-[1920px] mx-auto px-4">
@@ -106,14 +107,14 @@ export default function TrendingProductsPage() {
           <div className="flex items-center justify-center gap-4 mb-6">
             <button
               onClick={() => setShowGlobalRankings(!showGlobalRankings)}
-              className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-full text-gray-700 font-medium hover:border-[#9A79FF] hover:text-[#9A79FF] transition-colors"
+              className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-full text-gray-700 font-medium hover:border-[#3373FF] hover:text-[#3373FF] transition-colors"
             >
               Global rankings
               <ChevronDown size={16} className={`transition-transform ${showGlobalRankings ? 'rotate-180' : ''}`} />
             </button>
             <button
               onClick={() => setShowAllCategories(!showAllCategories)}
-              className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-full text-gray-700 font-medium hover:border-[#9A79FF] hover:text-[#9A79FF] transition-colors"
+              className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-300 rounded-full text-gray-700 font-medium hover:border-[#3373FF] hover:text-[#3373FF] transition-colors"
             >
               All categories
               <ChevronDown size={16} className={`transition-transform ${showAllCategories ? 'rotate-180' : ''}`} />
@@ -239,7 +240,7 @@ export default function TrendingProductsPage() {
                       {/* Product Info - All Left Aligned */}
                       <div className="p-4" style={{ width: '100%', textAlign: 'left' }}>
                         <Link href={`/products/${product.id}`} style={{ display: 'block', width: '100%', textAlign: 'left' }}>
-                          <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 hover:text-[#9A79FF] transition-colors" style={{ textAlign: 'left', width: '100%' }}>
+                          <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 hover:text-[#3373FF] transition-colors" style={{ textAlign: 'left', width: '100%' }}>
                             {product.name}
                           </h3>
                         </Link>
@@ -265,7 +266,7 @@ export default function TrendingProductsPage() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleAddToCart(product)}
-                            className="flex-1 bg-[#9A79FF] hover:bg-[#8A69EF] text-white py-2 px-4 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2"
+                            className="flex-1 bg-[#3373FF] hover:bg-[#265ACC] text-white py-2 px-4 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2"
                           >
                             <ShoppingCart size={16} />
                             <span>Add to Cart</span>
@@ -309,7 +310,7 @@ export default function TrendingProductsPage() {
       <div className="fixed bottom-6 right-6 z-50">
         <Link
           href="/account?view=messages"
-          className="relative w-14 h-14 bg-[#9A79FF] hover:bg-[#8A69EF] rounded-full shadow-lg flex items-center justify-center transition-colors group"
+          className="relative w-14 h-14 bg-[#3373FF] hover:bg-[#265ACC] rounded-full shadow-lg flex items-center justify-center transition-colors group"
         >
           <MessageSquare size={24} className="text-white" />
           <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold text-white">

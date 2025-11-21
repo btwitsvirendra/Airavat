@@ -204,7 +204,7 @@ export default function PaymentsView() {
                     key={index}
                     onClick={() => setWalletIndex(index)}
                     className={`w-2 h-2 rounded-full transition ${
-                      index === walletIndex ? 'bg-[#9A79FF]' : 'bg-gray-300'
+                      index === walletIndex ? 'bg-[#3373FF]' : 'bg-gray-300'
                     }`}
                   />
                 ))}
@@ -215,7 +215,7 @@ export default function PaymentsView() {
             <div className="border border-gray-200 rounded-lg p-6 bg-white">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-bold text-gray-900">Wallet Details</h2>
-                <a href="#" className="flex items-center gap-2 text-[#9A79FF] hover:text-[#8A69EF] text-sm">
+                <a href="#" className="flex items-center gap-2 text-[#3373FF] hover:text-[#265ACC] text-sm">
                   <Headphones size={16} />
                   Support
                 </a>
@@ -243,11 +243,11 @@ export default function PaymentsView() {
                 </div>
 
                 <div className="flex items-center gap-3 pt-4">
-                  <button className="flex-1 bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2">
+                  <button className="flex-1 bg-[#3373FF] hover:bg-[#265ACC] text-white px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2">
                     <Wallet size={18} />
                     Add Money
                   </button>
-                  <button className="flex-1 bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2">
+                  <button className="flex-1 bg-[#3373FF] hover:bg-[#265ACC] text-white px-4 py-3 rounded-lg font-medium transition flex items-center justify-center gap-2">
                     <Wallet size={18} />
                     Withdraw
                   </button>
@@ -264,7 +264,7 @@ export default function PaymentsView() {
                 onClick={() => setActiveTab('all')}
                 className={`pb-4 px-2 text-sm font-medium transition ${
                   activeTab === 'all'
-                    ? 'text-[#9A79FF] border-b-2 border-[#9A79FF]'
+                    ? 'text-[#3373FF] border-b-2 border-[#3373FF]'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -274,7 +274,7 @@ export default function PaymentsView() {
                 onClick={() => setActiveTab('purchase')}
                 className={`pb-4 px-2 text-sm font-medium transition ${
                   activeTab === 'purchase'
-                    ? 'text-[#9A79FF] border-b-2 border-[#9A79FF]'
+                    ? 'text-[#3373FF] border-b-2 border-[#3373FF]'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -284,7 +284,7 @@ export default function PaymentsView() {
                 onClick={() => setActiveTab('refund')}
                 className={`pb-4 px-2 text-sm font-medium transition ${
                   activeTab === 'refund'
-                    ? 'text-[#9A79FF] border-b-2 border-[#9A79FF]'
+                    ? 'text-[#3373FF] border-b-2 border-[#3373FF]'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -300,7 +300,7 @@ export default function PaymentsView() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search by amount, supplier, Product"
-                  className="w-full border border-black rounded-lg px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-[#9A79FF] min-w-[200px]"
+                  className="w-full border border-black rounded-lg px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-[#3373FF] min-w-[200px]"
                 />
                 <Search size={18} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black" />
               </div>

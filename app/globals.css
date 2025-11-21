@@ -8,58 +8,83 @@
   }
   
   html {
-    background-color: #F0F4F8 !important;
-    background: #F0F4F8 !important;
+    background-color: var(--color-bg-page) !important;
+    background: var(--color-bg-page) !important;
   }
   
   body {
-    background-color: #F0F4F8 !important;
-    background: #F0F4F8 !important;
-    color: #0D1B2A !important;
+    background-color: var(--color-bg-page) !important;
+    background: var(--color-bg-page) !important;
+    color: var(--color-text-main) !important;
     margin: 0;
     padding: 0;
   }
   
   #__next,
   [data-nextjs-scroll-focus-boundary] {
-    background-color: #F0F4F8 !important;
-    background: #F0F4F8 !important;
+    background-color: var(--color-bg-page) !important;
+    background: var(--color-bg-page) !important;
   }
 }
 
 :root {
+  /* --- PRIMARY ACTIONS --- */
+  --color-primary:        #3373FF;
+  --color-primary-hover:   #265ACC;
+  --color-primary-light:   #D6E4FF; /* For focus rings/background highlights */
+
+  /* --- PRESTIGE ACCENTS --- */
+  --color-accent-gold:     #F59E0B; /* Verified Badges */
+  
+  /* --- NEUTRALS (BACKGROUNDS) --- */
+  --color-bg-page:         #F8FAFC; /* Main background */
+  --color-bg-surface:      #FFFFFF; /* Cards, Header, Sidebar */
+  --color-bg-footer:       #0B1A3A; /* Deep Navy */
+
+  /* --- NEUTRALS (TEXT) --- */
+  --color-text-main:       #0F172A; /* Headings, Titles */
+  --color-text-body:       #334155; /* Paragraphs */
+  --color-text-muted:      #64748B; /* Meta data, placeholders */
+
+  /* --- NEUTRALS (BORDERS) --- */
+  --color-border:          #E2E8F0; /* Dividers, Card outlines */
+  
+  /* --- FUNCTIONAL STATES --- */
+  --color-success:          #10B981;
+  --color-error:            #EF4444;
+
+  /* Legacy support (for gradual migration) */
   --teal: #03C4CB;
   --regal-blue: #09546A;
   --regal-gold: #C89B3C;
   --stone-grey: #121212;
-  /* Royal Logistics Color Palette */
   --royal-navy: #1B263B;
-  --cloud-white: #F0F4F8;
-  --antique-gold: #C5A059;
-  --antique-gold-hover: #B8954A;
-  --charcoal: #0D1B2A;
-  --bg-body: #F0F4F8;
+  --cloud-white: #F8FAFC;
+  --antique-gold: #F59E0B;
+  --antique-gold-hover: #D97706;
+  --charcoal: #0F172A;
+  --bg-body: #F8FAFC;
   --bg-surface: #FFFFFF;
-  --primary-accent: #C5A059;
-  --secondary-accent: #E8D4A8;
-  --text-primary: #0D1B2A;
-  --text-secondary: #555560;
+  --primary-accent: #3373FF;
+  --secondary-accent: #D6E4FF;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
 }
 
 /* Ensure main containers use the new background */
 main,
 main > *,
 [class*="min-h-screen"] {
-  background-color: #F0F4F8 !important;
-  background: #F0F4F8 !important;
+  background-color: var(--color-bg-page) !important;
+  background: var(--color-bg-page) !important;
 }
 
 /* Override any gray backgrounds */
 .bg-gray-50,
 .bg-gray-100,
 .bg-white[class*="min-h"] {
-  background-color: #F0F4F8 !important;
-  background: #F0F4F8 !important;
+  background-color: var(--color-bg-page) !important;
+  background: var(--color-bg-page) !important;
 }
 
 .gradient-hero {
@@ -79,13 +104,13 @@ main > *,
   @apply text-white px-6 py-3 rounded-lg font-semibold
          transition-all duration-200
          active:scale-95 shadow-md hover:shadow-lg;
-  background-color: #C5A059 !important;
-  background: #C5A059 !important;
+  background-color: var(--color-primary) !important;
+  background: var(--color-primary) !important;
 }
 
 .btn-primary:hover {
-  background-color: #B8954A !important;
-  background: #B8954A !important;
+  background-color: var(--color-primary-hover) !important;
+  background: var(--color-primary-hover) !important;
 }
 
 .btn-secondary {
@@ -114,9 +139,9 @@ main > *,
 }
 
 .input-field:focus {
-  --tw-ring-color: #C5A059 !important;
-  ring-color: #C5A059 !important;
-  box-shadow: 0 0 0 2px #C5A059 !important;
+  --tw-ring-color: var(--color-primary-light) !important;
+  ring-color: var(--color-primary-light) !important;
+  box-shadow: 0 0 0 2px var(--color-primary-light) !important;
 }
 
 .badge {
@@ -142,16 +167,16 @@ main > *,
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #F0F4F8;
+  background-color: var(--color-bg-page);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #C5A059;
+  background-color: var(--color-primary);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #B8954A;
+  background-color: var(--color-primary-hover);
 }
 
 /* Animation utilities */
@@ -478,14 +503,14 @@ main > *,
   top: 0;
   padding: 0;
   margin: 0;
-  color: #9A79FF;
+  color: var(--color-primary);
   animation: text_713 3.5s ease both infinite;
   font-size: 0.8rem;
   letter-spacing: 1px;
 }
 
 .load {
-  background-color: #9A79FF;
+  background-color: var(--color-primary);
   border-radius: 50px;
   display: block;
   height: 16px;
@@ -501,7 +526,7 @@ main > *,
   content: "";
   width: 100%;
   height: 100%;
-  background-color: #D1C2FF;
+  background-color: var(--color-primary-light);
   border-radius: inherit;
   animation: loading2_713 3.5s ease both infinite;
 }
@@ -584,5 +609,65 @@ main > *,
   100% {
     transform: translateX(0px);
     width: 16px;
+  }
+}
+
+/* Burger Menu Animation */
+.burger input:checked ~ span:nth-of-type(1) {
+  transform: rotate(45deg);
+  top: 0px;
+  left: 5px;
+}
+
+.burger input:checked ~ span:nth-of-type(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.burger input:checked ~ span:nth-of-type(3) {
+  transform: rotate(-45deg);
+  top: 28px;
+  left: 5px;
+}
+
+/* Favorite Button Animation */
+.favorite-container input:checked ~ .favorite-checkmark path {
+  fill: #FF5353;
+  stroke-width: 0;
+}
+
+.favorite-container input:checked ~ .favorite-checkmark {
+  animation: like_effect 400ms ease;
+}
+
+.favorite-checkmark.like-animation {
+  animation: like_effect 400ms ease;
+}
+
+.favorite-checkmark.dislike-animation {
+  animation: dislike_effect 400ms ease;
+}
+
+@keyframes like_effect {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes dislike_effect {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
   }
 }

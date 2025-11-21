@@ -29,12 +29,12 @@ export default function CategoriesPage() {
                 <div className="flex items-start gap-4">
                   <div className="text-4xl flex-shrink-0">{category.icon}</div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-[#9A79FF] transition">
+                    <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-[#3373FF] transition">
                       {category.name}
                     </h3>
                     <p className="text-sm text-gray-600 line-clamp-2 mb-3">{category.description}</p>
                     {category.subcategories && category.subcategories.length > 0 && (
-                      <div className="flex items-center gap-1 text-sm text-[#9A79FF]">
+                      <div className="flex items-center gap-1 text-sm text-[#3373FF]">
                         <span>{category.subcategories.length} subcategories</span>
                         <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -50,21 +50,21 @@ export default function CategoriesPage() {
         <div className="mt-12 bg-white rounded-lg p-8 shadow-sm">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
-              <div className="text-3xl font-bold text-[#9A79FF] mb-2">{categories.length}</div>
+              <div className="text-3xl font-bold text-[#3373FF] mb-2">{categories.length}</div>
               <div className="text-sm text-gray-600">Main Categories</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-[#9A79FF] mb-2">
+              <div className="text-3xl font-bold text-[#3373FF] mb-2">
                 {categories.reduce((acc, cat) => acc + (cat.subcategories?.length || 0), 0)}
               </div>
               <div className="text-sm text-gray-600">Subcategories</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-[#9A79FF] mb-2">10K+</div>
+              <div className="text-3xl font-bold text-[#3373FF] mb-2">10K+</div>
               <div className="text-sm text-gray-600">Products</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-[#9A79FF] mb-2">5K+</div>
+              <div className="text-3xl font-bold text-[#3373FF] mb-2">5K+</div>
               <div className="text-sm text-gray-600">Suppliers</div>
             </div>
           </div>

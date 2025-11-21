@@ -216,7 +216,7 @@ export default function Footer() {
             <div>
               <h4 className="text-white font-semibold mb-3">Airavat Lens</h4>
               <p className="text-sm text-gray-400 mb-4">Add Airavat Lens to Chrome</p>
-              <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2">
+              <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2">
                 <Camera size={20} />
                 Airavat Lens
               </button>
@@ -260,7 +260,7 @@ export default function Footer() {
           </div>
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-4 border-t border-gray-800">
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-[#9A79FF]">A</span>
+              <span className="text-2xl font-bold text-[#3373FF]">A</span>
               <span className="text-xl font-bold text-white">Airavat</span>
             </div>
             <div className="text-xs text-gray-500">

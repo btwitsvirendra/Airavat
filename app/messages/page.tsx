@@ -89,13 +89,13 @@ export default function MessagesPage() {
   const selectedMsg = mockMessages.find((m) => m.id === selectedMessage) || mockMessages[0];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F9F9FF' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#F8FAFC' }}>
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-[1920px] mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/" className="text-2xl font-bold text-[#9A79FF]">Airavat</Link>
+              <Link href="/" className="text-2xl font-bold text-[#3373FF]">Airavat</Link>
               <span className="text-gray-600">My Airavat</span>
             </div>
             <div className="flex items-center gap-4 text-sm">
@@ -106,23 +106,23 @@ export default function MessagesPage() {
               <div className="flex items-center gap-1 text-gray-600">
                 <span>English-USD</span>
               </div>
-              <Link href="/supplier/register" className="text-gray-600 hover:text-[#9A79FF]">
+              <Link href="/supplier/register" className="text-gray-600 hover:text-[#3373FF]">
                 Start selling
               </Link>
-              <Link href="/messages" className="text-[#9A79FF]">
+              <Link href="/messages" className="text-[#3373FF]">
                 <MessageSquare size={20} />
               </Link>
-              <Link href="/orders" className="text-gray-600 hover:text-[#9A79FF]">
+              <Link href="/orders" className="text-gray-600 hover:text-[#3373FF]">
                 <FileText size={20} />
               </Link>
-              <Link href="/cart" className="text-gray-600 hover:text-[#9A79FF] relative">
+              <Link href="/cart" className="text-gray-600 hover:text-[#3373FF] relative">
                 <ShoppingBag size={20} />
               </Link>
-              <Link href="/support" className="text-gray-600 hover:text-[#9A79FF]">
+              <Link href="/support" className="text-gray-600 hover:text-[#3373FF]">
                 <Headphones size={20} />
               </Link>
-              <Link href="/account" className="text-gray-600 hover:text-[#9A79FF]">
-                <div className="w-8 h-8 bg-[#9A79FF] rounded-full flex items-center justify-center text-white font-semibold">
+              <Link href="/account" className="text-gray-600 hover:text-[#3373FF]">
+                <div className="w-8 h-8 bg-[#3373FF] rounded-full flex items-center justify-center text-white font-semibold">
                   {user?.name?.[0] || 'U'}
                 </div>
               </Link>
@@ -212,7 +212,7 @@ export default function MessagesPage() {
                     placeholder="Q Search"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent outline-none text-sm"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3373FF] focus:border-transparent outline-none text-sm"
                   />
                 </div>
                 <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition">
@@ -226,7 +226,7 @@ export default function MessagesPage() {
                   onClick={() => setSelectedTab('all')}
                   className={`px-4 py-2 rounded-md text-sm font-medium transition ${
                     selectedTab === 'all'
-                      ? 'bg-[#9A79FF] text-white'
+                      ? 'bg-[#3373FF] text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -236,7 +236,7 @@ export default function MessagesPage() {
                   onClick={() => setSelectedTab('unread')}
                   className={`px-4 py-2 rounded-md text-sm font-medium transition relative ${
                     selectedTab === 'unread'
-                      ? 'bg-[#9A79FF] text-white'
+                      ? 'bg-[#3373FF] text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -269,7 +269,7 @@ export default function MessagesPage() {
                 >
                   <div className="flex items-start gap-3">
                     <div className="relative">
-                      <div className="w-12 h-12 bg-gradient-to-br from-[#9A79FF] to-[#8A69EF] rounded-full flex items-center justify-center text-white font-semibold">
+                      <div className="w-12 h-12 bg-gradient-to-br from-[#3373FF] to-[#265ACC] rounded-full flex items-center justify-center text-white font-semibold">
                         {message.avatar}
                       </div>
                       {message.unread > 0 && (
@@ -300,7 +300,7 @@ export default function MessagesPage() {
                 <div className="p-4 border-b border-gray-200">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-[#9A79FF] to-[#8A69EF] rounded-full flex items-center justify-center text-white font-semibold">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#3373FF] to-[#265ACC] rounded-full flex items-center justify-center text-white font-semibold">
                         {selectedMsg.avatar}
                       </div>
                       <div>
@@ -334,11 +334,11 @@ export default function MessagesPage() {
 
                   <div className="flex items-start gap-3 justify-end">
                     <div className="flex-1 flex justify-end">
-                      <div className="bg-[#9A79FF] text-white rounded-lg p-3 max-w-md">
+                      <div className="bg-[#3373FF] text-white rounded-lg p-3 max-w-md">
                         <p className="text-sm">Sure! I can provide you with detailed specifications and pricing. What specific products are you looking for?</p>
                       </div>
                     </div>
-                    <div className="w-8 h-8 bg-[#9A79FF] rounded-full flex items-center justify-center text-white text-xs">
+                    <div className="w-8 h-8 bg-[#3373FF] rounded-full flex items-center justify-center text-white text-xs">
                       {user?.name?.[0] || 'U'}
                     </div>
                   </div>
@@ -365,12 +365,12 @@ export default function MessagesPage() {
                     <input
                       type="text"
                       placeholder="Type a message..."
-                      className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent outline-none"
+                      className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3373FF] focus:border-transparent outline-none"
                     />
                     <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition">
                       <Smile size={20} />
                     </button>
-                    <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-2 rounded-lg transition flex items-center gap-2">
+                    <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-6 py-2 rounded-lg transition flex items-center gap-2">
                       <Send size={18} />
                       Send
                     </button>
@@ -397,7 +397,7 @@ export default function MessagesPage() {
 
       {/* Customer Service Button */}
       <div className="fixed bottom-6 right-6">
-        <button className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 transition">
+        <button className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 transition">
           <Headphones size={20} />
           Customer service
         </button>

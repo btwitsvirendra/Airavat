@@ -19,12 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" style={{ backgroundColor: '#F9F9FF', background: '#F9F9FF' }}>
+    <html lang="en" style={{ backgroundColor: '#F8FAFC', background: '#F8FAFC' }}>
       <body 
         className="font-sans antialiased" 
         style={{ 
-          backgroundColor: '#F9F9FF', 
-          background: '#F9F9FF',
+          backgroundColor: '#F8FAFC', 
+          background: '#F8FAFC',
           color: '#1A1A2E',
           margin: 0,
           padding: 0,
@@ -36,8 +36,8 @@ export default function RootLayout({
         <main 
           className="min-h-screen" 
           style={{ 
-            backgroundColor: '#F9F9FF',
-            background: '#F9F9FF',
+            backgroundColor: '#F8FAFC',
+            background: '#F8FAFC',
             minHeight: '100vh'
           }}
         >

@@ -40,7 +40,7 @@ const CookiesPopup = () => {
           transition={{ duration: 0.3 }}
           className="fixed bottom-6 right-6 z-[100] w-full max-w-sm"
         >
-          <div className="bg-gray-50 shadow-lg dark:bg-[#1E2735] rounded-2xl hover:bg-[#9A79FF] hover:bg-opacity-10 dark:hover:bg-[#9A79FF] dark:hover:bg-opacity-10 hover:-translate-y-3 transition duration-300 p-6 md:p-12">
+          <div className="bg-gray-50 shadow-lg dark:bg-[#1E2735] rounded-2xl hover:bg-[#3373FF] hover:bg-opacity-10 dark:hover:bg-[#3373FF] dark:hover:bg-opacity-10 hover:-translate-y-3 transition duration-300 p-6 md:p-12">
             <div className="text-center">
               <img
                 src="https://cdn.easyfrontend.com/pictures/cookies.png"
@@ -59,7 +59,7 @@ const CookiesPopup = () => {
                   e.preventDefault();
                   handleAccept();
                 }}
-                className="text-lg font-bold leading-none hover:text-[#9A79FF] mb-3 mr-1 transition-colors cursor-pointer text-zinc-900 dark:text-white"
+                className="text-lg font-bold leading-none hover:text-[#3373FF] mb-3 mr-1 transition-colors cursor-pointer text-zinc-900 dark:text-white"
               >
                 Accept
               </a>
@@ -69,7 +69,7 @@ const CookiesPopup = () => {
                   e.preventDefault();
                   handleReject();
                 }}
-                className="text-lg font-bold leading-none hover:text-[#9A79FF] mb-3 ml-1 transition-colors cursor-pointer text-zinc-900 dark:text-white"
+                className="text-lg font-bold leading-none hover:text-[#3373FF] mb-3 ml-1 transition-colors cursor-pointer text-zinc-900 dark:text-white"
               >
                 Reject
               </a>

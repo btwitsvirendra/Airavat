@@ -260,11 +260,11 @@ export default function CategoryCard() {
                       isSelected ? 'bg-[rgba(154,121,255,0.1)]' : 'hover:bg-gray-50'
                     }`}
                   >
-                    <IconComponent size={18} className={`flex-shrink-0 ${isSelected ? 'text-[#9A79FF]' : 'text-gray-600'}`} strokeWidth={1.5} />
-                    <span className={`text-sm font-medium flex-1 truncate ${isSelected ? 'text-[#9A79FF]' : 'text-gray-900'}`}>
+                    <IconComponent size={18} className={`flex-shrink-0 ${isSelected ? 'text-[#3373FF]' : 'text-gray-600'}`} strokeWidth={1.5} />
+                    <span className={`text-sm font-medium flex-1 truncate ${isSelected ? 'text-[#3373FF]' : 'text-gray-900'}`}>
                       {category.name}
                     </span>
-                    <ChevronRight size={14} className={`flex-shrink-0 transition ${isSelected ? 'text-[#9A79FF] opacity-100' : 'text-gray-400 opacity-0 group-hover:opacity-100'}`} />
+                    <ChevronRight size={14} className={`flex-shrink-0 transition ${isSelected ? 'text-[#3373FF] opacity-100' : 'text-gray-400 opacity-0 group-hover:opacity-100'}`} />
                   </Link>
                 );
               })}
@@ -337,17 +337,17 @@ export default function CategoryCard() {
               ref={scrollbarRef}
               className="absolute left-1/2 -translate-x-1/2 rounded-full transition-all duration-150 cursor-grab active:cursor-grabbing"
               style={{
-                backgroundColor: '#9A79FF',
+                backgroundColor: '#3373FF',
                 top: `${scrollProgress * (100 - scrollbarHeight) / 100}%`,
                 height: `${scrollbarHeight}%`,
                 minHeight: '10px',
                 width: '6px',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = '#8A69EF';
+                (e.currentTarget as HTMLElement).style.backgroundColor = '#265ACC';
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = '#9A79FF';
+                (e.currentTarget as HTMLElement).style.backgroundColor = '#3373FF';
               }}
               onMouseDown={(e) => {
                 e.preventDefault();
@@ -413,7 +413,7 @@ export default function CategoryCard() {
             <h3 className="text-lg font-semibold text-gray-900">{selectedCategoryData.name}</h3>
             <Link
               href={`/products?category=${selectedCategoryData.slug}`}
-              className="text-sm text-[#9A79FF] hover:text-[#8A69EF] hover:underline"
+              className="text-sm text-[#3373FF] hover:text-[#265ACC] hover:underline"
               onClick={() => {
                 setSelectedCategory(null);
                 setCategoryPosition(null);
@@ -436,10 +436,10 @@ export default function CategoryCard() {
                     setCategoryPosition(null);
                   }}
                 >
-                  <div className="w-20 h-20 rounded-full bg-gray-100 overflow-hidden mb-2 group-hover:ring-2 group-hover:ring-[#9A79FF] transition-all duration-300 flex items-center justify-center">
+                  <div className="w-20 h-20 rounded-full bg-gray-100 overflow-hidden mb-2 group-hover:ring-2 group-hover:ring-[#3373FF] transition-all duration-300 flex items-center justify-center">
                     <span className="text-2xl">{subcategory.icon || '📦'}</span>
                   </div>
-                  <span className="text-xs text-center text-gray-700 group-hover:text-[#9A79FF] transition line-clamp-2">
+                  <span className="text-xs text-center text-gray-700 group-hover:text-[#3373FF] transition line-clamp-2">
                     {subcategory.name}
                   </span>
                 </Link>
@@ -454,10 +454,10 @@ export default function CategoryCard() {
                   setCategoryPosition(null);
                 }}
               >
-                <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-2 group-hover:ring-2 group-hover:ring-[#9A79FF] transition-all duration-300">
-                  <ChevronRight size={28} className="text-gray-400 group-hover:text-[#9A79FF]" />
+                <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center mb-2 group-hover:ring-2 group-hover:ring-[#3373FF] transition-all duration-300">
+                  <ChevronRight size={28} className="text-gray-400 group-hover:text-[#3373FF]" />
                 </div>
-                <span className="text-xs text-center text-gray-700 group-hover:text-[#9A79FF] transition">
+                <span className="text-xs text-center text-gray-700 group-hover:text-[#3373FF] transition">
                   View all
                 </span>
               </Link>

@@ -26,7 +26,8 @@ import { catalogProducts } from '@/lib/data/catalog';
 
 export default function FavoritesView() {
   const router = useRouter();
-  const { favorites, removeFromFavorites, isFavorite, addToCart, startProductChat } = useStore();
+  const { favorites, removeFromFavorites, addToCart, startProductChat } = useStore();
+  const isFavorite = (productId: string) => favorites.some((p: any) => p.id === productId);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<'favorites' | 'wishlist'>('favorites');
@@ -70,7 +71,7 @@ export default function FavoritesView() {
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex-1 min-w-0">
-                  <p className="text-base font-semibold text-gray-900 mb-1 group-hover:text-[#9A79FF] transition">
+                  <p className="text-base font-semibold text-gray-900 mb-1 group-hover:text-[#3373FF] transition">
                     {product.name}
                   </p>
                   <p className="text-sm text-gray-500">{product.supplier?.name || 'Supplier'}</p>
@@ -124,7 +125,7 @@ export default function FavoritesView() {
                   </button>
                   <button 
                     onClick={() => handleAddToCartFromFavorite(product)}
-                    className="px-4 py-2 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg text-sm font-semibold transition flex items-center gap-2"
+                    className="px-4 py-2 bg-[#3373FF] hover:bg-[#265ACC] text-white rounded-lg text-sm font-semibold transition flex items-center gap-2"
                   >
                     <ShoppingCart size={16} />
                     Add to Cart
@@ -169,12 +170,12 @@ export default function FavoritesView() {
             </div>
             <button 
               onClick={() => handleChatFromFavorite(product)}
-              className="p-2 bg-white rounded-full shadow-md hover:bg-[rgba(154,121,255,0.1)] hover:text-[#9A79FF] transition"
+              className="p-2 bg-white rounded-full shadow-md hover:bg-[rgba(154,121,255,0.1)] hover:text-[#3373FF] transition"
               title="Chat with supplier"
             >
               <MessageSquare className="w-4 h-4" />
             </button>
-            <button className="p-2 bg-white rounded-full shadow-md hover:bg-[rgba(154,121,255,0.1)] hover:text-[#9A79FF] transition">
+            <button className="p-2 bg-white rounded-full shadow-md hover:bg-[rgba(154,121,255,0.1)] hover:text-[#3373FF] transition">
               <Share2 className="w-4 h-4" />
             </button>
           </div>
@@ -183,7 +184,7 @@ export default function FavoritesView() {
         {/* Product Info */}
         <div className="p-4">
           <div className="mb-2">
-            <p className="text-sm font-semibold text-gray-900 line-clamp-2 mb-1 group-hover:text-[#9A79FF] transition">
+            <p className="text-sm font-semibold text-gray-900 line-clamp-2 mb-1 group-hover:text-[#3373FF] transition">
               {product.name}
             </p>
             <p className="text-xs text-gray-500">{product.supplier?.name || 'Supplier'}</p>
@@ -210,7 +211,7 @@ export default function FavoritesView() {
             </button>
             <button 
               onClick={() => handleAddToCartFromFavorite(product)}
-              className="flex-1 px-3 py-2 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1"
+              className="flex-1 px-3 py-2 bg-[#3373FF] hover:bg-[#265ACC] text-white rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1"
             >
               <ShoppingCart size={14} />
               Add to Cart
@@ -237,7 +238,7 @@ export default function FavoritesView() {
               onClick={() => setViewMode('grid')}
               className={`p-2 rounded-lg transition ${
                 viewMode === 'grid'
-                  ? 'bg-[rgba(154,121,255,0.2)] text-[#9A79FF]'
+                  ? 'bg-[rgba(154,121,255,0.2)] text-[#3373FF]'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
@@ -247,7 +248,7 @@ export default function FavoritesView() {
               onClick={() => setViewMode('list')}
               className={`p-2 rounded-lg transition ${
                 viewMode === 'list'
-                  ? 'bg-[rgba(154,121,255,0.2)] text-[#9A79FF]'
+                  ? 'bg-[rgba(154,121,255,0.2)] text-[#3373FF]'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
@@ -262,7 +263,7 @@ export default function FavoritesView() {
             onClick={() => setActiveTab('favorites')}
             className={`px-4 py-2 text-sm font-semibold border-b-2 transition ${
               activeTab === 'favorites'
-                ? 'border-[#9A79FF] text-[#9A79FF]'
+                ? 'border-[#3373FF] text-[#3373FF]'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -279,7 +280,7 @@ export default function FavoritesView() {
             onClick={() => setActiveTab('wishlist')}
             className={`px-4 py-2 text-sm font-semibold border-b-2 transition ${
               activeTab === 'wishlist'
-                ? 'border-[#9A79FF] text-[#9A79FF]'
+                ? 'border-[#3373FF] text-[#3373FF]'
                 : 'border-transparent text-gray-600 hover:text-gray-900'
             }`}
           >
@@ -301,7 +302,7 @@ export default function FavoritesView() {
               placeholder="Search favorites..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#3373FF] focus:border-transparent"
             />
           </div>
           <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition flex items-center gap-2">
@@ -336,7 +337,7 @@ export default function FavoritesView() {
                     : 'space-y-4'
                 }
               >
-                {currentProducts.map((product) => (
+                {currentProducts.map((product: any) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
@@ -354,7 +355,7 @@ export default function FavoritesView() {
               </p>
               <Link
                 href="/products"
-                className="px-6 py-3 bg-[#9A79FF] hover:bg-[#8A69EF] text-white rounded-lg font-semibold transition shadow-md hover:shadow-lg"
+                className="px-6 py-3 bg-[#3373FF] hover:bg-[#265ACC] text-white rounded-lg font-semibold transition shadow-md hover:shadow-lg"
               >
                 Browse Products
               </Link>
@@ -372,13 +373,13 @@ export default function FavoritesView() {
               </div>
               <Link
                 href="/products"
-                className="text-sm font-semibold text-[#9A79FF] hover:text-[#8A69EF] transition"
+                className="text-sm font-semibold text-[#3373FF] hover:text-[#265ACC] transition"
               >
                 View All →
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-              {suggestedProducts.map((product) => (
+              {suggestedProducts.map((product: any) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>

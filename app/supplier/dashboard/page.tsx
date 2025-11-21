@@ -25,27 +25,27 @@ export default function SupplierDashboard() {
   const { user } = useStore();
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F9F9FF' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#F8FAFC' }}>
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-[1920px] mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/" className="text-2xl font-bold text-[#9A79FF]">Airavat</Link>
+              <Link href="/" className="text-2xl font-bold text-[#3373FF]">Airavat</Link>
               <span className="text-gray-600">My Airavat</span>
             </div>
             <div className="flex items-center gap-4 text-sm">
-              <Link href="/" className="text-gray-600 hover:text-[#9A79FF]">
+              <Link href="/" className="text-gray-600 hover:text-[#3373FF]">
                 Switch to buyer site
               </Link>
-              <Link href="/supplier/register" className="bg-[#9A79FF] hover:bg-[#8A69EF] text-white px-4 py-2 rounded-lg font-medium transition">
+              <Link href="/supplier/register" className="bg-[#3373FF] hover:bg-[#265ACC] text-white px-4 py-2 rounded-lg font-medium transition">
                 Start selling
               </Link>
-              <Link href="/help" className="text-gray-600 hover:text-[#9A79FF]">
+              <Link href="/help" className="text-gray-600 hover:text-[#3373FF]">
                 <Headphones size={20} />
               </Link>
-              <Link href="/account" className="text-gray-600 hover:text-[#9A79FF]">
-                <div className="w-8 h-8 bg-[#9A79FF] rounded-full flex items-center justify-center text-white font-semibold">
+              <Link href="/account" className="text-gray-600 hover:text-[#3373FF]">
+                <div className="w-8 h-8 bg-[#3373FF] rounded-full flex items-center justify-center text-white font-semibold">
                   {user?.name?.[0] || 'U'}
                 </div>
               </Link>
@@ -62,7 +62,7 @@ export default function SupplierDashboard() {
               <nav className="space-y-1">
                 <Link
                   href="/supplier/dashboard"
-                  className="flex items-center gap-3 px-4 py-3 bg-[rgba(154, 121, 255, 0.1)] text-[#9A79FF] rounded-lg font-medium"
+                  className="flex items-center gap-3 px-4 py-3 bg-[rgba(154, 121, 255, 0.1)] text-[#3373FF] rounded-lg font-medium"
                 >
                   <Home size={20} />
                   Home
@@ -146,11 +146,11 @@ export default function SupplierDashboard() {
                 ].map((tool, index) => (
                   <div key={index} className="text-center">
                     <div className="w-16 h-16 bg-[rgba(154, 121, 255, 0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
-                      <tool.icon size={32} className="text-[#9A79FF]" />
+                      <tool.icon size={32} className="text-[#3373FF]" />
                     </div>
                     <h3 className="font-semibold text-gray-900 mb-2">{tool.title}</h3>
                     <p className="text-sm text-gray-600 mb-3">{tool.description}</p>
-                    <Link href="/supplier/learn" className="text-sm text-[#9A79FF] hover:underline font-medium">
+                    <Link href="/supplier/learn" className="text-sm text-[#3373FF] hover:underline font-medium">
                       Learn more
                     </Link>
                   </div>
@@ -165,7 +165,7 @@ export default function SupplierDashboard() {
                   <p className="text-gray-900 font-medium">Add your industry and view the according industry report.</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#9A79FF] focus:border-transparent outline-none">
+                  <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#3373FF] focus:border-transparent outline-none">
                     <option>Please select industry</option>
                     <option>Electronics</option>
                     <option>Textiles</option>
