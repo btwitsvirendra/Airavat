@@ -133,8 +133,8 @@ export default function BuyerDashboard() {
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-[#3373FF] rounded-lg flex items-center justify-center">
                       <CheckCircle2 className="text-white w-5 h-5" />
-                    </div>
-                    <div>
+            </div>
+            <div>
                       <p className="text-sm font-semibold text-gray-900">Get Additional Tax benefits right now</p>
                       <p className="text-xs text-gray-600">Complete your profile to unlock exclusive benefits</p>
                     </div>
@@ -231,7 +231,7 @@ export default function BuyerDashboard() {
                 <div className="flex flex-col items-center justify-center py-16">
                   <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                     <Package className="w-12 h-12 text-gray-400" />
-                  </div>
+            </div>
                   <p className="text-lg font-semibold text-gray-900 mb-2">No orders yet</p>
                   <p className="text-sm text-gray-500 mb-6">Start shopping to see your orders here</p>
                   <Link
@@ -240,8 +240,8 @@ export default function BuyerDashboard() {
                   >
                     Browse Products
                   </Link>
-                </div>
-              )}
+              </div>
+            )}
             </div>
 
             {/* Right Sidebars */}
@@ -276,10 +276,10 @@ export default function BuyerDashboard() {
                         <p className="text-sm font-medium text-gray-700 mb-0.5">Price : ${item.price}</p>
                         <p className="text-xs text-gray-500">MOQ: {item.moq}</p>
                       </div>
-                    </div>
+            </div>
                   ))}
-                </div>
-              </div>
+            </div>
+          </div>
 
               {/* Favorite Section */}
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -313,8 +313,8 @@ export default function BuyerDashboard() {
                           <button className="flex-1 px-3 py-1.5 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-1">
                             <MessageSquare size={12} />
                             Chat
-                          </button>
-                        </div>
+          </button>
+        </div>
                       </div>
                     </div>
                   )) : (

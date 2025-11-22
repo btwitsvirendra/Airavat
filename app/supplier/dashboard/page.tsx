@@ -33,7 +33,7 @@ export default function SupplierDashboard() {
             <div className="flex items-center gap-4">
               <Link href="/" className="text-2xl font-bold text-[#3373FF]">Airavat</Link>
               <span className="text-gray-600">My Airavat</span>
-            </div>
+          </div>
             <div className="flex items-center gap-4 text-sm">
               <Link href="/" className="text-gray-600 hover:text-[#3373FF]">
                 Switch to buyer site
@@ -47,12 +47,12 @@ export default function SupplierDashboard() {
               <Link href="/account" className="text-gray-600 hover:text-[#3373FF]">
                 <div className="w-8 h-8 bg-[#3373FF] rounded-full flex items-center justify-center text-white font-semibold">
                   {user?.name?.[0] || 'U'}
-                </div>
+          </div>
               </Link>
+                    </div>
+                  </div>
             </div>
           </div>
-        </div>
-      </div>
 
       <div className="max-w-[1920px] mx-auto px-4 py-6">
         <div className="flex gap-6">
@@ -89,7 +89,7 @@ export default function SupplierDashboard() {
                   Store
                 </Link>
               </nav>
-            </div>
+                    </div>
           </aside>
 
           {/* Main Content */}
@@ -98,7 +98,7 @@ export default function SupplierDashboard() {
             <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-8 mb-6 text-white relative overflow-hidden">
               <div className="absolute right-0 top-0 bottom-0 w-96 opacity-20">
                 <div className="w-full h-full bg-white/10 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
-              </div>
+                  </div>
               <div className="relative z-10">
                 <h1 className="text-4xl font-bold mb-4">Start your global business journey with Airavat Selling</h1>
                 <p className="text-lg text-white/90 mb-6 max-w-2xl">
@@ -110,8 +110,8 @@ export default function SupplierDashboard() {
                 >
                   Become a seller now
                 </Link>
-              </div>
             </div>
+          </div>
 
             {/* Tools for B2B Sales */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-6">
@@ -147,23 +147,23 @@ export default function SupplierDashboard() {
                   <div key={index} className="text-center">
                     <div className="w-16 h-16 bg-[rgba(154, 121, 255, 0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
                       <tool.icon size={32} className="text-[#3373FF]" />
-                    </div>
+                </div>
                     <h3 className="font-semibold text-gray-900 mb-2">{tool.title}</h3>
                     <p className="text-sm text-gray-600 mb-3">{tool.description}</p>
                     <Link href="/supplier/learn" className="text-sm text-[#3373FF] hover:underline font-medium">
                       Learn more
                     </Link>
-                  </div>
-                ))}
-              </div>
             </div>
+                ))}
+            </div>
+          </div>
 
             {/* Industry Report Section */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <p className="text-gray-900 font-medium">Add your industry and view the according industry report.</p>
-                </div>
+              </div>
                 <div className="flex items-center gap-4">
                   <select className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#3373FF] focus:border-transparent outline-none">
                     <option>Please select industry</option>
@@ -174,12 +174,12 @@ export default function SupplierDashboard() {
                   </select>
                   <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition">
                     Save
-                  </button>
-                </div>
+                </button>
               </div>
             </div>
+          </div>
           </main>
-        </div>
+          </div>
       </div>
     </div>
   );
