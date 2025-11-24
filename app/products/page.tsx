@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -44,7 +45,7 @@ export default function ProductsPage() {
           const productCategory = product.category?.toLowerCase();
           const categoryName = category.name.toLowerCase();
           const categorySlug = category.slug.toLowerCase();
-          
+
           return (
             productCategory === categoryName ||
             productCategory === categorySlug ||
@@ -116,10 +117,10 @@ export default function ProductsPage() {
 
           <main className="flex-1">
             {/* Header */}
-              <div className="mb-6">
+            <div className="mb-6">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">Discover Products</h1>
               <p className="text-sm text-gray-600">{filteredProducts.length} products found</p>
-              </div>
+            </div>
 
             {/* Filters Bar */}
             <div className="mb-6 flex flex-wrap items-center gap-4 bg-white p-4 rounded-lg border border-gray-200">
@@ -139,24 +140,22 @@ export default function ProductsPage() {
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
                 <option value="rating">Highest Rated</option>
-                </select>
+              </select>
               <div className="flex items-center gap-2 ml-auto">
-                  <button
-                    onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-md transition ${
-                    viewMode === 'grid' ? 'bg-[#3373FF] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
-                  >
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-md transition ${viewMode === 'grid' ? 'bg-[#3373FF] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                >
                   <Grid size={18} />
-                  </button>
-                  <button
-                    onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-md transition ${
-                    viewMode === 'list' ? 'bg-[#3373FF] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
-                  >
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-md transition ${viewMode === 'list' ? 'bg-[#3373FF] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                >
                   <List size={18} />
-                  </button>
+                </button>
               </div>
             </div>
 
@@ -211,9 +210,9 @@ export default function ProductsPage() {
                           className="w-full px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:border-[#3373FF]"
                           placeholder="Max"
                         />
-                </div>
-              </div>
-            </div>
+                      </div>
+                    </div>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -227,7 +226,7 @@ export default function ProductsPage() {
                 <AnimatePresence>
                   {filteredProducts.map((product, index) => (
                     <motion.div
-                    key={product.id}
+                      key={product.id}
                       layout
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -239,8 +238,8 @@ export default function ProductsPage() {
                         <div className="relative bg-white rounded-2xl overflow-hidden h-full transition-all duration-300 ease-in-out shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,rgba(0,0,0,0.3)_0px_3px_7px_-3px] hover:bg-[#fdfdfd] hover:shadow-[rgba(0,0,0,0.09)_0px_2px_1px,rgba(0,0,0,0.09)_0px_4px_2px,rgba(0,0,0,0.09)_0px_8px_4px,rgba(0,0,0,0.09)_0px_16px_8px,rgba(0,0,0,0.09)_0px_32px_16px]" style={{ aspectRatio: '3/4' }}>
                           {/* Like button in top-right */}
                           <div className="absolute top-4 right-4 z-20" onClick={(e) => e.stopPropagation()}>
-                            <LikeButton 
-                              size="sm" 
+                            <LikeButton
+                              size="sm"
                               checked={isFavorite(product.id)}
                               onChange={(checked) => handleToggleFavorite(product, checked)}
                             />
@@ -251,10 +250,12 @@ export default function ProductsPage() {
                             <Link href={`/products/${product.id}`} className="block mb-3 flex-1" style={{ width: '100%' }}>
                               <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative group">
                                 {product.images[0] ? (
-                                  <img
+                                  <Image
                                     src={product.images[0]}
                                     alt={product.name}
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                    fill
+                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                   />
                                 ) : (
                                   <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -333,17 +334,19 @@ export default function ProductsPage() {
                           <Link href={`/products/${product.id}`} className="flex-shrink-0">
                             <div className="w-24 h-24 bg-gray-100 relative rounded-md">
                               {product.images[0] ? (
-                    <img
-                      src={product.images[0]}
-                      alt={product.name}
-                                  className="w-full h-full object-cover rounded-md"
+                                <Image
+                                  src={product.images[0]}
+                                  alt={product.name}
+                                  fill
+                                  className="object-cover rounded-md"
+                                  sizes="(max-width: 768px) 100px, 100px"
                                 />
                               ) : (
                                 <div className="w-full h-full flex items-center justify-center text-gray-400">
                                   <PackageSearch size={32} />
-                      </div>
+                                </div>
                               )}
-                          </div>
+                            </div>
                           </Link>
                           <div className="flex-1">
                             <Link href={`/products/${product.id}`}>
@@ -356,8 +359,8 @@ export default function ProductsPage() {
                                 <span className="text-xs text-gray-600">
                                   {product.supplier?.rating?.toFixed(1) || 'N/A'} ({Math.floor((product.id.charCodeAt(0) + product.id.length) % 100) + 1})
                                 </span>
-                        </div>
-                        </Link>
+                              </div>
+                            </Link>
                             <div className="flex items-baseline gap-1">
                               <span className="text-lg font-bold text-gray-900">
                                 ₹{product.price.amount.toLocaleString()}
@@ -365,21 +368,21 @@ export default function ProductsPage() {
                               <span className="text-xs text-gray-500">/{product.price.unit}</span>
                               <span className="text-xs text-gray-500 ml-2">
                                 MOQ: {product.minOrderQuantity} {product.price.unit}
-                          </span>
-                        </div>
-                      </div>
+                              </span>
+                            </div>
+                          </div>
                           <div className="flex flex-col items-end gap-2">
-                          <button
-                            onClick={() => handleAddToCart(product)}
+                            <button
+                              onClick={() => handleAddToCart(product)}
                               className="bg-[#3373FF] hover:bg-[#265ACC] text-white py-2 px-4 rounded-lg text-sm font-medium transition flex items-center justify-center gap-2"
-                          >
+                            >
                               <ShoppingCart size={16} />
-                            Add to Cart
-                          </button>
+                              Add to Cart
+                            </button>
                             <div className="flex gap-2">
                               <div className="p-2 bg-white rounded-full shadow-sm hover:bg-gray-50 transition border border-gray-200">
-                                <LikeButton 
-                                  size="sm" 
+                                <LikeButton
+                                  size="sm"
                                   checked={isFavorite(product.id)}
                                   onChange={(checked) => handleToggleFavorite(product, checked)}
                                 />
@@ -392,8 +395,8 @@ export default function ProductsPage() {
                                 <MessageSquare size={16} className="text-gray-600" />
                               </button>
                             </div>
+                          </div>
                         </div>
-                      </div>
                       )}
                     </motion.div>
                   ))}
@@ -404,7 +407,7 @@ export default function ProductsPage() {
                 <PackageSearch size={64} className="mx-auto text-gray-400 mb-4" />
                 <h3 className="text-xl font-semibold text-gray-800">No products found</h3>
                 <p className="text-gray-500 mt-2">Try adjusting your filters or search terms.</p>
-                    </div>
+              </div>
             )}
           </main>
         </div>

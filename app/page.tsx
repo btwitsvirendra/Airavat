@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -81,13 +82,13 @@ export default function HomePage() {
       const category = categories.find(
         (cat) => cat.slug === selectedCategory || cat.name.toLowerCase() === selectedCategory.toLowerCase()
       );
-      
+
       if (category) {
         filtered = filtered.filter((product) => {
           const productCategory = product.category?.toLowerCase();
           const categoryName = category.name.toLowerCase();
           const categorySlug = category.slug.toLowerCase();
-          
+
           return (
             productCategory === categoryName ||
             productCategory === categorySlug ||
@@ -200,8 +201,8 @@ export default function HomePage() {
                   >
                     {/* Like button in top-right */}
                     <div className="absolute top-4 right-4 z-20" onClick={(e) => e.stopPropagation()}>
-                      <LikeButton 
-                        size="sm" 
+                      <LikeButton
+                        size="sm"
                         checked={isFavorite(product.id)}
                         onChange={(checked) => handleToggleFavorite(product, checked)}
                       />
@@ -212,10 +213,12 @@ export default function HomePage() {
                       <Link href={`/products/${product.id}`} className="block mb-3 flex-1" style={{ width: '100%' }}>
                         <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden relative group">
                           {product.images[0] ? (
-                            <img
+                            <Image
                               src={product.images[0]}
                               alt={product.name}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -297,10 +300,10 @@ export default function HomePage() {
       </section>
 
       {/* Pagination */}
-      <Pagination 
-        currentPage={currentPage} 
-        totalPages={totalPages} 
-        onPageChange={handlePageChange} 
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
       />
     </div>
   );

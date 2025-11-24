@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Heart, Trash2, Minus, Plus, ShoppingBag, ArrowRight } from 'lucide-react';
@@ -121,9 +122,15 @@ const ProductItem = ({ item, onChange }: { item: { id: string; product: any; qua
   return (
     <div className="flex mb-4">
       <div className="mr-3">
-        <div className="min-w-[50px] w-[50px] md:min-w-[100px] md:w-[100px] h-auto bg-gray-50 border border-gray-200 rounded overflow-hidden">
+        <div className="min-w-[50px] w-[50px] md:min-w-[100px] md:w-[100px] h-auto bg-gray-50 border border-gray-200 rounded overflow-hidden relative" style={{ aspectRatio: '1/1' }}>
           {product.images?.[0] ? (
-            <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
+            <Image
+              src={product.images[0]}
+              alt={product.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 50px, 100px"
+            />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-gray-400">
               <ShoppingBag size={24} />
@@ -186,11 +193,11 @@ export default function CartPage() {
   // Group products by supplier/shop
   const shopGroups = useMemo(() => {
     const groups: Record<string, ShopGroup> = {};
-    
+
     cart.forEach((item: any) => {
       const shopId = item.product.supplier?.id || item.product.supplierId || 'default';
       const shopName = item.product.supplier?.name || item.product.supplierId || 'Unknown Supplier';
-      
+
       if (!groups[shopId]) {
         groups[shopId] = {
           shop: {
@@ -201,14 +208,14 @@ export default function CartPage() {
           products: [],
         };
       }
-      
+
       groups[shopId].products.push({
         id: item.product.id,
         product: item.product,
         quantity: item.quantity,
       });
     });
-    
+
     return Object.values(groups);
   }, [cart]);
 
@@ -270,7 +277,7 @@ export default function CartPage() {
             {/* Shop Groups */}
             {shopGroups.map((group) => {
               // Check if all products from this shop are favorited
-              const allProductsFavorited = group.products.every((item) => 
+              const allProductsFavorited = group.products.every((item) =>
                 favorites.some((f: any) => f.id === item.product.id)
               );
 

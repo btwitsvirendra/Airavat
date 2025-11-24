@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, cloneElement } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   Menu,
@@ -85,10 +86,10 @@ function HeaderDockItem({
     >
       <Link href={href} className="flex items-center justify-center w-full h-full group">
         <div className="relative flex items-center justify-center">
-          {React.isValidElement(icon) 
-            ? cloneElement(icon as React.ReactElement<any>, { 
-                className: `${(icon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
-              })
+          {React.isValidElement(icon)
+            ? cloneElement(icon as React.ReactElement<any>, {
+              className: `${(icon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
+            })
             : icon
           }
           {badge && badge > 0 && (
@@ -128,7 +129,7 @@ function HeaderDockLabel({ children, isHovered }: HeaderDockLabelProps) {
           exit={{ opacity: 0, y: -5 }}
           transition={{ duration: 0.2 }}
           className="absolute left-1/2 w-fit whitespace-nowrap text-xs text-gray-700 pointer-events-none z-50 font-medium"
-          style={{ 
+          style={{
             x: '-50%',
             top: 'calc(100% + 5px)',
             maxWidth: '200px',
@@ -199,7 +200,7 @@ function AccountDropdown({ user, isOpen, onClose, onMouseEnter, onMouseLeave }: 
               <button
                 onClick={handleSignIn}
                 className="w-full text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 hover:shadow-md"
-                style={{ 
+                style={{
                   backgroundColor: 'var(--color-primary)',
                 }}
                 onMouseEnter={(e) => {
@@ -239,7 +240,7 @@ function AccountDropdown({ user, isOpen, onClose, onMouseEnter, onMouseLeave }: 
                     onClose();
                   }}
                   className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
-                  style={{ 
+                  style={{
                     backgroundColor: 'var(--color-bg-surface)',
                     border: '2px solid var(--color-border)'
                   }}
@@ -278,9 +279,9 @@ function AccountDropdown({ user, isOpen, onClose, onMouseEnter, onMouseLeave }: 
             <div className="px-6 pb-4">
               <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                 By signing in via social media, I agree to the{' '}
-                <Link 
-                  href="/terms" 
-                  className="hover:underline transition-colors" 
+                <Link
+                  href="/terms"
+                  className="hover:underline transition-colors"
                   style={{ color: 'var(--color-primary)' }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = 'var(--color-primary-hover)';
@@ -293,9 +294,9 @@ function AccountDropdown({ user, isOpen, onClose, onMouseEnter, onMouseLeave }: 
                   Airavat Free Membership Agreement
                 </Link>{' '}
                 and{' '}
-                <Link 
-                  href="/privacy" 
-                  className="hover:underline transition-colors" 
+                <Link
+                  href="/privacy"
+                  className="hover:underline transition-colors"
                   style={{ color: 'var(--color-primary)' }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = 'var(--color-primary-hover)';
@@ -549,7 +550,7 @@ function AccountDropdown({ user, isOpen, onClose, onMouseEnter, onMouseLeave }: 
           <div className="flex items-center gap-3 px-4 py-3">
             <div className="relative aspect-square w-10 rounded-full bg-gray-200 flex items-center justify-center">
               {user?.avatar ? (
-                <img src={user.avatar} alt="account" className="w-full rounded-full object-cover object-center" />
+                <Image src={user.avatar} alt="account" fill className="rounded-full object-cover object-center" sizes="40px" />
               ) : (
                 <User size={20} className="text-gray-600" />
               )}
@@ -781,19 +782,9 @@ function HeaderDockIcons({ cart, user }: { cart: any[]; user: any }) {
       href: '/account?view=messages',
     },
     {
-      icon: (
-        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-600">
-          <path
-            d="M16 4C16.93 4 17.395 4 17.7765 4.10222C18.8117 4.37962 19.6204 5.18827 19.8978 6.22354C20 6.60504 20 7.07003 20 8V17.2C20 18.8802 20 19.7202 19.673 20.362C19.3854 20.9265 18.9265 21.3854 18.362 21.673C17.7202 22 16.8802 22 15.2 22H8.8C7.11984 22 6.27976 22 5.63803 21.673C5.07354 21.3854 4.6146 20.9265 4.32698 20.362C4 19.7202 4 18.8802 4 17.2V8C4 7.07003 4 6.60504 4.10222 6.22354C4.37962 5.18827 5.18827 4.37962 6.22354 4.10222C6.60504 4 7.07003 4 8 4M9.6 6H14.4C14.9601 6 15.2401 6 15.454 5.89101C15.6422 5.79513 15.7951 5.64215 15.891 5.45399C16 5.24008 16 4.96005 16 4.4V3.6C16 3.03995 16 2.75992 15.891 2.54601C15.7951 2.35785 15.6422 2.20487 15.454 2.10899C15.2401 2 14.9601 2 14.4 2H9.6C9.03995 2 8.75992 2 8.54601 2.10899C8.35785 2.20487 8.20487 2.35785 8.10899 2.54601C8 2.75992 8 3.03995 8 3.6V4.4C8 4.96005 8 5.24008 8.10899 5.45399C8.20487 5.64215 8.35785 5.79513 8.54601 5.89101C8.75992 6 9.03995 6 9.6 6Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      ),
-      label: 'RFQ',
-      href: '/account?view=rfq',
+      icon: <ShieldCheck size={23} className="text-gray-600" />,
+      label: 'Trade Assurance',
+      href: '/trade-assurance',
     },
     {
       icon: <ShoppingCart size={23} className="text-gray-600" />,
@@ -816,7 +807,7 @@ function HeaderDockIcons({ cart, user }: { cart: any[]; user: any }) {
   );
 
   // Messages Dropdown Component
-  const MessagesDropdown = ({ isOpen, onMouseEnter, onMouseLeave }: { isOpen: boolean; onMouseEnter: () => void; onMouseLeave: () => void }) => (
+  const MessagesDropdown = ({ isOpen, user, onMouseEnter, onMouseLeave }: { isOpen: boolean; user: any; onMouseEnter: () => void; onMouseLeave: () => void }) => (
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -833,22 +824,45 @@ function HeaderDockIcons({ cart, user }: { cart: any[]; user: any }) {
             <h3 className="text-base font-semibold mb-2" style={{ color: 'var(--color-text-main)' }}>
               Messages
             </h3>
-            <p className="text-sm text-center mb-4" style={{ color: 'var(--color-text-body)' }}>
-              Sign in to view more
-            </p>
-            <Link
-              href="/login"
-              className="block w-full text-white font-medium py-3 px-4 rounded-lg text-center transition-all duration-200 hover:shadow-md"
-              style={{ backgroundColor: 'var(--color-primary)' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--color-primary-hover)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--color-primary)';
-              }}
-            >
-              Sign in
-            </Link>
+            {user ? (
+              <>
+                <p className="text-sm text-center mb-4" style={{ color: 'var(--color-text-body)' }}>
+                  View your conversations
+                </p>
+                <Link
+                  href="/account?view=messages"
+                  className="block w-full text-white font-medium py-3 px-4 rounded-lg text-center transition-all duration-200 hover:shadow-md"
+                  style={{ backgroundColor: 'var(--color-primary)' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--color-primary-hover)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--color-primary)';
+                  }}
+                >
+                  Go to Messages
+                </Link>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-center mb-4" style={{ color: 'var(--color-text-body)' }}>
+                  Sign in to view more
+                </p>
+                <Link
+                  href="/login"
+                  className="block w-full text-white font-medium py-3 px-4 rounded-lg text-center transition-all duration-200 hover:shadow-md"
+                  style={{ backgroundColor: 'var(--color-primary)' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--color-primary-hover)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--color-primary)';
+                  }}
+                >
+                  Sign in
+                </Link>
+              </>
+            )}
           </div>
         </motion.div>
       )}
@@ -971,7 +985,7 @@ function HeaderDockIcons({ cart, user }: { cart: any[]; user: any }) {
                 <Link
                   href="/cart"
                   className="block w-full text-center font-medium py-2.5 px-4 rounded-lg border transition-all duration-200"
-                  style={{ 
+                  style={{
                     color: 'var(--color-text-main)',
                     borderColor: 'var(--color-border)'
                   }}
@@ -993,7 +1007,7 @@ function HeaderDockIcons({ cart, user }: { cart: any[]; user: any }) {
                   <div key={idx} className="flex items-center gap-3 p-2 rounded" style={{ backgroundColor: 'var(--color-bg-page)' }}>
                     <div className="w-12 h-12 rounded bg-gray-200 flex-shrink-0 overflow-hidden">
                       {item.product?.image ? (
-                        <img src={item.product.image} alt={item.product.name || 'Product'} className="w-full h-full object-cover" />
+                        <Image src={item.product.image} alt={item.product.name || 'Product'} fill className="object-cover" sizes="48px" />
                       ) : (
                         <div className="w-full h-full bg-gray-200"></div>
                       )}
@@ -1045,8 +1059,8 @@ function HeaderDockIcons({ cart, user }: { cart: any[]; user: any }) {
           <div className="relative flex items-center justify-center">
             {React.isValidElement(items[0].icon)
               ? cloneElement(items[0].icon as React.ReactElement<any>, {
-                  className: `${(items[0].icon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
-                })
+                className: `${(items[0].icon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
+              })
               : items[0].icon
             }
           </div>
@@ -1068,48 +1082,37 @@ function HeaderDockIcons({ cart, user }: { cart: any[]; user: any }) {
             <div className="relative flex items-center justify-center">
               {React.isValidElement(items[1].icon)
                 ? cloneElement(items[1].icon as React.ReactElement<any>, {
-                    className: `${(items[1].icon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
-                  })
+                  className: `${(items[1].icon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
+                })
                 : items[1].icon
               }
             </div>
           </div>
           <MessagesDropdown
             isOpen={isMessagesDropdownOpen}
+            user={user}
             onMouseEnter={handleMessagesMouseEnter}
             onMouseLeave={handleMessagesMouseLeave}
           />
         </div>
       )}
 
-      {/* RFQ Icon with Dropdown */}
+      {/* Trade Assurance Icon - Direct Link */}
       {items[2] && (
-        <div
-          ref={rfqDropdownRef}
-          className="relative"
-          onMouseEnter={handleRFQMouseEnter}
-          onMouseLeave={handleRFQMouseLeave}
+        <Link
+          href="/trade-assurance"
+          className="relative inline-flex items-center justify-center group"
+          style={{ width: baseItemSize, height: baseItemSize }}
         >
-          <Link
-            href={items[2].href || "/account?view=rfq"}
-            className="relative inline-flex items-center justify-center group"
-            style={{ width: baseItemSize, height: baseItemSize }}
-          >
-            <div className="relative flex items-center justify-center">
-              {React.isValidElement(items[2].icon)
-                ? cloneElement(items[2].icon as React.ReactElement<any>, {
-                    className: `${(items[2].icon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
-                  })
-                : items[2].icon
-              }
-            </div>
-          </Link>
-          <RFQDropdown
-            isOpen={isRFQDropdownOpen}
-            onMouseEnter={handleRFQMouseEnter}
-            onMouseLeave={handleRFQMouseLeave}
-          />
-        </div>
+          <div className="relative flex items-center justify-center">
+            {React.isValidElement(items[2].icon)
+              ? cloneElement(items[2].icon as React.ReactElement<any>, {
+                className: `${(items[2].icon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
+              })
+              : items[2].icon
+            }
+          </div>
+        </Link>
       )}
 
       {/* Cart Icon with Dropdown */}
@@ -1127,8 +1130,8 @@ function HeaderDockIcons({ cart, user }: { cart: any[]; user: any }) {
             <div className="relative flex items-center justify-center">
               {React.isValidElement(items[3].icon)
                 ? cloneElement(items[3].icon as React.ReactElement<any>, {
-                    className: `${(items[3].icon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
-                  })
+                  className: `${(items[3].icon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
+                })
                 : items[3].icon
               }
               {items[3].badge && items[3].badge > 0 && (
@@ -1146,10 +1149,10 @@ function HeaderDockIcons({ cart, user }: { cart: any[]; user: any }) {
           />
         </div>
       )}
-      
+
       {/* Account Button with Dropdown */}
-      <div 
-        ref={accountDropdownRef} 
+      <div
+        ref={accountDropdownRef}
         className="relative"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -1165,8 +1168,8 @@ function HeaderDockIcons({ cart, user }: { cart: any[]; user: any }) {
             <div className="relative flex items-center justify-center">
               {React.isValidElement(accountIcon)
                 ? cloneElement(accountIcon as React.ReactElement<any>, {
-                    className: `${(accountIcon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
-                  })
+                  className: `${(accountIcon as any).props?.className || ''} group-hover:text-[#3373FF] transition-colors duration-300`.trim()
+                })
                 : accountIcon
               }
             </div>
@@ -1256,7 +1259,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            onMouseEnter={() => {}}
+            onMouseEnter={() => { }}
             onMouseLeave={onClose}
             className="absolute left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-50 overflow-hidden"
           >
@@ -1344,10 +1347,10 @@ export default function Navbar() {
                       strokeLinecap="round"
                     />
                   </svg>
-              </div>
+                </div>
                 <span className="text-2xl font-bold text-gray-800">Airavat</span>
-            </Link>
-              
+              </Link>
+
               {/* Deliver To Section - Moved to Left */}
               <div className="hidden lg:flex flex-col items-start border-l border-gray-200 pl-6">
                 <span className="text-xs text-gray-500 font-medium leading-tight">Deliver To</span>
@@ -1392,18 +1395,18 @@ export default function Navbar() {
             {/* Right: Navigation Icons - Dock-style Hover Animation */}
             <HeaderDockIcons cart={cart} user={user} />
 
-              {/* Mobile Menu Button */}
-              <div className="block lg:hidden">
-                <button
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
-                >
-                  <Menu size={24} />
-                </button>
-              </div>
+            {/* Mobile Menu Button */}
+            <div className="block lg:hidden">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="rounded-sm bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+              >
+                <Menu size={24} />
+              </button>
             </div>
           </div>
         </div>
+      </div>
 
       {/* Bottom Section - Secondary Navigation */}
       <div className="bg-white border-b border-gray-200 relative" ref={dropdownRef}>
@@ -1443,7 +1446,7 @@ export default function Navbar() {
                 <span>Trade Protection</span>
                 <ChevronDown size={14} className={`transition-transform ${isTradeProtectionOpen ? 'rotate-180' : ''}`} />
               </button>
-              </div>
+            </div>
 
             {/* Right: Home, About, Contact Us, Help Center */}
             <div className="flex items-center gap-6">
@@ -1475,476 +1478,476 @@ export default function Navbar() {
                 Help Center
                 <ChevronDown size={14} className={`transition-transform ${isHelpCenterOpen ? 'rotate-180' : ''}`} />
               </button>
+            </div>
           </div>
         </div>
-      </div>
 
         {/* Categories Mega Menu */}
-      <MegaMenu
-        isOpen={isCategoriesOpen}
-        onClose={() => setIsCategoriesOpen(false)}
-        sections={[
-          {
-            title: 'Get Started',
-            items: [
-              {
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 23.325C9.11255 23.325 6.18755 22.2375 3.97505 20.025C1.83755 17.8875 0.675049 15.0375 0.675049 12C0.675049 8.9625 1.83755 6.1125 4.01255 3.975C6.11255 1.8375 8.96255 0.675003 12 0.675003C15.0375 0.675003 17.8876 1.8375 20.025 4.0125C24.4501 8.4375 24.4501 15.6375 20.025 20.0625C17.8125 22.2375 14.8875 23.325 12 23.325Z" fill="currentColor" />
-                  </svg>
-                ),
-                title: 'Browse All Categories',
-                description: 'Explore our complete product catalog organized by industry.',
-                href: '/products',
-              },
-              {
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.4 7.72501H13.9875C14.4375 7.72501 14.8125 7.35001 14.8125 6.90001C14.8125 6.45001 14.4375 6.07501 13.9875 6.07501H13.2375V5.73751C13.2375 5.28751 12.8625 4.91251 12.4125 4.91251C11.9625 4.91251 11.5875 5.28751 11.5875 5.73751V6.07501H11.4375C10.2 6.07501 9.1875 7.08751 9.1875 8.28751C9.1875 9.52501 10.2 10.5 11.4375 10.5H12.6375C12.9375 10.5 13.2 10.7625 13.2 11.025C13.2 11.2875 12.9375 11.55 12.6375 11.55H10.05C9.6 11.55 9.225 11.925 9.225 12.375C9.225 12.825 9.6 13.2 10.05 13.2H11.5875V13.5375C11.5875 13.9875 11.9625 14.3625 12.4125 14.3625C12.8625 14.3625 13.2375 13.9875 13.2375 13.5375V13.0875C14.175 12.825 14.85 11.9625 14.85 10.95C14.85 9.71251 13.8375 8.73751 12.6 8.73751H11.4C11.1 8.73751 10.8375 8.51251 10.8375 8.21251C10.8375 7.91251 11.1 7.72501 11.4 7.72501Z" fill="currentColor" />
-                    <path d="M20.9998 1.27499H2.9998C1.7248 1.27499 0.674805 2.32499 0.674805 3.59999V15.1125C0.674805 16.3875 1.7248 17.4375 2.9998 17.4375H11.1748V21H8.13731C7.68731 21 7.3123 21.375 7.3123 21.825C7.3123 22.275 7.68731 22.65 8.13731 22.65H15.8998C16.3498 22.65 16.7248 22.275 16.7248 21.825C16.7248 21.375 16.3498 21 15.8998 21H12.8623V17.4375H20.9998C22.2748 17.4375 23.3248 16.3875 23.3248 15.1125V3.59999C23.3623 2.32499 22.2748 1.27499 20.9998 1.27499Z" fill="currentColor" />
-                  </svg>
-                ),
-                title: 'Featured Categories',
-                description: 'Discover trending and popular product categories.',
-                href: '/products?featured=true',
-              },
-              {
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18.9374 23.3625H7.4999C5.7749 23.3625 4.3124 22.05 4.1249 20.3625C4.1249 20.2875 4.0874 20.25 4.0874 20.175V2.96249C4.0874 1.68749 5.0999 0.674988 6.3749 0.674988H17.5499C18.8249 0.674988 19.8374 1.68749 19.8374 2.96249V16.0125C19.8374 17.2875 18.8249 18.3 17.5499 18.3H7.4999C7.0499 18.3 6.5999 18.4875 6.2999 18.7875C5.9624 19.0875 5.8124 19.5375 5.8124 19.9875C5.8124 20.925 6.5624 21.675 7.4999 21.675H18.9374C19.3874 21.675 19.7999 22.05 19.7999 22.5375C19.7999 23.025 19.4249 23.3625 18.9374 23.3625Z" fill="currentColor" />
-                  </svg>
-                ),
-                title: 'Category Directory',
-                description: 'Browse all categories in an organized directory format.',
-                href: '/categories',
-              },
-            ],
-          },
-          {
-            title: 'Popular Categories',
-            items: [
-              {
-                icon: <PackageSearch size={24} />,
-                title: 'Electronics',
-                description: 'Consumer electronics, components, and accessories.',
-                href: '/products?category=electronics',
-              },
-              {
-                icon: <Store size={24} />,
-                title: 'Apparel & Textiles',
-                description: 'Clothing, fabrics, and fashion accessories.',
-                href: '/products?category=apparel-accessories',
-              },
-              {
-                icon: <ShieldCheck size={24} />,
-                title: 'Industrial Equipment',
-                description: 'Machinery, tools, and industrial supplies.',
-                href: '/products?category=industrial-parts',
-              },
-            ],
-          },
-        ]}
-      />
+        <MegaMenu
+          isOpen={isCategoriesOpen}
+          onClose={() => setIsCategoriesOpen(false)}
+          sections={[
+            {
+              title: 'Get Started',
+              items: [
+                {
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 23.325C9.11255 23.325 6.18755 22.2375 3.97505 20.025C1.83755 17.8875 0.675049 15.0375 0.675049 12C0.675049 8.9625 1.83755 6.1125 4.01255 3.975C6.11255 1.8375 8.96255 0.675003 12 0.675003C15.0375 0.675003 17.8876 1.8375 20.025 4.0125C24.4501 8.4375 24.4501 15.6375 20.025 20.0625C17.8125 22.2375 14.8875 23.325 12 23.325Z" fill="currentColor" />
+                    </svg>
+                  ),
+                  title: 'Browse All Categories',
+                  description: 'Explore our complete product catalog organized by industry.',
+                  href: '/products',
+                },
+                {
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.4 7.72501H13.9875C14.4375 7.72501 14.8125 7.35001 14.8125 6.90001C14.8125 6.45001 14.4375 6.07501 13.9875 6.07501H13.2375V5.73751C13.2375 5.28751 12.8625 4.91251 12.4125 4.91251C11.9625 4.91251 11.5875 5.28751 11.5875 5.73751V6.07501H11.4375C10.2 6.07501 9.1875 7.08751 9.1875 8.28751C9.1875 9.52501 10.2 10.5 11.4375 10.5H12.6375C12.9375 10.5 13.2 10.7625 13.2 11.025C13.2 11.2875 12.9375 11.55 12.6375 11.55H10.05C9.6 11.55 9.225 11.925 9.225 12.375C9.225 12.825 9.6 13.2 10.05 13.2H11.5875V13.5375C11.5875 13.9875 11.9625 14.3625 12.4125 14.3625C12.8625 14.3625 13.2375 13.9875 13.2375 13.5375V13.0875C14.175 12.825 14.85 11.9625 14.85 10.95C14.85 9.71251 13.8375 8.73751 12.6 8.73751H11.4C11.1 8.73751 10.8375 8.51251 10.8375 8.21251C10.8375 7.91251 11.1 7.72501 11.4 7.72501Z" fill="currentColor" />
+                      <path d="M20.9998 1.27499H2.9998C1.7248 1.27499 0.674805 2.32499 0.674805 3.59999V15.1125C0.674805 16.3875 1.7248 17.4375 2.9998 17.4375H11.1748V21H8.13731C7.68731 21 7.3123 21.375 7.3123 21.825C7.3123 22.275 7.68731 22.65 8.13731 22.65H15.8998C16.3498 22.65 16.7248 22.275 16.7248 21.825C16.7248 21.375 16.3498 21 15.8998 21H12.8623V17.4375H20.9998C22.2748 17.4375 23.3248 16.3875 23.3248 15.1125V3.59999C23.3623 2.32499 22.2748 1.27499 20.9998 1.27499Z" fill="currentColor" />
+                    </svg>
+                  ),
+                  title: 'Featured Categories',
+                  description: 'Discover trending and popular product categories.',
+                  href: '/products?featured=true',
+                },
+                {
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18.9374 23.3625H7.4999C5.7749 23.3625 4.3124 22.05 4.1249 20.3625C4.1249 20.2875 4.0874 20.25 4.0874 20.175V2.96249C4.0874 1.68749 5.0999 0.674988 6.3749 0.674988H17.5499C18.8249 0.674988 19.8374 1.68749 19.8374 2.96249V16.0125C19.8374 17.2875 18.8249 18.3 17.5499 18.3H7.4999C7.0499 18.3 6.5999 18.4875 6.2999 18.7875C5.9624 19.0875 5.8124 19.5375 5.8124 19.9875C5.8124 20.925 6.5624 21.675 7.4999 21.675H18.9374C19.3874 21.675 19.7999 22.05 19.7999 22.5375C19.7999 23.025 19.4249 23.3625 18.9374 23.3625Z" fill="currentColor" />
+                    </svg>
+                  ),
+                  title: 'Category Directory',
+                  description: 'Browse all categories in an organized directory format.',
+                  href: '/categories',
+                },
+              ],
+            },
+            {
+              title: 'Popular Categories',
+              items: [
+                {
+                  icon: <PackageSearch size={24} />,
+                  title: 'Electronics',
+                  description: 'Consumer electronics, components, and accessories.',
+                  href: '/products?category=electronics',
+                },
+                {
+                  icon: <Store size={24} />,
+                  title: 'Apparel & Textiles',
+                  description: 'Clothing, fabrics, and fashion accessories.',
+                  href: '/products?category=apparel-accessories',
+                },
+                {
+                  icon: <ShieldCheck size={24} />,
+                  title: 'Industrial Equipment',
+                  description: 'Machinery, tools, and industrial supplies.',
+                  href: '/products?category=industrial-parts',
+                },
+              ],
+            },
+          ]}
+        />
 
-      {/* Discover Mega Menu */}
-      <MegaMenu
-        isOpen={isDiscoverOpen}
-        onClose={() => setIsDiscoverOpen(false)}
-        sections={[
-          {
-            title: 'Explore',
-            items: [
-              {
-                icon: <Rocket size={24} />,
-                title: 'Trending Products',
-                description: 'Discover the most popular products right now.',
-                href: '/trending',
-              },
-              {
-                icon: <Star size={24} />,
-                title: 'Featured Suppliers',
-                description: 'Browse verified and top-rated suppliers.',
-                href: '/suppliers?featured=true',
-              },
-              {
-                icon: <Globe size={24} />,
-                title: 'Global Markets',
-                description: 'Explore products from different regions worldwide.',
-                href: '/markets',
-              },
-            ],
-          },
-          {
-            title: 'Resources',
-            items: [
-              {
-                icon: <FileText size={24} />,
-                title: 'Industry Insights',
-                description: 'Latest trends and market analysis reports.',
-                href: '/insights',
-              },
-              {
-                icon: <Camera size={24} />,
-                title: 'Product Showcases',
-                description: 'View curated product collections and showcases.',
-                href: '/showcases',
-              },
-              {
-                icon: <AppWindow size={24} />,
-                title: 'Trade Shows',
-                description: 'Upcoming trade shows and exhibitions.',
-                href: '/trade-shows',
-              },
-            ],
-          },
-        ]}
-      />
+        {/* Discover Mega Menu */}
+        <MegaMenu
+          isOpen={isDiscoverOpen}
+          onClose={() => setIsDiscoverOpen(false)}
+          sections={[
+            {
+              title: 'Explore',
+              items: [
+                {
+                  icon: <Rocket size={24} />,
+                  title: 'Trending Products',
+                  description: 'Discover the most popular products right now.',
+                  href: '/trending',
+                },
+                {
+                  icon: <Star size={24} />,
+                  title: 'Featured Suppliers',
+                  description: 'Browse verified and top-rated suppliers.',
+                  href: '/suppliers?featured=true',
+                },
+                {
+                  icon: <Globe size={24} />,
+                  title: 'Global Markets',
+                  description: 'Explore products from different regions worldwide.',
+                  href: '/markets',
+                },
+              ],
+            },
+            {
+              title: 'Resources',
+              items: [
+                {
+                  icon: <FileText size={24} />,
+                  title: 'Industry Insights',
+                  description: 'Latest trends and market analysis reports.',
+                  href: '/insights',
+                },
+                {
+                  icon: <Camera size={24} />,
+                  title: 'Product Showcases',
+                  description: 'View curated product collections and showcases.',
+                  href: '/showcases',
+                },
+                {
+                  icon: <AppWindow size={24} />,
+                  title: 'Trade Shows',
+                  description: 'Upcoming trade shows and exhibitions.',
+                  href: '/trade-shows',
+                },
+              ],
+            },
+          ]}
+        />
 
-      {/* RFQ Mega Menu */}
-      <MegaMenu
-        isOpen={isRFQOpen}
-        onClose={() => setIsRFQOpen(false)}
-        sections={[
-          {
-            title: 'Request for Quotation',
-            items: [
-              {
-                icon: <FileText size={24} />,
-                title: 'Post an RFQ',
-                description: 'Create a new request for quotation and get multiple quotes.',
-                href: '/account/rfq/new',
-              },
-              {
-                icon: <PackageSearch size={24} />,
-                title: 'My RFQs',
-                description: 'View and manage all your RFQ requests.',
-                href: '/account/rfq',
-              },
-              {
-                icon: <MessageSquare size={24} />,
-                title: 'RFQ Responses',
-                description: 'Review quotes and responses from suppliers.',
-                href: '/account/rfq/responses',
-              },
-            ],
-          },
-          {
-            title: 'Learn More',
-            items: [
-              {
-                icon: <HelpCircle size={24} />,
-                title: 'How RFQ Works',
-                description: 'Learn how to use our RFQ system effectively.',
-                href: '/help/rfq',
-              },
-              {
-                icon: <FileTextIcon size={24} />,
-                title: 'RFQ Templates',
-                description: 'Download ready-to-use RFQ templates.',
-                href: '/templates/rfq',
-              },
-              {
-                icon: <Store size={24} />,
-                title: 'Supplier Directory',
-                description: 'Browse suppliers who respond to RFQs.',
-                href: '/suppliers',
-              },
-            ],
-          },
-        ]}
-      />
+        {/* RFQ Mega Menu */}
+        <MegaMenu
+          isOpen={isRFQOpen}
+          onClose={() => setIsRFQOpen(false)}
+          sections={[
+            {
+              title: 'Request for Quotation',
+              items: [
+                {
+                  icon: <FileText size={24} />,
+                  title: 'Post an RFQ',
+                  description: 'Create a new request for quotation and get multiple quotes.',
+                  href: '/account/rfq/new',
+                },
+                {
+                  icon: <PackageSearch size={24} />,
+                  title: 'My RFQs',
+                  description: 'View and manage all your RFQ requests.',
+                  href: '/account/rfq',
+                },
+                {
+                  icon: <MessageSquare size={24} />,
+                  title: 'RFQ Responses',
+                  description: 'Review quotes and responses from suppliers.',
+                  href: '/account/rfq/responses',
+                },
+              ],
+            },
+            {
+              title: 'Learn More',
+              items: [
+                {
+                  icon: <HelpCircle size={24} />,
+                  title: 'How RFQ Works',
+                  description: 'Learn how to use our RFQ system effectively.',
+                  href: '/help/rfq',
+                },
+                {
+                  icon: <FileTextIcon size={24} />,
+                  title: 'RFQ Templates',
+                  description: 'Download ready-to-use RFQ templates.',
+                  href: '/templates/rfq',
+                },
+                {
+                  icon: <Store size={24} />,
+                  title: 'Supplier Directory',
+                  description: 'Browse suppliers who respond to RFQs.',
+                  href: '/suppliers',
+                },
+              ],
+            },
+          ]}
+        />
 
-      {/* Trade Protection Mega Menu */}
-      <MegaMenu
-        isOpen={isTradeProtectionOpen}
-        onClose={() => setIsTradeProtectionOpen(false)}
-        sections={[
-          {
-            title: 'Protection Services',
-            items: [
-              {
-                icon: <ShieldCheck size={24} />,
-                title: 'Trade Assurance',
-                description: 'Get protection for your orders with our escrow service.',
-                href: '/trade-assurance',
-              },
-              {
-                icon: <ShieldCheck size={24} />,
-                title: 'Order Protection',
-                description: 'Secure payment and delivery protection for all orders.',
-                href: '/protection',
-              },
-              {
-                icon: <ShieldCheck size={24} />,
-                title: 'Dispute Resolution',
-                description: 'Fair and fast resolution for trade disputes.',
-                href: '/disputes',
-              },
-            ],
-          },
-          {
-            title: 'Verification',
-            items: [
-              {
-                icon: <ShieldCheck size={24} />,
-                title: 'Verified Suppliers',
-                description: 'Browse suppliers verified by Airavat.',
-                href: '/suppliers?verified=true',
-              },
-              {
-                icon: <ShieldCheck size={24} />,
-                title: 'Get Verified',
-                description: 'Apply for supplier verification badge.',
-                href: '/supplier/verify',
-              },
-              {
-                icon: <ShieldCheck size={24} />,
-                title: 'Security Center',
-                description: 'Learn about our security measures and policies.',
-                href: '/security',
-              },
-            ],
-          },
-        ]}
-      />
+        {/* Trade Protection Mega Menu */}
+        <MegaMenu
+          isOpen={isTradeProtectionOpen}
+          onClose={() => setIsTradeProtectionOpen(false)}
+          sections={[
+            {
+              title: 'Protection Services',
+              items: [
+                {
+                  icon: <ShieldCheck size={24} />,
+                  title: 'Trade Assurance',
+                  description: 'Get protection for your orders with our escrow service.',
+                  href: '/trade-assurance#trade-assurance',
+                },
+                {
+                  icon: <ShieldCheck size={24} />,
+                  title: 'Order Protection',
+                  description: 'Secure payment and delivery protection for all orders.',
+                  href: '/trade-assurance#order-protection',
+                },
+                {
+                  icon: <ShieldCheck size={24} />,
+                  title: 'Dispute Resolution',
+                  description: 'Fair and fast resolution for trade disputes.',
+                  href: '/trade-assurance#dispute-resolution',
+                },
+              ],
+            },
+            {
+              title: 'Verification',
+              items: [
+                {
+                  icon: <ShieldCheck size={24} />,
+                  title: 'Verified Suppliers',
+                  description: 'Browse suppliers verified by Airavat.',
+                  href: '/trade-assurance#verified-suppliers',
+                },
+                {
+                  icon: <ShieldCheck size={24} />,
+                  title: 'Get Verified',
+                  description: 'Apply for supplier verification badge.',
+                  href: '/trade-assurance#get-verified',
+                },
+                {
+                  icon: <ShieldCheck size={24} />,
+                  title: 'Security Center',
+                  description: 'Learn about our security measures and policies.',
+                  href: '/trade-assurance#security-center',
+                },
+              ],
+            },
+          ]}
+        />
 
-      {/* Home Mega Menu */}
-      <MegaMenu
-        isOpen={isHomeOpen}
-        onClose={() => setIsHomeOpen(false)}
-        sections={[
-          {
-            title: 'Quick Links',
-            items: [
-              {
-                icon: <Store size={24} />,
-                title: 'Homepage',
-                description: 'Return to the main homepage.',
-                href: '/',
-              },
-              {
-                icon: <PackageSearch size={24} />,
-                title: 'All Products',
-                description: 'Browse our complete product catalog.',
-                href: '/products',
-              },
-              {
-                icon: <Star size={24} />,
-                title: 'Featured Deals',
-                description: 'Special offers and featured products.',
-                href: '/deals',
-              },
-            ],
-          },
-          {
-            title: 'Account',
-            items: [
-              {
-                icon: <User size={24} />,
-                title: 'My Account',
-                description: 'Access your account dashboard.',
-                href: '/account',
-              },
-              {
-                icon: <ShoppingCart size={24} />,
-                title: 'My Cart',
-                description: 'View items in your shopping cart.',
-                href: '/cart',
-              },
-              {
-                icon: <MessageSquare size={24} />,
-                title: 'Messages',
-                description: 'Check your messages and inquiries.',
-                href: '/messages',
-              },
-            ],
-          },
-        ]}
-      />
+        {/* Home Mega Menu */}
+        <MegaMenu
+          isOpen={isHomeOpen}
+          onClose={() => setIsHomeOpen(false)}
+          sections={[
+            {
+              title: 'Quick Links',
+              items: [
+                {
+                  icon: <Store size={24} />,
+                  title: 'Homepage',
+                  description: 'Return to the main homepage.',
+                  href: '/',
+                },
+                {
+                  icon: <PackageSearch size={24} />,
+                  title: 'All Products',
+                  description: 'Browse our complete product catalog.',
+                  href: '/products',
+                },
+                {
+                  icon: <Star size={24} />,
+                  title: 'Featured Deals',
+                  description: 'Special offers and featured products.',
+                  href: '/deals',
+                },
+              ],
+            },
+            {
+              title: 'Account',
+              items: [
+                {
+                  icon: <User size={24} />,
+                  title: 'My Account',
+                  description: 'Access your account dashboard.',
+                  href: '/account',
+                },
+                {
+                  icon: <ShoppingCart size={24} />,
+                  title: 'My Cart',
+                  description: 'View items in your shopping cart.',
+                  href: '/cart',
+                },
+                {
+                  icon: <MessageSquare size={24} />,
+                  title: 'Messages',
+                  description: 'Check your messages and inquiries.',
+                  href: '/messages',
+                },
+              ],
+            },
+          ]}
+        />
 
-      {/* About Mega Menu */}
-      <MegaMenu
-        isOpen={isAboutOpen}
-        onClose={() => setIsAboutOpen(false)}
-        sections={[
-          {
-            title: 'Company',
-            items: [
-              {
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 23.325C9.11255 23.325 6.18755 22.2375 3.97505 20.025C1.83755 17.8875 0.675049 15.0375 0.675049 12C0.675049 8.9625 1.83755 6.1125 4.01255 3.975C6.11255 1.8375 8.96255 0.675003 12 0.675003C15.0375 0.675003 17.8876 1.8375 20.025 4.0125C24.4501 8.4375 24.4501 15.6375 20.025 20.0625C17.8125 22.2375 14.8875 23.325 12 23.325Z" fill="currentColor" />
-                  </svg>
-                ),
-                title: 'About Us',
-                description: 'Learn about Airavat and our mission.',
-                href: '/about',
-              },
-              {
-                icon: <Store size={24} />,
-                title: 'Our Story',
-                description: 'The journey of Airavat and our vision.',
-                href: '/about/story',
-              },
-              {
-                icon: <Star size={24} />,
-                title: 'Careers',
-                description: 'Join our team and build the future of B2B commerce.',
-                href: '/careers',
-              },
-            ],
-          },
-          {
-            title: 'Resources',
-            items: [
-              {
-                icon: <FileText size={24} />,
-                title: 'Press & Media',
-                description: 'Latest news, press releases, and media kit.',
-                href: '/press',
-              },
-              {
-                icon: <Globe size={24} />,
-                title: 'Global Presence',
-                description: 'Our offices and presence around the world.',
-                href: '/locations',
-              },
-              {
-                icon: <MessageSquare size={24} />,
-                title: 'Contact Us',
-                description: 'Get in touch with our team.',
-                href: '/contact',
-              },
-            ],
-          },
-        ]}
-      />
+        {/* About Mega Menu */}
+        <MegaMenu
+          isOpen={isAboutOpen}
+          onClose={() => setIsAboutOpen(false)}
+          sections={[
+            {
+              title: 'Company',
+              items: [
+                {
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 23.325C9.11255 23.325 6.18755 22.2375 3.97505 20.025C1.83755 17.8875 0.675049 15.0375 0.675049 12C0.675049 8.9625 1.83755 6.1125 4.01255 3.975C6.11255 1.8375 8.96255 0.675003 12 0.675003C15.0375 0.675003 17.8876 1.8375 20.025 4.0125C24.4501 8.4375 24.4501 15.6375 20.025 20.0625C17.8125 22.2375 14.8875 23.325 12 23.325Z" fill="currentColor" />
+                    </svg>
+                  ),
+                  title: 'About Us',
+                  description: 'Learn about Airavat and our mission.',
+                  href: '/about',
+                },
+                {
+                  icon: <Store size={24} />,
+                  title: 'Our Story',
+                  description: 'The journey of Airavat and our vision.',
+                  href: '/about/story',
+                },
+                {
+                  icon: <Star size={24} />,
+                  title: 'Careers',
+                  description: 'Join our team and build the future of B2B commerce.',
+                  href: '/careers',
+                },
+              ],
+            },
+            {
+              title: 'Resources',
+              items: [
+                {
+                  icon: <FileText size={24} />,
+                  title: 'Press & Media',
+                  description: 'Latest news, press releases, and media kit.',
+                  href: '/press',
+                },
+                {
+                  icon: <Globe size={24} />,
+                  title: 'Global Presence',
+                  description: 'Our offices and presence around the world.',
+                  href: '/locations',
+                },
+                {
+                  icon: <MessageSquare size={24} />,
+                  title: 'Contact Us',
+                  description: 'Get in touch with our team.',
+                  href: '/contact',
+                },
+              ],
+            },
+          ]}
+        />
 
-      {/* Contact Us Mega Menu */}
-      <MegaMenu
-        isOpen={isContactUsOpen}
-        onClose={() => setIsContactUsOpen(false)}
-        sections={[
-          {
-            title: 'Get in Touch',
-            items: [
-              {
-                icon: <MessageSquare size={24} />,
-                title: 'General Inquiry',
-                description: 'Send us a message for general questions.',
-                href: '/contact',
-              },
-              {
-                icon: <Store size={24} />,
-                title: 'Sales Team',
-                description: 'Contact our sales team for business inquiries.',
-                href: '/contact/sales',
-              },
-              {
-                icon: <HelpCircle size={24} />,
-                title: 'Support',
-                description: 'Get help with your account or orders.',
-                href: '/contact/support',
-              },
-            ],
-          },
-          {
-            title: 'Other Ways',
-            items: [
-              {
-                icon: <MessageSquare size={24} />,
-                title: 'Live Chat',
-                description: 'Chat with our support team in real-time.',
-                href: '/chat',
-              },
-              {
-                icon: <FileText size={24} />,
-                title: 'Email Us',
-                description: 'Send us an email at support@airavat.com',
-                href: 'mailto:support@airavat.com',
-              },
-              {
-                icon: <Globe size={24} />,
-                title: 'Office Locations',
-                description: 'Find our office locations worldwide.',
-                href: '/locations',
-              },
-            ],
-          },
-        ]}
-      />
+        {/* Contact Us Mega Menu */}
+        <MegaMenu
+          isOpen={isContactUsOpen}
+          onClose={() => setIsContactUsOpen(false)}
+          sections={[
+            {
+              title: 'Get in Touch',
+              items: [
+                {
+                  icon: <MessageSquare size={24} />,
+                  title: 'General Inquiry',
+                  description: 'Send us a message for general questions.',
+                  href: '/contact',
+                },
+                {
+                  icon: <Store size={24} />,
+                  title: 'Sales Team',
+                  description: 'Contact our sales team for business inquiries.',
+                  href: '/contact/sales',
+                },
+                {
+                  icon: <HelpCircle size={24} />,
+                  title: 'Support',
+                  description: 'Get help with your account or orders.',
+                  href: '/contact/support',
+                },
+              ],
+            },
+            {
+              title: 'Other Ways',
+              items: [
+                {
+                  icon: <MessageSquare size={24} />,
+                  title: 'Live Chat',
+                  description: 'Chat with our support team in real-time.',
+                  href: '/chat',
+                },
+                {
+                  icon: <FileText size={24} />,
+                  title: 'Email Us',
+                  description: 'Send us an email at support@airavat.com',
+                  href: 'mailto:support@airavat.com',
+                },
+                {
+                  icon: <Globe size={24} />,
+                  title: 'Office Locations',
+                  description: 'Find our office locations worldwide.',
+                  href: '/locations',
+                },
+              ],
+            },
+          ]}
+        />
 
-      {/* Help Center Mega Menu */}
-      <MegaMenu
-        isOpen={isHelpCenterOpen}
-        onClose={() => setIsHelpCenterOpen(false)}
-        sections={[
-          {
-            title: 'Help & Support',
-            items: [
-              {
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16.3498 3.5625H7.64981C3.7873 3.5625 0.674805 6.675 0.674805 10.5375V18.15C0.674805 19.3875 1.6873 20.4 2.9248 20.4H16.3873C20.2498 20.4 23.3623 17.2875 23.3623 13.425V10.5375C23.3623 6.7125 20.2123 3.5625 16.3498 3.5625Z" fill="currentColor" />
-                    <circle cx="6.4873" cy="12" r="0.9375" fill="currentColor" />
-                    <circle cx="12" cy="12" r="0.9375" fill="currentColor" />
-                    <circle cx="17.5122" cy="12" r="0.9375" fill="currentColor" />
-                  </svg>
-                ),
-                title: 'Help Center',
-                description: 'Find answers to frequently asked questions.',
-                href: '/help',
-              },
-              {
-                icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20.5873 6.22499L15.4123 1.12499C15.1123 0.824988 14.6998 0.674988 14.2873 0.674988H5.2873C4.0123 0.674988 2.9248 1.72499 2.9248 3.03749V21.0375C2.9248 22.3125 3.9748 23.4 5.2873 23.4H18.6748C19.9498 23.4 21.0373 22.35 21.0373 21.0375V7.34999C21.0373 6.93749 20.8873 6.52499 20.5873 6.22499Z" fill="currentColor" />
-                    <path d="M14.5873 10.9125H8.09981C7.64981 10.9125 7.2373 11.2875 7.2373 11.775C7.2373 12.2625 7.61231 12.6375 8.09981 12.6375H14.5873C15.0373 12.6375 15.4498 12.2625 15.4498 11.775C15.4498 11.2875 15.0748 10.9125 14.5873 10.9125Z" fill="currentColor" />
-                    <path d="M14.5873 15.0375H8.09981C7.64981 15.0375 7.2373 15.4125 7.2373 15.9C7.2373 16.3875 7.61231 16.7625 8.09981 16.7625H14.5873C15.0373 16.7625 15.4498 16.3875 15.4498 15.9C15.4498 15.4125 15.0748 15.0375 14.5873 15.0375Z" fill="currentColor" />
-                  </svg>
-                ),
-                title: 'Documentation',
-                description: 'Comprehensive guides and tutorials.',
-                href: '/docs',
-              },
-              {
-                icon: <MessageSquare size={24} />,
-                title: 'Contact Support',
-                description: 'Get personalized help from our team.',
-                href: '/contact/support',
-              },
-            ],
-          },
-          {
-            title: 'Resources',
-            items: [
-              {
-                icon: <FileText size={24} />,
-                title: 'FAQs',
-                description: 'Browse frequently asked questions.',
-                href: '/help/faq',
-              },
-              {
-                icon: <HelpCircle size={24} />,
-                title: 'Video Tutorials',
-                description: 'Watch step-by-step video guides.',
-                href: '/help/videos',
-              },
-              {
-                icon: <FileTextIcon size={24} />,
-                title: 'User Guides',
-                description: 'Detailed guides for using Airavat.',
-                href: '/help/guides',
-              },
-            ],
-          },
-        ]}
-      />
+        {/* Help Center Mega Menu */}
+        <MegaMenu
+          isOpen={isHelpCenterOpen}
+          onClose={() => setIsHelpCenterOpen(false)}
+          sections={[
+            {
+              title: 'Help & Support',
+              items: [
+                {
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M16.3498 3.5625H7.64981C3.7873 3.5625 0.674805 6.675 0.674805 10.5375V18.15C0.674805 19.3875 1.6873 20.4 2.9248 20.4H16.3873C20.2498 20.4 23.3623 17.2875 23.3623 13.425V10.5375C23.3623 6.7125 20.2123 3.5625 16.3498 3.5625Z" fill="currentColor" />
+                      <circle cx="6.4873" cy="12" r="0.9375" fill="currentColor" />
+                      <circle cx="12" cy="12" r="0.9375" fill="currentColor" />
+                      <circle cx="17.5122" cy="12" r="0.9375" fill="currentColor" />
+                    </svg>
+                  ),
+                  title: 'Help Center',
+                  description: 'Find answers to frequently asked questions.',
+                  href: '/help',
+                },
+                {
+                  icon: (
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.5873 6.22499L15.4123 1.12499C15.1123 0.824988 14.6998 0.674988 14.2873 0.674988H5.2873C4.0123 0.674988 2.9248 1.72499 2.9248 3.03749V21.0375C2.9248 22.3125 3.9748 23.4 5.2873 23.4H18.6748C19.9498 23.4 21.0373 22.35 21.0373 21.0375V7.34999C21.0373 6.93749 20.8873 6.52499 20.5873 6.22499Z" fill="currentColor" />
+                      <path d="M14.5873 10.9125H8.09981C7.64981 10.9125 7.2373 11.2875 7.2373 11.775C7.2373 12.2625 7.61231 12.6375 8.09981 12.6375H14.5873C15.0373 12.6375 15.4498 12.2625 15.4498 11.775C15.4498 11.2875 15.0748 10.9125 14.5873 10.9125Z" fill="currentColor" />
+                      <path d="M14.5873 15.0375H8.09981C7.64981 15.0375 7.2373 15.4125 7.2373 15.9C7.2373 16.3875 7.61231 16.7625 8.09981 16.7625H14.5873C15.0373 16.7625 15.4498 16.3875 15.4498 15.9C15.4498 15.4125 15.0748 15.0375 14.5873 15.0375Z" fill="currentColor" />
+                    </svg>
+                  ),
+                  title: 'Documentation',
+                  description: 'Comprehensive guides and tutorials.',
+                  href: '/docs',
+                },
+                {
+                  icon: <MessageSquare size={24} />,
+                  title: 'Contact Support',
+                  description: 'Get personalized help from our team.',
+                  href: '/contact/support',
+                },
+              ],
+            },
+            {
+              title: 'Resources',
+              items: [
+                {
+                  icon: <FileText size={24} />,
+                  title: 'FAQs',
+                  description: 'Browse frequently asked questions.',
+                  href: '/help/faq',
+                },
+                {
+                  icon: <HelpCircle size={24} />,
+                  title: 'Video Tutorials',
+                  description: 'Watch step-by-step video guides.',
+                  href: '/help/videos',
+                },
+                {
+                  icon: <FileTextIcon size={24} />,
+                  title: 'User Guides',
+                  description: 'Detailed guides for using Airavat.',
+                  href: '/help/guides',
+                },
+              ],
+            },
+          ]}
+        />
       </div>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
-      {isMobileMenuOpen && (
+        {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
@@ -1967,10 +1970,10 @@ export default function Navbar() {
                 <div className="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none">
                   <Search className="h-5 w-5 text-gray-400" />
                 </div>
-              <input
-                type="text"
+                <input
+                  type="text"
                   placeholder="Search Airavat"
-                value={searchQuery}
+                  value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-8 pr-20 py-2 text-sm text-gray-700 bg-transparent rounded-lg focus:outline-none"
                 />
@@ -1983,7 +1986,7 @@ export default function Navbar() {
                 >
                   Search
                 </button>
-            </div>
+              </div>
               <nav className="space-y-2">
                 <Link href="/about" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                   About
@@ -1996,29 +1999,29 @@ export default function Navbar() {
                 </Link>
                 <Link href="/trade-services" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                   Services
-              </Link>
+                </Link>
                 <Link href="/products" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                   Projects
-              </Link>
+                </Link>
                 <Link href="/help" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                   Blog
-              </Link>
+                </Link>
                 <Link href="/cart" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                   Cart ({cart.length})
-              </Link>
+                </Link>
                 {user ? (
                   <Link href="/account" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
                     My Account
-                </Link>
+                  </Link>
                 ) : (
                   <Link href="/login" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                Sign In
-              </Link>
+                    Sign In
+                  </Link>
                 )}
               </nav>
             </div>
           </motion.div>
-      )}
+        )}
       </AnimatePresence>
     </header>
   );
