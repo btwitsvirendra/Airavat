@@ -33,6 +33,10 @@ export interface User extends Omit<Users, 'user_id' | 'password_hash' | 'created
   company?: string; // For backward compatibility
   gstin?: string; // For backward compatibility
   profile?: UserProfile;
+  // Role-based authentication (Alibaba-style)
+  roles?: ('buyer' | 'seller')[]; // Array of roles (supports hybrid users)
+  defaultView?: 'buyer' | 'seller'; // Preferred default view after login
+  supplierStatus?: 'active' | 'inactive' | 'pending' | null; // Supplier membership status
 }
 
 export interface UserProfile {
@@ -378,6 +382,10 @@ export interface BusinessConnection extends Omit<BusinessConnections, 'connectio
   buyerBusinessId?: string;
   sellerId: string;
   sellerBusinessId?: string;
+  followingSince?: Date;
+  createdAt: Date;
+}
+
   followingSince?: Date;
   createdAt: Date;
 }

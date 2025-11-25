@@ -1,14 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  MapPin, 
-  FileText, 
-  Phone, 
-  Mail, 
-  CheckCircle2, 
-  Plus, 
+import {
+  MapPin,
+  FileText,
+  Phone,
+  Mail,
+  CheckCircle2,
+  Plus,
   Trash2,
   Minus,
   ChevronDown
@@ -51,7 +52,7 @@ const BillingItem = ({ bill }: { bill: BillingInfo }) => {
 
 const PromoCode = () => {
   const [promoCode, setPromoCode] = useState('');
-  
+
   const handleApply = () => {
     if (promoCode.trim()) {
       toast.success('Promo code applied!');
@@ -83,16 +84,16 @@ const PromoCode = () => {
   );
 };
 
-const SideBar = ({ 
-  subtotal, 
-  shipping, 
-  tax, 
+const SideBar = ({
+  subtotal,
+  shipping,
+  tax,
   total,
-  itemCount 
-}: { 
-  subtotal: number; 
-  shipping: number; 
-  tax: number; 
+  itemCount
+}: {
+  subtotal: number;
+  shipping: number;
+  tax: number;
   total: number;
   itemCount: number;
 }) => {
@@ -126,7 +127,7 @@ const SideBar = ({
       ))}
 
       <h6 className="text-2xl font-bold my-6">Order Summary</h6>
-      
+
       <div className="flex justify-between items-center mb-2">
         <span className="flex items-center">
           <FileText className="w-4 h-4 mr-2 text-blue-600" />
@@ -138,7 +139,7 @@ const SideBar = ({
           </button>
         </span>
       </div>
-      
+
       <div className="flex justify-between items-center mb-2">
         <span className="flex items-center">
           <FileText className="w-4 h-4 mr-2 text-blue-600" />
@@ -178,13 +179,13 @@ const SideBar = ({
   );
 };
 
-const Quantity = ({ 
-  quantity, 
-  onIncrease, 
-  onDecrease 
-}: { 
-  quantity: number; 
-  onIncrease: () => void; 
+const Quantity = ({
+  quantity,
+  onIncrease,
+  onDecrease
+}: {
+  quantity: number;
+  onIncrease: () => void;
   onDecrease: () => void;
 }) => {
   return (
@@ -214,12 +215,12 @@ const Quantity = ({
   );
 };
 
-const OrderItem = ({ 
-  item, 
-  onUpdateQuantity, 
-  onRemove 
-}: { 
-  item: { product: any; quantity: number }; 
+const OrderItem = ({
+  item,
+  onUpdateQuantity,
+  onRemove
+}: {
+  item: { product: any; quantity: number };
   onUpdateQuantity: (productId: string, quantity: number) => void;
   onRemove: (productId: string) => void;
 }) => {
@@ -256,15 +257,16 @@ const OrderItem = ({
           </p>
         </div>
       </div>
-
       <div className="flex flex-col sm:flex-row">
         <div className="flex-grow w-48 sm:mr-4 mx-auto">
           <Link href={`/products/${item.product.id}`}>
             {item.product.images?.[0] ? (
-              <img 
-                src={item.product.images[0]} 
-                alt={item.product.name} 
-                className="w-full h-auto rounded" 
+              <Image
+                src={item.product.images[0]}
+                alt={item.product.name}
+                width={192}
+                height={192}
+                className="w-full h-auto rounded object-cover"
               />
             ) : (
               <div className="w-full h-48 bg-slate-200 rounded flex items-center justify-center">
@@ -277,7 +279,7 @@ const OrderItem = ({
           <div className="flex flex-col md:flex-row justify-between gap-6">
             <div className="flex-grow w-full md:w-auto">
               <div className="hover:text-blue-600 hover:underline mb-1">
-                <Link 
+                <Link
                   href={`/products/${item.product.id}`}
                   className="text-[15px] leading-[19px]"
                 >
@@ -324,8 +326,8 @@ const OrderItem = ({
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
@@ -340,7 +342,7 @@ export default function CheckoutPage() {
       const product = cartItem.product;
       const currentQuantity = cartItem.quantity;
       const difference = newQuantity - currentQuantity;
-      
+
       if (difference > 0) {
         // Increasing quantity - just add the difference
         addToCart(product, difference);
@@ -358,7 +360,7 @@ export default function CheckoutPage() {
     toast.success('Item removed from cart');
   };
 
-  const subtotal = cart.reduce((sum: number, item: any) => 
+  const subtotal = cart.reduce((sum: number, item: any) =>
     sum + (item.product.price?.amount || 0) * item.quantity, 0
   );
   const shipping = 200; // Standard shipping

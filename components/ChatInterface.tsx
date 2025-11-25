@@ -171,7 +171,7 @@ const initialMessages: Message[] = [
 ];
 
 export default function ChatInterface() {
-    const { user } = useStore();
+    const { user, activeProductContext } = useStore();
     const [selectedTab, setSelectedTab] = useState<'all' | 'unread'>('all');
     const [selectedContactId, setSelectedContactId] = useState<string | null>('1');
     const [messages, setMessages] = useState<Message[]>(initialMessages);
@@ -465,6 +465,35 @@ export default function ChatInterface() {
                         {/* Header Actions if needed */}
                     </div>
                 </div>
+
+                {/* Product Context Card (Sticky) */}
+                {activeProductContext && (
+                    <div className="bg-blue-50 border-b border-blue-100 p-3 flex items-center gap-4 relative">
+                        <div className="w-12 h-12 bg-white rounded border border-blue-100 overflow-hidden flex-shrink-0">
+                            <img
+                                src={activeProductContext.images?.[0]}
+                                alt={activeProductContext.name}
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                                <span className="bg-blue-100 text-blue-700 text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wide">Inquiry</span>
+                                <h3 className="text-sm font-semibold text-gray-900 truncate">{activeProductContext.name}</h3>
+                            </div>
+                            <div className="flex items-center gap-3 text-xs text-gray-600">
+                                <span>Price: <span className="font-medium text-gray-900">{activeProductContext.price.currency} {activeProductContext.price.amount}</span></span>
+                                <span>MOQ: <span className="font-medium text-gray-900">{activeProductContext.minOrderQuantity}</span></span>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => sendSpecialMessage('custom-offer')}
+                            className="px-3 py-1.5 bg-white border border-blue-200 text-blue-600 text-xs font-medium rounded hover:bg-blue-50 transition shadow-sm"
+                        >
+                            Send Inquiry
+                        </button>
+                    </div>
+                )}
 
                 {/* Messages Scroll Area */}
                 <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-white">

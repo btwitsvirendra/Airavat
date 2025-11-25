@@ -155,12 +155,23 @@ type AccountDropdownProps = {
 
 function AccountDropdown({ user, isOpen, onClose, onMouseEnter, onMouseLeave }: AccountDropdownProps) {
   const setUser = useStore((state: any) => state.setUser);
+  const { currentView, toggleView, setCurrentView } = useStore();
 
   const handleLogout = () => {
     setUser(null);
     onClose();
     if (typeof window !== 'undefined') {
       window.location.href = '/';
+    }
+  };
+
+  const handleViewToggle = () => {
+    toggleView();
+    onClose();
+    // Redirect to appropriate dashboard
+    const newView = currentView === 'buyer' ? 'seller' : 'buyer';
+    if (typeof window !== 'undefined') {
+      window.location.href = newView === 'buyer' ? '/buyer/dashboard' : '/seller/dashboard';
     }
   };
 
@@ -556,7 +567,7 @@ function AccountDropdown({ user, isOpen, onClose, onMouseEnter, onMouseLeave }: 
               )}
               <span className="absolute -right-0.5 -top-0.5 block h-3.5 w-3.5 rounded-full border-2 border-white bg-green-500"></span>
             </div>
-            <div>
+            <div className="flex-1">
               <p className="text-sm font-semibold text-gray-900">
                 {user?.name || 'User'}
               </p>
@@ -565,6 +576,37 @@ function AccountDropdown({ user, isOpen, onClose, onMouseEnter, onMouseLeave }: 
               </p>
             </div>
           </div>
+
+          {/* Role Toggle Button (for hybrid users) */}
+          {user?.roles?.includes('buyer') && user?.roles?.includes('seller') && user?.supplierStatus === 'active' && (
+            <div style={{ borderTop: '1px solid var(--color-border)' }}>
+              <button
+                onClick={handleViewToggle}
+                className="flex w-full items-center justify-between px-4 py-2.5 text-sm font-medium transition-colors"
+                style={{ 
+                  color: 'var(--color-primary)',
+                  backgroundColor: currentView === 'seller' ? 'var(--color-primary-light)' : 'transparent'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-primary-light)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = currentView === 'seller' ? 'var(--color-primary-light)' : 'transparent';
+                }}
+              >
+                <span className="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 0.5C3.85 0.5 0.5 3.85 0.5 8C0.5 12.15 3.85 15.5 8 15.5C12.15 15.5 15.5 12.15 15.5 8C15.5 3.85 12.15 0.5 8 0.5ZM8 14C4.7 14 2 11.3 2 8C2 4.7 4.7 2 8 2C11.3 2 14 4.7 14 8C14 11.3 11.3 14 8 14Z" fill="currentColor"/>
+                    <path d="M5.5 8L7 9.5L10.5 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                  </svg>
+                  {currentView === 'buyer' ? 'Switch to Selling' : 'Switch to Buying'}
+                </span>
+                <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
+                  {currentView === 'buyer' ? 'Buyer' : 'Seller'}
+                </span>
+              </button>
+            </div>
+          )}
 
           {/* Quick Nav Section - Profile & Dashboard */}
           <div>
@@ -1985,6 +2027,48 @@ export default function Navbar() {
                   className="absolute right-1 top-1 bottom-1 px-4 bg-[#3373FF] hover:bg-[#265ACC] text-white text-xs font-medium rounded-xl"
                 >
                   Search
+                </button>
+              </div>
+              <nav className="space-y-2">
+                <Link href="/about" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  About
+                </Link>
+                <Link href="/supplier/register" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  Careers
+                </Link>
+                <Link href="/products" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  History
+                </Link>
+                <Link href="/trade-services" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  Services
+                </Link>
+                <Link href="/products" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  Projects
+                </Link>
+                <Link href="/help" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  Blog
+                </Link>
+                <Link href="/cart" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                  Cart ({cart.length})
+                </Link>
+                {user ? (
+                  <Link href="/account" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                    My Account
+                  </Link>
+                ) : (
+                  <Link href="/login" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+                    Sign In
+                  </Link>
+                )}
+              </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
+
                 </button>
               </div>
               <nav className="space-y-2">

@@ -17,7 +17,7 @@ const TradeAssurancePage = () => {
                     <div>
                         <h2 className="text-3xl font-bold text-gray-900 mb-4">Trade Assurance</h2>
                         <p className="text-gray-600 leading-relaxed text-lg">
-                            Trade Assurance is a free order protection service offered by Airavat. It's designed to create trust between buyers and suppliers and to protect your orders from payment to delivery.
+                            Trade Assurance is a free order protection service offered by Airavat. It&apos;s designed to create trust between buyers and suppliers and to protect your orders from payment to delivery.
                         </p>
                     </div>
 
@@ -136,7 +136,7 @@ const TradeAssurancePage = () => {
                     <div>
                         <h2 className="text-3xl font-bold text-gray-900 mb-4">Verified Suppliers</h2>
                         <p className="text-gray-600 leading-relaxed text-lg">
-                            "Verified Supplier" is a premium membership status for high-quality suppliers on Airavat. These suppliers have passed a rigorous on-site verification process conducted by third-party inspection companies.
+                            &quot;Verified Supplier&quot; is a premium membership status for high-quality suppliers on Airavat. These suppliers have passed a rigorous on-site verification process conducted by third-party inspection companies.
                         </p>
                     </div>
 
