@@ -17,7 +17,6 @@ export default function RegisterPage() {
     confirmPassword: '',
     phone: '',
     company: '',
-    role: 'buyer' as 'buyer' | 'seller',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,12 +33,13 @@ export default function RegisterPage() {
     }
 
     // Demo registration - in production, this would call your API
+    // All users have both buyer and seller roles by default
     setUser({
       id: 'user-' + Date.now(),
       email: formData.email,
       name: formData.full_name,
       full_name: formData.full_name,
-      role: formData.role,
+      role: 'buyer', // Legacy support
       phone: formData.phone,
       company: formData.company,
       status: 'active',
@@ -47,10 +47,15 @@ export default function RegisterPage() {
       email_verified: false,
       createdAt: new Date(),
       updatedAt: new Date(),
+      // All users have both buyer and seller roles by default
+      roles: ['buyer', 'seller'] as ('buyer' | 'seller')[],
+      supplierStatus: 'active' as const, // All users can sell
+      defaultView: 'buyer' as const, // Default to buyer view
     });
     
     toast.success('Account created successfully!');
-    router.push('/account');
+    // Always redirect to home page after registration
+    router.push('/');
   };
 
   return (
@@ -115,33 +120,7 @@ export default function RegisterPage() {
         <div className="flex-1 flex items-center justify-center p-8 overflow-y-auto">
           <div className="w-full max-w-md">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Create an account</h2>
-            <p className="text-gray-600 mb-8">Join thousands of businesses trading on Airavat</p>
-
-            {/* Role Selection */}
-            <div className="flex gap-4 mb-6">
-              <button
-                onClick={() => setFormData({ ...formData, role: 'buyer' })}
-                className={`flex-1 px-4 py-3 rounded-lg border-2 transition ${
-                  formData.role === 'buyer'
-                    ? 'border-[#3373FF] bg-[rgba(154, 121, 255, 0.1)] text-[#3373FF]'
-                    : 'border-gray-300 text-gray-700 hover:border-gray-400'
-                }`}
-              >
-                <div className="font-semibold">I&apos;m a Buyer</div>
-                <div className="text-xs mt-1">Source products from suppliers</div>
-              </button>
-              <button
-                onClick={() => setFormData({ ...formData, role: 'seller' })}
-                className={`flex-1 px-4 py-3 rounded-lg border-2 transition ${
-                  formData.role === 'seller'
-                    ? 'border-[#3373FF] bg-[rgba(154, 121, 255, 0.1)] text-[#3373FF]'
-                    : 'border-gray-300 text-gray-700 hover:border-gray-400'
-                }`}
-              >
-                <div className="font-semibold">I&apos;m a Supplier</div>
-                <div className="text-xs mt-1">Sell products to buyers</div>
-              </button>
-            </div>
+            <p className="text-gray-600 mb-8">Join thousands of businesses trading on Airavat. You can buy and sell with one account!</p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -198,24 +177,22 @@ export default function RegisterPage() {
                 </div>
               </div>
 
-              {formData.role === 'buyer' && (
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                    Company Name (Optional)
-                  </label>
-                  <div className="relative">
-                    <Building2 size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                    <input
-                      id="company"
-                      type="text"
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      placeholder="Enter your company name"
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3373FF] focus:border-transparent outline-none"
-                    />
-                  </div>
+              <div>
+                <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                  Company Name (Optional)
+                </label>
+                <div className="relative">
+                  <Building2 size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <input
+                    id="company"
+                    type="text"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    placeholder="Enter your company name"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3373FF] focus:border-transparent outline-none"
+                  />
                 </div>
-              )}
+              </div>
 
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">

@@ -17,17 +17,15 @@ export default function LoginPage() {
     e.preventDefault();
     
     // Demo login - in production, this would call your API
-    // Simulate different user types based on email
+    // All users can be both buyer and seller (hybrid by default)
     const userEmail = email || 'demo@airavat.com';
-    const isSeller = userEmail.includes('seller') || userEmail.includes('supplier');
-    const isHybrid = userEmail.includes('hybrid');
     
     const user = {
       id: 'user-001',
       email: userEmail,
       full_name: 'Virendra',
       name: 'Virendra',
-      role: isSeller ? 'seller' : 'buyer', // Legacy support
+      role: 'buyer', // Legacy support
       phone: '+91 98765 43210',
       company: 'Demo Business',
       status: 'active' as const,
@@ -35,37 +33,23 @@ export default function LoginPage() {
       email_verified: true,
       createdAt: new Date(),
       updatedAt: new Date(),
-      // Alibaba-style role system
-      roles: (isHybrid ? ['buyer', 'seller'] : (isSeller ? ['seller'] : ['buyer'])) as ('buyer' | 'seller')[],
-      supplierStatus: (isSeller || isHybrid) ? 'active' as const : null,
-      defaultView: isHybrid ? undefined : (isSeller ? 'seller' as const : 'buyer' as const),
+      // All users have both buyer and seller roles by default
+      roles: ['buyer', 'seller'] as ('buyer' | 'seller')[],
+      supplierStatus: 'active' as const, // All users can sell
+      defaultView: 'buyer' as const, // Default to buyer view
     };
     
     setUser(user);
     toast.success('Signed in successfully!');
     
-    // Alibaba-style redirection based on roles
-    const hasSellerRole = user.roles?.includes('seller') && user.supplierStatus === 'active';
-    const hasBuyerRole = user.roles?.includes('buyer') ?? true;
-    
-    if (hasSellerRole && !hasBuyerRole) {
-      // Pure seller - redirect to seller dashboard
-      router.push('/seller/dashboard');
-    } else if (hasSellerRole && hasBuyerRole) {
-      // Hybrid user - redirect based on defaultView or preference
-      const savedView = typeof window !== 'undefined' ? localStorage.getItem('airavat_current_view') : null;
-      const targetView = savedView || user.defaultView || (user.supplierStatus === 'active' ? 'seller' : 'buyer');
-      router.push(targetView === 'seller' ? '/seller/dashboard' : '/buyer/dashboard');
-    } else {
-      // Pure buyer - redirect to buyer dashboard
-      router.push('/buyer/dashboard');
-    }
+    // Always redirect to home page after login
+    router.push('/');
   };
 
   const handleSocialLogin = (provider: string) => {
     toast.success(`Signing in with ${provider}...`);
     // In production, implement OAuth flow
-    // Default to buyer for social logins (can be updated after verification)
+    // All users have both buyer and seller roles by default
     const user = {
       id: 'user-001',
       email: `demo@${provider.toLowerCase()}.com`,
@@ -79,13 +63,16 @@ export default function LoginPage() {
       email_verified: true,
       createdAt: new Date(),
       updatedAt: new Date(),
-      roles: ['buyer'] as ('buyer' | 'seller')[],
-      supplierStatus: null,
-      defaultView: 'buyer' as const,
+      // All users have both buyer and seller roles by default
+      roles: ['buyer', 'seller'] as ('buyer' | 'seller')[],
+      supplierStatus: 'active' as const, // All users can sell
+      defaultView: 'buyer' as const, // Default to buyer view
     };
     
     setUser(user);
-    router.push('/buyer/dashboard');
+    toast.success('Signed in successfully!');
+    // Always redirect to home page after login
+    router.push('/');
   };
 
   return (
@@ -243,49 +230,6 @@ export default function LoginPage() {
 
             {/* Additional Options */}
             <div className="space-y-3 pt-6 border-t border-gray-200">
-              <Link
-                href="/supplier/login"
-                className="flex items-center gap-3 text-gray-600 hover:text-[#3373FF] transition"
-              >
-                <div className="w-6 h-6 border border-gray-300 rounded flex items-center justify-center">
-                  <span className="text-xs">📦</span>
-                </div>
-                Supplier sign-in
-              </Link>
-              <Link
-                href="/login/qr"
-                className="flex items-center gap-3 text-gray-600 hover:text-[#3373FF] transition"
-              >
-                <div className="w-6 h-6 border border-gray-300 rounded flex items-center justify-center">
-                  <span className="text-xs">◻◻</span>
-                </div>
-                Sign in with QR code
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-              New to Airavat?{' '}
-              <Link href="/register" className="text-[#3373FF] hover:underline font-semibold">
-                Create an account
-              </Link>
-            </p>
-
-            {/* Additional Options */}
-            <div className="space-y-3 pt-6 border-t border-gray-200">
-              <Link
-                href="/supplier/login"
-                className="flex items-center gap-3 text-gray-600 hover:text-[#3373FF] transition"
-              >
-                <div className="w-6 h-6 border border-gray-300 rounded flex items-center justify-center">
-                  <span className="text-xs">📦</span>
-                </div>
-                Supplier sign-in
-              </Link>
               <Link
                 href="/login/qr"
                 className="flex items-center gap-3 text-gray-600 hover:text-[#3373FF] transition"

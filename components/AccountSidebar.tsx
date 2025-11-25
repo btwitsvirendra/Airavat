@@ -93,7 +93,7 @@ const Menu = ({ children, items, onButtonClick }: MenuProps) => {
 export default function AccountSidebar({ onPanelOpen, onBackToDashboard, activeView = 'dashboard' }: AccountSidebarProps = {}) {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, cart } = useStore();
+  const { user, cart, currentView, toggleView } = useStore();
   const profileRef = useRef<HTMLButtonElement>(null);
   const [isProfileActive, setIsProfileActive] = useState(false);
 
@@ -418,12 +418,17 @@ export default function AccountSidebar({ onPanelOpen, onBackToDashboard, activeV
                       <span className="block text-gray-500/80 p-2">
                         {user?.email || 'user@airavat.com'}
                       </span>
-                      <Link
-                        href="/supplier/register"
-                        className="block w-full p-2 text-left rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150"
-                      >
-                        Switch to supplier
-                      </Link>
+                      {user?.roles?.includes('seller') && user?.roles?.includes('buyer') && (
+                        <button
+                          onClick={() => {
+                            toggleView();
+                            router.push(currentView === 'buyer' ? '/seller/dashboard' : '/buyer/dashboard');
+                          }}
+                          className="block w-full p-2 text-left rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150"
+                        >
+                          Switch to {currentView === 'buyer' ? 'Seller' : 'Buyer'}
+                        </button>
+                      )}
                       <div className="relative rounded-md hover:bg-gray-50 active:bg-gray-100 duration-150">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -583,30 +588,35 @@ export default function AccountSidebar({ onPanelOpen, onBackToDashboard, activeV
                 </Menu>
               </li>
 
-              <li>
-                <Link
-                  href="/supplier/dashboard"
-                  className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors duration-75 will-change-[background-color]"
-                >
-                  <div className="text-gray-500 flex-shrink-0">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
-                      />
-                    </svg>
-                  </div>
-                  <span className="sidebar-text">Switch to supplier</span>
-                </Link>
-              </li>
+              {user?.roles?.includes('seller') && user?.roles?.includes('buyer') && (
+                <li>
+                  <button
+                    onClick={() => {
+                      toggleView();
+                      router.push(currentView === 'buyer' ? '/seller/dashboard' : '/buyer/dashboard');
+                    }}
+                    className="w-full flex items-center gap-x-2 text-gray-600 p-2 rounded-lg hover:bg-gray-50 active:bg-gray-100 transition-colors duration-75 will-change-[background-color] text-left"
+                  >
+                    <div className="text-gray-500 flex-shrink-0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+                        />
+                      </svg>
+                    </div>
+                    <span className="sidebar-text">Switch to {currentView === 'buyer' ? 'Seller' : 'Buyer'}</span>
+                  </button>
+                </li>
+              )}
             </ul>
 
             <div className="pt-2 mt-2 border-t">

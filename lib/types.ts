@@ -1,21 +1,230 @@
-// Import database schema types
-import type {
-  Users,
-  Business,
-  BusinessTypes,
-  BusinessDocuments,
-  BusinessConnections,
-  Products,
-  ProductImages,
-  Categories,
-  Currencies,
-  PriceUnits,
-  Inquiries,
-  Quotations,
-  Orders,
-  OrderItems,
-  Reviews,
-} from './database-schema';
+// ============================================
+// DATABASE SCHEMA TYPES (Base types matching backend)
+// ============================================
+
+interface Users {
+  user_id: string;
+  email: string;
+  password_hash: string;
+  full_name: string;
+  phone?: string;
+  role: string;
+  is_verified: boolean;
+  status: string;
+  email_verified: boolean;
+  last_login?: Date;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface Business {
+  business_id: string;
+  user_id: string;
+  business_type_id: string;
+  business_name: string;
+  display_name: string;
+  company_legal_name?: string;
+  description?: string;
+  gst_number?: string;
+  pan_number?: string;
+  msme_number?: string;
+  can_buy: boolean;
+  can_sell: boolean;
+  license_number?: string;
+  tax_number?: string;
+  website_url?: string;
+  employee_count?: string;
+  year_established?: number;
+  is_verified: boolean;
+  verification_level?: string;
+  address_line1: string;
+  address_line2?: string;
+  city: string;
+  state: string;
+  country: string;
+  pincode: string;
+  primary_contact_phone: string;
+  primary_contact_email: string;
+  verified_at?: Date;
+  verified_by?: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface BusinessTypes {
+  business_type_id: string;
+  type_name: string;
+  description?: string;
+  created_at: Date;
+}
+
+interface BusinessDocuments {
+  document_id: string;
+  business_id: string;
+  document_type: string;
+  document_name: string;
+  document_url: string;
+  is_verified: boolean;
+  verified_at?: Date;
+  verified_by?: string;
+  uploaded_at: Date;
+}
+
+interface BusinessConnections {
+  connection_id: string;
+  buyer_business_id: string;
+  seller_business_id: string;
+  following_since?: Date;
+  is_following: boolean;
+  created_at: Date;
+}
+
+interface Products {
+  product_id: string;
+  business_id: string;
+  category_id: string;
+  currency_id: string;
+  price_unit_id: string;
+  product_name: string;
+  slug: string;
+  description: string;
+  specifications?: string;
+  base_price: number;
+  min_order_quantity: number;
+  max_order_quantity?: number;
+  unit_in_stock: number;
+  available_quantity: number;
+  hs_code?: string;
+  brand?: string;
+  manufacturer?: string;
+  country_of_origin?: string;
+  status: string;
+  is_featured: boolean;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface ProductImages {
+  image_id: string;
+  product_id: string;
+  image_url: string;
+  display_order: number;
+  is_primary: boolean;
+  uploaded_at: Date;
+}
+
+interface Categories {
+  category_id: string;
+  parent_category_id?: string;
+  category_name: string;
+  slug: string;
+  description?: string;
+  is_active: boolean;
+  display_order: number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface Currencies {
+  currency_id: string;
+  currency_code: string;
+  currency_name: string;
+  symbol: string;
+  is_active: boolean;
+  display_order: number;
+  created_at: Date;
+}
+
+interface PriceUnits {
+  unit_id: string;
+  unit_code: string;
+  unit_name: string;
+  unit_type: string;
+  abbreviation: string;
+  is_active: boolean;
+  display_order: number;
+  created_at: Date;
+}
+
+interface Inquiries {
+  inquiry_id: string;
+  buyer_business_id: string;
+  product_id: string;
+  inquiry_title: string;
+  description: string;
+  required_quantity: number;
+  budget_range?: string;
+  expected_delivery?: Date;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface Quotations {
+  quotation_id: string;
+  inquiry_id: string;
+  seller_business_id: string;
+  validity_days: number;
+  delivery_time_days: number;
+  payment_terms?: string;
+  other_terms?: string;
+  status: string;
+  setup?: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface Orders {
+  order_id: string;
+  buyer_business_id: string;
+  seller_business_id: string;
+  currency_id: string;
+  order_number: string;
+  status: string;
+  tax_amount: number;
+  discount_amount: number;
+  shipping_amount: number;
+  final_amount: number;
+  delivery_address: string;
+  delivery_city: string;
+  delivery_state: string;
+  delivery_pincode: string;
+  delivery_country: string;
+  expected_delivery_date?: Date;
+  payment_status: string;
+  buyer_notes?: string;
+  seller_notes?: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface OrderItems {
+  order_item_id: string;
+  order_id: string;
+  product_id: string;
+  product_name: string;
+  quantity_unit: string;
+  unit_price: number;
+  discount_rate: number;
+  total_price: number;
+  tax_rate: number;
+  hs_code?: string;
+}
+
+interface Reviews {
+  review_id: string;
+  order_id: string;
+  reviewer_business_id: string;
+  reviewed_business_id: string;
+  rating: number;
+  review_text?: string;
+  product_quality_rating?: number;
+  delivery_rating?: number;
+  communication_rating?: number;
+  is_approved: boolean;
+  created_at: Date;
+  updated_at: Date;
+}
 
 // ============================================
 // USER TYPES (Application-level, camelCase)
@@ -382,10 +591,6 @@ export interface BusinessConnection extends Omit<BusinessConnections, 'connectio
   buyerBusinessId?: string;
   sellerId: string;
   sellerBusinessId?: string;
-  followingSince?: Date;
-  createdAt: Date;
-}
-
   followingSince?: Date;
   createdAt: Date;
 }

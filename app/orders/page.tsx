@@ -24,7 +24,7 @@ import {
 import { useStore } from '@/lib/store';
 
 export default function OrdersPage() {
-  const { user } = useStore();
+  const { user, currentView, toggleView } = useStore();
   const [activeTab, setActiveTab] = useState<'all' | 'confirming' | 'unpaid' | 'preparing' | 'delivering' | 'refunds' | 'completed' | 'closed'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -133,10 +133,21 @@ export default function OrdersPage() {
                     <Settings size={18} />
                     Account settings
                   </Link>
-                  <Link href="/supplier/dashboard" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition">
-                    <ArrowRight size={18} />
-                    Switch to supplier
-                  </Link>
+                  {user?.roles?.includes('seller') && user?.roles?.includes('buyer') && (
+                    <button
+                      onClick={() => {
+                        toggleView();
+                        const newView = currentView === 'buyer' ? 'seller' : 'buyer';
+                        if (typeof window !== 'undefined') {
+                          window.location.href = newView === 'buyer' ? '/buyer/dashboard' : '/seller/dashboard';
+                        }
+                      }}
+                      className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition w-full text-left"
+                    >
+                      <ArrowRight size={18} />
+                      Switch to {currentView === 'buyer' ? 'Seller' : 'Buyer'}
+                    </button>
+                  )}
                 </div>
               </nav>
             </div>

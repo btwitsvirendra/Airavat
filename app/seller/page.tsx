@@ -146,17 +146,3 @@ export default function SellerDashboard() {
         </div>
     );
 }
-
-                                <MessageSquare className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                                <div>
-                                    <p className="text-sm font-medium text-blue-800">New Message</p>
-                                    <p className="text-xs text-blue-600 mt-1">Buyer &quot;Global Traders&quot; asked about bulk pricing.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}

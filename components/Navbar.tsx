@@ -528,8 +528,8 @@ function AccountDropdown({ user, isOpen, onClose, onMouseEnter, onMouseLeave }: 
           <path d="M2.92494 13.625C2.77494 13.625 2.59994 13.55 2.49994 13.425L0.574941 11.15C0.424941 10.975 0.399941 10.75 0.499941 10.55C0.599941 10.35 0.799941 10.225 0.999941 10.225H11.0749C11.3749 10.225 11.6249 10.475 11.6249 10.775C11.6249 11.075 11.3749 11.325 11.0749 11.325H2.19994L3.34994 12.675C3.54994 12.925 3.52494 13.275 3.27494 13.475C3.17494 13.6 3.04994 13.625 2.92494 13.625Z" fill="currentColor" />
         </svg>
       ),
-      label: 'Switch to supplier',
-      href: '/supplier/register',
+      label: 'Switch to seller',
+      href: '/seller/dashboard',
     },
     {
       icon: (
@@ -649,18 +649,26 @@ function AccountDropdown({ user, isOpen, onClose, onMouseEnter, onMouseLeave }: 
             ))}
           </div>
 
-          {/* Additional Items - Switch to supplier, Help, Settings */}
+          {/* Additional Items - Switch to seller, Help, Settings */}
           <div>
-            <Link
-              href="/supplier/register"
-              onClick={onClose}
-              className="flex w-full items-center justify-between px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
-            >
-              <span className="flex items-center gap-2">
-                {menuItems[6].icon}
-                {menuItems[6].label}
-              </span>
-            </Link>
+            {user?.roles?.includes('seller') && user?.roles?.includes('buyer') && (
+              <button
+                onClick={() => {
+                  toggleView();
+                  onClose();
+                  const newView = currentView === 'buyer' ? 'seller' : 'buyer';
+                  if (typeof window !== 'undefined') {
+                    window.location.href = newView === 'buyer' ? '/buyer/dashboard' : '/seller/dashboard';
+                  }
+                }}
+                className="flex w-full items-center justify-between px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+              >
+                <span className="flex items-center gap-2">
+                  {menuItems[6].icon}
+                  Switch to {currentView === 'buyer' ? 'Seller' : 'Buyer'}
+                </span>
+              </button>
+            )}
             <Link
               href="/help"
               onClick={onClose}
@@ -2027,48 +2035,6 @@ export default function Navbar() {
                   className="absolute right-1 top-1 bottom-1 px-4 bg-[#3373FF] hover:bg-[#265ACC] text-white text-xs font-medium rounded-xl"
                 >
                   Search
-                </button>
-              </div>
-              <nav className="space-y-2">
-                <Link href="/about" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                  About
-                </Link>
-                <Link href="/supplier/register" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                  Careers
-                </Link>
-                <Link href="/products" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                  History
-                </Link>
-                <Link href="/trade-services" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                  Services
-                </Link>
-                <Link href="/products" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                  Projects
-                </Link>
-                <Link href="/help" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                  Blog
-                </Link>
-                <Link href="/cart" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                  Cart ({cart.length})
-                </Link>
-                {user ? (
-                  <Link href="/account" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                    My Account
-                  </Link>
-                ) : (
-                  <Link href="/login" className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
-                    Sign In
-                  </Link>
-                )}
-              </nav>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
-  );
-}
-
                 </button>
               </div>
               <nav className="space-y-2">
